@@ -37,7 +37,9 @@ export default function Home() {
               <MathBlock>{"(f \\cdot g)' = f' g + f g'"}</MathBlock>
             </Column>
             <Column width="third">
-              <MathBlock>{"\\left(\\frac{f}{g}\\right)' = \\frac{f' g - f g'}{g^2}"}</MathBlock>
+              <MathBlock>
+                {"\\left(\\frac{f}{g}\\right)' = \\frac{f' g - f g'}{g^2}"}
+              </MathBlock>
             </Column>
             <Column width="third">
               <MathBlock>{"(f \\circ g)' = f'(g) \\cdot g'"}</MathBlock>
@@ -74,30 +76,85 @@ export default function Home() {
           </Column>
           <Column width="half">
             <Box color="red" border="left" title="-">
-              <MathBlock>
-                {"\\int g'(x)f(g(x))\\,dx = F(g(x)) + C"}
-              </MathBlock>
+              <MathBlock>{"\\int g'(x)f(g(x))\\,dx = F(g(x)) + C"}</MathBlock>
             </Box>
           </Column>
         </Row>
 
         <Row>
-          <Column width="half">
+          <Column width="third">
             <Example title="Metodo sostituzione">
-              <Math>{"\\int 2x \\cdot e^{x^2} dx"}</Math>
+              <Math>{"\\int \\frac{e^x}{\\sqrt{1 - e^{2x}}} dx"}</Math>
               <ol className="example-steps">
-                <li>Poni <Math>{"u = x^2"}</Math>, quindi <Math>{"du = 2x\\,dx"}</Math></li>
-                <li><Math>{"\\int e^u du = e^u + C = e^{x^2} + C"}</Math></li>
+                <li>
+                  Poni <Math>{"t = e^x"}</Math>, quindi{" "} <br />
+                  <Math>{"\\frac{dt}{dx} = e^x \\implies dt = (e^x)' dx"}</Math>
+                </li>
+                <li>
+                  <Math>
+                    {"\\int \\frac{1}{\\sqrt{1 - t^2}} dt = \\arcsin(t) + C"}
+                  </Math>
+                </li>
+                <li>
+                  <Math>{"= \\arcsin(e^x) + C"}</Math>
+                </li>
               </ol>
             </Example>
           </Column>
-          <Column width="half">
+          <Column width="two-thirds">
             <Example title="Metodo frazioni parziali">
-              <Math>{"\\int \\frac{1}{x^2-1} dx = \\int \\frac{1}{(x-1)(x+1)} dx"}</Math>
+              <Note>
+                Applicabile solo se il grado del numeratore è minore del grado
+                del denominatore. In caso contrario, eseguire prima la divisione
+                polinomiale.
+              </Note>
+              <Math>{"\\int \\frac{x^3-3x-1}{x^2-x-2} dx"}</Math>
               <ol className="example-steps">
-                <li><Math>{"\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1}"}</Math></li>
-                <li><Math>{"A = \\frac{1}{2}, \\quad B = -\\frac{1}{2}"}</Math></li>
-                <li><Math>{"= \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C"}</Math></li>
+                <Row>
+                  <Column width="half">
+                  <li>
+                  Divisione:
+                  <MathBlock>{`\\begin{array}{r|l}
+x^3-3x-1 & x^2-x-2 \\\\
+\\hline
+-x^3+x^2+2x & x+1 \\\\
+\\hline
+x^2-x-1 & \\\\
+-x^2+x+2 & \\\\
+\\hline
+1 &
+\\end{array}`}</MathBlock>
+                </li>
+                <li>
+                  <Math>
+                    {"\\frac{x^3-3x-1}{x^2-x-2} = x+1 + \\frac{1}{x^2-x-2}"}
+                  </Math>
+                </li>
+                  </Column>
+                  <Column width="half">
+                  <li>
+                  Frazioni parziali per il resto:
+                  <MathBlock>
+                    {
+                      "\\frac{1}{(x-2)(x+1)} = \\frac{A}{x-2} + \\frac{B}{x+1}"
+                    }
+                  </MathBlock>
+                  <MathBlock>{"= \\frac{(A+B)x + (A-2B)}{(x-2)(x+1)}"}</MathBlock>
+                  <MathBlock>{`\\begin{cases} A+B = 0 \\\\ A-2B = 1 \\end{cases} \\Rightarrow \\begin{cases} A = \\frac{1}{3} \\\\ B = -\\frac{1}{3} \\end{cases}`}</MathBlock>
+                </li>
+                <li>
+                  <Math>
+                    {
+                      "= \\frac{x^2}{2} + x + \\frac{1}{3}\\ln|x-2| - \\frac{1}{3}\\ln|x+1| + C"
+                    }
+                  </Math>
+                </li>
+                    </Column>
+                </Row>
+                
+                
+                
+                
               </ol>
             </Example>
           </Column>
@@ -106,11 +163,6 @@ export default function Home() {
         <Theorem title="Area racchiusa tra due curve">
           <MathBlock>{"A = \\int_a^b |f(x) - g(x)| dx"}</MathBlock>
         </Theorem>
-
-        <Note>
-          Ricorda: la primitiva è definita a meno di una costante{" "}
-          <Math>{"C"}</Math>.
-        </Note>
       </Section>
 
       <Section title="Curve parametriche">
@@ -206,7 +258,9 @@ export default function Home() {
           <Column width="half">
             <Box color="yellow" border="left" title="Variabili separabili">
               <Math>{"y' = f(x) \\cdot g(y)"}</Math>
-              <MathBlock>{"\\int \\frac{dy}{g(y)} = \\int f(x)\\,dx"}</MathBlock>
+              <MathBlock>
+                {"\\int \\frac{dy}{g(y)} = \\int f(x)\\,dx"}
+              </MathBlock>
             </Box>
           </Column>
         </Row>
@@ -217,7 +271,9 @@ export default function Home() {
               <MathBlock>{"\\frac{dy}{dx} = f(x)g(y)"}</MathBlock>
             </Column>
             <Column width="half">
-              <MathBlock>{"\\int \\frac{1}{g(y)} dy = \\int f(x)\\,dx"}</MathBlock>
+              <MathBlock>
+                {"\\int \\frac{1}{g(y)} dy = \\int f(x)\\,dx"}
+              </MathBlock>
             </Column>
           </Row>
         </Theorem>
@@ -227,13 +283,17 @@ export default function Home() {
           <Math>{"\\lambda^2 + a\\lambda + b = 0"}</Math>:
           <ul>
             <li>
-              Radici reali distinte: <Math>{"y = C_1 e^{\\lambda_1 x} + C_2 e^{\\lambda_2 x}"}</Math>
+              Radici reali distinte:{" "}
+              <Math>{"y = C_1 e^{\\lambda_1 x} + C_2 e^{\\lambda_2 x}"}</Math>
             </li>
             <li>
               Radice doppia: <Math>{"y = (C_1 + C_2 x) e^{\\lambda x}"}</Math>
             </li>
             <li>
-              Radici complesse: <Math>{"y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)"}</Math>
+              Radici complesse:{" "}
+              <Math>
+                {"y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)"}
+              </Math>
             </li>
           </ul>
         </Theorem>
