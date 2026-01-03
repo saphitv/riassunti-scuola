@@ -19,7 +19,7 @@ export default function Home() {
     <div className="page">
       <header className="header">
         <h1>Analisi 2</h1>
-        <p>Appunti per l&apos;esame</p>
+        {/* <p>Appunti per l&apos;esame</p> */}
       </header>
 
       {/* INTEGRALI */}
@@ -30,6 +30,20 @@ export default function Home() {
           grafico di <Math>{"f"}</Math>, l&apos;asse <Math>{"x"}</Math> e le
           rette <Math>{"x = a"}</Math> e <Math>{"x = b"}</Math>.
         </Definition>
+
+        <Box color="gray" border="left" title="Regole di derivazione">
+          <Row>
+            <Column width="third">
+              <MathBlock>{"(f \\cdot g)' = f' g + f g'"}</MathBlock>
+            </Column>
+            <Column width="third">
+              <MathBlock>{"\\left(\\frac{f}{g}\\right)' = \\frac{f' g - f g'}{g^2}"}</MathBlock>
+            </Column>
+            <Column width="third">
+              <MathBlock>{"(f \\circ g)' = f'(g) \\cdot g'"}</MathBlock>
+            </Column>
+          </Row>
+        </Box>
 
         {/* Example: Two boxes side by side */}
         <Row>
