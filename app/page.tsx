@@ -37,12 +37,22 @@ export default function Home() {
         {/* Example: Two boxes side by side */}
         <Row>
           <Column width="half">
-            <Box color="blue" border="left" title="Integrazione per parti">
-              <MathBlock>{"\\int u\\,dv = uv - \\int v\\,du"}</MathBlock>
+            <Box color="yellow" border="left" title="-">
+              <MathBlock>{"\\int f(ax+b)\\,dx = \\frac{1}{a}F(ax+b) + C"}</MathBlock>
             </Box>
           </Column>
           <Column width="half">
-            <Box color="green" border="left" title="Sostituzione">
+            <Box color="green" border="left" title="Integrazione di funzioni razionali">
+              <MathBlock>{"\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln |f(x)| + C"}</MathBlock>
+            </Box>
+          </Column>
+          <Column width="half">
+            <Box color="blue" border="left" title="Integrazione per parti">
+              <MathBlock>{"\\int u'(x)v(x)\\,dx = u(x)v(x) - \\int u(x)v'(x)\\,dx"}</MathBlock>
+            </Box>
+          </Column>
+          <Column width="half">
+            <Box color="red" border="left" title="-">
               <MathBlock>{"\\int f(g(x))g'(x)\\,dx = \\int f(u)\\,du"}</MathBlock>
             </Box>
           </Column>
@@ -54,17 +64,16 @@ export default function Home() {
         </Note>
       </Section>
 
-      <Divider style="solid" spacing="lg" />
+      {/* <Divider style="solid" spacing="lg" /> */}
 
       {/* SERIE */}
-      <Section title="Serie numeriche">
+      {/* <Section title="Serie numeriche">
         <Definition term="Serie">
           Data una successione <Math>{"\\{a_n\\}"}</Math>, la serie{" "}
           <Math>{"\\sum_{n=1}^{\\infty} a_n"}</Math> è il limite delle somme
           parziali.
         </Definition>
 
-        {/* Example: Three columns */}
         <Row gap="md">
           <Column width="third">
             <Box color="gray" border="solid" title="Criterio rapporto">
@@ -87,10 +96,10 @@ export default function Home() {
         </Row>
       </Section>
 
-      <Divider style="dashed" spacing="md" />
+      <Divider style="dashed" spacing="md" /> */}
 
       {/* SERIE DI TAYLOR */}
-      <Section title="Serie di Taylor">
+      {/* <Section title="Serie di Taylor">
         <Definition term="Serie di Taylor">
           <MathBlock>
             {"f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(x_0)}{n!}(x - x_0)^n"}
@@ -99,7 +108,7 @@ export default function Home() {
 
         <Spacer size="sm" />
 
-        {/* Example: Two columns for notable expansions */}
+        // Example: Two columns for notable expansions
         <Row>
           <Column width="half">
             <Box color="blue" border="dashed">
@@ -116,10 +125,10 @@ export default function Home() {
         </Row>
       </Section>
 
-      <Divider style="double" spacing="lg" />
+      <Divider style="double" spacing="lg" /> */}
 
       {/* EQUAZIONI DIFFERENZIALI */}
-      <Section title="Equazioni differenziali">
+      {/* <Section title="Equazioni differenziali">
         <Row>
           <Column width="half">
             <Box color="red" border="left" title="EDO I ordine lineare">
@@ -156,10 +165,10 @@ export default function Home() {
         </Theorem>
       </Section>
 
-      <Divider style="solid" spacing="md" />
+      <Divider style="solid" spacing="md" /> */}
 
       {/* INTEGRALI MULTIPLI */}
-      <Section title="Integrali multipli">
+      {/* <Section title="Integrali multipli">
         <Row>
           <Column width="two-thirds">
             <Theorem title="Teorema di Fubini">
@@ -183,7 +192,7 @@ export default function Home() {
           Per regioni con simmetria radiale, le coordinate polari semplificano
           il calcolo.
         </Note>
-      </Section>
+      </Section> */}
 
       {/* Add more sections below... */}
     </div>
