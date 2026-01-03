@@ -10,6 +10,7 @@ import {
   Note,
   Definition,
   Theorem,
+  FormulaTable,
 } from "@/components";
 
 export default function Home() {
@@ -28,11 +29,6 @@ export default function Home() {
           grafico di <Math>{"f"}</Math>, l&apos;asse <Math>{"x"}</Math> e le
           rette <Math>{"x = a"}</Math> e <Math>{"x = b"}</Math>.
         </Definition>
-
-        <Theorem title="Teorema fondamentale del calcolo integrale">
-          Se <Math>{"f"}</Math> è continua su <Math>{"[a, b]"}</Math>, allora:
-          <MathBlock>{"\\frac{d}{dx}\\int_a^x f(t)\\,dt = f(x)"}</MathBlock>
-        </Theorem>
 
         {/* Example: Two boxes side by side */}
         <Row>
@@ -58,10 +54,89 @@ export default function Home() {
           </Column>
         </Row>
 
+
+        <Theorem title="Area racchiusa tra due curve">
+          <MathBlock>{"A = \\int_a^b |f(x) - g(x)| dx"}</MathBlock>
+        </Theorem>
+
+
+
         <Note>
           Ricorda: la primitiva è definita a meno di una costante{" "}
           <Math>{"C"}</Math>.
         </Note>
+      </Section>
+
+      <Section title="Curve parametriche">
+        <Definition term="Curve parametrica">
+          Una curva parametrica è una funzione <Math>{"r(t) = (x(t), y(t))"}</Math> da <Math>{"[a, b]"}</Math> a <Math>{"\\mathbb{R}^2"}</Math>. <br />
+          L&apos;area è data da: <Math>{"\\int_a^b g(t) * f'(t) dt"}</Math>
+        </Definition>
+
+
+        <FormulaTable
+          headers={["Funzioni", "Curve parametriche"]}
+          rows={[
+            {
+              label: "Lunghezza",
+              cells: [
+                "\\ell = \\int_a^b \\sqrt{1 + \\left( f'(x) \\right)^2} \\, dx",
+                "\\ell = \\int_\\alpha^\\beta \\sqrt{\\left( f'(t) \\right)^2 + \\left( g'(t) \\right)^2} \\, dt",
+              ],
+            },
+          ]}
+        />
+
+      </Section>
+
+      {/* SOLIDI DI ROTAZIONE */}
+      <Section title="Solidi di rotazione">
+        <Theorem title="Baricentro con asse x">
+          <Row>
+            <Column width="half">
+              <MathBlock>{"x_G = \\frac{1}{A} \\int_a^b x(t) f(x) dx"}</MathBlock>
+            </Column>
+            <Column width="half">
+              <MathBlock>{"y_G = \\frac{1}{2A} \\int_a^b f(x)^2 dx"}</MathBlock>
+            </Column>
+          </Row>
+        </Theorem>
+        <FormulaTable
+          headers={["Funzioni", "Curve parametriche"]}
+          rows={[
+            {
+              label: "Volume",
+              cells: [
+                "V = \\int_a^b \\pi \\left( f(x) \\right)^2 dx",
+                "V = \\int_\\alpha^\\beta \\pi \\left( g(t) \\right)^2 \\cdot f'(t) \\, dt",
+              ],
+            },
+            {
+              label: "Area laterale",
+              cells: [
+                "A_S = \\int_a^b 2\\pi f(x) \\cdot \\sqrt{1 + \\left( f'(x) \\right)^2} \\, dx",
+                "A_S = \\int_\\alpha^\\beta 2\\pi g(t) \\cdot \\sqrt{\\left( f'(t) \\right)^2 + \\left( g'(t) \\right)^2} \\, dt",
+              ],
+            },
+          ]}
+        />
+
+        <Theorem title="Teorema di Pappo">
+          <Row>
+            <Column width="third">
+              <MathBlock>{"A_r = \\int_a^b f(x) dx"}</MathBlock>
+              <MathBlock>{"V = 2\\pi  A_r * r"}</MathBlock>
+            </Column>
+            <Column width="two-thirds">
+              <Definition term="r">
+                Raggio di rotazione puo essere preso sottraendo il baricentro dalla distanza tra il punto di rotazione e l&apos;asse di rotazione.
+                Oppure se non perpendicolare all&apos;asse di rotazione si puo usare: <br />
+                <Math>{"d(P, r) = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2 + b^2}} = \\frac{|y_P - (m * x_P + q)|}{\\sqrt{1 + m^2}}"}</Math>
+              </Definition>
+            </Column>
+          </Row>
+          
+        </Theorem>
       </Section>
 
       {/* <Divider style="solid" spacing="lg" /> */}

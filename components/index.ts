@@ -9,6 +9,7 @@ export { Spacer } from "./Spacer";
 // Math components
 export { Math } from "./Math";
 export { MathBlock } from "./MathBlock";
+export { FormulaTable } from "./FormulaTable";
 
 // Content components
 export { Note } from "./Note";

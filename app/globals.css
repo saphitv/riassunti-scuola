@@ -285,6 +285,53 @@ body {
   overflow-x: auto;
 }
 
+/* Formula Table */
+.formula-table-wrapper {
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.formula-table {
+  width: 100%;
+  border-collapse: collapse;
+  break-inside: avoid;
+}
+
+.formula-table-header {
+  font-weight: 700;
+  font-size: var(--font-size-box-title);
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  background: var(--box-gray);
+  border: 1px solid var(--border);
+}
+
+.formula-table-label-header {
+  background: var(--box-gray);
+  border: 1px solid var(--border);
+  width: 100px;
+}
+
+.formula-table-label {
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background: var(--box-gray);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.formula-table-cell {
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.formula-table-cell .MathJax {
+  margin: 0 !important;
+}
+
 /* List styles */
 ul, ol {
   margin: 0.5rem 0;
@@ -394,6 +441,17 @@ li {
 
   .math-block {
     page-break-inside: avoid;
+  }
+
+  /* Formula table print styles */
+  .formula-table {
+    page-break-inside: avoid;
+  }
+
+  .formula-table-header,
+  .formula-table-label-header,
+  .formula-table-label {
+    background-color: #f9fafb !important;
   }
 
   .no-print {
