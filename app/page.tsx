@@ -11,6 +11,7 @@ import {
   Definition,
   Theorem,
   FormulaTable,
+  Example,
 } from "@/components";
 
 export default function Home() {
@@ -63,6 +64,28 @@ export default function Home() {
                 {"\\int f(g(x))g'(x)\\,dx = \\int f(u)\\,du"}
               </MathBlock>
             </Box>
+          </Column>
+        </Row>
+
+        <Row>
+          <Column width="half">
+            <Example title="Metodo sostituzione">
+              <Math>{"\\int 2x \\cdot e^{x^2} dx"}</Math>
+              <ol className="example-steps">
+                <li>Poni <Math>{"u = x^2"}</Math>, quindi <Math>{"du = 2x\\,dx"}</Math></li>
+                <li><Math>{"\\int e^u du = e^u + C = e^{x^2} + C"}</Math></li>
+              </ol>
+            </Example>
+          </Column>
+          <Column width="half">
+            <Example title="Metodo frazioni parziali">
+              <Math>{"\\int \\frac{1}{x^2-1} dx = \\int \\frac{1}{(x-1)(x+1)} dx"}</Math>
+              <ol className="example-steps">
+                <li><Math>{"\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1}"}</Math></li>
+                <li><Math>{"A = \\frac{1}{2}, \\quad B = -\\frac{1}{2}"}</Math></li>
+                <li><Math>{"= \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C"}</Math></li>
+              </ol>
+            </Example>
           </Column>
         </Row>
 

@@ -278,6 +278,36 @@ body {
   font-weight: 700;
 }
 
+/* Example box - compact for step-by-step examples */
+.example {
+  font-size: var(--font-size-small);
+  padding: 0.4rem 0.6rem;
+  background: #fafafa;
+  border-left: 2px solid var(--border);
+  break-inside: avoid;
+}
+
+.example-title {
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  margin-bottom: 0.25rem;
+}
+
+.example-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.example-steps {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.example-steps li {
+  margin-bottom: 0.15rem;
+}
+
 /* Math block */
 .math-block {
   text-align: center;

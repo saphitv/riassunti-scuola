@@ -15,6 +15,7 @@ export { FormulaTable } from "./FormulaTable";
 export { Note } from "./Note";
 export { Definition } from "./Definition";
 export { Theorem } from "./Theorem";
+export { Example } from "./Example";
 
 // Provider
 export { MathJaxProvider } from "./MathJaxProvider";
