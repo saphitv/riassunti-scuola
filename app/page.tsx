@@ -75,7 +75,7 @@ export default function Home() {
           <Column width="half">
             <Box color="red" border="left" title="-">
               <MathBlock>
-                {"\\int f(g(x))g'(x)\\,dx = \\int f(u)\\,du"}
+                {"\\int g'(x)f(g(x))\\,dx = F(g(x)) + C"}
               </MathBlock>
             </Box>
           </Column>
