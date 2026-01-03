@@ -1,26 +1,387 @@
 @import "tailwindcss";
 
+/* ============================================
+   FONT CONFIGURATION - EDIT THESE VALUES
+   ============================================ */
 :root {
+  /* Base font sizes - change these to resize everything */
+  --font-size-base: 11pt;        /* Main text */
+  --font-size-small: 10pt;       /* Notes, proofs */
+  --font-size-h1: 24pt;          /* Page title */
+  --font-size-h2: 16pt;          /* Section titles */
+  --font-size-h3: 13pt;          /* Subsection titles */
+  --font-size-box-title: 11pt;   /* Box/theorem titles */
+  
+  /* Line height */
+  --line-height: 1.6;
+  
+  /* Spacing */
+  --section-gap: 1.5rem;
+  --content-gap: 0.75rem;
+
+  /* Colors */
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #2563eb;
+  --border: #e5e5e5;
+  --muted: #6b7280;
+
+  /* Box colors */
+  --box-blue: #eff6ff;
+  --box-blue-border: #3b82f6;
+  --box-green: #f0fdf4;
+  --box-green-border: #22c55e;
+  --box-red: #fef2f2;
+  --box-red-border: #ef4444;
+  --box-yellow: #fffbeb;
+  --box-yellow-border: #f59e0b;
+  --box-gray: #f9fafb;
+  --box-gray-border: #9ca3af;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ============================================
+   BASE STYLES
+   ============================================ */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-crimson), Georgia, "Times New Roman", serif;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+}
+
+/* Page container */
+.page {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm 15mm;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--foreground);
+}
+
+.header h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.header p {
+  font-size: calc(var(--font-size-base) + 1pt);
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+.section {
+  margin-bottom: var(--section-gap);
+  break-inside: avoid-page;
+}
+
+.section-title {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+}
+
+/* Subsection */
+.subsection {
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.subsection-title {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+/* ============================================
+   LAYOUT COMPONENTS
+   ============================================ */
+
+/* Row - horizontal layout */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.row-gap-sm { gap: 0.5rem; }
+.row-gap-md { gap: 1rem; }
+.row-gap-lg { gap: 1.5rem; }
+
+/* Column */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+}
+
+.col-auto { flex: 1 1 auto; }
+.col-half { flex: 0 0 calc(50% - 0.5rem); }
+.col-third { flex: 0 0 calc(33.333% - 0.67rem); }
+.col-two-thirds { flex: 0 0 calc(66.666% - 0.33rem); }
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+.divider-solid { border-top-style: solid; }
+.divider-dashed { border-top-style: dashed; }
+.divider-dotted { border-top-style: dotted; }
+.divider-double { border-top: 3px double var(--border); }
+
+.divider-spacing-sm { margin: 0.5rem 0; }
+.divider-spacing-md { margin: 1rem 0; }
+.divider-spacing-lg { margin: 1.5rem 0; }
+
+/* Spacer */
+.spacer-sm { height: 0.5rem; }
+.spacer-md { height: 1rem; }
+.spacer-lg { height: 1.5rem; }
+.spacer-xl { height: 2rem; }
+
+/* ============================================
+   BOX COMPONENT
+   ============================================ */
+.box {
+  padding: 0.5rem 0.75rem;
+  break-inside: avoid;
+}
+
+.box-title {
+  font-weight: 700;
+  font-size: var(--font-size-box-title);
+  margin-bottom: 0.25rem;
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Box borders */
+.box-border-none { border: none; }
+.box-border-solid { border: 1px solid var(--border); }
+.box-border-dashed { border: 1px dashed var(--border); }
+.box-border-left { border-left: 3px solid var(--border); }
+
+/* Box colors */
+.box-default { background: transparent; }
+.box-blue { 
+  background: var(--box-blue); 
+  border-color: var(--box-blue-border); 
+}
+.box-blue.box-border-left { border-left-color: var(--box-blue-border); }
+
+.box-green { 
+  background: var(--box-green); 
+  border-color: var(--box-green-border); 
+}
+.box-green.box-border-left { border-left-color: var(--box-green-border); }
+
+.box-red { 
+  background: var(--box-red); 
+  border-color: var(--box-red-border); 
+}
+.box-red.box-border-left { border-left-color: var(--box-red-border); }
+
+.box-yellow { 
+  background: var(--box-yellow); 
+  border-color: var(--box-yellow-border); 
+}
+.box-yellow.box-border-left { border-left-color: var(--box-yellow-border); }
+
+.box-gray { 
+  background: var(--box-gray); 
+  border-color: var(--box-gray-border); 
+}
+.box-gray.box-border-left { border-left-color: var(--box-gray-border); }
+
+/* ============================================
+   CONTENT COMPONENTS
+   ============================================ */
+
+/* Definition box */
+.definition {
+  padding: 0.5rem 0;
+  break-inside: avoid;
+}
+
+.definition-term {
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Theorem box */
+.theorem {
+  border-left: 3px solid var(--foreground);
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  background: #fafafa;
+  break-inside: avoid;
+}
+
+.theorem-header {
+  font-weight: 700;
+  font-size: var(--font-size-box-title);
+  margin-bottom: 0.25rem;
+}
+
+.theorem-content {
+  margin-bottom: 0.5rem;
+}
+
+.theorem-proof {
+  font-size: var(--font-size-small);
+  color: var(--muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.proof-label {
+  font-style: italic;
+}
+
+/* Note box */
+.note {
+  background: var(--box-yellow);
+  border: 1px solid var(--box-yellow-border);
+  padding: 0.5rem 0.75rem;
+  font-size: var(--font-size-small);
+  break-inside: avoid;
+}
+
+.note-label {
+  font-weight: 700;
+}
+
+/* Math block */
+.math-block {
+  text-align: center;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+/* List styles */
+ul, ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  :root {
+    /* Slightly smaller for print */
+    --font-size-base: 10pt;
+    --font-size-small: 9pt;
+    --font-size-h1: 20pt;
+    --font-size-h2: 14pt;
+    --font-size-h3: 12pt;
+    --font-size-box-title: 10pt;
+    --line-height: 1.5;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .header p {
+    color: #333;
+  }
+
+  .section {
+    page-break-inside: avoid;
+  }
+
+  .section-title {
+    page-break-after: avoid;
+  }
+
+  /* Print-safe colors */
+  .theorem {
+    background: #f5f5f5;
+    border-left-color: black;
+  }
+
+  .note {
+    background: #f9f9f9;
+    border-color: #666;
+  }
+
+  .box-blue,
+  .box-green,
+  .box-red,
+  .box-yellow,
+  .box-gray {
+    background: #f5f5f5;
+    border-color: #666;
+  }
+
+  .math-block {
+    page-break-inside: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   SCREEN STYLES
+   ============================================ */
+@media screen {
+  body {
+    background: #f5f5f5;
+  }
+
+  .page {
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+  }
 }
