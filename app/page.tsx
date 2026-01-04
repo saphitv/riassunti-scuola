@@ -294,7 +294,7 @@ x^2-x-1 & \\\\
               <Math>
                 {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"} 
               </Math>
-              con <Math>{"\\alpha = \\frac{b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"}</Math> reali.
+              con <Math>{"\\alpha = \\frac{-b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"}</Math> reali.
             </li>
           </ul>
         </Theorem>
