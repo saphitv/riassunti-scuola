@@ -283,14 +283,14 @@ x^2-x-1 & \\\\
           <Math>{"p(t) = at^2 + bt + c = 0"}</Math>, dopo aver calcolato gli zeri <Math>{"r_1, r_2"}</Math>:
           <ul>
             <li>
-              Radici reali distinte:{" "}
+              Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "} 
               <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t}"}</Math>
             </li>
             <li>
-              Radice doppia: <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
+              Radice doppia (<Math>{"delta = 0"}</Math>): <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
             </li>
             <li>
-              Radici complesse:{" "}
+              Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
               <Math>
                 {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"} 
               </Math>
