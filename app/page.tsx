@@ -284,7 +284,7 @@ x^2-x-1 & \\\\
           <ul>
             <li>
               Radici reali distinte:{" "}
-              <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t} + ..."}</Math>
+              <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t}"}</Math>
             </li>
             <li>
               Radice doppia: <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
@@ -292,8 +292,9 @@ x^2-x-1 & \\\\
             <li>
               Radici complesse:{" "}
               <Math>
-                {"y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)"}
+                {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"} 
               </Math>
+              con <Math>{"\\alpha = \\frac{b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"}</Math> reali.
             </li>
           </ul>
         </Theorem>
