@@ -280,14 +280,14 @@ x^2-x-1 & \\\\
 
         <Theorem title="EDO II ordine a coefficienti costanti">
           Per <Math>{"y'' + ay' + by = 0"}</Math>, equazione caratteristica{" "}
-          <Math>{"\\lambda^2 + a\\lambda + b = 0"}</Math>:
+          <Math>{"p(t) = at^2 + bt + c = 0"}</Math>, dopo aver calcolato gli zeri <Math>{"r_1, r_2"}</Math>:
           <ul>
             <li>
               Radici reali distinte:{" "}
-              <Math>{"y = C_1 e^{\\lambda_1 x} + C_2 e^{\\lambda_2 x}"}</Math>
+              <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t} + ..."}</Math>
             </li>
             <li>
-              Radice doppia: <Math>{"y = (C_1 + C_2 x) e^{\\lambda x}"}</Math>
+              Radice doppia: <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
             </li>
             <li>
               Radici complesse:{" "}
