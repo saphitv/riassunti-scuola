@@ -18,6 +18,12 @@
   /* Spacing */
   --section-gap: 1.25rem;
   --content-gap: 0.6rem;
+  --box-padding-y: 0.45rem;      /* Box vertical padding */
+  --box-padding-x: 0.70rem;      /* Box horizontal padding */
+  --example-padding-y: 0.4rem;   /* Example vertical padding */
+  --example-padding-x: 0.6rem;   /* Example horizontal padding */
+  --table-padding-y: 0.5rem;     /* Table cell vertical padding */
+  --table-padding-x: 0.75rem;    /* Table cell horizontal padding */
 
   /* Colors */
   --background: #ffffff;
@@ -165,7 +171,7 @@ body {
    BOX COMPONENT
    ============================================ */
 .box {
-  padding: 0.5rem 0.75rem;
+  padding: var(--box-padding-y) var(--box-padding-x);
   break-inside: avoid;
 }
 
@@ -237,7 +243,7 @@ body {
 /* Theorem box */
 .theorem {
   border-left: 3px solid var(--foreground);
-  padding: 0.5rem 0.75rem;
+  padding: var(--box-padding-y) var(--box-padding-x);
   margin: 0.25rem 0;
   background: #fafafa;
   break-inside: avoid;
@@ -269,7 +275,7 @@ body {
 .note {
   background: var(--box-yellow);
   border: 1px solid var(--box-yellow-border);
-  padding: 0.5rem 0.75rem;
+  padding: var(--box-padding-y) var(--box-padding-x);
   font-size: var(--font-size-small);
   break-inside: avoid;
 }
@@ -281,7 +287,7 @@ body {
 /* Example box - compact for step-by-step examples */
 .example {
   font-size: var(--font-size-small);
-  padding: 0.4rem 0.6rem;
+  padding: var(--example-padding-y) var(--example-padding-x);
   background: #fafafa;
   border-left: 2px solid var(--border);
   break-inside: avoid;
@@ -330,7 +336,7 @@ body {
 .formula-table-header {
   font-weight: 700;
   font-size: var(--font-size-box-title);
-  padding: 0.5rem 0.75rem;
+  padding: var(--table-padding-y) var(--table-padding-x);
   text-align: center;
   background: var(--box-gray);
   border: 1px solid var(--border);
@@ -344,7 +350,7 @@ body {
 
 .formula-table-label {
   font-weight: 600;
-  padding: 0.5rem 0.75rem;
+  padding: var(--table-padding-y) var(--table-padding-x);
   text-align: left;
   background: var(--box-gray);
   border: 1px solid var(--border);
@@ -352,7 +358,7 @@ body {
 }
 
 .formula-table-cell {
-  padding: 0.5rem 0.75rem;
+  padding: var(--table-padding-y) var(--table-padding-x);
   text-align: center;
   border: 1px solid var(--border);
   vertical-align: middle;
