@@ -31,7 +31,7 @@ export default function Home() {
           rette <Math>{"x = a"}</Math> e <Math>{"x = b"}</Math>.
         </Definition>
 
-        <Box color="gray" border="left" title="Regole di derivazione">
+        {/* <Box color="gray" border="left" title="Regole di derivazione">
           <Row>
             <Column width="third">
               <MathBlock>{"(f \\cdot g)' = f' g + f g'"}</MathBlock>
@@ -45,12 +45,12 @@ export default function Home() {
               <MathBlock>{"(f \\circ g)' = f'(g) \\cdot g'"}</MathBlock>
             </Column>
           </Row>
-        </Box>
+        </Box> */}
 
         {/* Example: Two boxes side by side */}
         <Row>
           <Column width="half">
-            <Box color="yellow" border="left" title="-">
+            <Box color="yellow" border="left" title="Sostituzione diretta">
               <MathBlock>
                 {"\\int f(ax+b)\\,dx = \\frac{1}{a}F(ax+b) + C"}
               </MathBlock>
@@ -60,7 +60,7 @@ export default function Home() {
             <Box
               color="green"
               border="left"
-              title="Integrazione di funzioni razionali"
+              title="Sostituzione diretta"
             >
               <MathBlock>
                 {"\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln |f(x)| + C"}
@@ -75,7 +75,7 @@ export default function Home() {
             </Box>
           </Column>
           <Column width="half">
-            <Box color="red" border="left" title="-">
+            <Box color="red" border="left" title="Sostituzione diretta">
               <MathBlock>{"\\int g'(x)f(g(x))\\,dx = F(g(x)) + C"}</MathBlock>
             </Box>
           </Column>
@@ -87,7 +87,7 @@ export default function Home() {
               <Math>{"\\int \\frac{e^x}{\\sqrt{1 - e^{2x}}} dx"}</Math>
               <ol className="example-steps">
                 <li>
-                  Poni <Math>{"t = e^x"}</Math>, quindi{" "} <br />
+                  Poni <Math>{"t = e^x"}</Math>, quindi <br />
                   <Math>{"\\frac{dt}{dx} = e^x \\implies dt = (e^x)' dx"}</Math>
                 </li>
                 <li>
@@ -112,9 +112,9 @@ export default function Home() {
               <ol className="example-steps">
                 <Row>
                   <Column width="half">
-                  <li>
-                  Divisione:
-                  <MathBlock>{`\\begin{array}{r|l}
+                    <li>
+                      Divisione:
+                      <MathBlock>{`\\begin{array}{r|l}
 x^3-3x-1 & x^2-x-2 \\\\
 \\hline
 -x^3+x^2+2x & x+1 \\\\
@@ -124,37 +124,38 @@ x^2-x-1 & \\\\
 \\hline
 1 &
 \\end{array}`}</MathBlock>
-                </li>
-                <li>
-                  <Math>
-                    {"\\frac{x^3-3x-1}{x^2-x-2} = x+1 + \\frac{1}{x^2-x-2}"}
-                  </Math>
-                </li>
+                    </li>
+                    <li>
+                      <Math>
+                        {"\\frac{x^3-3x-1}{x^2-x-2} = x+1 + \\frac{1}{x^2-x-2}"}
+                      </Math>
+                    </li>
+                    <li>
+                      Risultato Finale: <br />
+                      <Math>
+                        {
+                          "\\frac{x^2}{2} + x + \\frac{1}{3}\\ln|x-2| - \\frac{1}{3}\\ln|x+1| + C"
+                        }
+                      </Math>
+                    </li>
                   </Column>
                   <Column width="half">
-                  <li>
-                  Frazioni parziali per il resto:
-                  <MathBlock>
-                    {
-                      "\\frac{1}{(x-2)(x+1)} = \\frac{A}{x-2} + \\frac{B}{x+1}"
-                    }
-                  </MathBlock>
-                  <MathBlock>{"= \\frac{(A+B)x + (A-2B)}{(x-2)(x+1)}"}</MathBlock>
-                  <MathBlock>{`\\begin{cases} A+B = 0 \\\\ A-2B = 1 \\end{cases} \\Rightarrow \\begin{cases} A = \\frac{1}{3} \\\\ B = -\\frac{1}{3} \\end{cases}`}</MathBlock>
-                </li>
-                <li>
-                  <Math>
-                    {
-                      "= \\frac{x^2}{2} + x + \\frac{1}{3}\\ln|x-2| - \\frac{1}{3}\\ln|x+1| + C"
-                    }
-                  </Math>
-                </li>
-                    </Column>
+                    <li>
+                      Frazioni parziali per il resto:
+                      <MathBlock>
+                        {
+                          "\\frac{1}{(x-2)(x+1)} = \\frac{A}{x-2} + \\frac{B}{x+1}"
+                        }
+                      </MathBlock>
+                      Oppure nel caso di una radice doppia:
+                      <Math>{`\\frac{1}{(x-2)^3(x+1)} = \\frac{A}{x-2} + \\frac{B}{(x-2)^2} + \\frac{C}{(x-2)^3} + \\frac{D}{x+1}`}</Math>
+                      <MathBlock>
+                        {"= \\frac{(A+B)x + (A-2B)}{(x-2)(x+1)}"}
+                      </MathBlock>
+                      <MathBlock>{`\\begin{cases} A+B = 0 \\\\ A-2B = 1 \\end{cases} \\Rightarrow \\begin{cases} A = \\frac{1}{3} \\\\ B = -\\frac{1}{3} \\end{cases}`}</MathBlock>
+                    </li>
+                  </Column>
                 </Row>
-                
-                
-                
-                
               </ol>
             </Example>
           </Column>
@@ -280,21 +281,29 @@ x^2-x-1 & \\\\
 
         <Theorem title="EDO II ordine a coefficienti costanti">
           Per <Math>{"y'' + ay' + by = 0"}</Math>, equazione caratteristica{" "}
-          <Math>{"p(t) = at^2 + bt + c = 0"}</Math>, dopo aver calcolato gli zeri <Math>{"r_1, r_2"}</Math>:
+          <Math>{"p(t) = at^2 + bt + c = 0"}</Math>, dopo aver calcolato gli
+          zeri <Math>{"r_1, r_2"}</Math>:
           <ul>
             <li>
-              Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "} 
+              Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "}
               <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t}"}</Math>
             </li>
             <li>
-              Radice doppia (<Math>{"delta = 0"}</Math>): <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
+              Radice doppia (<Math>{"delta = 0"}</Math>):{" "}
+              <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
             </li>
             <li>
               Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
               <Math>
-                {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"} 
+                {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"}
               </Math>
-              con <Math>{"\\alpha = \\frac{-b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"}</Math> reali.
+              con{" "}
+              <Math>
+                {
+                  "\\alpha = \\frac{-b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"
+                }
+              </Math>{" "}
+              reali.
             </li>
           </ul>
         </Theorem>
