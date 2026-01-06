@@ -307,7 +307,7 @@ x^2-x-1 & \\\\
           </ul>
         </Theorem>
 
-        <Theorem title="> 2 coefficenti omogenea a coefficienti costanti">
+        <Theorem title="> 2 lineari omogenee a coefficienti costanti">
           Per <Math>{"y^{(n)} + a_{n-1}y^{(n-1)} + ... + a_1y' + a_0y = 0"}</Math>, equazione caratteristica{" "}
           <Math>{"p(t) = t^n + a_{n-1}t^{n-1} + ... + a_1t + a_0 = 0"}</Math>, dopo aver calcolato gli
           zeri <Math>{"r_1, r_2, ... , r_n"}</Math>:
@@ -328,6 +328,40 @@ x^2-x-1 & \\\\
             </li>
           </ul>
         </Theorem>
+
+        <Box color="green" border="left" title="lineari a coefficienti costanti inomogenee (Ansatz)">
+          Data la equazione differenziale <Math>{"y^{(n)} + a_{n-1}y^{(n-1)} + ... + a_1y' + a_0y = f(x)"}</Math>:
+          <Row>
+            <Column width="third">
+              <strong>Step 1</strong> &rarr; Equazione omogenea associata: <br />
+              <span className="text-[0.7rem] italic">Risolvibile con il metodo sopra.</span>
+            </Column>
+            <Column width="two-thirds">
+              <strong>Step 2</strong> &rarr; Trovare la soluzione particolare yₚ(x) della forma: <br />
+              <Math>{"y_p(x) = A_n x^n + A_{n-1} x^{n-1} + ... + A_1 x + A_0"}</Math>
+              <Example color="green" radius="md" border="all">
+                Esempio con <Math>{"y'' - 3y' + 2y = 2t^2 + 1"}</Math>
+                <ol className="example-steps">
+                  <li>
+                    <Math>{"y_p(t) = A t^2 + B t + C"}</Math><br />
+                    <Math>{"y_p'(t) = 2A t + B"}</Math><br />
+                    <Math>{"y_p''(t) = 2A"}</Math><br />
+                  </li>
+                  <li>
+                    Sostituire nell&apos;equazione differenziale:
+                    <MathBlock gap="sm">{"2A + 2A t + B - 3(2A t + B) + 2(A t^2 + B t + C) = 2t^2 + 1"
+                    + "\\newline t^2(2A) + t(-6A + 2B) + (2A - 3B + 2C) = 2t^2 + 1"
+                    + "\\newline \\begin{cases} 2A = 2 \\\\ -6A + 2B = 0 \\\\ 2A - 3B + 2C = 1 \\end{cases}"
+                    + "\\begin{cases} A = 1 \\\\ B = 3 \\\\ C = 4 \\end{cases}"}</MathBlock>
+                  </li>
+                </ol>
+              </Example>
+            </Column>
+          </Row>
+
+          <strong>Step 3</strong> &rarr; Unione delle due soluzioni:
+          <MathBlock>{"y = y_h(x) + y_p(x)"}</MathBlock>
+        </Box>
       </Section>
 
       {/* <Divider style="solid" spacing="lg" /> */}

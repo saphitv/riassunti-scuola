@@ -43,6 +43,18 @@
   --box-yellow-border: #f59e0b;
   --box-gray: #f9fafb;
   --box-gray-border: #9ca3af;
+
+  /* Example colors - slightly more saturated for nesting visibility */
+  --example-blue: #dbeafe;
+  --example-blue-border: #2563eb;
+  --example-green: #dcfce7;
+  --example-green-border: #16a34a;
+  --example-red: #fee2e2;
+  --example-red-border: #dc2626;
+  --example-yellow: #fef3c7;
+  --example-yellow-border: #d97706;
+  --example-gray: #f3f4f6;
+  --example-gray-border: #6b7280;
 }
 
 /* ============================================
@@ -289,7 +301,7 @@ body {
   font-size: var(--font-size-small);
   padding: var(--example-padding-y) var(--example-padding-x);
   background: #fafafa;
-  border-left: 2px solid var(--border);
+  border: none;
   break-inside: avoid;
 }
 
@@ -314,12 +326,76 @@ body {
   margin-bottom: 0.15rem;
 }
 
+/* Example border positions */
+.example-border-left { border-left: 3px solid var(--border); }
+.example-border-right { border-right: 3px solid var(--border); }
+.example-border-top { border-top: 3px solid var(--border); }
+.example-border-bottom { border-bottom: 3px solid var(--border); }
+.example-border-all { border: 2px solid var(--border); }
+
+/* Example border radius */
+.example-radius-none { border-radius: 0; }
+.example-radius-sm { border-radius: 0.25rem; }
+.example-radius-md { border-radius: 0.5rem; }
+.example-radius-lg { border-radius: 0.75rem; }
+.example-radius-full { border-radius: 9999px; }
+
+/* Example colors - distinct from box colors for nesting */
+.example-color-green {
+  background: var(--example-green);
+}
+.example-color-green.example-border-left { border-left-color: var(--example-green-border); }
+.example-color-green.example-border-right { border-right-color: var(--example-green-border); }
+.example-color-green.example-border-top { border-top-color: var(--example-green-border); }
+.example-color-green.example-border-bottom { border-bottom-color: var(--example-green-border); }
+.example-color-green.example-border-all { border-color: var(--example-green-border); }
+
+.example-color-red {
+  background: var(--example-red);
+}
+.example-color-red.example-border-left { border-left-color: var(--example-red-border); }
+.example-color-red.example-border-right { border-right-color: var(--example-red-border); }
+.example-color-red.example-border-top { border-top-color: var(--example-red-border); }
+.example-color-red.example-border-bottom { border-bottom-color: var(--example-red-border); }
+.example-color-red.example-border-all { border-color: var(--example-red-border); }
+
+.example-color-yellow {
+  background: var(--example-yellow);
+}
+.example-color-yellow.example-border-left { border-left-color: var(--example-yellow-border); }
+.example-color-yellow.example-border-right { border-right-color: var(--example-yellow-border); }
+.example-color-yellow.example-border-top { border-top-color: var(--example-yellow-border); }
+.example-color-yellow.example-border-bottom { border-bottom-color: var(--example-yellow-border); }
+.example-color-yellow.example-border-all { border-color: var(--example-yellow-border); }
+
+.example-color-blue {
+  background: var(--example-blue);
+}
+.example-color-blue.example-border-left { border-left-color: var(--example-blue-border); }
+.example-color-blue.example-border-right { border-right-color: var(--example-blue-border); }
+.example-color-blue.example-border-top { border-top-color: var(--example-blue-border); }
+.example-color-blue.example-border-bottom { border-bottom-color: var(--example-blue-border); }
+.example-color-blue.example-border-all { border-color: var(--example-blue-border); }
+
+.example-color-gray {
+  background: var(--example-gray);
+}
+.example-color-gray.example-border-left { border-left-color: var(--example-gray-border); }
+.example-color-gray.example-border-right { border-right-color: var(--example-gray-border); }
+.example-color-gray.example-border-top { border-top-color: var(--example-gray-border); }
+.example-color-gray.example-border-bottom { border-bottom-color: var(--example-gray-border); }
+.example-color-gray.example-border-all { border-color: var(--example-gray-border); }
+
 /* Math block */
 .math-block {
   text-align: center;
-  margin: 0.5rem 0;
   overflow-x: auto;
 }
+
+.math-block-gap-sm { margin: 0 0; padding: 0 0; }
+.math-block-gap-md { margin: 0.25rem 0; padding: 0.25rem 0; }
+.math-block-gap-lg { margin: 0.5rem 0; padding: 0.5rem 0; }
+.math-block-gap-xl { margin: 0.75rem 0; padding: 0.75rem 0; }
 
 /* Formula Table */
 .formula-table-wrapper {
@@ -474,6 +550,42 @@ li {
     background-color: #fffbeb !important;
     border-color: #f59e0b !important;
   }
+
+  /* Preserve example colors - more saturated than box colors */
+  .example-color-green { background-color: #dcfce7 !important; }
+  .example-color-green.example-border-left { border-left-color: #16a34a !important; }
+  .example-color-green.example-border-right { border-right-color: #16a34a !important; }
+  .example-color-green.example-border-top { border-top-color: #16a34a !important; }
+  .example-color-green.example-border-bottom { border-bottom-color: #16a34a !important; }
+  .example-color-green.example-border-all { border-color: #16a34a !important; }
+
+  .example-color-red { background-color: #fee2e2 !important; }
+  .example-color-red.example-border-left { border-left-color: #dc2626 !important; }
+  .example-color-red.example-border-right { border-right-color: #dc2626 !important; }
+  .example-color-red.example-border-top { border-top-color: #dc2626 !important; }
+  .example-color-red.example-border-bottom { border-bottom-color: #dc2626 !important; }
+  .example-color-red.example-border-all { border-color: #dc2626 !important; }
+
+  .example-color-yellow { background-color: #fef3c7 !important; }
+  .example-color-yellow.example-border-left { border-left-color: #d97706 !important; }
+  .example-color-yellow.example-border-right { border-right-color: #d97706 !important; }
+  .example-color-yellow.example-border-top { border-top-color: #d97706 !important; }
+  .example-color-yellow.example-border-bottom { border-bottom-color: #d97706 !important; }
+  .example-color-yellow.example-border-all { border-color: #d97706 !important; }
+
+  .example-color-blue { background-color: #dbeafe !important; }
+  .example-color-blue.example-border-left { border-left-color: #2563eb !important; }
+  .example-color-blue.example-border-right { border-right-color: #2563eb !important; }
+  .example-color-blue.example-border-top { border-top-color: #2563eb !important; }
+  .example-color-blue.example-border-bottom { border-bottom-color: #2563eb !important; }
+  .example-color-blue.example-border-all { border-color: #2563eb !important; }
+
+  .example-color-gray { background-color: #f3f4f6 !important; }
+  .example-color-gray.example-border-left { border-left-color: #6b7280 !important; }
+  .example-color-gray.example-border-right { border-right-color: #6b7280 !important; }
+  .example-color-gray.example-border-top { border-top-color: #6b7280 !important; }
+  .example-color-gray.example-border-bottom { border-bottom-color: #6b7280 !important; }
+  .example-color-gray.example-border-all { border-color: #6b7280 !important; }
 
   .math-block {
     page-break-inside: avoid;
