@@ -145,7 +145,7 @@ x^2-x-1 & \\\\
                           "\\frac{1}{(x-2)(x+1)} = \\frac{A}{x-2} + \\frac{B}{x+1}"
                         }
                       </MathBlock>
-                      Oppure nel caso di una radice doppia:
+                      Oppure moltiplicità maggiore di 1: <br />
                       <Math>{`\\frac{1}{(x-2)^3(x+1)} = \\frac{A}{x-2} + \\frac{B}{(x-2)^2} + \\frac{C}{(x-2)^3} + \\frac{D}{x+1}`}</Math>
                       <MathBlock>
                         {"= \\frac{(A+B)x + (A-2B)}{(x-2)(x+1)}"}
