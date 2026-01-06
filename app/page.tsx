@@ -3,8 +3,6 @@ import {
   Row,
   Column,
   Box,
-  Divider,
-  Spacer,
   Math,
   MathBlock,
   Note,
