@@ -286,24 +286,45 @@ x^2-x-1 & \\\\
           <ul>
             <li>
               Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "}
-              <Math>{"y = k_1 e^{r_1 t} + k_2 e^{r_2 t}"}</Math>
+              <Math>{"y = C_1 e^{r_1 t} + C_2 e^{r_2 t}"}</Math>
             </li>
             <li>
               Radice doppia (<Math>{"delta = 0"}</Math>):{" "}
-              <Math>{"y = (k_1 + k_2 t) e^{r t}"}</Math>
+              <Math>{"y = (C_1 + C_2 t) e^{r t}"}</Math>
             </li>
             <li>
               Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
               <Math>
                 {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"}
               </Math>
-              con{" "}
+              <br /> con{" "}
               <Math>
                 {
-                  "\\alpha = \\frac{-b}{2a} e \\beta = \\frac{\\sqrt{4ac-b^2}}{2a}"
+                  "\\Delta = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} = \\alpha \\pm i \\beta"
                 }
-              </Math>{" "}
-              reali.
+              </Math>
+            </li>
+          </ul>
+        </Theorem>
+
+        <Theorem title="> 2 coefficenti omogenea a coefficienti costanti">
+          Per <Math>{"y^{(n)} + a_{n-1}y^{(n-1)} + ... + a_1y' + a_0y = 0"}</Math>, equazione caratteristica{" "}
+          <Math>{"p(t) = t^n + a_{n-1}t^{n-1} + ... + a_1t + a_0 = 0"}</Math>, dopo aver calcolato gli
+          zeri <Math>{"r_1, r_2, ... , r_n"}</Math>:
+          <ul>
+            <li>
+              Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "}
+              <Math>{"y = C_1 e^{r_1 t} + C_2 e^{r_2 t} + ... + C_n e^{r_n t}"}</Math>
+            </li>
+            <li>
+              Radice doppia (<Math>{"delta = 0"}</Math>):{" "}
+              <Math>{"y = (C_1 + C_2 t + C_3 t^2) e^{r t} + ... + (C_n + C_{n+1} t + C_{n+2} t^2) e^{r t}"}</Math>
+            </li>
+            <li>
+              Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
+              <Math>
+                {"y = e^{\\alpha t}(C_1 \\cos\\beta t + C_2 \\sin\\beta t) + ... + e^{\\alpha t}(C_n \\cos\\beta t + C_{n+1} \\sin\\beta t)"}
+              </Math>
             </li>
           </ul>
         </Theorem>
