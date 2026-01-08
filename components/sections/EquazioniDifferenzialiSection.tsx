@@ -1,0 +1,132 @@
+import {
+  Section,
+  Row,
+  Column,
+  Box,
+  Math,
+  MathBlock,
+  Theorem,
+  Example,
+} from "@/components";
+
+export function EquazioniDifferenzialiSection() {
+  return (
+    <Section title="Equazioni differenziali">
+      <Row>
+        <Column width="half">
+          <Box color="red" border="left" title="EDO I ordine lineare">
+            <Math>{"y' + p(x)y = q(x)"}</Math>
+            <MathBlock>
+              {"y = e^{-\\mu(x)} \\int q(x) e^{\\mu(x)}\\,dx + C"}
+            </MathBlock>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="yellow" border="left" title="Variabili separabili">
+            <Math>{"y' = f(x) \\cdot g(y)"}</Math>
+            <MathBlock>
+              {"\\int \\frac{dy}{g(y)} = \\int f(x)\\,dx"}
+            </MathBlock>
+          </Box>
+        </Column>
+      </Row>
+
+      <Theorem title="Teorema di Cachy">
+        <Row>
+          <Column width="half">
+            <MathBlock>{"\\frac{dy}{dx} = f(x)g(y)"}</MathBlock>
+          </Column>
+          <Column width="half">
+            <MathBlock>
+              {"\\int \\frac{1}{g(y)} dy = \\int f(x)\\,dx"}
+            </MathBlock>
+          </Column>
+        </Row>
+      </Theorem>
+
+      <Theorem title="EDO II ordine a coefficienti costanti">
+        Per <Math>{"y'' + ay' + by = 0"}</Math>, equazione caratteristica{" "}
+        <Math>{"p(t) = at^2 + bt + c = 0"}</Math>, dopo aver calcolato gli
+        zeri <Math>{"r_1, r_2"}</Math>:
+        <ul>
+          <li>
+            Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "}
+            <Math>{"y = C_1 e^{r_1 t} + C_2 e^{r_2 t}"}</Math>
+          </li>
+          <li>
+            Radice doppia (<Math>{"delta = 0"}</Math>):{" "}
+            <Math>{"y = (C_1 + C_2 t) e^{r t}"}</Math>
+          </li>
+          <li>
+            Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
+            <Math>
+              {"y = e^{\\alpha t}(k_1 \\cos\\beta t + k_2 \\sin\\beta t)"}
+            </Math>
+            <br /> con{" "}
+            <Math>
+              {
+                "\\Delta = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} = \\alpha \\pm i \\beta"
+              }
+            </Math>
+          </li>
+        </ul>
+      </Theorem>
+
+      <Theorem title="> 2 lineari omogenee a coefficienti costanti">
+        Per <Math>{"y^{(n)} + a_{n-1}y^{(n-1)} + ... + a_1y' + a_0y = 0"}</Math>, equazione caratteristica{" "}
+        <Math>{"p(t) = t^n + a_{n-1}t^{n-1} + ... + a_1t + a_0 = 0"}</Math>, dopo aver calcolato gli
+        zeri <Math>{"r_1, r_2, ... , r_n"}</Math>:
+        <ul>
+          <li>
+            Radici reali distinte (<Math>{"delta > 0"}</Math>):{" "}
+            <Math>{"y = C_1 e^{r_1 t} + C_2 e^{r_2 t} + ... + C_n e^{r_n t}"}</Math>
+          </li>
+          <li>
+            Radice doppia (<Math>{"delta = 0"}</Math>):{" "}
+            <Math>{"y = (C_1 + C_2 t + C_3 t^2) e^{r t} + ... + (C_n + C_{n+1} t + C_{n+2} t^2) e^{r t}"}</Math>
+          </li>
+          <li>
+            Radici complesse (<Math>{"delta < 0"}</Math>):{" "}
+            <Math>
+              {"y = e^{\\alpha t}(C_1 \\cos\\beta t + C_2 \\sin\\beta t) + ... + e^{\\alpha t}(C_n \\cos\\beta t + C_{n+1} \\sin\\beta t)"}
+            </Math>
+          </li>
+        </ul>
+      </Theorem>
+
+      <Box color="green" border="left" title="lineari a coefficienti costanti inomogenee (Ansatz)">
+        Data la equazione differenziale <Math>{"y^{(n)} + a_{n-1}y^{(n-1)} + ... + a_1y' + a_0y = f(x)"}</Math>:
+        <Row>
+          <Column width="third">
+            <strong>Step 1</strong> &rarr; Equazione omogenea associata: <br />
+            <span className="text-[0.7rem] italic">Risolvibile con il metodo sopra.</span>
+          </Column>
+          <Column width="two-thirds">
+            <strong>Step 2</strong> &rarr; Trovare la soluzione particolare yₚ(x) della forma: <br />
+            <Math>{"y_p(x) = A_n x^n + A_{n-1} x^{n-1} + ... + A_1 x + A_0"}</Math>
+            <Example color="green" radius="md" border="all">
+              Esempio con <Math>{"y'' - 3y' + 2y = 2t^2 + 1"}</Math>
+              <ol className="example-steps">
+                <li>
+                  <Math>{"y_p(t) = A t^2 + B t + C"}</Math><br />
+                  <Math>{"y_p'(t) = 2A t + B"}</Math><br />
+                  <Math>{"y_p''(t) = 2A"}</Math><br />
+                </li>
+                <li>
+                  Sostituire nell&apos;equazione differenziale:
+                  <MathBlock gap="sm">{"2A + 2A t + B - 3(2A t + B) + 2(A t^2 + B t + C) = 2t^2 + 1"
+                  + "\\newline t^2(2A) + t(-6A + 2B) + (2A - 3B + 2C) = 2t^2 + 1"
+                  + "\\newline \\begin{cases} 2A = 2 \\\\ -6A + 2B = 0 \\\\ 2A - 3B + 2C = 1 \\end{cases}"
+                  + "\\begin{cases} A = 1 \\\\ B = 3 \\\\ C = 4 \\end{cases}"}</MathBlock>
+                </li>
+              </ol>
+            </Example>
+          </Column>
+        </Row>
+
+        <strong>Step 3</strong> &rarr; Unione delle due soluzioni:
+        <MathBlock>{"y = y_h(x) + y_p(x)"}</MathBlock>
+      </Box>
+    </Section>
+  );
+}
