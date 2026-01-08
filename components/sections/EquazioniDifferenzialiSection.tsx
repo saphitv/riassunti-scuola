@@ -17,12 +17,12 @@ export function EquazioniDifferenzialiSection() {
           <Box color="red" border="left" title="EDO I ordine lineare">
             <Math>{"y' + p(x)y = q(x)"}</Math>
             <MathBlock>
-              {"y = e^{-\\mu(x)} \\int q(x) e^{\\mu(x)}\\,dx + C"}
+              {"y = e^{-\\mu(x)} \\int q(x) e^{\\mu(x)}\\,dx \\implies \\mu(x) = \\int p(x)\\,dx"}
             </MathBlock>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="yellow" border="left" title="Variabili separabili">
+          <Box color="yellow" border="left" title="EDO I ordine Variabili separabili">
             <Math>{"y' = f(x) \\cdot g(y)"}</Math>
             <MathBlock>
               {"\\int \\frac{dy}{g(y)} = \\int f(x)\\,dx"}
@@ -31,17 +31,35 @@ export function EquazioniDifferenzialiSection() {
         </Column>
       </Row>
 
-      <Theorem title="Teorema di Cachy">
-        <Row>
-          <Column width="half">
-            <MathBlock>{"\\frac{dy}{dx} = f(x)g(y)"}</MathBlock>
-          </Column>
-          <Column width="half">
-            <MathBlock>
-              {"\\int \\frac{1}{g(y)} dy = \\int f(x)\\,dx"}
-            </MathBlock>
-          </Column>
-        </Row>
+      <Theorem title="Problema di Cauchy">
+        Data un&apos;EDO con condizione iniziale:
+        <MathBlock>
+          {"\\begin{cases} y' = f(x, y) \\\\ y(x_0) = y_0 \\end{cases}"}
+        </MathBlock>
+        Si cerca la soluzione particolare che passa per il punto{" "}
+        <Math>{"(x_0, y_0)"}</Math>.
+        <Example color="blue" radius="md" border="all">
+          <strong>Esempio:</strong> Risolvere{" "}
+          <Math>{"\\begin{cases} y' = xy \\\\ y(0) = 2 \\end{cases}"}</Math>
+          <ol className="example-steps">
+            <li>
+              Separo le variabili:{" "}
+              <Math>{"\\frac{dy}{y} = x\\,dx"}</Math>
+            </li>
+            <li>
+              Integro:{" "}
+              <Math>{"\\ln|y| = \\frac{x^2}{2} + C \\implies y = Ce^{x^2/2}"}</Math>
+            </li>
+            <li>
+              Applico la condizione iniziale <Math>{"y(0) = 2"}</Math>:{" "}
+              <Math>{"2 = Ce^0 \\implies C = 2"}</Math>
+            </li>
+            <li>
+              <strong>Soluzione:</strong>{" "}
+              <Math>{"y = 2e^{x^2/2}"}</Math>
+            </li>
+          </ol>
+        </Example>
       </Theorem>
 
       <Theorem title="EDO II ordine a coefficienti costanti">
