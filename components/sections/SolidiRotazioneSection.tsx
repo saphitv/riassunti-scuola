@@ -7,6 +7,7 @@ import {
   Definition,
   Theorem,
   FormulaTable,
+  Note,
 } from "@/components";
 
 export function SolidiRotazioneSection() {
@@ -48,13 +49,16 @@ export function SolidiRotazioneSection() {
         <Row>
           <Column width="half">
             <MathBlock>
-              {"x_G = \\frac{1}{A} \\int_a^b x(t) f(x) dx"}
+              {"x_G = \\frac{1}{A} \\int_a^b x[f(x) - g(x)] dx"}
             </MathBlock>
           </Column>
           <Column width="half">
-            <MathBlock>{"y_G = \\frac{1}{2A} \\int_a^b f(x)^2 dx"}</MathBlock>
+            <MathBlock>{"y_G = \\frac{1}{2A} \\int_a^b [f(x)^2 - g(x)^2] dx"}</MathBlock>
           </Column>
         </Row>
+        <Note>
+          Nel caso di una funzione composta, l&apos;integrale è la somma degli integrali delle singole parti (es. <Math>{"\\frac{1}{A} \\int_a^c = \\frac{1}{A} (\\int_a^b + \\int_b^c)"}</Math>).
+        </Note>
       </Theorem>
 
       <Theorem title="Teorema di Pappo">
