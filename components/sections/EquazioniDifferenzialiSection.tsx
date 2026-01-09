@@ -143,7 +143,7 @@ export function EquazioniDifferenzialiSection() {
         </Row>
 
         <strong>Step 3</strong> &rarr; Unione delle due soluzioni:
-        <MathBlock>{"y = y_h(x) + y_p(x)"}</MathBlock>
+        <MathBlock>{"y = y_o(x) + y_p(x)"}</MathBlock>
       </Box>
     </Section>
   );
