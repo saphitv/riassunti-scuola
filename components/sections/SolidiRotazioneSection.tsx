@@ -75,7 +75,7 @@ export function SolidiRotazioneSection() {
               rotazione si puo usare: <br />
               <Math>
                 {
-                  "d(P, r) = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2 + b^2}} = \\frac{|y_P - (m * x_P + q)|}{\\sqrt{1 + m^2}}"
+                  "d(P, r) = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2 + b^2}} = \\frac{|m*x_P - y_P + q|}{\\sqrt{m^2 + 1}}"
                 }
               </Math>
             </Definition>
