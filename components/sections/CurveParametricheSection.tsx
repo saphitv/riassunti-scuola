@@ -15,6 +15,18 @@ export function CurveParametricheSection() {
         L&apos;area è data da: <Math>{"\\int_a^b g(t) * f'(t) dt"}</Math>
       </Definition>
 
+      <div className="formulas-inline">
+        <span>
+          <strong>Circonferenza:</strong> <Math>{"x^2 + y^2 = r^2"}</Math> →{" "}
+          <Math>{"(r\\cos t,\\, r\\sin t)"}</Math>
+        </span>
+        <span className="formula-separator">|</span>
+        <span>
+          <strong>Ellisse:</strong> <Math>{"\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1"}</Math> →{" "}
+          <Math>{"(a\\cos t,\\, b\\sin t)"}</Math>
+        </span>
+      </div>
+
       <FormulaTable
         headers={["Funzioni", "Curve parametriche"]}
         rows={[
