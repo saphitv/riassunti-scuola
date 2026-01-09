@@ -32,6 +32,18 @@ export function SolidiRotazioneSection() {
         ]}
       />
 
+      <div className="formulas-inline">
+        <span>
+          <strong>Tra 2 funzioni (asse x):</strong>{" "}
+          <Math>{"V = \\pi \\int_a^b \\left[ f(x)^2 - g(x)^2 \\right] dx"}</Math>
+        </span>
+        <span className="formula-separator">|</span>
+        <span>
+          <strong>Gusci cilindrici (asse y):</strong>{" "}
+          <Math>{"V = 2\\pi \\int_a^b x \\left[ f(x) - g(x) \\right] dx"}</Math>
+        </span>
+      </div>
+
       <Theorem title="Baricentro con asse x">
         <Row>
           <Column width="half">
