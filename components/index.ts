@@ -17,5 +17,9 @@ export { Definition } from "./Definition";
 export { Theorem } from "./Theorem";
 export { Example } from "./Example";
 
+// Visualizers
+export { CurveVisualizer } from "./CurveVisualizer";
+export { VolumeVisualizer } from "./VolumeVisualizer";
+
 // Provider
 export { MathJaxProvider } from "./MathJaxProvider";

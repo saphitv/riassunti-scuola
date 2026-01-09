@@ -3,6 +3,7 @@ import {
   CurveParametricheSection,
   SolidiRotazioneSection,
   EquazioniDifferenzialiSection,
+  FormeNotevoliSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <CurveParametricheSection />
       <SolidiRotazioneSection />
       <EquazioniDifferenzialiSection />
+      <FormeNotevoliSection />
     </div>
   );
 }
