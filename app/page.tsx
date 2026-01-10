@@ -4,6 +4,7 @@ import {
   SolidiRotazioneSection,
   EquazioniDifferenzialiSection,
   FormeNotevoliSection,
+  FunzioniPiuVariabiliSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <CurveParametricheSection />
       <SolidiRotazioneSection />
       <EquazioniDifferenzialiSection />
+      <FunzioniPiuVariabiliSection />
       <FormeNotevoliSection />
     </div>
   );
