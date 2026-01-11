@@ -17,9 +17,11 @@ export default function Home() {
       <IntegraliSection />
       <CurveParametricheSection />
       <SolidiRotazioneSection />
-      <EquazioniDifferenzialiSection />
-      <FunzioniPiuVariabiliSection />
       <FormeNotevoliSection />
+
+      <EquazioniDifferenzialiSection />
+
+      <FunzioniPiuVariabiliSection />
     </div>
   );
 }

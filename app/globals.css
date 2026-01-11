@@ -10,20 +10,20 @@
   --font-size-h1: 18pt;          /* Page title */
   --font-size-h2: 12pt;          /* Section titles */
   --font-size-h3: 10pt;          /* Subsection titles */
-  --font-size-box-title: 8pt;   /* Box/theorem titles */
+  --font-size-box-title: 10pt;   /* Box/theorem titles */
   
   /* Line height */
-  --line-height: 1.3;
+  --line-height: 1.2;
   
   /* Spacing */
-  --section-gap: 1rem;
-  --content-gap: 0.5rem;
-  --box-padding-y: 0.45rem;      /* Box vertical padding */
-  --box-padding-x: 0.70rem;      /* Box horizontal padding */
-  --example-padding-y: 0.4rem;   /* Example vertical padding */
-  --example-padding-x: 0.6rem;   /* Example horizontal padding */
-  --table-padding-y: 0.5rem;     /* Table cell vertical padding */
-  --table-padding-x: 0.75rem;    /* Table cell horizontal padding */
+  --section-gap: 0.75rem;
+  --content-gap: 0.35rem;
+  --box-padding-y: 0.35rem;      /* Box vertical padding */
+  --box-padding-x: 0.60rem;      /* Box horizontal padding */
+  --example-padding-y: 0.3rem;   /* Example vertical padding */
+  --example-padding-x: 0.5rem;   /* Example horizontal padding */
+  --table-padding-y: 0.35rem;    /* Table cell vertical padding */
+  --table-padding-x: 0.6rem;     /* Table cell horizontal padding */
 
   /* Colors */
   --background: #ffffff;
@@ -78,8 +78,8 @@ body {
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--foreground);
 }
 
@@ -106,8 +106,8 @@ body {
 .section-title {
   font-size: var(--font-size-h2);
   font-weight: 700;
-  margin: 0 0 0.75rem 0;
-  padding-bottom: 0.25rem;
+  margin: 0 0 0.5rem 0;
+  padding-bottom: 0.15rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -119,14 +119,14 @@ body {
 
 /* Subsection */
 .subsection {
-  margin-top: 1rem;
-  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .subsection-title {
   font-size: var(--font-size-h3);
   font-weight: 600;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.3rem 0;
 }
 
 /* ============================================
@@ -192,13 +192,13 @@ body {
 .box-title {
   font-weight: 700;
   font-size: var(--font-size-box-title);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .box-content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 /* Box borders */
@@ -245,7 +245,7 @@ body {
 
 /* Definition box */
 .definition {
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
   break-inside: avoid;
 }
 
@@ -258,7 +258,7 @@ body {
 .theorem {
   border-left: 3px solid var(--foreground);
   padding: var(--box-padding-y) var(--box-padding-x);
-  margin: 0.25rem 0;
+  margin: 0.15rem 0;
   background: #fafafa;
   break-inside: avoid;
 }
@@ -266,19 +266,19 @@ body {
 .theorem-header {
   font-weight: 700;
   font-size: var(--font-size-box-title);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .theorem-content {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .theorem-proof {
   font-size: var(--font-size-small);
   color: var(--muted);
   border-top: 1px dashed var(--border);
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
+  padding-top: 0.3rem;
+  margin-top: 0.3rem;
 }
 
 .proof-label {
@@ -316,7 +316,7 @@ body {
 .example-content {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .example-steps {
@@ -325,7 +325,7 @@ body {
 }
 
 .example-steps li {
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
 /* Example border positions */
@@ -423,7 +423,7 @@ body {
 /* Formula Table */
 .formula-table-wrapper {
   overflow-x: auto;
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
 }
 
 .formula-table {
@@ -469,12 +469,12 @@ body {
 
 /* List styles */
 ul, ol {
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
   padding-left: 1.5rem;
 }
 
 li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 /* ============================================
@@ -483,18 +483,18 @@ li {
 @media print {
   @page {
     size: A4;
-    margin: 15mm;
+    margin: 10mm;
   }
 
   :root {
-    /* Slightly smaller for print */
-    --font-size-base: 10pt;
-    --font-size-small: 9pt;
-    --font-size-h1: 20pt;
-    --font-size-h2: 14pt;
-    --font-size-h3: 12pt;
-    --font-size-box-title: 10pt;
-    --line-height: 1.5;
+    /* Compact for print - keep same as screen or smaller */
+    --font-size-base: 9pt;
+    --font-size-small: 7pt;
+    --font-size-h1: 16pt;
+    --font-size-h2: 11pt;
+    --font-size-h3: 9pt;
+    --font-size-box-title: 8pt;
+    --line-height: 1.2;
   }
 
   /* Force browsers to print background colors and images */
