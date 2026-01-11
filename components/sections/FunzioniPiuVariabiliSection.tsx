@@ -114,6 +114,29 @@ export function FunzioniPiuVariabiliSection() {
         </Note>
       </Theorem>
 
+      <Box color="gray" border="solid" title="Calcolo sui bordi">
+        <p>Per ogni bordo del dominio:</p>
+        <ol className="example-steps">
+          <li>
+            <strong>Parametrizzare:</strong> Esprimere il bordo con una variabile (es. sul bordo <Math>{"y = 0"}</Math>, 
+            sostituire in <Math>{"f(x,y)"}</Math> per ottenere <Math>{"g(x) = f(x, 0)"}</Math>)
+          </li>
+          <li>
+            <strong>Derivare:</strong> Calcolare <Math>{"g'(x) = 0"}</Math> per trovare punti critici sul bordo
+          </li>
+          <li>
+            <strong>Valutare:</strong> Calcolare <Math>{"f"}</Math> nei punti critici trovati
+          </li>
+        </ol>
+        <Note>
+          <strong>Esempio:</strong> Dominio <Math>{"D = \\{0 \\leq x \\leq 1, 0 \\leq y \\leq 1\\}"}</Math><br />
+          Bordi: <Math>{"y=0"}</Math> → <Math>{"g_1(x) = f(x,0)"}</Math>, {" "}
+          <Math>{"y=1"}</Math> → <Math>{"g_2(x) = f(x,1)"}</Math>, {" "}
+          <Math>{"x=0"}</Math> → <Math>{"g_3(y) = f(0,y)"}</Math>, {" "}
+          <Math>{"x=1"}</Math> → <Math>{"g_4(y) = f(1,y)"}</Math>
+        </Note>
+      </Box>
+
       {/* Studio di funzione - Punti critici */}
       <Theorem title="Punti critici e Hessiana">
         <Definition term="Punto critico">
@@ -181,28 +204,7 @@ export function FunzioniPiuVariabiliSection() {
         </ol>
       </Box>
 
-      <Box color="gray" border="solid" title="Calcolo sui bordi">
-        <p>Per ogni bordo del dominio:</p>
-        <ol className="example-steps">
-          <li>
-            <strong>Parametrizzare:</strong> Esprimere il bordo con una variabile (es. sul bordo <Math>{"y = 0"}</Math>, 
-            sostituire in <Math>{"f(x,y)"}</Math> per ottenere <Math>{"g(x) = f(x, 0)"}</Math>)
-          </li>
-          <li>
-            <strong>Derivare:</strong> Calcolare <Math>{"g'(x) = 0"}</Math> per trovare punti critici sul bordo
-          </li>
-          <li>
-            <strong>Valutare:</strong> Calcolare <Math>{"f"}</Math> nei punti critici trovati
-          </li>
-        </ol>
-        <Note>
-          <strong>Esempio:</strong> Dominio <Math>{"D = \\{0 \\leq x \\leq 1, 0 \\leq y \\leq 1\\}"}</Math><br />
-          Bordi: <Math>{"y=0"}</Math> → <Math>{"g_1(x) = f(x,0)"}</Math>, {" "}
-          <Math>{"y=1"}</Math> → <Math>{"g_2(x) = f(x,1)"}</Math>, {" "}
-          <Math>{"x=0"}</Math> → <Math>{"g_3(y) = f(0,y)"}</Math>, {" "}
-          <Math>{"x=1"}</Math> → <Math>{"g_4(y) = f(1,y)"}</Math>
-        </Note>
-      </Box>
+      
     </Section>
   );
 }

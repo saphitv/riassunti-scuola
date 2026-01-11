@@ -5,19 +5,19 @@
    ============================================ */
 :root {
   /* Base font sizes - change these to resize everything */
-  --font-size-base: 10pt;        /* Main text */
-  --font-size-small: 8pt;       /* Notes, proofs */
-  --font-size-h1: 20pt;          /* Page title */
-  --font-size-h2: 14pt;          /* Section titles */
-  --font-size-h3: 12pt;          /* Subsection titles */
-  --font-size-box-title: 10pt;   /* Box/theorem titles */
+  --font-size-base: 9pt;        /* Main text */
+  --font-size-small: 7pt;       /* Notes, proofs */
+  --font-size-h1: 18pt;          /* Page title */
+  --font-size-h2: 12pt;          /* Section titles */
+  --font-size-h3: 10pt;          /* Subsection titles */
+  --font-size-box-title: 8pt;   /* Box/theorem titles */
   
   /* Line height */
-  --line-height: 1.4;
+  --line-height: 1.3;
   
   /* Spacing */
-  --section-gap: 1.25rem;
-  --content-gap: 0.6rem;
+  --section-gap: 1rem;
+  --content-gap: 0.5rem;
   --box-padding-y: 0.45rem;      /* Box vertical padding */
   --box-padding-x: 0.70rem;      /* Box horizontal padding */
   --example-padding-y: 0.4rem;   /* Example vertical padding */

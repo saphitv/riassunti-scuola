@@ -1,4 +1,4 @@
-import { Section, Row, Column, Math, MathBlock } from "@/components";
+import { Section, Math } from "@/components";
 import { CurveVisualizer } from "@/components/CurveVisualizer";
 import { VolumeVisualizer } from "@/components/VolumeVisualizer";
 
@@ -40,47 +40,27 @@ export function FormeNotevoliSection() {
       </div>
 
       {/* Parametric Curves Section */}
-      <div className="subsection">
-        <h3 className="subsection-title">Curve Parametriche Classiche</h3>
-        <Row gap="md">
-          <Column width="auto">
-            <CurveVisualizer type="cicloide" animate={true} color="#3b82f6" />
-          </Column>
-          <Column width="auto">
-            <CurveVisualizer type="astroide" animate={true} color="#8b5cf6" />
-          </Column>
-          <Column width="auto">
-            <CurveVisualizer type="cardioide" animate={true} color="#ec4899" />
-          </Column>
-          <Column width="auto">
-            <CurveVisualizer type="lemniscata" animate={true} color="#f59e0b" />
-          </Column>
-        </Row>
+      <div className="subsection" style={{ marginTop: "0.25rem", marginBottom: "0.25rem" }}>
+        <h3 className="subsection-title" style={{ marginBottom: "0.25rem" }}>Curve Parametriche Classiche</h3>
+        <div style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem", justifyContent: "space-between" }}>
+          <CurveVisualizer type="cicloide" animate={true} color="#3b82f6" width={120} height={80} />
+          <CurveVisualizer type="astroide" animate={true} color="#8b5cf6" width={120} height={80} />
+          <CurveVisualizer type="cardioide" animate={true} color="#ec4899" width={120} height={80} />
+          <CurveVisualizer type="lemniscata" animate={true} color="#f59e0b" width={120} height={80} />
+        </div>
       </div>
 
       {/* Volumes Section */}
-      <div className="subsection">
-        <h3 className="subsection-title">Volumi e Superfici</h3>
-        <Row gap="md">
-          <Column width="auto">
-            <VolumeVisualizer type="piramide" color="#3b82f6" />
-          </Column>
-          <Column width="auto">
-            <VolumeVisualizer type="cono" color="#22c55e" />
-          </Column>
-          <Column width="auto">
-            <VolumeVisualizer type="sfera" color="#8b5cf6" />
-          </Column>
-          <Column width="auto">
-            <VolumeVisualizer type="cilindro" color="#f59e0b" />
-          </Column>
-          <Column width="auto">
-            <VolumeVisualizer type="toro" color="#ec4899" />
-          </Column>
-          <Column width="auto">
-            <VolumeVisualizer type="paraboloide" color="#06b6d4" />
-          </Column>
-        </Row>
+      <div className="subsection" style={{ marginTop: "0.25rem" }}>
+        <h3 className="subsection-title" style={{ marginBottom: "0.25rem" }}>Volumi e Superfici</h3>
+        <div style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem", justifyContent: "space-between" }}>
+          <VolumeVisualizer type="piramide" color="#3b82f6" width={90} height={70} />
+          <VolumeVisualizer type="cono" color="#22c55e" width={90} height={70} />
+          <VolumeVisualizer type="sfera" color="#8b5cf6" width={90} height={70} />
+          <VolumeVisualizer type="cilindro" color="#f59e0b" width={90} height={70} />
+          <VolumeVisualizer type="toro" color="#ec4899" width={90} height={70} />
+          <VolumeVisualizer type="paraboloide" color="#06b6d4" width={90} height={70} />
+        </div>
       </div>
     </Section>
   );

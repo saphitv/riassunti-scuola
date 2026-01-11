@@ -290,7 +290,9 @@ export function CurveVisualizer({
       />
       {showFormula && (
         <div style={styles.formula}>
-          <MathComponent>{`x = ${curve.formula.x},\\; y = ${curve.formula.y}`}</MathComponent>
+          <MathComponent>{`x = ${curve.formula.x}`}</MathComponent>
+          <br />
+          <MathComponent>{`y = ${curve.formula.y}`}</MathComponent>
         </div>
       )}
     </div>
