@@ -14,6 +14,16 @@ import {
 export function FunzioniPiuVariabiliSection() {
   return (
     <Section title="Funzioni a più variabili">
+      {/* Dominio - Quick reference */}
+      <Box color="gray" border="solid" title="Dominio - Checklist">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.5rem 1rem", fontSize: "var(--font-size-small)" }}>
+          <div><Math>{"\\ln(\\cdot)"}</Math>: arg <Math>{"> 0"}</Math></div>
+          <div><Math>{"\\sqrt{\\cdot}"}</Math>: arg <Math>{"\\geq 0"}</Math></div>
+          <div><Math>{"\\frac{1}{\\cdot}"}</Math>: den <Math>{"\\neq 0"}</Math></div>
+          <div><Math>{"\\frac{1}{\\log(\\cdot)}"}</Math>: arg <Math>{"\\neq 1"}</Math></div>
+        </div>
+      </Box>
+
       {/* Limiti e continuità */}
       <Definition term="Limite">
         <MathBlock>

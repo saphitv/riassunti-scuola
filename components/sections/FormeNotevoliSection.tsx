@@ -82,55 +82,6 @@ export function FormeNotevoliSection() {
           </Column>
         </Row>
       </div>
-
-      {/* Rotation formulas */}
-      <div className="subsection">
-        <h3 className="subsection-title">Formule di Rotazione</h3>
-        <Row>
-          <Column width="half">
-            <div className="box box-blue box-border-left">
-              <div className="box-title">Volume di rotazione (asse x)</div>
-              <div className="box-content">
-                <MathBlock>{"V = \\pi \\int_a^b [f(x)]^2 \\, dx"}</MathBlock>
-              </div>
-            </div>
-          </Column>
-          <Column width="half">
-            <div className="box box-green box-border-left">
-              <div className="box-title">Superficie di rotazione</div>
-              <div className="box-content">
-                <MathBlock>
-                  {"S = 2\\pi \\int_a^b f(x) \\sqrt{1 + [f'(x)]^2} \\, dx"}
-                </MathBlock>
-              </div>
-            </div>
-          </Column>
-        </Row>
-        <Row>
-          <Column width="half">
-            <div className="box box-yellow box-border-left">
-              <div className="box-title">Teorema di Guldino (Volume)</div>
-              <div className="box-content">
-                <MathBlock>{"V = 2\\pi \\bar{y} \\cdot A"}</MathBlock>
-                <p style={{ fontSize: "var(--font-size-small)", color: "var(--muted)" }}>
-                  <Math>{"\\bar{y}"}</Math> = distanza del baricentro dall&apos;asse, <Math>{"A"}</Math> = area della figura
-                </p>
-              </div>
-            </div>
-          </Column>
-          <Column width="half">
-            <div className="box box-red box-border-left">
-              <div className="box-title">Teorema di Guldino (Superficie)</div>
-              <div className="box-content">
-                <MathBlock>{"S = 2\\pi \\bar{y} \\cdot \\ell"}</MathBlock>
-                <p style={{ fontSize: "var(--font-size-small)", color: "var(--muted)" }}>
-                  <Math>{"\\bar{y}"}</Math> = distanza del baricentro dall&apos;asse, <Math>{"\\ell"}</Math> = lunghezza della curva
-                </p>
-              </div>
-            </div>
-          </Column>
-        </Row>
-      </div>
     </Section>
   );
 }
