@@ -118,12 +118,7 @@ export function FunzioniPiuVariabiliSection() {
       <Theorem title="Punti critici e Hessiana">
         <Definition term="Punto critico">
           Un punto <Math>{"(x_0, y_0)"}</Math> è critico se{" "}
-          <Math>{"\\nabla f(x_0, y_0) = \\vec{0}"}</Math>, ovvero:
-          <MathBlock>
-            {
-              "\\begin{cases} \\frac{\\partial f}{\\partial x}(x_0, y_0) = 0 \\\\ \\frac{\\partial f}{\\partial y}(x_0, y_0) = 0 \\end{cases}"
-            }
-          </MathBlock>
+          <Math>{"\\nabla f(x_0, y_0) = \\vec{0}"}</Math>.
         </Definition>
 
         <Definition term="Matrice Hessiana">
@@ -160,69 +155,53 @@ export function FunzioniPiuVariabiliSection() {
           ]}
         />
 
-        <MathBlock>
-          {"\\det(H) = f_{xx} \\cdot f_{yy} - (f_{xy})^2"}
-        </MathBlock>
-      </Theorem>
-
-      {/* Interpretazione grafica */}
-      <Theorem title="Interpretazione grafica">
-        <Row>
-          <Column width="half">
-            <Definition term="Curve di livello">
-              Le curve di livello sono le curve{" "}
-              <Math>{"f(x, y) = k"}</Math> (costante). Rappresentano
-              &quot;sezioni orizzontali&quot; del grafico.
-              <Note>
-                Curve più vicine indicano pendenza maggiore.
-              </Note>
-            </Definition>
-          </Column>
-          <Column width="half">
-            <Definition term="Piano tangente">
-              <MathBlock>
-                {
-                  "z = f(x_0, y_0) + f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0)"
-                }
-              </MathBlock>
-            </Definition>
-          </Column>
-        </Row>
-        <Note>
-          <strong>Riepilogo geometrico:</strong> Il gradiente è perpendicolare
-          alle curve di livello. In un punto di massimo/minimo, le curve di
-          livello formano &quot;cerchi concentrici&quot;. In un punto di sella,
-          le curve di livello si intersecano.
-        </Note>
+        <Box color="gray" border="solid" title="Calcolo del determinante">
+          <MathBlock>
+            {"\\det(H) = \\det \\begin{pmatrix} f_{xx} & f_{xy} \\\\ f_{yx} & f_{yy} \\end{pmatrix} = f_{xx} \\cdot f_{yy} - f_{xy} \\cdot f_{yx}"}
+          </MathBlock>
+          <Note>
+            Poiché <Math>{"f_{xy} = f_{yx}"}</Math> (Schwarz), si ha: <Math>{"\\det(H) = f_{xx} \\cdot f_{yy} - (f_{xy})^2"}</Math>
+          </Note>
+        </Box>
       </Theorem>
 
       {/* Studio di funzione completo */}
       <Box color="blue" border="left" title="Schema studio di funzione">
         <ol className="example-steps">
           <li>
-            <strong>Dominio:</strong> Determinare dove <Math>{"f(x,y)"}</Math> è
-            definita
-          </li>
-          <li>
-            <strong>Simmetrie:</strong> Verificare se{" "}
-            <Math>{"f(-x,-y) = f(x,y)"}</Math> o altre simmetrie
-          </li>
-          <li>
-            <strong>Limiti al bordo:</strong> Studiare il comportamento sui
-            bordi del dominio e all&apos;infinito
+            <strong>Vertici:</strong> Valutare <Math>{"f"}</Math> nei vertici del dominio
           </li>
           <li>
             <strong>Punti critici:</strong> Risolvere{" "}
-            <Math>{"\\nabla f = \\vec{0}"}</Math>
+            <Math>{"\\nabla f = \\vec{0}"}</Math> e classificare con la Hessiana
           </li>
           <li>
-            <strong>Classificazione:</strong> Usare la matrice Hessiana
-          </li>
-          <li>
-            <strong>Estremi vincolati:</strong> Se il dominio è limitato,
-            studiare anche il bordo
+            <strong>Controllo dei bordi:</strong> Parametrizzare ogni bordo e trovare estremi
           </li>
         </ol>
+      </Box>
+
+      <Box color="gray" border="solid" title="Calcolo sui bordi">
+        <p>Per ogni bordo del dominio:</p>
+        <ol className="example-steps">
+          <li>
+            <strong>Parametrizzare:</strong> Esprimere il bordo con una variabile (es. sul bordo <Math>{"y = 0"}</Math>, 
+            sostituire in <Math>{"f(x,y)"}</Math> per ottenere <Math>{"g(x) = f(x, 0)"}</Math>)
+          </li>
+          <li>
+            <strong>Derivare:</strong> Calcolare <Math>{"g'(x) = 0"}</Math> per trovare punti critici sul bordo
+          </li>
+          <li>
+            <strong>Valutare:</strong> Calcolare <Math>{"f"}</Math> nei punti critici trovati
+          </li>
+        </ol>
+        <Note>
+          <strong>Esempio:</strong> Dominio <Math>{"D = \\{0 \\leq x \\leq 1, 0 \\leq y \\leq 1\\}"}</Math><br />
+          Bordi: <Math>{"y=0"}</Math> → <Math>{"g_1(x) = f(x,0)"}</Math>, {" "}
+          <Math>{"y=1"}</Math> → <Math>{"g_2(x) = f(x,1)"}</Math>, {" "}
+          <Math>{"x=0"}</Math> → <Math>{"g_3(y) = f(0,y)"}</Math>, {" "}
+          <Math>{"x=1"}</Math> → <Math>{"g_4(y) = f(1,y)"}</Math>
+        </Note>
       </Box>
     </Section>
   );
