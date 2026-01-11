@@ -156,6 +156,8 @@ body {
 .col-half { flex: 1 1 calc(50% - 0.5rem); max-width: calc(50% - 0.5rem); }
 .col-third { flex: 1 1 calc(33.333% - 0.67rem); max-width: calc(33.333% - 0.67rem); }
 .col-two-thirds { flex: 1 1 calc(66.666% - 0.33rem); max-width: calc(66.666% - 0.33rem); }
+.col-fourth { flex: 1 1 calc(25% - 0.75rem); max-width: calc(25% - 0.75rem); }
+.col-three-fourths { flex: 1 1 calc(75% - 0.25rem); max-width: calc(75% - 0.25rem); }
 
 /* Divider */
 .divider {

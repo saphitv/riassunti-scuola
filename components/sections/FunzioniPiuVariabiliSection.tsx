@@ -48,6 +48,32 @@ export function FunzioniPiuVariabiliSection() {
         </Note>
       </Theorem>
 
+      {/* Piano tangente e retta normale */}
+      <Box color="gray" border="solid">
+        <Row>
+          <Column width="fourth">
+          <Math>{"P_0 = \\begin{pmatrix} x_0 \\\\ y_0 \\\\ f(x_0, y_0) \\end{pmatrix}"}</Math>
+          
+          </Column>
+          <Column width="three-fourths">
+            <Row>
+              <Column width="auto">
+                <strong>Piano tangente:</strong>
+                <Math>
+                  {"z = z_0 + f_x(P_0)(x - x_0) + f_y(P_0)(y - y_0)"}
+                </Math>
+              </Column>
+              <Column width="auto">
+                <strong>Retta normale:</strong>
+                <Math>
+                  {"r(t) = \\begin{pmatrix} x_0 \\\\ y_0 \\\\ f(x_0, y_0) \\end{pmatrix} + t \\cdot \\begin{pmatrix} -f_x(P_0) \\\\ -f_y(P_0) \\\\ 1 \\end{pmatrix}"}
+                </Math>
+              </Column>
+            </Row>
+          </Column>
+        </Row>
+      </Box>
+
       <Definition term="Gradiente">
         <MathBlock>
           {
