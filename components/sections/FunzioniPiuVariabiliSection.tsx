@@ -24,35 +24,20 @@ export function FunzioniPiuVariabiliSection() {
         </div>
       </Box>
 
-      {/* Limiti e continuità */}
-      <Definition term="Limite">
-        <MathBlock>
-          {
-            "\\lim_{(x,y) \\to (x_0, y_0)} f(x,y) = L \\iff \\forall \\varepsilon > 0, \\exists \\delta > 0 : 0 < \\|(x,y) - (x_0,y_0)\\| < \\delta \\Rightarrow |f(x,y) - L| < \\varepsilon"
-          }
-        </MathBlock>
-        <Note>
-          Per <strong>verificare l&apos;esistenza</strong> del limite, si può
-          usare il teorema del confronto o passare a coordinate polari. Per{" "}
-          <strong>dimostrare che non esiste</strong>, basta trovare due
-          restrizioni (percorsi) che danno limiti diversi.
-        </Note>
-      </Definition>
-
       {/* Derivate parziali e gradiente */}
       <Theorem title="Derivate parziali">
         <Row>
           <Column width="half">
             <MathBlock>
               {
-                "\\frac{\\partial f}{\\partial x} = \\lim_{h \\to 0} \\frac{f(x+h, y) - f(x,y)}{h}"
+                "\\frac{\\partial f}{\\partial x} = f_x = \\lim_{h \\to 0} \\frac{f(x+h, y) - f(x,y)}{h}"
               }
             </MathBlock>
           </Column>
           <Column width="half">
             <MathBlock>
               {
-                "\\frac{\\partial f}{\\partial y} = \\lim_{k \\to 0} \\frac{f(x, y+k) - f(x,y)}{k}"
+                "\\frac{\\partial f}{\\partial y} = f_y = \\lim_{k \\to 0} \\frac{f(x, y+k) - f(x,y)}{k}"
               }
             </MathBlock>
           </Column>
