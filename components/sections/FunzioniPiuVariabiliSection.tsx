@@ -29,30 +29,6 @@ export function FunzioniPiuVariabiliSection() {
         </Note>
       </Definition>
 
-      <Row>
-        <Column width="half">
-          <Box color="blue" border="left" title="Coordinate polari">
-            <MathBlock>
-              {
-                "\\begin{cases} x = x_0 + \\rho\\cos\\theta \\\\ y = y_0 + \\rho\\sin\\theta \\end{cases}"
-              }
-            </MathBlock>
-            <Note>
-              Se il limite per <Math>{"\\rho \\to 0^+"}</Math> non dipende da{" "}
-              <Math>{"\\theta"}</Math>, allora il limite esiste.
-            </Note>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Continuità">
-            <Math>{"f"}</Math> è continua in <Math>{"(x_0, y_0)"}</Math> se:
-            <MathBlock>
-              {"\\lim_{(x,y) \\to (x_0, y_0)} f(x,y) = f(x_0, y_0)"}
-            </MathBlock>
-          </Box>
-        </Column>
-      </Row>
-
       {/* Derivate parziali e gradiente */}
       <Theorem title="Derivate parziali">
         <Row>
