@@ -42,10 +42,6 @@ export function FunzioniPiuVariabiliSection() {
             </MathBlock>
           </Column>
         </Row>
-        <Note>
-          Si calcola derivando rispetto a una variabile tenendo le altre
-          costanti.
-        </Note>
       </Theorem>
 
       {/* Piano tangente e retta normale */}
@@ -75,11 +71,22 @@ export function FunzioniPiuVariabiliSection() {
       </Box>
 
       <Definition term="Gradiente">
-        <MathBlock>
-          {
-            "\\nabla f(x,y) = \\text{grad } f = \\left( \\frac{\\partial f}{\\partial x}, \\frac{\\partial f}{\\partial y} \\right)"
-          }
-        </MathBlock>
+        <Row>
+          <Column width="half">
+            <MathBlock>
+              {
+                "\\nabla f(x,y) = \\text{grad } f = \\left( \\frac{\\partial f}{\\partial x}, \\frac{\\partial f}{\\partial y} \\right) = (f_x, f_y)"
+              }
+            </MathBlock>
+          </Column>
+          <Column width="half">
+            <MathBlock>
+              {
+                "\\nabla f = \\vec{0} \\iff f_x = 0 \\land f_y = 0 \\quad \\text{(punto critico)}"
+              }
+            </MathBlock>
+          </Column>
+        </Row>
         <Note>
           Il gradiente punta nella <strong>direzione di massima crescita</strong>{" "}
           della funzione ed è sempre <strong>perpendicolare</strong> alle curve
@@ -98,49 +105,13 @@ export function FunzioniPiuVariabiliSection() {
           <Math>{"\\vec{v}"}</Math> deve essere un vettore <strong>unitario</strong>{" "}
           (<Math>{"\\|\\vec{v}\\| = 1"}</Math>). Se non lo è, normalizzare:{" "}
           <Math>{"\\hat{v} = \\frac{\\vec{v}}{\\|\\vec{v}\\|}"}</Math>
+          <br />
+          Da <Math>{"P_0"}</Math> verso <Math>{"P_1"}</Math>:{" "}
+          <Math>{"\\vec{v} = P_1 - P_0"}</Math>
+          <br />
+          Se <Math>{"\\vec{v} = e_1 + e_2 - e_3"}</Math>:{" "}
+          <Math>{"\\vec{v} = (1, 1, -1)"}</Math>, poi normalizzare
         </Note>
-        <Row>
-          <Column width="third">
-            <Box color="green" border="left" title="Massima crescita">
-              <MathBlock>{"D_{\\text{max}} = \\|\\nabla f\\|"}</MathBlock>
-              Direzione: <Math>{"\\vec{v} = \\frac{\\nabla f}{\\|\\nabla f\\|}"}</Math>
-            </Box>
-          </Column>
-          <Column width="third">
-            <Box color="red" border="left" title="Massima decrescita">
-              <MathBlock>{"D_{\\text{min}} = -\\|\\nabla f\\|"}</MathBlock>
-              Direzione: <Math>{"\\vec{v} = -\\frac{\\nabla f}{\\|\\nabla f\\|}"}</Math>
-            </Box>
-          </Column>
-          <Column width="third">
-            <Box color="yellow" border="left" title="Nulla">
-              <MathBlock>{"D_{\\vec{v}} f = 0"}</MathBlock>
-              Direzione: <Math>{"\\vec{v} \\perp \\nabla f"}</Math>
-            </Box>
-          </Column>
-        </Row>
-      </Theorem>
-
-      {/* Differenziale totale */}
-      <Definition term="Differenziale totale">
-        <MathBlock>
-          {
-            "df = \\frac{\\partial f}{\\partial x} dx + \\frac{\\partial f}{\\partial y} dy = \\nabla f \\cdot d\\vec{r}"
-          }
-        </MathBlock>
-        <Note>
-          Se <Math>{"f"}</Math> è differenziabile in{" "}
-          <Math>{"(x_0, y_0)"}</Math>, allora{" "}
-          <Math>{"f"}</Math> è continua e ammette derivate parziali in quel
-          punto. Il viceversa <strong>non</strong> vale.
-        </Note>
-      </Definition>
-
-      <Theorem title="Condizione sufficiente di differenziabilità">
-        Se le derivate parziali <Math>{"f_x"}</Math> e <Math>{"f_y"}</Math>{" "}
-        esistono in un intorno di <Math>{"(x_0, y_0)"}</Math> e sono{" "}
-        <strong>continue</strong> in <Math>{"(x_0, y_0)"}</Math>, allora{" "}
-        <Math>{"f"}</Math> è differenziabile in <Math>{"(x_0, y_0)"}</Math>.
       </Theorem>
 
       {/* Studio di funzione - Punti critici */}
