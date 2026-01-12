@@ -145,6 +145,42 @@ export function EquazioniDifferenzialiSection() {
         <strong>Step 3</strong> &rarr; Unione delle due soluzioni:
         <MathBlock>{"y = y_o(x) + y_p(x)"}</MathBlock>
       </Box>
+
+      <Row>
+        <Column width="half">
+          <Box color="blue" border="left" title="Modelli di Crescita">
+            <Math>{"\\text{Esponenziale: } \\frac{dN}{dt} = kN \\implies N = N_0 e^{kt}"}</Math><br />
+            <Math>{"\\text{Logistica: } \\frac{dN}{dt} = \\lambda N(1 - \\frac{N}{K})"}</Math><br />
+            <Math>{"\\text{Catastrofico: } \\begin{cases} N'(t) = \\lambda N(t) & t \\neq t_c \\\\ N(t_c^+) = \\alpha N(t_c^-) \\end{cases}"}</Math><br />
+            <Math>{"\\text{Stagionale: } \\frac{dN}{dt} = \\lambda (t)N"}</Math>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="gray" border="left" title="Raffreddamento di Newton">
+            <Math>{"\\text{Classico: } \\frac{dT}{dt} = -\\lambda (T(t) - T_{amb})"}</Math><br />
+            <Math>{"\\text{Fluido: } \\frac{dT}{dt} = -\\lambda (T(t) - T_{amb}) * v"}</Math><br />
+            <Math>{"\\text{Radiativo: } \\frac{dT}{dt} = -\\sigma\\varepsilon(T(t)^4 - T_{amb}^4)"}</Math><br />
+            <Math>{"\\text{Stagionale: } T(t) = e^{\\lambda t}\\omega(t), \\; \\omega(t) \\in \\int e^{-\\lambda t}T_A(t)\\,dt"}</Math>
+          </Box>
+        </Column>
+      </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="red" border="left" title="Leggi di Moto di Newton">
+            <Math>{"F = ma \\implies m\\ddot{x}(t) = F(x, \\dot{x}, t)"}</Math><br />
+            <Math>{"\\text{Caduta libera: } m\\ddot{x} = -mg \\implies x(t) = x_0 + v_0 t - \\frac{1}{2}gt^2"}</Math><br />
+            <Math>{"\\text{Con attrito: } m\\ddot{x} = -mg - b\\dot{x}"}</Math>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="yellow" border="left" title="Moto Armonico">
+            <Math>{"\\text{Oscillatore: } x''(t) + \\omega^2 x(t) = 0, \\; \\omega \\in \\mathbb{R}"}</Math><br />
+            <Math>{"\\text{Soluzione: } x(t) = A\\cos(\\omega t) + B\\sin(\\omega t)"}</Math><br />
+            <Math>{"\\text{Smorzato: } mx''(t) + bx'(t) + kx = 0"}</Math>
+          </Box>
+        </Column>
+      </Row>
     </Section>
   );
 }
