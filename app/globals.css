@@ -103,6 +103,10 @@ body {
   break-inside: avoid-page;
 }
 
+.section-allow-break {
+  break-inside: auto;
+}
+
 .section-title {
   font-size: var(--font-size-h2);
   font-weight: 700;
@@ -526,6 +530,10 @@ li {
 
   .section {
     page-break-inside: avoid;
+  }
+
+  .section-allow-break {
+    page-break-inside: auto;
   }
 
   .section-title {

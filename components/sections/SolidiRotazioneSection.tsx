@@ -40,10 +40,36 @@ export function SolidiRotazioneSection() {
         </span>
         <span className="formula-separator">|</span>
         <span>
-          <strong>Gusci cilindrici (asse y):</strong>{" "}
-          <Math>{"V = 2\\pi \\int_a^b x \\left[ f(x) - g(x) \\right] dx"}</Math>
+          <strong>Tra 2 funzioni (asse y):</strong>{" "}
+          <Math>{"V = \\pi \\int_c^d \\left[ f(y)^2 - g(y)^2 \\right] dy"}</Math>
         </span>
       </div>
+
+      <Theorem title="Metodo dei cilindri cavi (Shell Method)">
+        <Row>
+          <Column width="half">
+            <Definition term="Rotazione attorno all'asse y">
+              Quando la regione tra <Math>{"f(x)"}</Math> e <Math>{"g(x)"}</Math> con <Math>{"f(x) \\geq g(x)"}</Math> su <Math>{"[a,b]"}</Math> ruota attorno all&apos;asse y:
+              <MathBlock>{"V = 2\\pi \\int_a^b x \\left[ f(x) - g(x) \\right] dx"}</MathBlock>
+              <Note>
+                Il raggio del cilindro e <Math>{"x"}</Math>, l&apos;altezza e <Math>{"f(x) - g(x)"}</Math>.
+              </Note>
+            </Definition>
+          </Column>
+          <Column width="half">
+            <Definition term="Rotazione attorno all'asse x">
+              Quando la regione tra <Math>{"f(y)"}</Math> e <Math>{"g(y)"}</Math> con <Math>{"f(y) \\geq g(y)"}</Math> su <Math>{"[c,d]"}</Math> ruota attorno all&apos;asse x:
+              <MathBlock>{"V = 2\\pi \\int_c^d y \\left[ f(y) - g(y) \\right] dy"}</MathBlock>
+              <Note>
+                Il raggio del cilindro e <Math>{"y"}</Math>, l&apos;altezza e <Math>{"f(y) - g(y)"}</Math>.
+              </Note>
+            </Definition>
+          </Column>
+        </Row>
+        <Note>
+          <strong>Quando usare i cilindri cavi:</strong> Questo metodo e utile quando l&apos;integrazione con il metodo dei dischi risulta difficile (es. quando bisogna invertire la funzione) o quando la regione e definita piu naturalmente rispetto all&apos;asse parallelo a quello di rotazione.
+        </Note>
+      </Theorem>
 
       <Theorem title="Baricentro con asse x">
         <Row>

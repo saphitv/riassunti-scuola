@@ -13,7 +13,7 @@ import {
 
 export function FunzioniPiuVariabiliSection() {
   return (
-    <Section title="Funzioni a più variabili">
+    <Section title="Funzioni a più variabili" allowPageBreak>
       {/* Dominio - Quick reference */}
       <Box color="gray" border="solid" title="Dominio - Checklist">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.5rem 1rem", fontSize: "var(--font-size-small)" }}>
