@@ -68,6 +68,9 @@ export function FunzioniPiuVariabiliSection() {
             </Row>
           </Column>
         </Row>
+        <Row>
+          <strong>Retta tangente</strong> (a curva di livello <Math>{"f(x,y) = k \\text{ o } f(x,y) = z"}</Math>): <Math>{"f_x(P_0)(x - x_0) + f_y(P_0)(y - y_0) = 0"}</Math>
+        </Row>
       </Box>
 
       <Definition term="Gradiente">
