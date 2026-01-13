@@ -34,8 +34,10 @@ export function ZeriDiFunzioneSection() {
             <MathBlock>
               {"\\lim_{n \\to \\infty} \\frac{|e_{n+1}|}{|e_n|^p} = C \\neq 0"}
             </MathBlock>
-            <p>
-              dove <Math>{"e_n = x_n - \\xi"}</Math> è l&apos;errore all&apos;iterazione n.
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              <Math>{"e_n = x_n - \\xi"}</Math> = errore al passo n.<br />
+              <strong>p</strong> indica la velocità: <Math>{"p=1"}</Math> lineare (errore si riduce di un fattore costante), 
+              <Math>{"p=2"}</Math> quadratica (le cifre corrette raddoppiano ad ogni iterazione).
             </p>
           </Box>
         </Column>
@@ -69,7 +71,7 @@ export function ZeriDiFunzioneSection() {
             </CodeBlock>
           </Column>
         </Row>
-        <RootFindingVisualizer method="bisezione" width={700} height={200} />
+        <RootFindingVisualizer method="bisezione" width={650} height={170} />
       </Box>
 
       <Box color="green" border="left" title="Metodo delle Secanti — Convergenza superlineare (p ≈ 1.618)">
@@ -99,7 +101,7 @@ export function ZeriDiFunzioneSection() {
             </CodeBlock>
           </Column>
         </Row>
-        <RootFindingVisualizer method="secanti" width={700} height={200} />
+        <RootFindingVisualizer method="secanti" width={650} height={170} />
       </Box>
 
       <Box color="red" border="left" title="Metodo di Newton — Convergenza quadratica (p = 2)">
@@ -126,7 +128,7 @@ export function ZeriDiFunzioneSection() {
             </CodeBlock>
           </Column>
         </Row>
-        <RootFindingVisualizer method="newton" width={700} height={200} />
+        <RootFindingVisualizer method="newton" width={650} height={170} />
       </Box>
 
       <Row>

@@ -746,8 +746,8 @@ interface VolumeVisualizerProps {
 
 export function VolumeVisualizer({
   type,
-  width = 180,
-  height = 140,
+  width = 100,
+  height = 85,
   color = "#22c55e",
   showFormula = true,
 }: VolumeVisualizerProps) {
@@ -773,30 +773,35 @@ export function VolumeVisualizer({
       display: "flex",
       flexDirection: "column" as const,
       alignItems: "center",
-      gap: "0.25rem",
-      padding: "0.5rem",
+      gap: "0.15rem",
+      padding: "0.35rem",
       background: "#fafafa",
-      borderRadius: "0.5rem",
+      borderRadius: "0.35rem",
       border: "1px solid #e5e7eb",
+      minWidth: 0,
+      flex: "1 1 0",
+      maxWidth: `${width + 20}px`,
     },
     header: {
       display: "flex",
       alignItems: "center",
-      gap: "0.5rem",
+      justifyContent: "center",
     },
     name: {
       fontWeight: 600,
-      fontSize: "0.875rem",
+      fontSize: "0.65rem",
+      textAlign: "center" as const,
+      lineHeight: 1.1,
     },
     canvas: {
       background: "white",
-      borderRadius: "0.25rem",
+      borderRadius: "0.2rem",
     },
     formula: {
-      fontSize: "0.75rem",
+      fontSize: "0.55rem",
       color: "#6b7280",
-      fontFamily: '"Times New Roman", serif',
-      fontStyle: "italic" as const,
+      textAlign: "center" as const,
+      lineHeight: 1.2,
     },
   };
 
@@ -814,12 +819,6 @@ export function VolumeVisualizer({
       {showFormula && (
         <div style={styles.formula}>
           <MathComponent>{volume.volumeFormula}</MathComponent>
-          {volume.surfaceFormula && (
-            <>
-              <br />
-              <MathComponent>{volume.surfaceFormula}</MathComponent>
-            </>
-          )}
         </div>
       )}
     </div>

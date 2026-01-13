@@ -1,10 +1,12 @@
+import React from "react";
+
 interface CodeBlockProps {
   children: string;
   language?: string;
   title?: string;
 }
 
-function highlightPython(code: string): JSX.Element[] {
+function highlightPython(code: string): React.ReactElement[] {
   const keywords = [
     "def",
     "return",
@@ -37,10 +39,10 @@ function highlightPython(code: string): JSX.Element[] {
   const builtins = ["abs", "print", "len", "range", "int", "float", "str", "list"];
 
   const lines = code.split("\n");
-  const elements: JSX.Element[] = [];
+  const elements: React.ReactElement[] = [];
 
   lines.forEach((line, lineIndex) => {
-    const tokens: JSX.Element[] = [];
+    const tokens: React.ReactElement[] = [];
     let i = 0;
     let tokenKey = 0;
 
