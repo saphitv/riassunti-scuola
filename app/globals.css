@@ -95,6 +95,70 @@ body {
   margin: 0;
 }
 
+/* Homepage styles */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: none;
+}
+
+.home-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.home-header p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--foreground);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.course-card:hover {
+  border-color: var(--box-blue-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.course-card-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.course-card-description {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 /* ============================================
    SECTION STYLES
    ============================================ */
@@ -398,6 +462,77 @@ body {
   overflow-x: auto;
 }
 
+/* Code block */
+.code-block {
+  background: #1e1e1e;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  font-family: "Fira Code", "Monaco", "Consolas", monospace;
+  font-size: 5.5pt;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  background: #2d2d2d;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.code-block-title {
+  color: #e0e0e0;
+  font-weight: 600;
+  font-size: 6pt;
+}
+
+.code-block-language {
+  color: #888;
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-block-content {
+  margin: 0;
+  padding: 0.3rem 0.4rem;
+  overflow-x: auto;
+  color: #d4d4d4;
+}
+
+.code-block-content code {
+  font-family: inherit;
+  white-space: pre;
+}
+
+/* Code syntax highlighting colors */
+.code-keyword { color: #c586c0; font-weight: 600; }
+.code-function { color: #dcdcaa; }
+.code-builtin { color: #4ec9b0; }
+.code-string { color: #ce9178; }
+.code-number { color: #b5cea8; }
+.code-comment { color: #6a9955; font-style: italic; }
+.code-operator { color: #d4d4d4; }
+.code-variable { color: #9cdcfe; }
+
+.code-line {
+  min-height: 1.4em;
+}
+
+/* Root Finding Visualizer */
+.root-finding-visualizer {
+  display: flex;
+  justify-content: center;
+}
+
+.root-finding-visualizer canvas {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+}
+
 /* Inline formulas row */
 .formulas-inline {
   display: flex;
@@ -469,6 +604,29 @@ body {
 
 .formula-table-cell .MathJax {
   margin: 0 !important;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-small);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.comparison-table th {
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+.comparison-table td:first-child {
+  font-weight: 500;
 }
 
 /* List styles */
@@ -620,6 +778,38 @@ li {
 
   .math-block {
     page-break-inside: avoid;
+  }
+
+  /* Code block print styles */
+  .code-block {
+    background-color: #1e1e1e !important;
+    page-break-inside: avoid;
+  }
+
+  .code-block-header {
+    background-color: #2d2d2d !important;
+  }
+
+  .code-block-title {
+    color: #e0e0e0 !important;
+  }
+
+  .code-block-content {
+    color: #d4d4d4 !important;
+  }
+
+  /* Comparison table print styles */
+  .comparison-table th {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Root finding visualizer print styles */
+  .root-finding-visualizer {
+    page-break-inside: avoid;
+  }
+
+  .root-finding-visualizer canvas {
+    border-color: #ccc !important;
   }
 
   /* Formula table print styles */

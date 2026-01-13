@@ -1,4 +1,5 @@
 // Layout components
+export { CourseHeader } from "./CourseHeader";
 export { Section } from "./Section";
 export { Row } from "./Row";
 export { Column } from "./Column";
@@ -11,6 +12,9 @@ export { Math } from "./Math";
 export { MathBlock } from "./MathBlock";
 export { FormulaTable } from "./FormulaTable";
 
+// Code components
+export { CodeBlock } from "./CodeBlock";
+
 // Content components
 export { Note } from "./Note";
 export { Definition } from "./Definition";
@@ -20,6 +24,7 @@ export { Example } from "./Example";
 // Visualizers
 export { CurveVisualizer } from "./CurveVisualizer";
 export { VolumeVisualizer } from "./VolumeVisualizer";
+export { RootFindingVisualizer } from "./RootFindingVisualizer";
 
 // Provider
 export { MathJaxProvider } from "./MathJaxProvider";

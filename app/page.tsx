@@ -1,27 +1,26 @@
-import {
-  IntegraliSection,
-  CurveParametricheSection,
-  SolidiRotazioneSection,
-  EquazioniDifferenzialiSection,
-  FormeNotevoliSection,
-  FunzioniPiuVariabiliSection,
-} from "@/components/sections";
+import Link from "next/link";
+
+const courses = [
+  { slug: "analisi-2", name: "Analisi 2", description: "Integrali, curve, equazioni differenziali" },
+  { slug: "numerica", name: "Numerica", description: "Coming soon" },
+];
 
 export default function Home() {
   return (
-    <div className="page">
-      <header className="header">
-        <h1>Analisi 2</h1>
+    <div className="page home-page">
+      <header className="home-header">
+        <h1>Appunti</h1>
+        <p>Riassunti per gli esami universitari</p>
       </header>
 
-      <IntegraliSection />
-      <CurveParametricheSection />
-      <SolidiRotazioneSection />
-      <FormeNotevoliSection />
-
-      <EquazioniDifferenzialiSection />
-
-      <FunzioniPiuVariabiliSection />
+      <nav className="course-grid">
+        {courses.map((course) => (
+          <Link key={course.slug} href={`/${course.slug}`} className="course-card">
+            <span className="course-card-name">{course.name}</span>
+            <span className="course-card-description">{course.description}</span>
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

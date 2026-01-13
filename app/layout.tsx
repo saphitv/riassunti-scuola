@@ -9,8 +9,8 @@ const crimsonPro = Crimson_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Analisi 2 - Appunti",
-  description: "Appunti per l'esame di Analisi 2",
+  title: "Appunti",
+  description: "Appunti per gli esami universitari",
 };
 
 export default function RootLayout({

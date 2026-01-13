@@ -1,6 +1,5 @@
-export { IntegraliSection } from "./IntegraliSection";
-export { CurveParametricheSection } from "./CurveParametricheSection";
-export { SolidiRotazioneSection } from "./SolidiRotazioneSection";
-export { EquazioniDifferenzialiSection } from "./EquazioniDifferenzialiSection";
-export { FormeNotevoliSection } from "./FormeNotevoliSection";
-export { FunzioniPiuVariabiliSection } from "./FunzioniPiuVariabiliSection";
+// Re-export analisi-2 sections for backwards compatibility
+export * from "./analisi-2";
+
+// Numerica sections
+export * from "./numerica";
