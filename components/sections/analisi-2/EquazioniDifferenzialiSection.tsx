@@ -157,7 +157,7 @@ export function EquazioniDifferenzialiSection() {
         </Column>
         <Column width="half">
           <Box color="gray" border="left" title="Raffreddamento di Newton">
-            <Math>{"\\text{Classico: } \\frac{dT}{dt} = -\\lambda (T(t) - T_{amb})"}</Math><br />
+            <Math>{"\\text{Classico: } \\frac{dT}{dt} = -\\lambda (T(t) - T_{amb}) \\implies T = T_A + C \\cdot e^{-\\lambda t}"}</Math><br />
             <Math>{"\\text{Fluido: } \\frac{dT}{dt} = -\\lambda (T(t) - T_{amb}) * v"}</Math><br />
             <Math>{"\\text{Radiativo: } \\frac{dT}{dt} = -\\sigma\\varepsilon(T(t)^4 - T_{amb}^4)"}</Math><br />
             <Math>{"\\text{Stagionale: } T(t) = e^{\\lambda t}\\omega(t), \\; \\omega(t) \\in \\int e^{-\\lambda t}T_A(t)\\,dt"}</Math>
