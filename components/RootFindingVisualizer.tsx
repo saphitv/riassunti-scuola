@@ -24,8 +24,8 @@ export function RootFindingVisualizer({
   width = 650,
   height: propHeight,
 }: RootFindingVisualizerProps) {
-  // Secanti needs more height to show the steep slopes clearly
-  const height = propHeight ?? (method === "secanti" ? 320 : 170);
+  // Secanti and Newton need more height to show clearly
+  const height = propHeight ?? (method === "secanti" ? 320 : method === "newton" ? 220 : 170);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -652,96 +652,212 @@ export function RootFindingVisualizer({
         ctx.fillText("b", toCanvasX(2), y0 - 8);
 
       } else if (method === "newton") {
-        let x = 2;
-        const points: { x: number; y: number; xNext: number }[] = [];
+        // Newton with f(x) = x³ - 2x - 5 (root ≈ 2.0946)
+        // A classic example - this is the function Newton himself used!
+        const fNewton = (x: number) => x * x * x - 2 * x - 5;
+        const dfNewton = (x: number) => 3 * x * x - 2;
+        const ROOT_NEWTON = 2.0945514815;
 
-        for (let i = 0; i < 4; i++) {
-          const y = f(x);
-          const xNext = x - y / df(x);
-          points.push({ x, y, xNext });
+        // Different colors for each iteration step
+        const stepColors = [
+          { line: "#3b82f6", point: "#2563eb" },  // Blue for step 1
+          { line: "#f97316", point: "#ea580c" },  // Orange for step 2
+          { line: "#a855f7", point: "#9333ea" },  // Purple for step 3
+        ];
+
+        // Recalculate bounds for this function
+        const xMinN = 1.0, xMaxN = 3.0;
+        const yMinN = -6, yMaxN = 10;
+
+        const toCanvasXN = (x: number) => padding.left + ((x - xMinN) / (xMaxN - xMinN)) * plotWidth;
+        const toCanvasYN = (y: number) => padding.top + ((yMaxN - y) / (yMaxN - yMinN)) * plotHeight;
+
+        // Redraw grid for new bounds
+        ctx.clearRect(0, 0, width, height);
+        
+        ctx.strokeStyle = "#e5e7eb";
+        ctx.lineWidth = 0.5;
+
+        for (let x = 1; x <= 3; x += 0.5) {
+          ctx.beginPath();
+          ctx.moveTo(toCanvasXN(x), padding.top);
+          ctx.lineTo(toCanvasXN(x), height - padding.bottom);
+          ctx.stroke();
+        }
+
+        for (let y = -4; y <= 8; y += 2) {
+          ctx.beginPath();
+          ctx.moveTo(padding.left, toCanvasYN(y));
+          ctx.lineTo(width - padding.right, toCanvasYN(y));
+          ctx.stroke();
+        }
+
+        // Draw axes
+        ctx.beginPath();
+        ctx.strokeStyle = "#374151";
+        ctx.lineWidth = 1.5;
+
+        const y0N = toCanvasYN(0);
+        ctx.moveTo(padding.left, y0N);
+        ctx.lineTo(width - padding.right, y0N);
+        ctx.moveTo(padding.left, padding.top);
+        ctx.lineTo(padding.left, height - padding.bottom);
+        ctx.stroke();
+
+        // Axis labels
+        ctx.font = "9pt sans-serif";
+        ctx.fillStyle = "#374151";
+        ctx.textAlign = "center";
+        ctx.fillText("1.5", toCanvasXN(1.5), height - 8);
+        ctx.fillText("2", toCanvasXN(2), height - 8);
+        ctx.fillText("2.5", toCanvasXN(2.5), height - 8);
+        ctx.textAlign = "right";
+        ctx.fillText("0", padding.left - 5, y0N + 4);
+        ctx.fillText("5", padding.left - 5, toCanvasYN(5) + 4);
+        ctx.fillText("-5", padding.left - 5, toCanvasYN(-5) + 4);
+
+        // Draw function curve
+        ctx.beginPath();
+        ctx.strokeStyle = "#374151";
+        ctx.lineWidth = 2.5;
+
+        for (let px = 0; px <= plotWidth; px++) {
+          const x = xMinN + (px / plotWidth) * (xMaxN - xMinN);
+          const y = fNewton(x);
+          const canvasX = toCanvasXN(x);
+          const canvasY = toCanvasYN(y);
+
+          if (px === 0) {
+            ctx.moveTo(canvasX, canvasY);
+          } else {
+            ctx.lineTo(canvasX, canvasY);
+          }
+        }
+        ctx.stroke();
+
+        // Label the function
+        ctx.font = "bold 10pt sans-serif";
+        ctx.fillStyle = "#374151";
+        ctx.textAlign = "left";
+        ctx.fillText("f(x) = x³ − 2x − 5", toCanvasXN(2.3), toCanvasYN(8));
+
+        // Calculate Newton iterations starting from x₀ = 3
+        let x = 3;
+        const points: { x: number; y: number; xNext: number; slope: number }[] = [];
+
+        for (let i = 0; i < 3; i++) {
+          const y = fNewton(x);
+          const slope = dfNewton(x);
+          const xNext = x - y / slope;
+          points.push({ x, y, xNext, slope });
           x = xNext;
         }
 
-        // Draw tangent lines
+        // Draw tangent lines with different colors for each step
         points.forEach((p, i) => {
-          ctx.globalAlpha = 0.4 + (i / points.length) * 0.6;
+          const stepColor = stepColors[i];
+          const slope = p.slope;
+          
+          // Calculate tangent line endpoints
+          // Extend left to x-intercept and a bit beyond curve point to the right
+          const xIntercept = p.xNext;
+          const xRight = p.x + 0.3;
+          const yRight = p.y + slope * 0.3;
 
-          // Tangent line
+          // Draw tangent line
           ctx.beginPath();
-          ctx.strokeStyle = color.light;
-          ctx.lineWidth = 2;
-
-          // Extend tangent
-          const slope = df(p.x);
-          const xExtend = p.x + 0.4;
-          const yExtend = p.y + slope * 0.4;
-
-          ctx.moveTo(toCanvasX(xExtend), toCanvasY(yExtend));
-          ctx.lineTo(toCanvasX(p.xNext), y0);
+          ctx.strokeStyle = stepColor.line;
+          ctx.lineWidth = 2.5;
+          ctx.moveTo(toCanvasXN(xIntercept - 0.1), toCanvasYN(-slope * 0.1));
+          ctx.lineTo(toCanvasXN(xRight), toCanvasYN(yRight));
           ctx.stroke();
-        });
 
-        ctx.globalAlpha = 1;
-
-        // Draw points and labels
-        points.forEach((p, i) => {
           // Point on curve
           ctx.beginPath();
-          ctx.fillStyle = color.main;
-          ctx.arc(toCanvasX(p.x), toCanvasY(p.y), 5, 0, 2 * Math.PI);
+          ctx.fillStyle = stepColor.point;
+          ctx.arc(toCanvasXN(p.x), toCanvasYN(p.y), 6, 0, 2 * Math.PI);
           ctx.fill();
 
-          // Vertical dashed line
+          // Vertical dashed line from curve to x-axis
           ctx.beginPath();
-          ctx.setLineDash([3, 3]);
-          ctx.strokeStyle = color.main;
-          ctx.lineWidth = 1;
-          ctx.moveTo(toCanvasX(p.x), y0);
-          ctx.lineTo(toCanvasX(p.x), toCanvasY(p.y));
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = stepColor.point;
+          ctx.lineWidth = 1.5;
+          ctx.moveTo(toCanvasXN(p.x), y0N);
+          ctx.lineTo(toCanvasXN(p.x), toCanvasYN(p.y));
           ctx.stroke();
           ctx.setLineDash([]);
 
-          // Point on x-axis
+          // Point on x-axis for xₙ
           ctx.beginPath();
-          ctx.fillStyle = color.main;
-          ctx.arc(toCanvasX(p.x), y0, 3, 0, 2 * Math.PI);
+          ctx.fillStyle = stepColor.point;
+          ctx.arc(toCanvasXN(p.x), y0N, 4, 0, 2 * Math.PI);
           ctx.fill();
 
-          // Labels
+          // Label xₙ
           ctx.font = "bold 9pt sans-serif";
-          ctx.fillStyle = color.main;
+          ctx.fillStyle = stepColor.point;
           ctx.textAlign = "center";
-          const labels = ["x₀", "x₁", "x₂", "x₃"];
-          ctx.fillText(labels[i], toCanvasX(p.x), y0 + 14);
+          const labels = ["x₀", "x₁", "x₂"];
+          const yOffset = (i % 2 === 0) ? 14 : 24;
+          ctx.fillText(labels[i], toCanvasXN(p.x), y0N + yOffset);
         });
 
-        // Final point
+        // Final point x₃ (result of last iteration)
         const lastP = points[points.length - 1];
         ctx.beginPath();
-        ctx.fillStyle = color.dark;
-        ctx.arc(toCanvasX(lastP.xNext), y0, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#15803d";  // Green for final result
+        ctx.arc(toCanvasXN(lastP.xNext), y0N, 6, 0, 2 * Math.PI);
         ctx.fill();
 
         ctx.font = "bold 9pt sans-serif";
-        ctx.fillStyle = color.dark;
+        ctx.fillStyle = "#15803d";
         ctx.textAlign = "center";
-        ctx.fillText("x₄ ≈ √2", toCanvasX(lastP.xNext), y0 + 14);
+        ctx.fillText("x₃", toCanvasXN(lastP.xNext), y0N + 14);
 
-        // Legend - positioned in top right with background
-        const legendX = width - 145;
+        // Mark the actual root
+        ctx.beginPath();
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 2;
+        ctx.moveTo(toCanvasXN(ROOT_NEWTON), y0N - 8);
+        ctx.lineTo(toCanvasXN(ROOT_NEWTON), y0N + 8);
+        ctx.stroke();
+
+        ctx.font = "bold 9pt sans-serif";
+        ctx.fillStyle = "#000";
+        ctx.textAlign = "center";
+        ctx.fillText("ξ ≈ 2.095", toCanvasXN(ROOT_NEWTON), y0N - 12);
+
+        // Legend with color coding - positioned in top right
+        const legendX = width - 135;
         const legendY = padding.top + 5;
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
-        ctx.fillRect(legendX - 5, legendY - 3, 130, 36);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+        ctx.fillRect(legendX - 5, legendY - 3, 120, 54);
         ctx.strokeStyle = "#e5e7eb";
         ctx.lineWidth = 1;
-        ctx.strokeRect(legendX - 5, legendY - 3, 130, 36);
+        ctx.strokeRect(legendX - 5, legendY - 3, 120, 54);
 
         ctx.font = "9pt sans-serif";
+        
+        // Step 1 legend
+        ctx.fillStyle = stepColors[0].line;
+        ctx.fillRect(legendX, legendY + 4, 12, 3);
         ctx.fillStyle = "#374151";
         ctx.textAlign = "left";
-        ctx.fillText("Tangente in (xₙ, f(xₙ))", legendX, legendY + 10);
-        ctx.fillText("interseca asse x in xₙ₊₁", legendX, legendY + 25);
+        ctx.fillText("Passo 1: x₀ → x₁", legendX + 16, legendY + 10);
+        
+        // Step 2 legend
+        ctx.fillStyle = stepColors[1].line;
+        ctx.fillRect(legendX, legendY + 19, 12, 3);
+        ctx.fillStyle = "#374151";
+        ctx.fillText("Passo 2: x₁ → x₂", legendX + 16, legendY + 25);
+
+        // Step 3 legend
+        ctx.fillStyle = stepColors[2].line;
+        ctx.fillRect(legendX, legendY + 34, 12, 3);
+        ctx.fillStyle = "#374151";
+        ctx.fillText("Passo 3: x₂ → x₃", legendX + 16, legendY + 40);
       }
 
       // Mark the actual root

@@ -184,7 +184,7 @@ export function ZeriDiFunzioneSection() {
             </CodeBlock>
           </Column>
         </Row>
-        <RootFindingVisualizer method="newton" width={650} height={170} />
+        <RootFindingVisualizer method="newton" width={650} height={220} />
       </Box>
 
       <Box color="purple" border="left" title="Metodo del Punto Fisso — Convergenza lineare (p = 1)">
