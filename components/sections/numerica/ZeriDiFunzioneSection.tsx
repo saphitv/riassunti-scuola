@@ -113,6 +113,17 @@ export function ZeriDiFunzioneSection() {
               <strong>Errore:</strong> <Math>{"|\\xi - x_n| \\leq \\frac{b-a}{2^{n+1}}"}</Math>.{" "}
               <strong>Pro:</strong> Sempre converge. <strong>Contro:</strong> Lenta.
             </Note>
+            <Definition term="Numero di iterazioni per precisione ε">
+              <MathBlock>
+                {`n \\geq \\log_2\\left(\\frac{b-a}{\\varepsilon}\\right) = \\frac{\\ln(b-a) - \\ln(\\varepsilon)}{\\ln 2}`}
+              </MathBlock>
+              <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.3rem" }}>
+                <strong>Esempio:</strong> Con <Math>{"[a,b] = [0, 4]"}</Math> e <Math>{"\\varepsilon = 10^{-6}"}</Math>:
+              </p>
+              <MathBlock>
+                {`n \\geq \\log_2\\left(\\frac{4}{10^{-6}}\\right) = \\log_2(4 \\cdot 10^6) \\approx 22 \\text{ iterazioni}`}
+              </MathBlock>
+            </Definition>
           </Column>
           <Column width="half">
             <CodeBlock title="Python" language="python">
@@ -142,6 +153,7 @@ export function ZeriDiFunzioneSection() {
               Il nuovo <Math>{"x_2"}</Math> è l&apos;intersezione con l&apos;asse x.
             </p>
             <Note>
+              <strong>Errore:</strong> <Math>{"|x_{n+1} - x_n|"}</Math> (distanza tra iterati consecutivi).{" "}
               <strong>Pro:</strong> Non richiede <Math>{"f'(x)"}</Math>.{" "}
               <strong>Contro:</strong> Può divergere se punti iniziali lontani.
             </Note>
@@ -169,6 +181,7 @@ export function ZeriDiFunzioneSection() {
               Il nuovo <Math>{"x_1"}</Math> è l&apos;intersezione con l&apos;asse x.
             </p>
             <Note>
+              <strong>Errore:</strong> <Math>{"|f(x_n)|"}</Math> (residuo, valore della funzione nel punto).{" "}
               <strong>Requisito:</strong> <Math>{"f'(x) \\neq 0"}</Math>.{" "}
               <strong>Pro:</strong> Molto veloce.{" "}
               <strong>Contro:</strong> Richiede derivata, può divergere.
@@ -200,6 +213,7 @@ export function ZeriDiFunzioneSection() {
               allora esiste un unico punto fisso <Math>{"\\xi"}</Math> e la successione converge.
             </Theorem>
             <Note>
+              <strong>Errore:</strong> <Math>{"|x_{n+1} - x_n|"}</Math> (distanza tra iterati consecutivi).{" "}
               <strong>Pro:</strong> Semplice, no derivata di <Math>{"f"}</Math>.{" "}
               <strong>Contro:</strong> Serve costruire <Math>{"g"}</Math>, convergenza solo lineare.
             </Note>
