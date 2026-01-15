@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-type MethodType = "bisezione" | "secanti" | "newton";
+type MethodType = "bisezione" | "secanti" | "newton" | "punto-fisso";
 
 interface RootFindingVisualizerProps {
   method: MethodType;
@@ -42,10 +42,228 @@ export function RootFindingVisualizer({
       bisezione: { main: "#2563eb", light: "#93c5fd", dark: "#1d4ed8" },
       secanti: { main: "#16a34a", light: "#86efac", dark: "#15803d" },
       newton: { main: "#dc2626", light: "#fca5a5", dark: "#b91c1c" },
+      "punto-fisso": { main: "#9333ea", light: "#c4b5fd", dark: "#7c3aed" },
     };
     const color = colors[method];
 
-    if (method === "secanti") {
+    if (method === "punto-fisso") {
+      // Fixed-point iteration to find zero of f(x) = e^(-x) - x
+      // The zero is where e^(-x) = x, i.e., fixed point of g(x) = e^(-x)
+      // Fixed point at ξ ≈ 0.5671
+      const fPunto = (x: number) => Math.exp(-x) - x;
+      const g = (x: number) => Math.exp(-x);
+      const FIXED_POINT = 0.5671432904;
+      
+      const xMin = -0.2, xMax = 2.0;
+      const yMin = -0.8, yMax = 1.5;
+
+      const padding = { left: 35, right: 20, top: 15, bottom: 25 };
+      const plotWidth = width - padding.left - padding.right;
+      const plotHeight = height - padding.top - padding.bottom;
+
+      const toCanvasX = (x: number) => padding.left + ((x - xMin) / (xMax - xMin)) * plotWidth;
+      const toCanvasY = (y: number) => padding.top + ((yMax - y) / (yMax - yMin)) * plotHeight;
+
+      // Draw light grid
+      ctx.strokeStyle = "#e5e7eb";
+      ctx.lineWidth = 0.5;
+
+      for (let x = 0; x <= 2; x += 0.5) {
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(x), padding.top);
+        ctx.lineTo(toCanvasX(x), height - padding.bottom);
+        ctx.stroke();
+      }
+
+      for (let y = -0.5; y <= 1.5; y += 0.5) {
+        ctx.beginPath();
+        ctx.moveTo(padding.left, toCanvasY(y));
+        ctx.lineTo(width - padding.right, toCanvasY(y));
+        ctx.stroke();
+      }
+
+      // Draw axes
+      ctx.beginPath();
+      ctx.strokeStyle = "#374151";
+      ctx.lineWidth = 1.5;
+
+      const y0 = toCanvasY(0);
+      const x0 = toCanvasX(0);
+      ctx.moveTo(padding.left, y0);
+      ctx.lineTo(width - padding.right, y0);
+      ctx.moveTo(x0, padding.top);
+      ctx.lineTo(x0, height - padding.bottom);
+      ctx.stroke();
+
+      // Axis labels
+      ctx.font = "9pt sans-serif";
+      ctx.fillStyle = "#374151";
+      ctx.textAlign = "center";
+      ctx.fillText("0.5", toCanvasX(0.5), height - 8);
+      ctx.fillText("1", toCanvasX(1), height - 8);
+      ctx.fillText("1.5", toCanvasX(1.5), height - 8);
+      ctx.textAlign = "right";
+      ctx.fillText("0", x0 - 5, y0 + 12);
+      ctx.fillText("1", padding.left - 5, toCanvasY(1) + 4);
+      ctx.fillText("-0.5", padding.left - 5, toCanvasY(-0.5) + 4);
+
+      // Draw g(x) = e^(-x) curve (dashed, light purple)
+      ctx.beginPath();
+      ctx.strokeStyle = color.light;
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+
+      for (let px = 0; px <= plotWidth; px++) {
+        const x = xMin + (px / plotWidth) * (xMax - xMin);
+        const y = g(x);
+        const canvasX = toCanvasX(x);
+        const canvasY = toCanvasY(y);
+
+        if (canvasY < padding.top - 10 || canvasY > height - padding.bottom + 10) continue;
+
+        if (px === 0) {
+          ctx.moveTo(canvasX, canvasY);
+        } else {
+          ctx.lineTo(canvasX, canvasY);
+        }
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Label g(x)
+      ctx.font = "bold 9pt sans-serif";
+      ctx.fillStyle = color.main;
+      ctx.textAlign = "left";
+      ctx.fillText("g(x) = e⁻ˣ", toCanvasX(0.02), toCanvasY(1.15));
+
+      // Draw f(x) = e^(-x) - x curve (solid)
+      ctx.beginPath();
+      ctx.strokeStyle = "#374151";
+      ctx.lineWidth = 2;
+
+      let firstPoint = true;
+      for (let px = 0; px <= plotWidth; px++) {
+        const x = xMin + (px / plotWidth) * (xMax - xMin);
+        const y = fPunto(x);
+        const canvasX = toCanvasX(x);
+        const canvasY = toCanvasY(y);
+
+        if (canvasY < padding.top - 10 || canvasY > height - padding.bottom + 10) {
+          firstPoint = true;
+          continue;
+        }
+
+        if (firstPoint) {
+          ctx.moveTo(canvasX, canvasY);
+          firstPoint = false;
+        } else {
+          ctx.lineTo(canvasX, canvasY);
+        }
+      }
+      ctx.stroke();
+
+      // Label the function f(x)
+      ctx.font = "bold 10pt sans-serif";
+      ctx.fillStyle = "#374151";
+      ctx.textAlign = "left";
+      ctx.fillText("f(x) = e⁻ˣ − x", toCanvasX(1.1), toCanvasY(0.45));
+
+      // Calculate iterations starting from x₀ = 0
+      const xValues: number[] = [0];
+      for (let i = 0; i < 6; i++) {
+        xValues.push(g(xValues[xValues.length - 1]));
+      }
+      // xValues ≈ [0, 1, 0.368, 0.692, 0.501, 0.606, 0.545, ...]
+
+      // Draw iteration points and connecting lines
+      const labels = ["x₀", "x₁", "x₂", "x₃", "x₄", "x₅"];
+      
+      xValues.slice(0, 6).forEach((xi, i) => {
+        const yi = fPunto(xi);
+        const gi = g(xi);
+        
+        // Point on f(x) curve
+        ctx.beginPath();
+        ctx.fillStyle = color.main;
+        ctx.arc(toCanvasX(xi), toCanvasY(yi), 4, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Point on g(x) curve (shows where next x comes from)
+        ctx.beginPath();
+        ctx.fillStyle = color.light;
+        ctx.arc(toCanvasX(xi), toCanvasY(gi), 4, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Vertical line connecting f(xi) to g(xi) - shows the iteration step
+        ctx.beginPath();
+        ctx.strokeStyle = color.main;
+        ctx.lineWidth = 1.5;
+        ctx.globalAlpha = 0.6;
+        ctx.moveTo(toCanvasX(xi), toCanvasY(yi));
+        ctx.lineTo(toCanvasX(xi), toCanvasY(gi));
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+
+        // Horizontal dashed line from g(xi) to x-axis at x_{i+1}
+        if (i < 5) {
+          const xNext = xValues[i + 1];
+          ctx.beginPath();
+          ctx.setLineDash([3, 3]);
+          ctx.strokeStyle = color.light;
+          ctx.lineWidth = 1;
+          ctx.moveTo(toCanvasX(xi), toCanvasY(gi));
+          ctx.lineTo(toCanvasX(xNext), toCanvasY(gi));
+          ctx.lineTo(toCanvasX(xNext), y0);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+
+        // Point on x-axis
+        ctx.beginPath();
+        ctx.fillStyle = color.main;
+        ctx.arc(toCanvasX(xi), y0, 3, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Label (only first 4 to avoid clutter)
+        if (i < 4) {
+          ctx.font = "bold 8pt sans-serif";
+          ctx.fillStyle = color.main;
+          ctx.textAlign = "center";
+          const yOffset = (i % 2 === 0) ? 12 : 22;
+          ctx.fillText(labels[i], toCanvasX(xi), y0 + yOffset);
+        }
+      });
+
+      // Mark the zero (fixed point)
+      ctx.beginPath();
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 2;
+      ctx.moveTo(toCanvasX(FIXED_POINT), y0 - 8);
+      ctx.lineTo(toCanvasX(FIXED_POINT), y0 + 8);
+      ctx.stroke();
+
+      ctx.font = "bold 9pt sans-serif";
+      ctx.fillStyle = "#000";
+      ctx.textAlign = "center";
+      ctx.fillText("ξ ≈ 0.567", toCanvasX(FIXED_POINT), y0 - 12);
+
+      // Legend
+      const legendX = width - 175;
+      const legendY = padding.top + 5;
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+      ctx.fillRect(legendX - 5, legendY - 3, 160, 42);
+      ctx.strokeStyle = "#e5e7eb";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(legendX - 5, legendY - 3, 160, 42);
+
+      ctx.font = "9pt sans-serif";
+      ctx.fillStyle = "#374151";
+      ctx.textAlign = "left";
+      ctx.fillText("Iterazione: xₙ₊₁ = g(xₙ) = e⁻ˣⁿ", legendX, legendY + 12);
+      ctx.fillText("g(xₙ) proiettato su asse x → xₙ₊₁", legendX, legendY + 27);
+
+    } else if (method === "secanti") {
       // Secant method with 2cos(x) - x
       // Using wider bounds to show x₀=-1 and x₁=4
       const xMin = -1.5, xMax = 4.5;

@@ -16,32 +16,88 @@ export function ZeriDiFunzioneSection() {
   return (
     <Section title="Zeri di Funzione">
       <Row>
-        <Column width="third">
+        <Column width="half">
           <Definition term="Zero di una funzione">
             Uno zero di <Math>{"f"}</Math> è un valore <Math>{"\\xi"}</Math> tale
             che <Math>{"f(\\xi) = 0"}</Math>.
           </Definition>
         </Column>
-        <Column width="third">
+        <Column width="half">
           <Theorem title="Teorema di Bolzano">
             Se <Math>{"f"}</Math> continua in <Math>{"[a, b]"}</Math> e{" "}
             <Math>{"f(a) \\cdot f(b) < 0"}</Math>, allora{" "}
             <Math>{"\\exists \\xi \\in (a, b): f(\\xi) = 0"}</Math>.
           </Theorem>
         </Column>
-        <Column width="third">
-          <Box color="yellow" border="left" title="Ordine di convergenza p">
+      </Row>
+
+      <Box color="yellow" border="left" title="Ordine di convergenza p — Misura della velocità di convergenza">
+        <Row>
+          <Column width="third">
+            <p style={{ marginBottom: "0.5rem", fontSize: "var(--font-size-small)" }}>
+              <strong>Definizione:</strong> <Math>{"e_n = x_n - \\xi"}</Math> è l&apos;errore al passo <Math>{"n"}</Math>.
+            </p>
             <MathBlock>
               {"\\lim_{n \\to \\infty} \\frac{|e_{n+1}|}{|e_n|^p} = C \\neq 0"}
             </MathBlock>
-            <p style={{ fontSize: "var(--font-size-small)" }}>
-              <Math>{"e_n = x_n - \\xi"}</Math> = errore al passo n.<br />
-              <strong>p</strong> indica la velocità: <Math>{"p=1"}</Math> lineare (errore si riduce di un fattore costante), 
-              <Math>{"p=2"}</Math> quadratica (le cifre corrette raddoppiano ad ogni iterazione).
+            <p style={{ marginTop: "0.5rem", fontSize: "var(--font-size-small)" }}>
+              <strong>Stima sperimentale di p:</strong>
             </p>
-          </Box>
-        </Column>
-      </Row>
+            <MathBlock>
+              {"p \\approx \\frac{\\ln|e_{n+1}/e_n|}{\\ln|e_n/e_{n-1}|}"}
+            </MathBlock>
+            <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.3rem" }}>
+              Usando gli incrementi <Math>{"\\delta_n = |x_{n+1} - x_n|"}</Math>:
+            </p>
+            <MathBlock>
+              {"p \\approx \\frac{\\ln(\\delta_{n+1}/\\delta_n)}{\\ln(\\delta_n/\\delta_{n-1})}"}
+            </MathBlock>
+          </Column>
+          <Column width="two-thirds">
+            <p style={{ marginBottom: "0.5rem" }}>
+              L&apos;ordine di convergenza <Math>{"p"}</Math> descrive <strong>quanto velocemente</strong> l&apos;errore si riduce ad ogni iterazione.
+            </p>
+            <table className="comparison-table" style={{ fontSize: "var(--font-size-small)" }}>
+              <thead>
+                <tr>
+                  <th>Valore</th>
+                  <th>Nome</th>
+                  <th>Significato pratico</th>
+                  <th>Esempio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><Math>{"p = 1"}</Math></td>
+                  <td>Lineare</td>
+                  <td>Errore si riduce di un <strong>fattore costante</strong> C ad ogni passo</td>
+                  <td>Se <Math>{"C = 0.5"}</Math>, guadagno ~1 cifra ogni 3 iterazioni</td>
+                </tr>
+                <tr>
+                  <td><Math>{"p \\approx 1.618"}</Math></td>
+                  <td>Superlineare</td>
+                  <td>Più veloce del lineare, meno del quadratico</td>
+                  <td>Secanti: ~1.6 cifre nuove per iterazione</td>
+                </tr>
+                <tr>
+                  <td><Math>{"p = 2"}</Math></td>
+                  <td>Quadratica</td>
+                  <td>Le <strong>cifre corrette raddoppiano</strong> ad ogni iterazione</td>
+                  <td>Newton: 1→2→4→8→16 cifre corrette</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style={{ marginTop: "0.5rem" }}>
+              <Note>
+                <strong>Come si calcola p?</strong> Dalla definizione, prendendo il logaritmo: se <Math>{"|e_{n+1}| \\approx C|e_n|^p"}</Math>, 
+                allora <Math>{"\\ln|e_{n+1}| \\approx \\ln C + p \\ln|e_n|"}</Math>. 
+                Confrontando due passi consecutivi si elimina C e si ottiene la formula di stima.
+                In pratica si usano gli incrementi <Math>{"\\delta_n"}</Math> come approssimazione degli errori.
+              </Note>
+            </div>
+          </Column>
+        </Row>
+      </Box>
 
       <Box color="blue" border="left" title="Metodo di Bisezione — Convergenza lineare (p = 1)">
         <Row>
@@ -131,6 +187,43 @@ export function ZeriDiFunzioneSection() {
         <RootFindingVisualizer method="newton" width={650} height={170} />
       </Box>
 
+      <Box color="purple" border="left" title="Metodo del Punto Fisso — Convergenza lineare (p = 1)">
+        <Row>
+          <Column width="half">
+            <p style={{ marginBottom: "0.5rem" }}>
+              Si riscrive <Math>{"f(x) = 0"}</Math> come <Math>{"x = g(x)"}</Math> e si itera:
+            </p>
+            <MathBlock>{"x_{n+1} = g(x_n)"}</MathBlock>
+            <Theorem title="Condizione di convergenza">
+              Se <Math>{"g"}</Math> continua, <Math>{"g([a,b]) \\subseteq [a,b]"}</Math> e{" "}
+              <Math>{"|g'(x)| \\leq L < 1"}</Math> per ogni <Math>{"x \\in [a,b]"}</Math>,
+              allora esiste un unico punto fisso <Math>{"\\xi"}</Math> e la successione converge.
+            </Theorem>
+            <Note>
+              <strong>Pro:</strong> Semplice, no derivata di <Math>{"f"}</Math>.{" "}
+              <strong>Contro:</strong> Serve costruire <Math>{"g"}</Math>, convergenza solo lineare.
+            </Note>
+          </Column>
+          <Column width="half">
+            <CodeBlock title="Python" language="python">
+              {`def punto_fisso(g, x0, tol, max_iter=100):
+    x = x0
+    for _ in range(max_iter):
+        x_new = g(x)
+        if abs(x_new - x) < tol:
+            return x_new
+        x = x_new
+    return x  # max iter raggiunto`}
+            </CodeBlock>
+            <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.5rem" }}>
+              <strong>Esempio:</strong> Per trovare lo zero di <Math>{"f(x) = e^{-x} - x"}</Math>, 
+              si itera <Math>{"x_{n+1} = e^{-x_n}"}</Math>. Lo zero <Math>{"\\xi \\approx 0.567"}</Math>.
+            </p>
+          </Column>
+        </Row>
+        <RootFindingVisualizer method="punto-fisso" width={650} height={220} />
+      </Box>
+
       <Row>
         <Column width="half">
           <Box color="gray" border="left" title="Confronto dei metodi">
@@ -161,6 +254,12 @@ export function ZeriDiFunzioneSection() {
                   <td>2</td>
                   <td><Math>{"f'(x)"}</Math></td>
                   <td>Molto veloce, può divergere</td>
+                </tr>
+                <tr>
+                  <td>Punto fisso</td>
+                  <td>1</td>
+                  <td><Math>{"|g'(x)| < 1"}</Math></td>
+                  <td>Semplice, convergenza lenta</td>
                 </tr>
               </tbody>
             </table>

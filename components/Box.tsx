@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface BoxProps {
   children: ReactNode;
-  color?: "default" | "blue" | "green" | "red" | "yellow" | "gray";
+  color?: "default" | "blue" | "green" | "red" | "yellow" | "gray" | "purple";
   border?: "none" | "solid" | "dashed" | "left";
   title?: string;
 }

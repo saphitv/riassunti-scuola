@@ -43,6 +43,8 @@
   --box-yellow-border: #f59e0b;
   --box-gray: #f9fafb;
   --box-gray-border: #9ca3af;
+  --box-purple: #faf5ff;
+  --box-purple-border: #9333ea;
 
   /* Example colors - slightly more saturated for nesting visibility */
   --example-blue: #dbeafe;
@@ -306,6 +308,12 @@ body {
   border-color: var(--box-gray-border); 
 }
 .box-gray.box-border-left { border-left-color: var(--box-gray-border); }
+
+.box-purple { 
+  background: var(--box-purple); 
+  border-color: var(--box-purple-border); 
+}
+.box-purple.box-border-left { border-left-color: var(--box-purple-border); }
 
 /* ============================================
    CONTENT COMPONENTS
@@ -735,6 +743,12 @@ li {
     border-color: #9ca3af !important; 
   }
   .box-gray.box-border-left { border-left-color: #9ca3af !important; }
+
+  .box-purple { 
+    background-color: #faf5ff !important; 
+    border-color: #9333ea !important; 
+  }
+  .box-purple.box-border-left { border-left-color: #9333ea !important; }
 
   /* Preserve theorem and note colors */
   .theorem {
