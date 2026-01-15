@@ -13,7 +13,7 @@ import {
 
 export function IntegraliSection() {
   return (
-    <Section title="Integrali">
+    <Section title="Integrali" forceFirstPage>
       <Definition term="Integrale definito">
         L&apos;integrale definito <Math>{"\\int_a^b f(x)\\,dx"}</Math>{" "}
         rappresenta l&apos;area con segno della regione compresa tra il

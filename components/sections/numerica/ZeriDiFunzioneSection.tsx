@@ -14,7 +14,7 @@ import {
 
 export function ZeriDiFunzioneSection() {
   return (
-    <Section title="Zeri di Funzione">
+    <Section title="Zeri di Funzione" forceFirstPage>
       <Row>
         <Column width="half">
           <Definition term="Zero di una funzione">
