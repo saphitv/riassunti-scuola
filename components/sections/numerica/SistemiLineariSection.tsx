@@ -45,22 +45,34 @@ a_{n1} & a_{n2} & \\cdots & a_{nn}
         border="left"
         title="Eliminazione di Gauss — O(n³/3)"
       >
+        <p>
+          Trasforma <Math>{"A"}</Math> in una matrice triangolare superiore{" "}
+          <Math>{"U"}</Math> tramite operazioni elementari sulle righe.
+          Il <strong>moltiplicatore</strong>: <Math>{`m_{ik} = a_{ik}/a_{kk}`}</Math> (elemento da eliminare / pivot).
+        </p>
+        <MathBlock>
+          {`\\begin{pmatrix}
+\\boxed{a_{11}} & a_{12} & a_{13} \\\\
+a_{21} & a_{22} & a_{23} \\\\
+a_{31} & a_{32} & a_{33}
+\\end{pmatrix}
+\\xrightarrow{\\substack{R_2 - m_{21}R_1 \\\\ R_3 - m_{31}R_1}}
+\\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\\\
+0 & \\boxed{a_{22}'} & a_{23}' \\\\
+0 & a_{32}' & a_{33}'
+\\end{pmatrix}
+\\xrightarrow{R_3 - m_{32}R_2}
+\\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\\\
+0 & a_{22}' & a_{23}' \\\\
+0 & 0 & a_{33}''
+\\end{pmatrix}`}
+        </MathBlock>
         <Row>
           <Column width="half">
-            <p>
-              Trasforma <Math>{"A"}</Math> in una matrice triangolare superiore{" "}
-              <Math>{"U"}</Math> tramite operazioni elementari sulle righe.
-            </p>
-            <MathBlock>
-              {`a_{ij}^{(k+1)} = a_{ij}^{(k)} - \\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}} \\cdot a_{kj}^{(k)}`}
-            </MathBlock>
-            <p>
-              Il <strong>moltiplicatore</strong> per la riga <Math>{"i"}</Math>{" "}
-              rispetto al pivot <Math>{"k"}</Math> e:
-            </p>
-            <MathBlock>{`m_{ik} = \\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}`}</MathBlock>
             <Note>
-              <strong>Pivot:</strong> <Math>{"a_{kk}^{(k)}"}</Math> deve essere{" "}
+              <strong>Pivot:</strong> <Math>{"a_{kk}"}</Math> (riquadrato) deve essere{" "}
               <Math>{"\\neq 0"}</Math>. Se e zero, si usa il pivoting.
             </Note>
           </Column>
@@ -68,18 +80,14 @@ a_{n1} & a_{n2} & \\cdots & a_{nn}
             <CodeBlock title="Python" language="python">
               {`def gauss(A, b):
     n = len(b)
-    # Crea matrice aumentata
     Ab = [A[i] + [b[i]] for i in range(n)]
-    
-    # Eliminazione in avanti
     for k in range(n - 1):
+        pivot = Ab[k][k]
+        if pivot == 0: raise ValueError("Pivot nullo!")
         for i in range(k + 1, n):
-            if Ab[k][k] == 0:
-                raise ValueError("Pivot nullo!")
-            m = Ab[i][k] / Ab[k][k]
+            m = Ab[i][k] / pivot
             for j in range(k, n + 1):
                 Ab[i][j] -= m * Ab[k][j]
-    
     return Ab  # Matrice triangolare superiore`}
             </CodeBlock>
           </Column>
@@ -95,16 +103,24 @@ a_{n1} & a_{n2} & \\cdots & a_{nn}
           <Column width="half">
             <p>
               Ad ogni passo <Math>{"k"}</Math>, si scambia la riga{" "}
-              <Math>{"k"}</Math> con la riga <Math>{"r \\geq k"}</Math> che ha
-              il <strong>pivot massimo in valore assoluto</strong>:
+              <Math>{"k"}</Math> con la riga che ha il{" "}
+              <strong>pivot massimo in valore assoluto</strong>.
+              Questo evita divisioni per numeri piccoli.
             </p>
             <MathBlock>
-              {`r = \\arg\\max_{i \\geq k} |a_{ik}^{(k)}|`}
+              {`\\begin{pmatrix}
+\\color{gray}{1} & 2 & 3 \\\\
+\\mathbf{4} & 5 & 6 \\\\
+2 & 1 & 3
+\\end{pmatrix}
+\\xrightarrow[\\max|\\cdot|=4]{R_1 \\leftrightarrow R_2}
+\\begin{pmatrix}
+\\boxed{4} & 5 & 6 \\\\
+1 & 2 & 3 \\\\
+2 & 1 & 3
+\\end{pmatrix}
+\\rightarrow \\text{elimina}`}
             </MathBlock>
-            <p>
-              Questo evita divisioni per numeri piccoli che amplificano gli
-              errori di arrotondamento.
-            </p>
             <Note>
               <strong>Pivoting totale:</strong> cerca il massimo in tutta la
               sottomatrice (piu costoso, raramente usato).
@@ -126,10 +142,11 @@ a_{n1} & a_{n2} & \\cdots & a_{nn}
         Ab[k], Ab[max_idx] = Ab[max_idx], Ab[k]
         
         # Eliminazione
+        pivot = Ab[k][k]
+        if pivot == 0:
+            raise ValueError("Sistema singolare")
         for i in range(k + 1, n):
-            if Ab[k][k] == 0:
-                raise ValueError("Sistema singolare")
-            m = Ab[i][k] / Ab[k][k]
+            m = Ab[i][k] / pivot
             for j in range(k, n + 1):
                 Ab[i][j] -= m * Ab[k][j]
     
@@ -147,43 +164,55 @@ a_{n1} & a_{n2} & \\cdots & a_{nn}
         <Row>
           <Column width="half">
             <p>
-              Dopo aver ottenuto il sistema triangolare superiore{" "}
-              <Math>{"Ux = c"}</Math>, si risolvono le incognite partendo
-              dall&apos;ultima:
+              Dal sistema triangolare <Math>{"Ux = c"}</Math>, si risolvono
+              le incognite <strong>dal basso verso l&apos;alto</strong>:
             </p>
             <MathBlock>
-              {`x_n = \\frac{c_n}{u_{nn}}`}
+              {`\\begin{pmatrix}
+u_{11} & u_{12} & u_{13} \\\\
+0 & u_{22} & u_{23} \\\\
+0 & 0 & u_{33}
+\\end{pmatrix}
+\\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix}
+=
+\\begin{pmatrix} c_1 \\\\ c_2 \\\\ c_3 \\end{pmatrix}`}
             </MathBlock>
             <MathBlock>
-              {`x_i = \\frac{1}{u_{ii}} \\left( c_i - \\sum_{j=i+1}^{n} u_{ij} x_j \\right)`}
+              {`\\begin{aligned}
+x_3 &= \\frac{c_3}{u_{33}} \\\\[4pt]
+x_2 &= \\frac{c_2 - u_{23}\\,x_3}{u_{22}} \\\\[4pt]
+x_1 &= \\frac{c_1 - u_{12}\\,x_2 - u_{13}\\,x_3}{u_{11}}
+\\end{aligned}`}
             </MathBlock>
-            <p>
-              Per <Math>{"i = n-1, n-2, \\ldots, 1"}</Math>.
-            </p>
             <Note>
               <strong>Sostituzione in avanti:</strong> per matrici triangolari
-              inferiori, si parte da <Math>{"x_1"}</Math> e si procede verso{" "}
-              <Math>{"x_n"}</Math>.
+              inferiori <Math>{"Lx = c"}</Math>, si parte da <Math>{"x_1"}</Math>.
             </Note>
           </Column>
           <Column width="half">
             <CodeBlock title="Python" language="python">
               {`def back_substitution(Ab):
+    """
+    Risolve Ux = c dove Ab = [U|c]
+    Ab[i][n] = termine noto c_i
+    Ab[i][i] = elemento diagonale u_ii
+    """
     n = len(Ab)
     x = [0] * n
     
+    # Parto dall'ultima riga (i = n-1)
+    # e risalgo fino alla prima (i = 0)
     for i in range(n - 1, -1, -1):
-        # Somma dei termini gia calcolati
-        somma = sum(Ab[i][j] * x[j] 
-                    for j in range(i + 1, n))
+        # Somma u_ij * x_j per j > i
+        # (termini gia risolti)
+        somma = 0
+        for j in range(i + 1, n):
+            somma += Ab[i][j] * x[j]
+        
+        # x_i = (c_i - somma) / u_ii
         x[i] = (Ab[i][n] - somma) / Ab[i][i]
     
-    return x
-
-# Soluzione completa
-def solve(A, b):
-    Ab = gauss_pivot(A, b)
-    return back_substitution(Ab)`}
+    return x`}
             </CodeBlock>
           </Column>
         </Row>
@@ -224,28 +253,27 @@ def solve(A, b):
             <CodeBlock title="Python" language="python">
               {`def gauss_jordan(A, b):
     n = len(b)
-    Ab = [A[i] + [b[i]] for i in range(n)]
+    Ab = [A[i] + [b[i]] for i in range(n)]  # matrice aumentata [A|b]
     
-    for k in range(n):
-        # Pivoting parziale
-        max_idx = max(range(k, n), 
-                      key=lambda i: abs(Ab[i][k]))
-        Ab[k], Ab[max_idx] = Ab[max_idx], Ab[k]
+    for k in range(n):                      # per ogni colonna k
+        # Trova riga con pivot massimo
+        max_idx = k
+        for i in range(k + 1, n):
+            if abs(Ab[i][k]) > abs(Ab[max_idx][k]):
+                max_idx = i
+        Ab[k], Ab[max_idx] = Ab[max_idx], Ab[k]  # scambia righe
         
-        # Normalizza riga pivot
-        pivot = Ab[k][k]
-        for j in range(k, n + 1):
-            Ab[k][j] /= pivot
+        pivot = Ab[k][k]                    # elemento diagonale
+        for j in range(k, n + 1):           # per ogni elemento della riga
+            Ab[k][j] /= pivot               # divide per pivot -> Ab[k][k] = 1
         
-        # Elimina sopra E sotto
-        for i in range(n):
-            if i != k:
-                m = Ab[i][k]
-                for j in range(k, n + 1):
-                    Ab[i][j] -= m * Ab[k][j]
+        for i in range(n):                  # per TUTTE le righe
+            if i != k:                      # tranne la riga pivot
+                m = Ab[i][k]                # moltiplicatore
+                for j in range(k, n + 1):   # per ogni elemento
+                    Ab[i][j] -= m * Ab[k][j]  # elimina -> Ab[i][k] = 0
     
-    # Soluzione nella colonna dei termini noti
-    return [Ab[i][n] for i in range(n)]`}
+    return [Ab[i][n] for i in range(n)]     # ultima colonna = soluzione`}
             </CodeBlock>
           </Column>
         </Row>
