@@ -174,7 +174,7 @@ class User {
           </Box>
         </Column>
         <Column width="half">
-          <Box color="teal" border="left" title="Optional con Stream (Java 9+)">
+          <Box color="blue" border="left" title="Optional con Stream (Java 9+)">
             <CodeBlock language="java">{`// stream() converte Optional in Stream
 Optional<String> opt = Optional.of("hello");
 opt.stream()

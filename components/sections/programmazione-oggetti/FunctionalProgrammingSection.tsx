@@ -162,7 +162,7 @@ long count = list.stream().count();`}</CodeBlock>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="teal" border="left" title="6. Preferire Espressioni a Statement">
+          <Box color="blue" border="left" title="6. Preferire Espressioni a Statement">
             <p>
               Le espressioni restituiscono un valore, gli statement eseguono
               azioni.
