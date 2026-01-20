@@ -88,6 +88,22 @@ for (Method m : clazz.getDeclaredMethods()) {
         </Column>
       </Row>
 
+      <Box color="gray" border="left" title="@Repeatable (Java 8+)">
+        <p>Permette di applicare la stessa annotation più volte sullo stesso elemento:</p>
+        <CodeBlock language="java">{`// 1. Container per le annotation ripetute
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Roles { Role[] value(); }
+
+// 2. Annotation ripetibile che punta al container
+@Repeatable(Roles.class)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Role { String value(); }
+
+// 3. Uso: più @Role sullo stesso elemento
+@Role("admin") @Role("user")
+public class MyService { ... }`}</CodeBlock>
+      </Box>
+
       <Note>
         Le annotation <code>@Override</code>, <code>@Deprecated</code>,{" "}
         <code>@SuppressWarnings</code> sono built-in. <code>@FunctionalInterface</code>{" "}

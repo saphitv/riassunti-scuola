@@ -474,6 +474,15 @@ body {
   overflow-x: auto;
 }
 
+/* Inline code */
+code {
+  font-family: "Fira Code", "Monaco", "Consolas", monospace;
+  font-size: 0.7em;
+  background: #f3f4f652;
+  padding: 0.1em 0.25em;
+  border-radius: 0.2em;
+}
+
 /* Code block */
 .code-block {
   background: #1e1e1e;

@@ -106,39 +106,6 @@ button.addActionListener(e ->
           </Box>
         </Column>
       </Row>
-
-      <Box color="gray" border="solid" title="Riepilogo">
-        <Row>
-          <Column width="fourth">
-            <p>
-              <strong>Static Nested</strong>
-              <br />
-              No outer instance
-            </p>
-          </Column>
-          <Column width="fourth">
-            <p>
-              <strong>Inner</strong>
-              <br />
-              Accesso a outer instance
-            </p>
-          </Column>
-          <Column width="fourth">
-            <p>
-              <strong>Local</strong>
-              <br />
-              Dentro un metodo
-            </p>
-          </Column>
-          <Column width="fourth">
-            <p>
-              <strong>Anonymous</strong>
-              <br />
-              No nome, usa e getta
-            </p>
-          </Column>
-        </Row>
-      </Box>
     </Section>
   );
 }
