@@ -5,6 +5,8 @@ import {
   AnnotationsSection,
   NestedClassesSection,
   LambdaStreamsSection,
+  OptionalSection,
+  FunctionalProgrammingSection,
 } from "@/components/sections";
 
 export default function ProgrammazioneOggettiPage() {
@@ -16,6 +18,8 @@ export default function ProgrammazioneOggettiPage() {
       <AnnotationsSection />
       <NestedClassesSection />
       <LambdaStreamsSection />
+      <OptionalSection />
+      <FunctionalProgrammingSection />
     </div>
   );
 }
