@@ -528,6 +528,9 @@ body {
 .code-comment { color: #6a9955; font-style: italic; }
 .code-operator { color: #d4d4d4; }
 .code-variable { color: #9cdcfe; }
+.code-annotation { color: #d7ba7d; }
+.code-type { color: #4ec9b0; }
+.code-generic { color: #569cd6; }
 
 .code-line {
   min-height: 1.4em;
