@@ -7,6 +7,7 @@ import {
   LambdaStreamsSection,
   OptionalSection,
   FunctionalProgrammingSection,
+  RecordsSealedSection,
 } from "@/components/sections";
 
 export default function ProgrammazioneOggettiPage() {
@@ -20,6 +21,7 @@ export default function ProgrammazioneOggettiPage() {
       <LambdaStreamsSection />
       <OptionalSection />
       <FunctionalProgrammingSection />
+      <RecordsSealedSection />
     </div>
   );
 }
