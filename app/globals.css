@@ -938,6 +938,11 @@ li {
   padding: var(--box-padding-y) var(--box-padding-x);
 }
 
+.page-compact .box-content p {
+  font-size: 5pt;
+  margin: 0;
+}
+
 .page-compact ul, .page-compact ol {
   margin: 0.15rem 0;
   padding-left: 1rem;
