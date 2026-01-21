@@ -889,12 +889,12 @@ li {
    For resumes that need more space
    ============================================ */
 .page-compact {
-  --font-size-base: 7pt;
-  --font-size-small: 5.5pt;
-  --font-size-h1: 14pt;
-  --font-size-h2: 9pt;
-  --font-size-h3: 7.5pt;
-  --font-size-box-title: 7.5pt;
+  --font-size-base: 6.5pt;
+  --font-size-small: 5pt;
+  --font-size-h1: 13pt;
+  --font-size-h2: 8.5pt;
+  --font-size-h3: 7pt;
+  --font-size-box-title: 7pt;
   --line-height: 1.12;
   --section-gap: 0.35rem;
   --content-gap: 0.15rem;
