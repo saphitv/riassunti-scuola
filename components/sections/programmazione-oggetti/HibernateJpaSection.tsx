@@ -11,39 +11,43 @@ import {
 export function HibernateJpaSection() {
   return (
     <Section title="10. Hibernate & JPA (ORM)">
-      <Definition term="Object-Relational Mapping">
-        Mappa classi ↔ tabelle, oggetti ↔ righe, campi ↔ colonne.{" "}
-        <strong>JPA</strong> = specifica standard (EntityManager, JPQL).{" "}
-        <strong>Hibernate</strong> = implementazione JPA (usa JDBC internamente).
-      </Definition>
+      <Row>
+        <Column width="half">
+          <Definition term="JPA (Java Persistence API)">
+            Specifica standard per ORM: mappa classi ↔ tabelle, oggetti ↔ righe.
+            Usa EntityManager e JPQL.
+          </Definition>
+        </Column>
+        <Column width="half">
+          <Definition term="Hibernate">
+            Implementazione di JPA. Usa JDBC internamente. Aggiunge features
+            come lazy loading e caching.
+          </Definition>
+        </Column>
+      </Row>
 
       <Row>
         <Column width="half">
-          <Box color="blue" border="left" title="Entity & Annotations">
+          <Box color="blue" border="left" title="Entity Annotations">
             <CodeBlock language="java">{`@Entity
-@Table(name = "users") // opzionale
+@Table(name = "users")  // opzionale
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_name") // opzionale
+    @Column(name = "full_name")  // opzionale
     private String name;
 
-    @Transient // NON persistito
+    @Transient  // NON persistito
     private String tempData;
 
-    // Costruttore no-arg OBBLIGATORIO
-    public User() {}
+    public User() {}  // no-arg OBBLIGATORIO
 }`}</CodeBlock>
-            <Note>
-              Usa <code>jakarta.persistence.*</code> (non javax con JPA 3+).
-            </Note>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="green" border="left" title="Relazioni tra Entity">
+          <Box color="green" border="left" title="Relazioni">
             <CodeBlock language="java">{`@Entity
 public class Order {
     @Id @GeneratedValue
@@ -54,85 +58,32 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order")
-    @OrderBy("id asc")
     private List<OrderItem> items;
 }
-
-// Relazioni: @OneToOne, @OneToMany,
-//            @ManyToOne, @ManyToMany`}</CodeBlock>
+// @OneToOne, @OneToMany, @ManyToOne, @ManyToMany`}</CodeBlock>
           </Box>
+          <Note>
+            <strong>Lazy loading</strong> (default): associazioni caricate on-demand.
+            LazyInitializationException se accedi fuori dalla session!
+          </Note>
         </Column>
       </Row>
 
-      <Row>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Field vs Property Access">
-            <p>
-              <strong>Field access:</strong> annotations sui campi (consigliato)
-            </p>
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>JPA usa reflection direttamente</li>
-              <li>Più leggibile, getter/setter opzionali</li>
-              <li>Logica custom nei getter senza interferire</li>
-            </ul>
-            <p style={{ marginTop: "0.5em" }}>
-              <strong>Property access:</strong> annotations sui getter
-            </p>
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>JPA usa getter/setter</li>
-              <li>Meno flessibile</li>
-            </ul>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="red" border="left" title="Requisiti & Gotchas">
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>
-                <strong>Costruttore no-arg</strong> obbligatorio (può essere private)
-              </li>
-              <li>
-                <strong>equals()/hashCode()</strong>: attenzione! Possono rompere
-                collections e identity logic
-              </li>
-              <li>
-                <strong>Lazy loading</strong> (default per associazioni): le
-                reference vengono caricate on-demand
-              </li>
-              <li>
-                Navigare object graph come se fosse in memoria
-              </li>
-            </ul>
-            <Note>
-              LazyInitializationException se accedi a lazy reference fuori dalla session!
-            </Note>
-          </Box>
-        </Column>
-      </Row>
-
-      <Box color="gray" border="left" title="JDBC vs JPA (quando usare cosa)">
+      <Box color="yellow" border="left" title="EntityManager (JPA) vs Spring Data Repository">
         <Row>
           <Column width="half">
-            <p><strong>JDBC diretto:</strong></p>
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>Query SQL complesse/ottimizzate</li>
-              <li>Bulk operations ad alte performance</li>
-              <li>Controllo totale sulle query</li>
-            </ul>
-            <CodeBlock language="java">{`Connection conn = DriverManager.getConnection(url);
-PreparedStatement ps = conn.prepareStatement(sql);
-ResultSet rs = ps.executeQuery();`}</CodeBlock>
+            <CodeBlock language="java">{`// JPA EntityManager (basso livello)
+User u = em.find(User.class, id);
+em.persist(newUser);
+em.merge(updatedUser);
+em.remove(user);`}</CodeBlock>
           </Column>
           <Column width="half">
-            <p><strong>JPA/Hibernate:</strong></p>
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>CRUD standard, modello a oggetti</li>
-              <li>Relazioni e navigazione tra entità</li>
-              <li>Portabilità tra database</li>
-            </ul>
-            <CodeBlock language="java">{`// EntityManager gestisce persistence context
-User user = entityManager.find(User.class, id);
-entityManager.persist(newUser);
-entityManager.merge(updatedUser);`}</CodeBlock>
+            <CodeBlock language="java">{`// Spring Data (preferito, vedi sezione 9)
+User u = repo.findById(id).orElseThrow();
+repo.save(newUser);
+repo.save(updatedUser);  // stesso metodo
+repo.delete(user);`}</CodeBlock>
           </Column>
         </Row>
       </Box>

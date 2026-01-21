@@ -11,138 +11,120 @@ import {
 export function SpringBootSection() {
   return (
     <Section title="9. Spring Boot & Dependency Injection">
-      <Definition term="Spring Framework">
-        Framework Java + IoC container. Gestisce oggetti (&quot;beans&quot;), il loro
-        ciclo di vita e le dipendenze. <strong>Spring Boot</strong> aggiunge
-        convenzioni e auto-configurazione per app standalone production-ready.
-      </Definition>
-
       <Row>
         <Column width="half">
-          <Box color="blue" border="left" title="IoC e Dependency Injection">
-            <p>
-              <strong>IoC:</strong> il container gestisce creazione e wiring degli oggetti.
-            </p>
-            <CodeBlock language="java">{`// BAD: tight coupling
-Item item = new ItemImpl1();
-
-// GOOD: dependency injection
-public class Store {
-    private final Item item;
-
-    // Constructor injection (preferito)
-    @Autowired
-    public Store(Item item) {
-        this.item = item;
-    }
-}`}</CodeBlock>
-            <Note>
-              <strong>ApplicationContext</strong> = interfaccia del container che
-              istanzia, configura e assembla i beans.
-            </Note>
-          </Box>
+          <Definition term="Spring Boot">
+            Framework Java con IoC container che gestisce oggetti (&quot;beans&quot;) e
+            dipendenze. Auto-configurazione, embedded server, no XML.
+          </Definition>
         </Column>
         <Column width="half">
-          <Box color="green" border="left" title="Definire Beans">
-            <CodeBlock language="java">{`// Metodo 1: @Configuration + @Bean
-@Configuration
-public class AppConfig {
-    @Bean
-    public Item item() {
-        return new ItemImpl();
-    }
-}
-
-// Metodo 2: Component scanning
-@Component  // oppure @Service, @Repository
-public class ItemImpl implements Item { }
-
-// Il container inietta automaticamente
-@Autowired
-private Item item;`}</CodeBlock>
-            <Note>
-              Scope default dei beans: <strong>singleton</strong>.
-            </Note>
-          </Box>
+          <Definition term="Dependency Injection">
+            Il container crea e &quot;inietta&quot; le dipendenze automaticamente tramite
+            <code>@Autowired</code> (preferire constructor injection).
+          </Definition>
         </Column>
       </Row>
 
-      <Row>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Spring Boot Features">
-            <ul style={{ margin: 0, paddingLeft: "1.2em" }}>
-              <li>
-                <strong>Embedded server</strong> (Tomcat/Jetty) → no WAR deploy
-              </li>
-              <li>
-                <strong>Starters</strong>: dipendenze pre-configurate
-              </li>
-              <li>
-                <strong>Auto-configuration</strong>: configura Spring + librerie
-              </li>
-              <li>
-                <strong>No XML</strong>: tutto via annotations
-              </li>
-            </ul>
-            <CodeBlock language="bash">{`# Build e run
-mvn package
-java -jar target/app.jar
-# Test
-curl http://localhost:8080/users`}</CodeBlock>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="purple" border="left" title="REST Controller">
-            <CodeBlock language="java">{`@RestController
-@RequestMapping("/users")
-public class UserController {
-
-    @GetMapping
-    public List<User> getAll() {
-        return userService.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getById(
-            @PathVariable Long id) {
-        return ResponseEntity.ok(
-            userService.findById(id));
-    }
-
-    @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.save(user);
-    }
-}`}</CodeBlock>
-          </Box>
-        </Column>
-      </Row>
-
-      <Box color="gray" border="left" title="Stereotype Annotations">
+      <Box color="gray" border="left" title="Architettura MVC: Controller → Service → Repository → Model">
         <Row>
-          <Column width="third">
-            <p>
-              <code>@Component</code>
-              <br />
-              Bean generico gestito dal container
-            </p>
+          <Column width="fourth">
+            <p><strong>Controller</strong></p>
+            <p>Gestisce HTTP request/response. Chiama il Service.</p>
+            <p><code>@RestController</code></p>
           </Column>
-          <Column width="third">
-            <p>
-              <code>@Service</code>
-              <br />
-              Business logic layer
-            </p>
+          <Column width="fourth">
+            <p><strong>Service</strong></p>
+            <p>Business logic. Chiama Repository.</p>
+            <p><code>@Service</code></p>
           </Column>
-          <Column width="third">
-            <p>
-              <code>@Repository</code>
-              <br />
-              Data access layer (+ exception translation)
-            </p>
+          <Column width="fourth">
+            <p><strong>Repository</strong></p>
+            <p>Accesso dati (CRUD). Interfaccia verso DB.</p>
+            <p><code>@Repository</code></p>
+          </Column>
+          <Column width="fourth">
+            <p><strong>Model</strong></p>
+            <p>Entità JPA mappate su tabelle DB.</p>
+            <p><code>@Entity</code></p>
           </Column>
         </Row>
       </Box>
+
+      <Row>
+        <Column width="third">
+          <Box color="blue" border="left" title="Model (Entity)">
+            <CodeBlock language="java">{`@Entity
+public class User {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private String email;
+    // getters, setters
+}`}</CodeBlock>
+          </Box>
+        </Column>
+        <Column width="third">
+          <Box color="green" border="left" title="Repository">
+            <CodeBlock language="java">{`@Repository
+public interface UserRepository
+    extends JpaRepository<User, Long> {
+    // CRUD già incluso!
+    // Query methods automatiche:
+    List<User> findByName(String name);
+    List<User> findByEmailContaining(String s);
+    Optional<User> findByEmail(String email);
+}`}</CodeBlock>
+          </Box>
+        </Column>
+        <Column width="third">
+          <Box color="purple" border="left" title="Controller">
+            <CodeBlock language="java">{`@RestController
+@RequestMapping("/users")
+public class UserController {
+    @Autowired
+    private UserRepository repo;
+
+    @GetMapping
+    public List<User> getAll() {
+        return repo.findAll();
+    }
+    @GetMapping("/{id}")
+    public User get(@PathVariable Long id) {
+        return repo.findById(id).orElseThrow();
+    }
+    @PostMapping
+    public User create(@RequestBody User u) {
+        return repo.save(u);
+    }
+}`}</CodeBlock>
+          </Box>
+        </Column>
+      </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="yellow" border="left" title="JpaRepository metodi built-in">
+            <CodeBlock language="java">{`repo.findAll()              // List<T>
+repo.findById(id)           // Optional<T>
+repo.save(entity)           // T (insert o update)
+repo.deleteById(id)         // void
+repo.existsById(id)         // boolean
+repo.count()                // long`}</CodeBlock>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="red" border="left" title="Query Methods (naming convention)">
+            <CodeBlock language="java">{`findBy<Field>               // WHERE field = ?
+findBy<Field>Containing     // WHERE field LIKE %?%
+findBy<Field>GreaterThan    // WHERE field > ?
+findBy<F1>And<F2>           // WHERE f1 = ? AND f2 = ?
+findBy<Field>OrderBy<F>Desc // ORDER BY f DESC
+countBy<Field>              // COUNT WHERE field = ?`}</CodeBlock>
+          </Box>
+        </Column>
+      </Row>
     </Section>
   );
 }

@@ -27,79 +27,41 @@ export function LambdaStreamsSection() {
       </Row>
 
       <Row>
-        <Column width="half">
+        <Column width="third">
           <Box color="blue" border="left" title="Sintassi Lambda">
-            <CodeBlock language="java">{`// Forma completa
-(Type1 p1, Type2 p2) -> { statements; return x; }
-
-// Tipo inferito
-(p1, p2) -> { statements; return x; }
-
-// Singola espressione (return implicito)
+            <CodeBlock language="java">{`(T1 p1, T2 p2) -> { return x; }
 (p1, p2) -> expression
-
-// Singolo parametro (parentesi opzionali)
 p -> expression
-
-// Nessun parametro
 () -> expression`}</CodeBlock>
           </Box>
+          <Box color="yellow" border="left" title="Method References">
+            <p><code>Class::static</code> ≡ <code>x -&gt; Class.static(x)</code></p>
+            <p><code>obj::method</code> ≡ <code>x -&gt; obj.method(x)</code></p>
+            <p><code>Class::method</code> ≡ <code>o -&gt; o.method()</code></p>
+            <p><code>Class::new</code> ≡ <code>() -&gt; new Class()</code></p>
+          </Box>
         </Column>
-        <Column width="half">
-          <Box color="green" border="left" title="Interfacce funzionali comuni">
-            <CodeBlock language="java">{`// java.util.function
-Predicate<T>    // T -> boolean
-Function<T,R>   // T -> R
-Consumer<T>     // T -> void
-Supplier<T>     // () -> T
+        <Column width="third">
+          <Box color="green" border="left" title="Interfacce funzionali">
+            <CodeBlock language="java">{`Predicate<T>      // T -> boolean
+Function<T,R>     // T -> R
+Consumer<T>       // T -> void
+Supplier<T>       // () -> T
 BiFunction<T,U,R> // (T,U) -> R
 UnaryOperator<T>  // T -> T
-BinaryOperator<T> // (T,T) -> T
-
-// Esempio
-Predicate<String> isEmpty = s -> s.isEmpty();
-Function<String, Integer> len = String::length;`}</CodeBlock>
+BinaryOperator<T> // (T,T) -> T`}</CodeBlock>
           </Box>
         </Column>
-      </Row>
-
-      <Row>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Method References">
-            <CodeBlock language="java">{`// Riferimento a metodo statico
-ClassName::staticMethod
-Math::abs  // x -> Math.abs(x)
-
-// Riferimento a metodo di istanza (su oggetto)
-instance::method
-System.out::println  // x -> System.out.println(x)
-
-// Riferimento a metodo di istanza (su tipo)
-ClassName::instanceMethod
-String::toUpperCase  // s -> s.toUpperCase()
-
-// Riferimento a costruttore
-ClassName::new
-ArrayList::new  // () -> new ArrayList<>()`}</CodeBlock>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="purple" border="left" title="Creazione di Stream">
-            <CodeBlock language="java">{`// Da Collection
-list.stream()
-set.parallelStream()  // parallelo
-
-// Da array
+        <Column width="third">
+          <Box color="purple" border="left" title="Creazione Stream">
+            <CodeBlock language="java">{`list.stream()
+set.parallelStream()
 Arrays.stream(array)
 Stream.of(a, b, c)
-
-// Stream infiniti
-Stream.iterate(0, n -> n + 1)  // 0,1,2,3...
-Stream.generate(Math::random)  // random...
-
-// Range di interi
-IntStream.range(0, 10)      // 0-9
-IntStream.rangeClosed(1, 10) // 1-10`}</CodeBlock>
+Stream.iterate(0, n -> n + 1)
+Stream.generate(Math::random)
+IntStream.range(0, 10)
+IntStream.rangeClosed(1, 10)`}</CodeBlock>
           </Box>
         </Column>
       </Row>
@@ -136,38 +98,24 @@ stream.min(Comparator.naturalOrder());`}</CodeBlock>
 
       <Row>
         <Column width="two-thirds">
-          <Box color="gray" border="left" title="Collectors comuni">
-            <CodeBlock language="java">{`import static java.util.stream.Collectors.*;
-
-// Raccolta in collection
-toList(), toSet(), toCollection(TreeSet::new)
-
-// Joining strings
-joining(", ")  // "a, b, c"
-
-// Raggruppamento
-groupingBy(Person::getCity)  // Map<City, List<Person>>
-groupingBy(Person::getCity, counting())  // Map<City, Long>
-
-// Partizionamento
-partitioningBy(x -> x > 0)  // Map<Boolean, List<T>>
-
-// Statistiche
-summarizingInt(String::length)  // count, sum, min, avg, max`}</CodeBlock>
+          <Box color="gray" border="left" title="Collectors (java.util.stream.Collectors)">
+            <CodeBlock language="java">{`stream.collect(Collectors.toList())              // → List<T>
+stream.collect(Collectors.toSet())               // → Set<T>
+stream.collect(Collectors.joining(", "))         // → "a, b, c"
+stream.collect(Collectors.groupingBy(P::getCity))      // → Map<City, List<P>>
+stream.collect(Collectors.partitioningBy(x -> x > 0))  // → Map<Boolean, List<T>>
+stream.collect(Collectors.summarizingInt(S::length))   // → IntSummaryStatistics`}</CodeBlock>
           </Box>
         </Column>
         <Column width="third">
           <Note>
-            <strong>Lazy evaluation:</strong> le operazioni intermedie non
-            vengono eseguite finché non c&apos;è un&apos;operazione terminale.
+            <strong>Lazy:</strong> operazioni intermedie eseguite solo con operazione terminale.
           </Note>
           <Note>
-            <strong>Short-circuiting:</strong> <code>findFirst</code>,{" "}
-            <code>anyMatch</code>, <code>limit</code> possono terminare senza
-            processare tutto lo stream.
+            <strong>Short-circuit:</strong> <code>findFirst</code>, <code>anyMatch</code>, <code>limit</code> possono terminare prima.
           </Note>
           <Note>
-            Uno stream può essere consumato <strong>una sola volta</strong>.
+            Stream consumabile <strong>una sola volta</strong>.
           </Note>
         </Column>
       </Row>
