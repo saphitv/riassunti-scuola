@@ -17,214 +17,69 @@ export function FunctionalProgrammingSection() {
         effects. Java 8+ supporta elementi funzionali pur rimanendo OOP.
       </Definition>
 
-      <Row>
-        <Column width="half">
-          <Box color="blue" border="left" title="1. Funzioni Pure">
-            <p>
-              Una funzione e <strong>pura</strong> se:
-            </p>
-            <ul style={{ marginLeft: "1rem", marginBottom: "0.5rem" }}>
-              <li>Restituisce sempre lo stesso output per lo stesso input</li>
-              <li>Non ha side effects (no I/O, no modifiche esterne)</li>
-            </ul>
+      <Box color="gray" border="solid" title="Le 6 Regole della Programmazione Funzionale">
+        <Row>
+          <Column width="half">
+            <p><strong>1. Funzioni Pure</strong></p>
+            <p>Stesso input → stesso output, nessun side effect.</p>
             <CodeBlock language="java">{`// PURA: dipende solo dall'input
-int add(int a, int b) {
-    return a + b;
-}
+int add(int a, int b) { return a + b; }
 
 // IMPURA: modifica stato esterno
 int counter = 0;
-int increment() {
-    return ++counter; // side effect!
-}
+int increment() { return ++counter; }`}</CodeBlock>
 
-// IMPURA: dipende da stato esterno
-int addToCounter(int x) {
-    return counter + x; // non deterministica
-}`}</CodeBlock>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="green" border="left" title="2. Immutabilita">
-            <p>
-              I dati <strong>non devono essere modificati</strong> dopo la
-              creazione. Crea nuovi oggetti invece di mutare.
-            </p>
-            <CodeBlock language="java">{`// MUTABILE (da evitare)
-List<String> list = new ArrayList<>();
-list.add("a");  // modifica la lista
+            <p style={{ marginTop: "1rem" }}><strong>2. Immutabilità</strong></p>
+            <p>Non modificare dati esistenti, crea nuovi oggetti.</p>
+            <CodeBlock language="java">{`// Usa List.of(), Set.of(), Map.of()
+List<String> immutable = List.of("a", "b");
 
-// IMMUTABILE (preferito)
-List<String> list1 = List.of("a", "b");
-List<String> list2 = Stream.concat(
-    list1.stream(), Stream.of("c")
-).toList();  // nuova lista
+// record = classe immutabile automatica
+public record Person(String name, int age) {}`}</CodeBlock>
 
-// Classe immutabile
-public record Person(String name, int age) {}
-// record: final, no setter, equals/hashCode auto`}</CodeBlock>
-            <Note>
-              Usa <code>List.of()</code>, <code>Set.of()</code>,{" "}
-              <code>Map.of()</code> per collezioni immutabili.
-            </Note>
-          </Box>
-        </Column>
-      </Row>
-
-      <Row>
-        <Column width="half">
-          <Box color="yellow" border="left" title="3. Evitare Side Effects">
-            <p>I side effects includono:</p>
-            <ul style={{ marginLeft: "1rem", marginBottom: "0.5rem" }}>
-              <li>Modificare variabili esterne</li>
-              <li>I/O (print, file, network)</li>
-              <li>Lanciare eccezioni</li>
-              <li>Modificare parametri passati</li>
-            </ul>
+            <p style={{ marginTop: "1rem" }}><strong>3. Evitare Side Effects</strong></p>
+            <p>No I/O, no modifiche a variabili esterne, no eccezioni.</p>
             <CodeBlock language="java">{`// MALE: side effect nel lambda
 List<String> results = new ArrayList<>();
-stream.forEach(x -> results.add(x)); // MALE!
+stream.forEach(x -> results.add(x));
 
 // BENE: collect senza side effects
-List<String> results = stream
-    .collect(Collectors.toList());
-
-// MALE: modifica parametro
-void addPrefix(List<String> list) {
-    list.replaceAll(s -> "pre_" + s); // muta!
+List<String> results = stream.toList();`}</CodeBlock>
+          </Column>
+          <Column width="half">
+            <p><strong>4. Higher-Order Functions</strong></p>
+            <p>Funzioni che accettano o restituiscono altre funzioni.</p>
+            <CodeBlock language="java">{`// Restituisce una funzione
+Function<Integer, Integer> multiplier(int n) {
+    return x -> x * n;
 }
+multiplier(3).apply(5); // 15
 
-// BENE: ritorna nuova lista
-List<String> addPrefix(List<String> list) {
-    return list.stream()
-        .map(s -> "pre_" + s)
-        .toList();
-}`}</CodeBlock>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="purple" border="left" title="4. Higher-Order Functions">
-            <p>
-              Funzioni che <strong>accettano</strong> o{" "}
-              <strong>restituiscono</strong> altre funzioni.
-            </p>
-            <CodeBlock language="java">{`// Accetta funzione come parametro
-<T, R> List<R> transform(
-    List<T> list,
-    Function<T, R> mapper
-) {
-    return list.stream().map(mapper).toList();
-}
+// Composizione
+Function<String, String> process =
+    String::trim.andThen(String::toUpperCase);`}</CodeBlock>
 
-// Restituisce una funzione
-Function<Integer, Integer> multiplier(int factor) {
-    return x -> x * factor;
-}
-Function<Integer, Integer> triple = multiplier(3);
-triple.apply(5); // 15
+            <p style={{ marginTop: "1rem" }}><strong>5. Effectively Final</strong></p>
+            <p>Lambda catturano solo variabili non riassegnate.</p>
+            <CodeBlock language="java">{`String prefix = "Hello";  // effectively final
+list.stream().map(s -> prefix + s); // OK
 
-// Composizione di funzioni
-Function<String, String> trim = String::trim;
-Function<String, String> upper = String::toUpperCase;
-Function<String, String> process = trim.andThen(upper);
-process.apply("  hello  "); // "HELLO"`}</CodeBlock>
-          </Box>
-        </Column>
-      </Row>
+prefix = "Hi";  // riassegnazione
+list.stream().map(s -> prefix + s); // ERRORE!`}</CodeBlock>
 
-      <Row>
-        <Column width="half">
-          <Box color="red" border="left" title="5. Effectively Final">
-            <p>
-              Le lambda possono catturare solo variabili{" "}
-              <strong>effectively final</strong> (non riassegnate dopo
-              l&apos;inizializzazione).
-            </p>
-            <CodeBlock language="java">{`// OK: variabile effectively final
-String prefix = "Hello";
-list.stream().map(s -> prefix + s);
-
-// ERRORE: variabile riassegnata
-String prefix = "Hello";
-prefix = "Hi";  // riassegnazione!
-list.stream().map(s -> prefix + s); // ERRORE!
-
-// ERRORE: modifica in lambda
-int[] count = {0};  // workaround array
-list.forEach(x -> count[0]++); // MALE!
-
-// BENE: usa reduce o count
-long count = list.stream().count();`}</CodeBlock>
-            <Note>
-              Il compilatore richiede effectively final per garantire thread
-              safety e prevedibilita.
-            </Note>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="blue" border="left" title="6. Preferire Espressioni a Statement">
-            <p>
-              Le espressioni restituiscono un valore, gli statement eseguono
-              azioni.
-            </p>
-            <CodeBlock language="java">{`// STATEMENT (imperativo)
-String result;
-if (condition) {
-    result = "yes";
-} else {
-    result = "no";
-}
-
-// ESPRESSIONE (funzionale)
-String result = condition ? "yes" : "no";
-
-// STATEMENT (loop imperativo)
+            <p style={{ marginTop: "1rem" }}><strong>6. Espressioni &gt; Statement</strong></p>
+            <p>Preferisci map/filter/reduce a loop imperativi.</p>
+            <CodeBlock language="java">{`// Statement (imperativo)
 int sum = 0;
-for (int n : numbers) {
-    sum += n;
-}
+for (int n : numbers) sum += n;
 
-// ESPRESSIONE (reduce)
-int sum = numbers.stream()
-    .reduce(0, Integer::sum);`}</CodeBlock>
-          </Box>
-        </Column>
-      </Row>
-
-      <Box color="gray" border="solid" title="Riepilogo: Le 6 Regole della FP in Java">
-        <Row>
-          <Column width="third">
-            <ol style={{ marginLeft: "1rem" }}>
-              <li>
-                <strong>Funzioni pure</strong>: stesso input = stesso output
-              </li>
-              <li>
-                <strong>Immutabilita</strong>: non mutare, crea nuovi oggetti
-              </li>
-            </ol>
-          </Column>
-          <Column width="third">
-            <ol style={{ marginLeft: "1rem" }} start={3}>
-              <li>
-                <strong>No side effects</strong>: evita I/O e modifiche esterne
-              </li>
-              <li>
-                <strong>Higher-order</strong>: passa/ritorna funzioni
-              </li>
-            </ol>
-          </Column>
-          <Column width="third">
-            <ol style={{ marginLeft: "1rem" }} start={5}>
-              <li>
-                <strong>Effectively final</strong>: no riassegnazioni in lambda
-              </li>
-              <li>
-                <strong>Espressioni</strong>: preferisci map/filter/reduce a
-                loop
-              </li>
-            </ol>
+// Espressione (funzionale)
+int sum = numbers.stream().reduce(0, Integer::sum);`}</CodeBlock>
           </Column>
         </Row>
+        <Note>
+          <strong>Principio guida:</strong> scrivi codice dichiarativo (cosa fare) invece che imperativo (come fare).
+        </Note>
       </Box>
     </Section>
   );

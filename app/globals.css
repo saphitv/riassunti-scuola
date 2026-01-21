@@ -883,3 +883,133 @@ li {
     min-height: 100vh;
   }
 }
+
+/* ============================================
+   COMPACT PAGE VARIANT
+   For resumes that need more space
+   ============================================ */
+.page-compact {
+  --font-size-base: 7pt;
+  --font-size-small: 5.5pt;
+  --font-size-h1: 14pt;
+  --font-size-h2: 9pt;
+  --font-size-h3: 7.5pt;
+  --font-size-box-title: 7.5pt;
+  --line-height: 1.12;
+  --section-gap: 0.35rem;
+  --content-gap: 0.15rem;
+  --box-padding-y: 0.15rem;
+  --box-padding-x: 0.3rem;
+  --example-padding-y: 0.1rem;
+  --example-padding-x: 0.25rem;
+  --table-padding-y: 0.15rem;
+  --table-padding-x: 0.3rem;
+  
+  padding: 8mm 10mm;
+}
+
+.page-compact .header {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.page-compact .section-title {
+  margin-bottom: 0.25rem;
+  padding-bottom: 0.1rem;
+}
+
+.page-compact .box-title {
+  margin-bottom: 0.1rem;
+}
+
+.page-compact .box-content {
+  gap: 0.15rem;
+}
+
+.page-compact .definition {
+  padding: 0.15rem 0;
+}
+
+.page-compact .theorem {
+  margin: 0.1rem 0;
+}
+
+.page-compact .note {
+  padding: var(--box-padding-y) var(--box-padding-x);
+}
+
+.page-compact ul, .page-compact ol {
+  margin: 0.15rem 0;
+  padding-left: 1rem;
+}
+
+.page-compact li {
+  margin-bottom: 0.08rem;
+}
+
+.page-compact .row-gap-sm { gap: 0.3rem; }
+.page-compact .row-gap-md { gap: 0.5rem; }
+.page-compact .row-gap-lg { gap: 0.75rem; }
+
+.page-compact .subsection {
+  margin-top: 0.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.page-compact .subsection-title {
+  margin-bottom: 0.15rem;
+}
+
+/* Compact code blocks */
+.page-compact .code-block {
+  font-size: 5pt;
+  line-height: 1.25;
+}
+
+.page-compact .code-block-header {
+  padding: 0.15rem 0.3rem;
+}
+
+.page-compact .code-block-title {
+  font-size: 5pt;
+}
+
+.page-compact .code-block-language {
+  font-size: 4pt;
+}
+
+.page-compact .code-block-content {
+  padding: 0.2rem 0.3rem;
+}
+
+/* Compact box with minimal styling - just border-left */
+.box-minimal {
+  background: transparent !important;
+  border: none !important;
+  border-left: 2px solid var(--border) !important;
+  padding: var(--box-padding-y) var(--box-padding-x);
+}
+
+.box-minimal.box-blue { border-left-color: var(--box-blue-border) !important; }
+.box-minimal.box-green { border-left-color: var(--box-green-border) !important; }
+.box-minimal.box-red { border-left-color: var(--box-red-border) !important; }
+.box-minimal.box-yellow { border-left-color: var(--box-yellow-border) !important; }
+.box-minimal.box-gray { border-left-color: var(--box-gray-border) !important; }
+.box-minimal.box-purple { border-left-color: var(--box-purple-border) !important; }
+
+@media print {
+  .page-compact {
+    padding: 0;
+  }
+  
+  .page-compact .code-block {
+    font-size: 5pt;
+  }
+  
+  .page-compact .section {
+    page-break-before: avoid;
+    page-break-inside: auto;
+    break-before: avoid;
+    break-inside: auto;
+  }
+}

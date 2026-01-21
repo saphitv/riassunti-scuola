@@ -6,3 +6,5 @@ export { LambdaStreamsSection } from "./LambdaStreamsSection";
 export { OptionalSection } from "./OptionalSection";
 export { FunctionalProgrammingSection } from "./FunctionalProgrammingSection";
 export { RecordsSealedSection } from "./RecordsSealedSection";
+export { SpringBootSection } from "./SpringBootSection";
+export { HibernateJpaSection } from "./HibernateJpaSection";
