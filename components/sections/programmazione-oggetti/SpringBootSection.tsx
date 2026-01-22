@@ -26,6 +26,10 @@ export function SpringBootSection() {
         </Column>
       </Row>
 
+      <Note>
+        <strong>Dipendenze progetto (start.spring.io):</strong> Spring Data JPA, Spring Web, H2 Database
+      </Note>
+
       <Box color="gray" border="left" title="Architettura MVC: Controller → Service → Repository → Model">
         <Row>
           <Column width="fourth">
