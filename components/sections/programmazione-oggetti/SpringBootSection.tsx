@@ -129,6 +129,25 @@ countBy<Field>              // COUNT WHERE field = ?`}</CodeBlock>
           </Box>
         </Column>
       </Row>
+
+      <Box color="gray" border="left" title="ResponseEntity - Status Codes">
+        <CodeBlock language="java">{`@GetMapping("/{id}")
+public ResponseEntity<User> get(@PathVariable Long id) {
+    return repo.findById(id)
+        .map(ResponseEntity::ok)                              // 200 OK
+        .orElse(ResponseEntity.notFound().build());           // 404 Not Found
+}
+
+@PostMapping
+public ResponseEntity<User> create(@RequestBody User u) {
+    if (u.getName() == null)
+        return ResponseEntity.badRequest().build();           // 400 Bad Request
+    User saved = repo.save(u);
+    return ResponseEntity.status(HttpStatus.CREATED).body(saved);  // 201 Created
+}
+
+// Altri: .noContent() (204), .status(HttpStatus.FORBIDDEN) (403)`}</CodeBlock>
+      </Box>
     </Section>
   );
 }
