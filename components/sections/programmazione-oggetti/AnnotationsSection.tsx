@@ -66,6 +66,15 @@ public void testLogin() { ... }`}</CodeBlock>
 @Role("admin") @Role("user")  // uso multiplo
 public class MyService { }`}</CodeBlock>
           </Box>
+          <Box color="gray" border="left" title="Reflection per @Repeatable">
+            <CodeBlock language="java">{`// getAnnotationsByType → array diretto
+Role[] roles = clazz.getAnnotationsByType(Role.class);
+for (Role r : roles) System.out.println(r.value());
+
+// oppure via container
+Roles container = clazz.getAnnotation(Roles.class);
+if (container != null) { /* container.value() */ }`}</CodeBlock>
+          </Box>
         </Column>
       </Row>
 
