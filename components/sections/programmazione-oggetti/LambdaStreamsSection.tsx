@@ -34,12 +34,6 @@ export function LambdaStreamsSection() {
 p -> expression
 () -> expression`}</CodeBlock>
           </Box>
-          <Box color="yellow" border="left" title="Method References">
-            <p><code>Class::static</code> ≡ <code>x -&gt; Class.static(x)</code></p>
-            <p><code>obj::method</code> ≡ <code>x -&gt; obj.method(x)</code></p>
-            <p><code>Class::method</code> ≡ <code>o -&gt; o.method()</code></p>
-            <p><code>Class::new</code> ≡ <code>() -&gt; new Class()</code></p>
-          </Box>
         </Column>
         <Column width="third">
           <Box color="green" border="left" title="Interfacce funzionali">
@@ -104,7 +98,17 @@ stream.collect(Collectors.toSet())               // → Set<T>
 stream.collect(Collectors.joining(", "))         // → "a, b, c"
 stream.collect(Collectors.groupingBy(P::getCity))      // → Map<City, List<P>>
 stream.collect(Collectors.partitioningBy(x -> x > 0))  // → Map<Boolean, List<T>>
-stream.collect(Collectors.summarizingInt(S::length))   // → IntSummaryStatistics`}</CodeBlock>
+stream.collect(Collectors.summarizingInt(S::length))   // → IntSummaryStatistics
+// groupingBy con downstream collector:
+words.collect(Collectors.groupingBy(String::length, Collectors.counting()))  // → Map<Int, Long>`}</CodeBlock>
+          </Box>
+          <Box color="yellow" border="left" title="Esempio: conteggio caratteri ordinato">
+            <CodeBlock language="java">{`words.stream()
+    .flatMapToInt(String::chars).boxed()
+    .collect(Collectors.groupingBy(ch -> ch, Collectors.counting()))
+    .entrySet().stream()
+    .sorted(Map.Entry.comparingByValue())
+    .forEach(e -> System.out.printf("%c: %d%n", (char)(int)e.getKey(), e.getValue()));`}</CodeBlock>
           </Box>
         </Column>
         <Column width="third">
