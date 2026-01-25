@@ -1027,15 +1027,21 @@ li {
   .page-compact {
     padding: 0;
   }
-  
+
   .page-compact .code-block {
     font-size: 5pt;
   }
-  
-  .page-compact .section {
-    page-break-before: avoid;
+
+  /* Allow all content to break across pages in compact mode */
+  .page-compact .section,
+  /* .page-compact .box, */
+  .page-compact .code-block,
+  .page-compact .note,
+  .page-compact .example,
+  .page-compact .theorem,
+  .page-compact .definition,
+  .page-compact .formula-table {
     page-break-inside: auto;
-    break-before: avoid;
     break-inside: auto;
   }
 }

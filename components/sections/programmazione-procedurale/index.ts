@@ -10,3 +10,5 @@ export { PuntatoriSection } from "./PuntatoriSection";
 export { StaticFunzioniSection } from "./StaticFunzioniSection";
 export { TempoSection } from "./TempoSection";
 export { StruttureDatiSection } from "./StruttureDatiSection";
+export { OperatoriBitSection } from "./OperatoriBitSection";
+export { ModularizzazioneSection } from "./ModularizzazioneSection";

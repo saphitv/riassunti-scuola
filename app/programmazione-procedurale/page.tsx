@@ -12,11 +12,13 @@ import {
   StaticFunzioniSection,
   TempoSection,
   StruttureDatiSection,
+  OperatoriBitSection,
+  ModularizzazioneSection,
 } from "@/components/sections/programmazione-procedurale";
 
 export default function ProgrammazioneProceduralePage() {
   return (
-    <div className="page">
+    <div className="page page-compact">
       <CourseHeader title="Programmazione Procedurale" />
       <IncludesSection />
       <MacroSection />
@@ -30,6 +32,8 @@ export default function ProgrammazioneProceduralePage() {
       <StaticFunzioniSection />
       <TempoSection />
       <StruttureDatiSection />
+      <OperatoriBitSection />
+      <ModularizzazioneSection />
     </div>
   );
 }
