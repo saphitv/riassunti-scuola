@@ -672,6 +672,25 @@ li {
   margin-bottom: 0.15rem;
 }
 
+/* Reference list - compact for specifiers/quick reference */
+.ref-list {
+  margin: 0.15rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ref-list li {
+  margin-bottom: 0.1rem;
+  display: flex;
+  gap: 0.3rem;
+  align-items: baseline;
+}
+
+.ref-list li code {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
 /* ============================================
    PRINT STYLES
    ============================================ */

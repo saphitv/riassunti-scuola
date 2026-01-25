@@ -4,39 +4,39 @@ export function TempoSection() {
   return (
     <Section title="10. Gestione del Tempo">
       <Row>
-        <Column width="half">
+        <Column width="third">
           <Box color="blue" border="left" title="struct tm">
-            <CodeBlock language="c">{`struct tm {
-    int tm_sec;   // secondi [0..59]
-    int tm_min;   // minuti [0..59]
-    int tm_hour;  // ore [0..23]
-    int tm_mday;  // giorno del mese [1..31]
-    int tm_mon;   // mesi da gennaio [0..11]
-    int tm_year;  // anni dal 1900
-    int tm_wday;  // giorni da domenica [0..6]
-    int tm_yday;  // giorni dal 1 gen [0..365]
-    int tm_isdst; // ora legale
-};`}</CodeBlock>
+            <ul className="ref-list">
+              <li><code>tm_sec</code> [0..59]</li>
+              <li><code>tm_min</code> [0..59]</li>
+              <li><code>tm_hour</code> [0..23]</li>
+              <li><code>tm_mday</code> giorno [1..31]</li>
+              <li><code>tm_mon</code> mese [0..11]</li>
+              <li><code>tm_year</code> anni dal 1900</li>
+              <li><code>tm_wday</code> giorno sett [0..6]</li>
+            </ul>
           </Box>
         </Column>
-        <Column width="half">
+        <Column width="third">
           <Box color="green" border="left" title="Funzioni time.h">
-            <CodeBlock language="c">{`time_t time(time_t *t)    // tempo corrente
-char *ctime(time_t *t)    // stringa leggibile
-clock_t clock(void)       // clock CPU
-double difftime(t2, t1)   // differenza in sec
-
-// Conversioni
-struct tm *gmtime(time_t *t)    // UTC
-struct tm *localtime(time_t *t) // locale
-time_t mktime(struct tm *t)     // tm -> time_t`}</CodeBlock>
+            <ul className="ref-list">
+              <li><code>time(NULL)</code> tempo corrente</li>
+              <li><code>ctime(&t)</code> stringa leggibile</li>
+              <li><code>difftime(t2, t1)</code> diff in sec</li>
+              <li><code>gmtime(&t)</code> → tm* UTC</li>
+              <li><code>localtime(&t)</code> → tm* locale</li>
+              <li><code>mktime(&tm)</code> → time_t</li>
+            </ul>
           </Box>
-          <Box color="yellow" border="left" title="Esempio d'uso">
-            <CodeBlock language="c">{`struct tm *ptr;
-time_t lTime = time(NULL);
-ptr = localtime(&lTime);
+        </Column>
+        <Column width="third">
+          <Box color="yellow" border="left" title="Esempio">
+            <CodeBlock language="c">{`time_t t = time(NULL);
+struct tm *ptr = localtime(&t);
 printf("%d:%d:%d\\n",
-    ptr->tm_hour, ptr->tm_min, ptr->tm_sec);`}</CodeBlock>
+  ptr->tm_hour,
+  ptr->tm_min,
+  ptr->tm_sec);`}</CodeBlock>
           </Box>
         </Column>
       </Row>

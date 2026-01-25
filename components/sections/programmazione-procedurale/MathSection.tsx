@@ -6,15 +6,17 @@ export function MathSection() {
       <Row>
         <Column width="half">
           <Box color="blue" border="left" title="math.h">
-            <CodeBlock language="c">{`sin(x), cos(x), tan(x)
-exp(x)              // e^x
-log(x)              // ln(x)
-log10(x)            // log base 10
-pow(x, y)           // x^y
-sqrt(x)             // radice quadrata
-ceil(x)             // arrotonda per eccesso
-floor(x)            // arrotonda per difetto
-fabs(x)             // valore assoluto (double)`}</CodeBlock>
+            <ul className="ref-list">
+              <li><code>sin(x)</code>, <code>cos(x)</code>, <code>tan(x)</code></li>
+              <li><code>exp(x)</code> e^x</li>
+              <li><code>log(x)</code> ln(x)</li>
+              <li><code>log10(x)</code> log base 10</li>
+              <li><code>pow(x, y)</code> x^y</li>
+              <li><code>sqrt(x)</code> radice quadrata</li>
+              <li><code>ceil(x)</code> arrotonda per eccesso</li>
+              <li><code>floor(x)</code> arrotonda per difetto</li>
+              <li><code>fabs(x)</code> valore assoluto</li>
+            </ul>
           </Box>
         </Column>
         <Column width="half">
@@ -22,12 +24,8 @@ fabs(x)             // valore assoluto (double)`}</CodeBlock>
             <CodeBlock language="c">{`#include <stdlib.h>
 #include <time.h>
 
-// Inizializza il seed
-srand(time(NULL));
-
-// Genera numero casuale
-int n = rand() % MAX_NUM + 1;
-// Genera tra 0 e MAX_NUM incluso`}</CodeBlock>
+srand(time(NULL));  // init seed
+int n = rand() % MAX + 1;  // [1, MAX]`}</CodeBlock>
           </Box>
         </Column>
       </Row>

@@ -1,34 +1,36 @@
-import { Section, Row, Column, Box, Note, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, CodeBlock } from "@/components";
 
 export function ConversioniSection() {
   return (
     <Section title="6. Conversioni di Tipo">
       <Row>
-        <Column width="half">
-          <Box color="blue" border="left" title="Funzioni semplici">
-            <CodeBlock language="c">{`// stdlib.h - meno controllo sugli errori
-int atoi(const char *str)     // stringa -> int
-double atof(const char *str)  // stringa -> double
-long atol(const char *str)    // stringa -> long`}</CodeBlock>
+        <Column width="third">
+          <Box color="blue" border="left" title="Semplici (stdlib.h)">
+            <ul className="ref-list">
+              <li><code>atoi(str)</code> str → int</li>
+              <li><code>atof(str)</code> str → double</li>
+              <li><code>atol(str)</code> str → long</li>
+            </ul>
           </Box>
         </Column>
-        <Column width="half">
-          <Box color="green" border="left" title="Funzioni avanzate">
-            <CodeBlock language="c">{`// Con controllo errori (endptr = primo char non valido)
-double strtod(str, &endptr)
-float strtof(str, &endptr)
-long strtol(str, &endptr, base)
-
-// base: 10 decimale, 16 hex, 0 auto-detect`}</CodeBlock>
+        <Column width="third">
+          <Box color="green" border="left" title="Con controllo errori">
+            <ul className="ref-list">
+              <li><code>strtod(str, &end)</code></li>
+              <li><code>strtof(str, &end)</code></li>
+              <li><code>strtol(str, &end, base)</code></li>
+            </ul>
+            <p style={{fontSize: "5pt"}}>base: 10=dec, 16=hex, 0=auto</p>
+          </Box>
+        </Column>
+        <Column width="third">
+          <Box color="gray" border="left" title="Casting esplicito">
+            <CodeBlock language="c">{`int a = 5, b = 2;
+double r = (double)a / b;
+// 2.5 invece di 2`}</CodeBlock>
           </Box>
         </Column>
       </Row>
-      <Box color="gray" border="left" title="Casting esplicito">
-        <CodeBlock language="c">{`(tipo) espressione
-
-int a = 5, b = 2;
-double result = (double)a / b;  // 2.5 invece di 2`}</CodeBlock>
-      </Box>
     </Section>
   );
 }

@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, Note, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, CodeBlock } from "@/components";
 
 export function PuntatoriSection() {
   return (

@@ -1,35 +1,34 @@
-import { Section, Row, Column, Box, Note, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, CodeBlock } from "@/components";
 
 export function IoSection() {
   return (
     <Section title="3. Input/Output">
       <Row>
         <Column width="half">
-          <Box color="blue" border="left" title="I/O da terminale">
-            <CodeBlock language="c">{`// Lettura da file (./a.out <input.txt >output.txt)
-while((c = getchar()) != EOF) {
-    putchar(c);
-}
-
-// Lettura stringhe
-char stringa[100];
-printf("Introdurre una stringa: ");
-fgets(stringa, 100, stdin);
-puts(stringa);`}</CodeBlock>
+          <Box color="blue" border="left" title="Funzioni I/O">
+            <ul className="ref-list">
+              <li><code>getchar()</code> legge un carattere</li>
+              <li><code>putchar(c)</code> stampa un carattere</li>
+              <li><code>puts(s)</code> stampa stringa + newline</li>
+              <li><code>fgets(s, n, fp)</code> legge max n-1 char</li>
+              <li><code>fputs(s, fp)</code> scrive stringa su file</li>
+            </ul>
+          </Box>
+          <Box color="green" border="left" title="File">
+            <CodeBlock language="c">{`FILE *fp = fopen("file.txt", "r");
+// Modi: "r" read, "w" write, "a" append
+fclose(fp);`}</CodeBlock>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="green" border="left" title="Funzioni I/O">
-            <CodeBlock language="c">{`getchar()        // legge un carattere
-putchar(c)       // stampa un carattere
-gets(s)          // DEPRECATO - usa fgets
-puts(s)          // stampa stringa + newline
-fgets(s, n, fp)  // legge max n-1 char
-fputs(s, fp)     // scrive stringa su file
+          <Box color="yellow" border="left" title="Esempi">
+            <CodeBlock language="c">{`// Redirezione: ./a.out <in.txt >out.txt
+while((c = getchar()) != EOF)
+    putchar(c);
 
-// File
-FILE *fp = fopen("file.txt", "r");
-fclose(fp);`}</CodeBlock>
+// Lettura stringhe
+char str[100];
+fgets(str, 100, stdin);`}</CodeBlock>
           </Box>
         </Column>
       </Row>
