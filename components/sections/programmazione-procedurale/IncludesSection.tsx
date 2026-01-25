@@ -14,7 +14,8 @@ export function IncludesSection() {
 #include <time.h>     // time_t, struct tm
 #include <ctype.h>    // isalnum, toupper...
 #include <limits.h>   // INT_MAX, INT_MIN
-#include <float.h>    // FLT_MAX, DBL_MAX`}</CodeBlock>
+#include <float.h>    // FLT_MAX, DBL_MAX
+`}</CodeBlock>
           </Box>
         </Column>
         <Column width="half">

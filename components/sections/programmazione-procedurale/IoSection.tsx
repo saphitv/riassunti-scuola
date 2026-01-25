@@ -30,6 +30,17 @@ export function IoSection() {
             <CodeBlock language="c">{`puts(buf)  <=> printf("%s\\n", buf)
 fputs(buf, stdout) <=> printf("%s", buf)`}</CodeBlock>
           </Box>
+          <Box color="purple" border="left" title="errno - Codice errore">
+            <CodeBlock language="c">{`#include <errno.h>
+
+FILE *f = fopen("file.txt", "r");
+if (f == NULL) {
+    perror("Errore");  // stampa messaggio
+    printf("Codice: %d\\n", errno);
+}
+// Controllare errno SUBITO dopo l'errore
+// Codici: ENOENT, ENOMEM, EACCES`}</CodeBlock>
+          </Box>
         </Column>
         <Column width="half">
           <Box color="yellow" border="left" title="Apertura/chiusura e controllo">
