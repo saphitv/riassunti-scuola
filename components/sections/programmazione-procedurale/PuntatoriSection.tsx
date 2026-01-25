@@ -23,17 +23,21 @@ char *table[3] = {"Blame", "Semicolon", "Dot"};`}</CodeBlock>
         </Column>
         <Column width="half">
           <Box color="yellow" border="left" title="Allocazione dinamica">
-            <CodeBlock language="c">{`// Alloca memoria nello heap
-char *str = malloc(20 * sizeof(char));
+            <CodeBlock language="c">{`#include <stdlib.h> // malloc, calloc, realloc, free
+
+// malloc: alloca memoria NON inizializzata
+int *p = malloc(5 * sizeof(int)); // valori spazzatura
+
+// calloc: alloca E inizializza a zero
+int *q = calloc(5, sizeof(int));  // tutti 0
+
+// realloc: ridimensiona memoria esistente
+p = realloc(p, 10 * sizeof(int));
 
 // Sempre controllare NULL
-if (str == NULL) { /* errore */ }
+if (p == NULL) { /* errore */ }
 
-// Ridimensiona memoria esistente
-str = realloc(str, 40 * sizeof(char));
-
-// Libera memoria
-free(str);`}</CodeBlock>
+free(p); // libera memoria`}</CodeBlock>
           </Box>
           <Box color="red" border="left" title="qsort">
             <CodeBlock language="c">{`int compare(const void *a, const void *b) {

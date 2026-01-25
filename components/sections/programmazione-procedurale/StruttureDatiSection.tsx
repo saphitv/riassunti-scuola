@@ -127,7 +127,7 @@ void inOrder(NodoAlbero *root) {
       </Row>
       <Row>
         <Column width="half">
-          <Box color="red" border="left" title="Hash Table - Chaining (Closed)">
+          <Box color="red" border="left" title="Hash Table - Chaining (Open)">
             <CodeBlock language="c">{`#define SIZE 10
 Nodo *table[SIZE]; // array di liste
 
@@ -151,7 +151,7 @@ Nodo *search(int key) {
           </Box>
         </Column>
         <Column width="half">
-          <Box color="gray" border="left" title="Hash Table - Open Addressing">
+          <Box color="gray" border="left" title="Hash Table - Open Addressing (Closed)">
             <CodeBlock language="c">{`int table[SIZE];
 int occupied[SIZE] = {0};
 
