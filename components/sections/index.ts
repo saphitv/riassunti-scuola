@@ -6,3 +6,6 @@ export * from "./numerica";
 
 // Programmazione a Oggetti sections
 export * from "./programmazione-oggetti";
+
+// Programmazione Procedurale sections
+export * from "./programmazione-procedurale";

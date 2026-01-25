@@ -2,8 +2,9 @@ import Link from "next/link";
 
 const courses = [
   { slug: "analisi-2", name: "Analisi 2", description: "Integrali, curve, equazioni differenziali" },
-  { slug: "numerica", name: "Numerica", description: "Coming soon" },
+  { slug: "numerica", name: "Numerica", description: "Zeri di funzione, sistemi lineari" },
   { slug: "programmazione-oggetti", name: "Programmazione a Oggetti", description: "Generics, Reflection, Annotations, Nested Classes" },
+  { slug: "programmazione-procedurale", name: "Programmazione Procedurale", description: "Stringhe, Puntatori, Struct, I/O, Tempo" },
 ];
 
 export default function Home() {

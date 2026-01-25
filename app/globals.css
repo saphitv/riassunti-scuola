@@ -540,6 +540,8 @@ code {
 .code-annotation { color: #d7ba7d; }
 .code-type { color: #4ec9b0; }
 .code-generic { color: #569cd6; }
+.code-preprocessor { color: #c586c0; }
+.code-constant { color: #4fc1ff; }
 
 .code-line {
   min-height: 1.4em;
