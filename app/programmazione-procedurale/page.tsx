@@ -1,6 +1,7 @@
 import { CourseHeader } from "@/components";
 import {
   IncludesSection,
+  MacroSection,
   FormattazioneSection,
   IoSection,
   MathSection,
@@ -10,6 +11,7 @@ import {
   PuntatoriSection,
   StaticFunzioniSection,
   TempoSection,
+  StruttureDatiSection,
 } from "@/components/sections/programmazione-procedurale";
 
 export default function ProgrammazioneProceduralePage() {
@@ -17,6 +19,7 @@ export default function ProgrammazioneProceduralePage() {
     <div className="page">
       <CourseHeader title="Programmazione Procedurale" />
       <IncludesSection />
+      <MacroSection />
       <FormattazioneSection />
       <IoSection />
       <MathSection />
@@ -26,6 +29,7 @@ export default function ProgrammazioneProceduralePage() {
       <PuntatoriSection />
       <StaticFunzioniSection />
       <TempoSection />
+      <StruttureDatiSection />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 export { IncludesSection } from "./IncludesSection";
+export { MacroSection } from "./MacroSection";
 export { FormattazioneSection } from "./FormattazioneSection";
 export { IoSection } from "./IoSection";
 export { MathSection } from "./MathSection";
@@ -8,3 +9,4 @@ export { StructUnionSection } from "./StructUnionSection";
 export { PuntatoriSection } from "./PuntatoriSection";
 export { StaticFunzioniSection } from "./StaticFunzioniSection";
 export { TempoSection } from "./TempoSection";
+export { StruttureDatiSection } from "./StruttureDatiSection";

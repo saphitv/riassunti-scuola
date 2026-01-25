@@ -27,9 +27,10 @@ char *table[3] = {"Blame", "Semicolon", "Dot"};`}</CodeBlock>
 char *str = malloc(20 * sizeof(char));
 
 // Sempre controllare NULL
-if (str == NULL) {
-    // gestisci errore
-}
+if (str == NULL) { /* errore */ }
+
+// Ridimensiona memoria esistente
+str = realloc(str, 40 * sizeof(char));
 
 // Libera memoria
 free(str);`}</CodeBlock>
