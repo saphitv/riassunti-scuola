@@ -30,6 +30,12 @@ export function IoSection() {
             <CodeBlock language="c">{`puts(buf)  <=> printf("%s\\n", buf)
 fputs(buf, stdout) <=> printf("%s", buf)`}</CodeBlock>
           </Box>
+          <Box color="red" border="left" title="getline - Lettura stringhe">
+            <CodeBlock language="c">{`char *line = NULL; size_t len = 0;
+getline(&line, &len, stdin);
+// alloca/rialloca automaticamente
+free(line);`}</CodeBlock>
+          </Box>
           <Box color="purple" border="left" title="errno - Codice errore">
             <CodeBlock language="c">{`#include <errno.h>
 
