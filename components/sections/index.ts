@@ -6,3 +6,6 @@ export * from "./numerica";
 
 // Programmazione a Oggetti sections
 export * from "./programmazione-oggetti";
+
+// Probabilita e Statistica sections
+export * from "./probabilita-e-statistica";
