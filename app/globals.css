@@ -540,6 +540,8 @@ code {
 .code-annotation { color: #d7ba7d; }
 .code-type { color: #4ec9b0; }
 .code-generic { color: #569cd6; }
+.code-preprocessor { color: #c586c0; }
+.code-constant { color: #4fc1ff; }
 
 .code-line {
   min-height: 1.4em;
@@ -668,6 +670,25 @@ ul, ol {
 
 li {
   margin-bottom: 0.15rem;
+}
+
+/* Reference list - compact for specifiers/quick reference */
+.ref-list {
+  margin: 0.15rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ref-list li {
+  margin-bottom: 0.1rem;
+  display: flex;
+  gap: 0.3rem;
+  align-items: baseline;
+}
+
+.ref-list li code {
+  flex-shrink: 0;
+  font-weight: 600;
 }
 
 /* ============================================
@@ -1006,15 +1027,21 @@ li {
   .page-compact {
     padding: 0;
   }
-  
+
   .page-compact .code-block {
     font-size: 5pt;
   }
-  
-  .page-compact .section {
-    page-break-before: avoid;
+
+  /* Allow all content to break across pages in compact mode */
+  .page-compact .section,
+  /* .page-compact .box, */
+  .page-compact .code-block,
+  .page-compact .note,
+  .page-compact .example,
+  .page-compact .theorem,
+  .page-compact .definition,
+  .page-compact .formula-table {
     page-break-inside: auto;
-    break-before: avoid;
     break-inside: auto;
   }
 }

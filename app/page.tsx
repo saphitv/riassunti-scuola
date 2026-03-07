@@ -5,6 +5,7 @@ const courses = [
   { slug: "numerica", name: "Numerica (Semestre 1)", description: "Trovare zeri di funzioni, sistemi lineari" },
   { slug: "programmazione-oggetti", name: "Programmazione a Oggetti", description: "Generics, Reflection, Annotations, Nested Classes" },
   { slug: "probabilita-e-statistica", name: "Probabilita e Statistica", description: "Eventi, probabilita condizionata, Bayes, indipendenza" },
+  { slug: "programmazione-procedurale", name: "Programmazione Procedurale", description: "Stringhe, Puntatori, Struct, I/O, Tempo" },
 ];
 
 export default function Home() {

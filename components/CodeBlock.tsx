@@ -196,6 +196,202 @@ function highlightJava(code: string): React.ReactElement[] {
   return elements;
 }
 
+function highlightC(code: string): React.ReactElement[] {
+  const keywords = [
+    "auto", "break", "case", "char", "const", "continue", "default", "do",
+    "double", "else", "enum", "extern", "float", "for", "goto", "if",
+    "inline", "int", "long", "register", "restrict", "return", "short",
+    "signed", "sizeof", "static", "struct", "switch", "typedef", "union",
+    "unsigned", "void", "volatile", "while", "NULL", "true", "false",
+  ];
+
+  const builtins = [
+    "printf", "scanf", "fprintf", "fscanf", "sprintf", "sscanf",
+    "fgets", "fputs", "puts", "gets", "fopen", "fclose", "fread", "fwrite",
+    "malloc", "calloc", "realloc", "free", "sizeof",
+    "strlen", "strcpy", "strncpy", "strcat", "strncat", "strcmp", "strncmp",
+    "strchr", "strrchr", "strstr", "strspn", "strcspn", "strpbrk", "strtok",
+    "atoi", "atof", "atol", "strtod", "strtof", "strtol",
+    "sin", "cos", "tan", "exp", "log", "log10", "pow", "sqrt", "ceil", "floor", "fabs",
+    "srand", "rand", "time", "clock", "difftime", "mktime", "localtime", "gmtime",
+    "ctime", "asctime", "getchar", "putchar", "qsort", "bsearch", "memcpy", "memset",
+    "EOF", "stdin", "stdout", "stderr", "FILE", "size_t", "time_t", "clock_t",
+  ];
+
+  const preprocessor = ["include", "define", "ifdef", "ifndef", "endif", "pragma", "undef"];
+
+  const lines = code.split("\n");
+  const elements: React.ReactElement[] = [];
+
+  lines.forEach((line, lineIndex) => {
+    const tokens: React.ReactElement[] = [];
+    let i = 0;
+    let tokenKey = 0;
+
+    while (i < line.length) {
+      // Preprocessor directives
+      if (line[i] === "#") {
+        let j = i + 1;
+        while (j < line.length && /\s/.test(line[j])) j++;
+        let k = j;
+        while (k < line.length && /\w/.test(line[k])) k++;
+        const directive = line.slice(j, k);
+        if (preprocessor.includes(directive)) {
+          tokens.push(
+            <span key={tokenKey++} className="code-preprocessor">
+              {line.slice(i)}
+            </span>
+          );
+          break;
+        }
+      }
+
+      // Single-line comments
+      if (line[i] === "/" && line[i + 1] === "/") {
+        tokens.push(
+          <span key={tokenKey++} className="code-comment">
+            {line.slice(i)}
+          </span>
+        );
+        break;
+      }
+
+      // Multi-line comment start (simplified - only handles single line)
+      if (line[i] === "/" && line[i + 1] === "*") {
+        const endIndex = line.indexOf("*/", i + 2);
+        if (endIndex !== -1) {
+          tokens.push(
+            <span key={tokenKey++} className="code-comment">
+              {line.slice(i, endIndex + 2)}
+            </span>
+          );
+          i = endIndex + 2;
+          continue;
+        } else {
+          tokens.push(
+            <span key={tokenKey++} className="code-comment">
+              {line.slice(i)}
+            </span>
+          );
+          break;
+        }
+      }
+
+      // Strings (double quotes)
+      if (line[i] === '"') {
+        let j = i + 1;
+        while (j < line.length && line[j] !== '"') {
+          if (line[j] === "\\") j++;
+          j++;
+        }
+        tokens.push(
+          <span key={tokenKey++} className="code-string">
+            {line.slice(i, j + 1)}
+          </span>
+        );
+        i = j + 1;
+        continue;
+      }
+
+      // Characters (single quotes)
+      if (line[i] === "'") {
+        let j = i + 1;
+        while (j < line.length && line[j] !== "'") {
+          if (line[j] === "\\") j++;
+          j++;
+        }
+        tokens.push(
+          <span key={tokenKey++} className="code-string">
+            {line.slice(i, j + 1)}
+          </span>
+        );
+        i = j + 1;
+        continue;
+      }
+
+      // Numbers
+      if (/\d/.test(line[i]) && (i === 0 || !/\w/.test(line[i - 1]))) {
+        let j = i;
+        while (j < line.length && /[\d.xXaAbBcCdDeEfFlLuU]/.test(line[j])) j++;
+        tokens.push(
+          <span key={tokenKey++} className="code-number">
+            {line.slice(i, j)}
+          </span>
+        );
+        i = j;
+        continue;
+      }
+
+      // Words (keywords, builtins, identifiers)
+      if (/[a-zA-Z_]/.test(line[i])) {
+        let j = i;
+        while (j < line.length && /\w/.test(line[j])) j++;
+        const word = line.slice(i, j);
+
+        if (keywords.includes(word)) {
+          tokens.push(
+            <span key={tokenKey++} className="code-keyword">
+              {word}
+            </span>
+          );
+        } else if (builtins.includes(word)) {
+          tokens.push(
+            <span key={tokenKey++} className="code-builtin">
+              {word}
+            </span>
+          );
+        } else if (j < line.length && line[j] === "(") {
+          tokens.push(
+            <span key={tokenKey++} className="code-function">
+              {word}
+            </span>
+          );
+        } else if (/^[A-Z_][A-Z_0-9]*$/.test(word)) {
+          tokens.push(
+            <span key={tokenKey++} className="code-constant">
+              {word}
+            </span>
+          );
+        } else {
+          tokens.push(
+            <span key={tokenKey++} className="code-variable">
+              {word}
+            </span>
+          );
+        }
+        i = j;
+        continue;
+      }
+
+      // Operators and punctuation
+      if (/[+\-*/%=<>!&|^~:,()[\]{}.]/.test(line[i])) {
+        let j = i;
+        while (j < line.length && /[+\-*/%=<>!&|^~]/.test(line[j])) j++;
+        if (j === i) j++;
+        tokens.push(
+          <span key={tokenKey++} className="code-operator">
+            {line.slice(i, j)}
+          </span>
+        );
+        i = j;
+        continue;
+      }
+
+      // Whitespace and other characters
+      tokens.push(<span key={tokenKey++}>{line[i]}</span>);
+      i++;
+    }
+
+    elements.push(
+      <div key={lineIndex} className="code-line">
+        {tokens.length > 0 ? tokens : " "}
+      </div>
+    );
+  });
+
+  return elements;
+}
+
 function highlightPython(code: string): React.ReactElement[] {
   const keywords = [
     "def",
@@ -351,7 +547,9 @@ export function CodeBlock({
       ? highlightPython(children)
       : language === "java"
         ? highlightJava(children)
-        : null;
+        : language === "c"
+          ? highlightC(children)
+          : null;
 
   return (
     <div className="code-block">

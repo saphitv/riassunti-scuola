@@ -9,3 +9,6 @@ export * from "./programmazione-oggetti";
 
 // Probabilita e Statistica sections
 export * from "./probabilita-e-statistica";
+
+// Programmazione Procedurale sections
+export * from "./programmazione-procedurale";
