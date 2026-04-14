@@ -11,6 +11,10 @@ const crimsonPro = Crimson_Pro({
 export const metadata: Metadata = {
   title: "Appunti",
   description: "Appunti per gli esami universitari",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
