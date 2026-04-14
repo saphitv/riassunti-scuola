@@ -68,6 +68,11 @@ body {
   font-family: var(--font-crimson), Georgia, "Times New Roman", serif;
   font-size: var(--font-size-base);
   line-height: var(--line-height);
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 }
 
 /* Page container */
