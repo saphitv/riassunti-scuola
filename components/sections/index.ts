@@ -12,3 +12,6 @@ export * from "./probabilita-e-statistica";
 
 // Programmazione Procedurale sections
 export * from "./programmazione-procedurale";
+
+// Microcontrollori sections
+export * from "./microcontrollori";
