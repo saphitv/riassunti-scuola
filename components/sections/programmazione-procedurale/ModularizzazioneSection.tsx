@@ -90,7 +90,7 @@ int pop(Stack *);
 int top(Stack *);
 void initStack(Stack *);`}</CodeBlock>
             <Note>
-              Struct nell'header permette istanze multiple
+              Struct nell&apos;header permette istanze multiple
             </Note>
           </Box>
         </Column>

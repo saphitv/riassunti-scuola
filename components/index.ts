@@ -1,5 +1,6 @@
 // Layout components
 export { CourseHeader } from "./CourseHeader";
+export { CourseCardLink } from "./CourseCardLink";
 export { Section } from "./Section";
 export { Row } from "./Row";
 export { Column } from "./Column";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { CourseCardLink } from "@/components";
 
 const courses = [
   { slug: "analisi-2", name: "Analisi 2", description: "Integrali, curve, equazioni differenziali" },
@@ -18,10 +18,12 @@ export default function Home() {
 
       <nav className="course-grid">
         {courses.map((course) => (
-          <Link key={course.slug} href={`/${course.slug}`} className="course-card">
-            <span className="course-card-name">{course.name}</span>
-            <span className="course-card-description">{course.description}</span>
-          </Link>
+          <CourseCardLink
+            key={course.slug}
+            slug={course.slug}
+            name={course.name}
+            description={course.description}
+          />
         ))}
       </nav>
     </div>

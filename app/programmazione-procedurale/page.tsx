@@ -15,11 +15,15 @@ import {
   OperatoriBitSection,
   ModularizzazioneSection,
 } from "@/components/sections/programmazione-procedurale";
+import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 
 export default function ProgrammazioneProceduralePage() {
   return (
     <div className="page page-compact">
-      <CourseHeader title="Programmazione Procedurale" />
+      <CourseHeader
+        title="Programmazione Procedurale"
+        viewTransitionName={getCourseTitleTransitionName("programmazione-procedurale")}
+      />
       <IncludesSection />
       <MacroSection />
       <FormattazioneSection />

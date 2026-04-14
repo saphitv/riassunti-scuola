@@ -95,13 +95,20 @@ export function CurveVisualizer({
 }: CurveVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [progress, setProgress] = useState(animate ? 0 : 1);
+  const [animationKey, setAnimationKey] = useState(0);
   const animationRef = useRef<number>(0);
   const curve = CURVES[type];
 
   useEffect(() => {
     if (!animate) {
-      setProgress(1);
-      return;
+      animationRef.current = requestAnimationFrame(() => {
+        setProgress(1);
+      });
+      return () => {
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+      };
     }
 
     let start: number | null = null;
@@ -125,7 +132,7 @@ export function CurveVisualizer({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [animate, type]);
+  }, [animate, type, animationKey]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -156,9 +163,6 @@ export function CurveVisualizer({
     if (points.length < 2) return;
 
     // Find bounds
-    const xs = points.map((p) => p.x);
-    const ys = points.map((p) => p.y);
-    
     // Calculate full curve bounds for consistent scaling
     const allPoints: { x: number; y: number }[] = [];
     for (let i = 0; i <= steps; i++) {
@@ -290,6 +294,7 @@ export function CurveVisualizer({
         onClick={() => {
           if (animate) {
             setProgress(0);
+            setAnimationKey((key) => key + 1);
           }
         }}
       />

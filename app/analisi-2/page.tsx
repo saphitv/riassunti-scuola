@@ -7,11 +7,15 @@ import {
   FormeNotevoliSection,
   FunzioniPiuVariabiliSection,
 } from "@/components/sections/analisi-2";
+import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 
 export default function Analisi2Page() {
   return (
     <div className="page">
-      <CourseHeader title="Analisi 2" />
+      <CourseHeader
+        title="Analisi 2"
+        viewTransitionName={getCourseTitleTransitionName("analisi-2")}
+      />
 
       <IntegraliSection />
       <CurveParametricheSection />

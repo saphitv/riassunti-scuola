@@ -12,7 +12,6 @@ interface RootFindingVisualizerProps {
 
 // Bisezione and Newton: f(x) = x² - 2 (root at √2 ≈ 1.414)
 const f = (x: number) => x * x - 2;
-const df = (x: number) => 2 * x;
 const ROOT = Math.sqrt(2);
 
 // Secant method: f(x) = 2cos(x) - x (root at ~1.03) - steeper vertical slopes

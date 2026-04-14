@@ -11,11 +11,15 @@ import {
   SpringBootSection,
   HibernateJpaSection,
 } from "@/components/sections";
+import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 
 export default function ProgrammazioneOggettiPage() {
   return (
     <div className="page page-compact">
-      <CourseHeader title="Programmazione a Oggetti" />
+      <CourseHeader
+        title="Programmazione a Oggetti"
+        viewTransitionName={getCourseTitleTransitionName("programmazione-oggetti")}
+      />
       <GenericsSection />
       <ReflectionSection />
       <AnnotationsSection />
