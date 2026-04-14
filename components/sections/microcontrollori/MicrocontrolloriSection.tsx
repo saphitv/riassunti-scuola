@@ -70,6 +70,32 @@ export function MicrocontrolloriSection() {
           System bus e peripheral bus possono lavorare con clock diversi.
         </p>
       </Box>
+
+      <Box color="purple" border="left" title="Documentazione utile">
+        <div style={{ fontSize: "var(--font-size-small)" }}>
+          <p>
+            <strong>Datasheet</strong>: pinout, memoria, limiti elettrici e
+            funzioni del chip. <strong>Usalo</strong> per capire cosa offre il
+            PIC32 e quali pin/valori puoi usare.
+          </p>
+          <p style={{ marginTop: "0.15rem" }}>
+            <a href="/downloads/microcontrollori/pic32mx370f512l-datasheet.pdf" download>
+              Scarica il datasheet del PIC32MX370F512L
+            </a>
+          </p>
+
+          <p style={{ marginTop: "0.35rem" }}>
+            <strong>Reference Manual</strong>: descrive in dettaglio registri,
+            bit e funzionamento delle periferiche. <strong>Usalo</strong> quando
+            programmi timer, UART, SPI, ADC, interrupt o PPS.
+          </p>
+          <p style={{ marginTop: "0.15rem" }}>
+            <a href="/downloads/microcontrollori/pic32-reference-manual.pdf" download>
+              Scarica il PIC32 Reference Manual
+            </a>
+          </p>
+        </div>
+      </Box>
     </Section>
   );
 }
