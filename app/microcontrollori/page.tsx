@@ -3,6 +3,7 @@ import {
   MicrocontrolloriSection,
   GPIOCheatsheetSection,
   UARTCheatsheetSection,
+  TimersCheatsheetSection,
 } from "@/components/sections";
 
 export default function MicrocontrolloriPage() {
@@ -12,6 +13,7 @@ export default function MicrocontrolloriPage() {
       <MicrocontrolloriSection />
       <GPIOCheatsheetSection />
       <UARTCheatsheetSection />
+      <TimersCheatsheetSection />
     </div>
   );
 }
