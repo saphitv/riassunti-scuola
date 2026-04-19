@@ -58,7 +58,7 @@ export function UARTCheatsheetSection() {
       </Row>
 
       <Row>
-        <Column width="two-thirds">
+        <Column width="half">
           <Box color="gray" border="left" title="Struttura del frame">
             <div style={{ fontSize: "var(--font-size-small)" }}>
               <ul className="ref-list">
@@ -83,7 +83,7 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="third">
+        <Column width="half">
           <Box color="purple" border="left" title="UxBRG + esempio @ 9600 baud">
             <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
             <ul

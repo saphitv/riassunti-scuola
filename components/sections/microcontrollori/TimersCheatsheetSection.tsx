@@ -60,7 +60,7 @@ export function TimersCheatsheetSection() {
       </Row>
 
       <Row>
-        <Column width="two-thirds">
+        <Column width="auto">
           <Box color="gray" border="left" title="Registri principali">
             <table className="comparison-table">
               <thead>
@@ -87,37 +87,14 @@ export function TimersCheatsheetSection() {
                   <td><code>TxCON</code></td>
                   <td>registro di configurazione</td>
                   <td>
-                    contiene <code>ON</code>, <code>TCKPS</code>,{" "}
-                    <code>TCS</code>, <code>TSYNC</code>, <code>TGATE</code>
+                    <code>ON</code> avvia / ferma, <code>TCKPS</code> imposta
+                    il prescaler, <code>TCS</code> sceglie clock interno o
+                    esterno, <code>TSYNC</code> sincronizza il clock esterno,{" "}
+                    <code>TGATE</code> abilita il gated mode
                   </td>
                 </tr>
               </tbody>
             </table>
-          </Box>
-        </Column>
-
-        <Column width="third">
-          <Box color="gray" border="left" title="Bit di controllo (TxCON)">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                <code>ON</code> - avvia / ferma il timer
-              </li>
-              <li>
-                <code>TCKPS</code> - prescaler
-              </li>
-              <li>
-                <code>TCS</code> - clock interno o esterno
-              </li>
-              <li>
-                <code>TSYNC</code> - sync clock esterno
-              </li>
-              <li>
-                <code>TGATE</code> - modo gated
-              </li>
-            </ul>
           </Box>
         </Column>
       </Row>
