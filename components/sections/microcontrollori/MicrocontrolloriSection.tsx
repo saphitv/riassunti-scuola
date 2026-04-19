@@ -19,12 +19,6 @@ export function MicrocontrolloriSection() {
               </p>
             </div>
           </Box>
-
-          <Box color="gray" border="left" title="Nota">
-            <p style={{ fontSize: "var(--font-size-small)" }}>
-              System bus e peripheral bus possono lavorare con clock diversi.
-            </p>
-          </Box>
         </Column>
 
         <Column width="third">
@@ -47,27 +41,10 @@ export function MicrocontrolloriSection() {
         </Column>
 
         <Column width="third">
-          <Box color="yellow" border="left" title="Blocchi / periferiche">
-            <div style={{ fontSize: "var(--font-size-small)" }}>
-              <p>
-                Flash = programma | SRAM = dati
-              </p>
-              <p>
-                GPIO / I-O | Timer
-              </p>
-              <p>
-                UART, SPI, I2C | ADC
-              </p>
-              <p>
-                Interrupt | DMA
-              </p>
-              <p>
-                Watchdog / RTCC
-              </p>
-              <p>
-                PPS = remap funzioni periferiche su pin
-              </p>
-            </div>
+          <Box color="gray" border="left" title="Nota">
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              System bus e peripheral bus possono lavorare con clock diversi.
+            </p>
           </Box>
         </Column>
       </Row>
