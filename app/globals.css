@@ -484,7 +484,7 @@ body {
 }
 
 .math-block-size-small mjx-container[display="true"] {
-  font-size: 0.72em !important;
+  font-size: 0.58em !important;
 }
 
 /* Inline code */
@@ -1026,7 +1026,7 @@ li {
 }
 
 .page-compact .math-block-size-small mjx-container[display="true"] {
-  font-size: 0.66em !important;
+  font-size: 0.54em !important;
 }
 
 /* Compact box with minimal styling - just border-left */

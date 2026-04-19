@@ -84,31 +84,23 @@ export function UARTCheatsheetSection() {
         </Column>
 
         <Column width="third">
-          <Box color="red" border="left" title="Timing @ 9600 baud">
+          <Box color="purple" border="left" title="UxBRG + esempio @ 9600 baud">
+            <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
             >
+              <li><code>FPB</code> = peripheral bus clock</li>
+              <li><code>B</code> = baud rate desiderato</li>
+              <li><code>M = 4</code> se <code>BRGH = 1</code></li>
+              <li><code>M = 16</code> se <code>BRGH = 0</code></li>
               <li>1 bit ~ <strong>104 µs</strong></li>
               <li>1 frame (8 dati + start + stop) ~ <strong>1 ms</strong></li>
-              <li>velocita tipiche: <code>9600</code>, <code>19200</code>, ...</li>
+              <li>esempio classico: <code>9600</code> baud</li>
             </ul>
           </Box>
         </Column>
       </Row>
-
-      <Box color="purple" border="left" title="Formula baud-rate UxBRG">
-        <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
-        <ul
-          className="ref-list"
-          style={{ fontSize: "var(--font-size-small)" }}
-        >
-          <li><code>FPB</code> = peripheral bus clock</li>
-          <li><code>B</code> = baud rate desiderato</li>
-          <li><code>M = 4</code> se <code>BRGH = 1</code></li>
-          <li><code>M = 16</code> se <code>BRGH = 0</code></li>
-        </ul>
-      </Box>
 
       <Row>
         <Column width="third">
