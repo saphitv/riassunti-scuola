@@ -98,7 +98,7 @@ export function UARTCheatsheetSection() {
       </Row>
 
       <Box color="purple" border="left" title="Formula baud-rate UxBRG">
-        <MathBlock>{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
+        <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
         <ul
           className="ref-list"
           style={{ fontSize: "var(--font-size-small)" }}
@@ -240,16 +240,38 @@ export function UARTCheatsheetSection() {
         </Column>
       </Row>
 
-      <Box color="gray" border="left" title="Esempio C - funzioni UART4">
-        <CodeBlock language="c">{`void UART_ConfigurePins(void)   // configura UART4 TX e RX
+      <Box color="gray" border="left" title="Esempio C - UART4">
+        <Row gap="sm">
+          <Column width="third">
+            <p
+              style={{
+                fontSize: "var(--font-size-small)",
+                fontWeight: 700,
+                marginBottom: "0.25rem",
+              }}
+            >
+              Configura pin
+            </p>
+            <CodeBlock language="c">{`void UART_ConfigurePins(void)
 {
-    TRISFbits.TRISF12 = 0;      // TX digital output
-    RPF12R = 2;                 // 0010 -> mappa U4TX su RPF12
-    TRISFbits.TRISF13 = 1;      // RX digital input
-    U4RXR  = 9;                 // 1001 -> mappa U4RX su RPF13
-}
+    TRISFbits.TRISF12 = 0;
+    RPF12R = 2;     // U4TX su RPF12
+    TRISFbits.TRISF13 = 1;
+    U4RXR  = 9;     // U4RX su RPF13
+}`}</CodeBlock>
+          </Column>
 
-void UART_ConfigureUart(int baud)
+          <Column width="third">
+            <p
+              style={{
+                fontSize: "var(--font-size-small)",
+                fontWeight: 700,
+                marginBottom: "0.25rem",
+              }}
+            >
+              Configura UART
+            </p>
+            <CodeBlock language="c">{`void UART_ConfigureUart(int baud)
 {
     U4MODEbits.ON     = 0;
     U4MODEbits.SIDL   = 0;
@@ -266,25 +288,38 @@ void UART_ConfigureUart(int baud)
     U4MODEbits.STSEL  = 0;
     U4MODEbits.BRGH   = 0;
 
-    /* calcolo brg */
-    UartBrg = (int)(((float)PbusClock / (16 * baud) - 1) + 0.5); // +0.5 arrotonda
-    U4BRG   = UartBrg;
+    UartBrg = (int)(
+        ((float)PbusClock / (16 * baud) - 1) + 0.5
+    );
+    U4BRG = UartBrg;
 
     U4STAbits.UTXEN = 1;
     U4STAbits.URXEN = 1;
     U4MODEbits.ON   = 1;
-}
+}`}</CodeBlock>
+          </Column>
 
-int putU4(int c)
+          <Column width="third">
+            <p
+              style={{
+                fontSize: "var(--font-size-small)",
+                fontWeight: 700,
+                marginBottom: "0.25rem",
+              }}
+            >
+              TX/RX e stringhe
+            </p>
+            <CodeBlock language="c">{`int putU4(int c)
 {
-    while (U4STAbits.UTXBF == 1);   // attende TX buffer libero
+    while (U4STAbits.UTXBF == 1);
     U4TXREG = c;
+    return c;
 }
 
 char getU4(void)
 {
-    while (!U4STAbits.URXDA);       // attende un nuovo carattere
-    return U4RXREG;                 // legge dal receive buffer
+    while (!U4STAbits.URXDA);
+    return U4RXREG;
 }
 
 void putU4_string(char szData[])
@@ -292,9 +327,11 @@ void putU4_string(char szData[])
     char *pData = szData;
     while (*pData)
     {
-        putU4((*(pData++)));
+        putU4(*pData++);
     }
 }`}</CodeBlock>
+          </Column>
+        </Row>
       </Box>
 
     </Section>

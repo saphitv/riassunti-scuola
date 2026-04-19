@@ -151,7 +151,7 @@ export function TimersCheatsheetSection() {
 
         <Column width="half">
           <Box color="purple" border="left" title="Formula del periodo">
-            <MathBlock>{`T = \\frac{\\text{Prescaler} \\cdot PR_x}{F_{clk}}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`T = \\frac{\\text{Prescaler} \\cdot PR_x}{F_{clk}}`}</MathBlock>
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
