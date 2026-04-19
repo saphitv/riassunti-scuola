@@ -104,67 +104,21 @@ export function UARTCheatsheetSection() {
 
       <Row>
         <Column width="third">
-          <Box color="blue" border="left" title="Feature PIC32MX">
+          <Box color="gray" border="left" title="Registri usati qui">
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
             >
-              <li>trasmissione <strong>8 o 9 bit</strong></li>
-              <li>parity <strong>even / odd / none</strong></li>
-              <li><strong>1 o 2 stop bit</strong></li>
-              <li>flow control hw</li>
-              <li>baud-rate generator</li>
-              <li>FIFO TX e RX</li>
-              <li>interrupt separati TX / RX</li>
-              <li>loopback, IrDA</li>
+              <li><code>UxMODE</code> - formato frame, pin, baud mode</li>
+              <li><code>UxSTA</code> - abilita TX / RX, flag di stato</li>
+              <li><code>UxBRG</code> - divisore baud-rate</li>
+              <li><code>UxTXREG</code> - scrittura dati TX</li>
+              <li><code>UxRXREG</code> - lettura dati RX</li>
             </ul>
           </Box>
         </Column>
 
-        <Column width="two-thirds">
-          <Box color="gray" border="left" title="Registri principali">
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Registro</th>
-                  <th>Funzione</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>UxMODE</code></td>
-                  <td>configurazione</td>
-                  <td>abilita UART, sceglie pin, baud mode, parity, stop</td>
-                </tr>
-                <tr>
-                  <td><code>UxSTA</code></td>
-                  <td>stato e controllo</td>
-                  <td>abilita TX / RX, flag di stato e di errore</td>
-                </tr>
-                <tr>
-                  <td><code>UxTXREG</code></td>
-                  <td>transmit register</td>
-                  <td>scrivi qui per <strong>trasmettere</strong></td>
-                </tr>
-                <tr>
-                  <td><code>UxRXREG</code></td>
-                  <td>receive register</td>
-                  <td>leggi qui per <strong>ricevere</strong></td>
-                </tr>
-                <tr>
-                  <td><code>UxBRG</code></td>
-                  <td>baud-rate generator</td>
-                  <td>imposta il divisore per il baud</td>
-                </tr>
-              </tbody>
-            </table>
-          </Box>
-        </Column>
-      </Row>
-
-      <Row>
-        <Column width="half">
+        <Column width="third">
           <Box color="green" border="left" title="Bit di UxMODE">
             <ul
               className="ref-list"
@@ -179,7 +133,7 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="half">
+        <Column width="third">
           <Box color="yellow" border="left" title="Bit di UxSTA">
             <ul
               className="ref-list"
@@ -200,38 +154,6 @@ export function UARTCheatsheetSection() {
         </Column>
       </Row>
 
-      <Row>
-        <Column width="half">
-          <Box color="blue" border="left" title="Pin UART4 su BasysMX3">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li><code>RF12</code> -&gt; <code>U4TX</code></li>
-              <li><code>RF13</code> -&gt; <code>U4RX</code></li>
-            </ul>
-            <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.35rem" }}>
-              I pin vanno <strong>mappati</strong> alla periferica tramite PPS.
-            </p>
-          </Box>
-        </Column>
-
-        <Column width="half">
-          <Box color="red" border="left" title="Procedura in 5 passi">
-            <ol
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>configura i pin (TRIS + PPS)</li>
-              <li>configura i registri UART4</li>
-              <li>calcola e imposta <code>U4BRG</code></li>
-              <li>abilita TX e RX (<code>UTXEN</code>, <code>URXEN</code>)</li>
-              <li>scrivi / leggi caratteri</li>
-            </ol>
-          </Box>
-        </Column>
-      </Row>
-
       <Box color="gray" border="left" title="Esempio C - UART4">
         <Row gap="sm">
           <Column width="third">
@@ -246,6 +168,7 @@ export function UARTCheatsheetSection() {
             </p>
             <CodeBlock language="c">{`void UART_ConfigurePins(void)
 {
+    // BasysMX3: RF12 -> U4TX, RF13 -> U4RX via PPS
     TRISFbits.TRISF12 = 0;
     RPF12R = 2;     // U4TX su RPF12
     TRISFbits.TRISF13 = 1;
@@ -265,6 +188,7 @@ export function UARTCheatsheetSection() {
             </p>
             <CodeBlock language="c">{`void UART_ConfigureUart(int baud)
 {
+    // U4MODE: formato frame, pin UART, baud mode
     U4MODEbits.ON     = 0;
     U4MODEbits.SIDL   = 0;
     U4MODEbits.IREN   = 0;
@@ -280,11 +204,13 @@ export function UARTCheatsheetSection() {
     U4MODEbits.STSEL  = 0;
     U4MODEbits.BRGH   = 0;
 
+    // U4BRG: divisore del baud-rate
     UartBrg = (int)(
         ((float)PbusClock / (16 * baud) - 1) + 0.5
     );
     U4BRG = UartBrg;
 
+    // U4STA: abilita trasmissione e ricezione
     U4STAbits.UTXEN = 1;
     U4STAbits.URXEN = 1;
     U4MODEbits.ON   = 1;
@@ -303,6 +229,7 @@ export function UARTCheatsheetSection() {
             </p>
             <CodeBlock language="c">{`int putU4(int c)
 {
+    // U4TXREG = transmit register
     while (U4STAbits.UTXBF == 1);
     U4TXREG = c;
     return c;
@@ -310,6 +237,7 @@ export function UARTCheatsheetSection() {
 
 char getU4(void)
 {
+    // U4RXREG = receive register
     while (!U4STAbits.URXDA);
     return U4RXREG;
 }
