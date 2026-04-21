@@ -124,11 +124,11 @@ export function UARTCheatsheetSection() {
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
             >
-              <li><code>ON</code> - abilita la UART</li>
+              <li><code>ON</code> (1 bit) - <code>0 = OFF</code>, <code>1 = ON</code></li>
               <li><code>UEN</code> - seleziona quali pin UART usare</li>
               <li><code>BRGH</code> - modo baud (<code>M = 4</code> o <code>16</code>)</li>
               <li><code>PDSEL</code> - data bits + parity</li>
-              <li><code>STSEL</code> - 1 o 2 stop bit</li>
+              <li><code>STSEL</code> (1 bit) - <code>0 = 1 stop</code>, <code>1 = 2 stop</code></li>
             </ul>
           </Box>
         </Column>

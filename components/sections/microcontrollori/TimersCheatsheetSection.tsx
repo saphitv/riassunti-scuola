@@ -21,23 +21,26 @@ export function TimersCheatsheetSection() {
 
         <Column width="third">
           <Box color="green" border="left" title="Timer in PIC32">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                <strong>5 timer</strong> totali
-              </li>
-              <li>
-                <code>Timer1</code> - solo <strong>16-bit</strong>
-              </li>
-              <li>
-                <code>Timer2 - Timer5</code> - <strong>16-bit</strong>
-              </li>
-              <li>
-                accoppiabili a coppie -&gt; <strong>32-bit</strong>
-              </li>
-            </ul>
+            <div style={{ fontSize: "var(--font-size-small)" }}>
+              <ul className="ref-list">
+                <li>
+                  <strong>5 timer</strong> totali
+                </li>
+                <li>
+                  <code>Timer1</code> - solo <strong>16-bit</strong>
+                </li>
+                <li>
+                  <code>Timer2 - Timer5</code> - <strong>16-bit</strong>
+                </li>
+                <li>
+                  accoppiabili a coppie -&gt; <strong>32-bit</strong>
+                </li>
+              </ul>
+              <p style={{ marginTop: "0.35rem" }}>
+                Limiti: <strong>16-bit</strong> = <code>0 - 65,535</code>,
+                <strong> 32-bit</strong> = <code>0 - 4,294,967,295</code>
+              </p>
+            </div>
           </Box>
         </Column>
 
@@ -129,6 +132,20 @@ export function TimersCheatsheetSection() {
         <Column width="half">
           <Box color="purple" border="left" title="Formula del periodo">
             <MathBlock gap="sm" size="small">{`T = \\frac{\\text{Prescaler} \\cdot PR_x}{F_{clk}}`}</MathBlock>
+            <ul
+              className="ref-list"
+              style={{ fontSize: "var(--font-size-small)", marginBottom: "0.5rem" }}
+            >
+              <li>
+                <code>T</code> = periodo / delay generato dal timer
+              </li>
+              <li>
+                <code>PRx</code> = valore del registro periodo, cioe il limite fino a cui conta il timer
+              </li>
+              <li>
+                <code>Fclk</code> = frequenza del clock che alimenta il timer
+              </li>
+            </ul>
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
