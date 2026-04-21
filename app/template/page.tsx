@@ -1,4 +1,4 @@
-import { CourseHeader, Section, Row, Column, Box, Math, MathBlock } from "@/components";
+import { CourseHeader, Section, Row, Column, Box, Math, MathBlock } from "@/components/index";
 
 export default function TemplatePage() {
   return (

@@ -3,7 +3,7 @@ import {
   Math,
   Definition,
   FormulaTable,
-} from "@/components";
+} from "@/components/index";
 
 export function CurveParametricheSection() {
   return (

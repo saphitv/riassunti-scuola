@@ -9,7 +9,7 @@ import {
   Definition,
   Theorem,
   FormulaTable,
-} from "@/components";
+} from "@/components/index";
 
 export function FunzioniPiuVariabiliSection() {
   return (

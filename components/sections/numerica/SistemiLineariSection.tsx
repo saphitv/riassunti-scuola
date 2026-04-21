@@ -9,7 +9,7 @@ import {
   Definition,
   Theorem,
   CodeBlock,
-} from "@/components";
+} from "@/components/index";
 
 export function SistemiLineariSection() {
   return (

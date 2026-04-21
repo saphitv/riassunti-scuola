@@ -29,3 +29,7 @@ export { RootFindingVisualizer } from "./RootFindingVisualizer";
 
 // Provider
 export { MathJaxProvider } from "./MathJaxProvider";
+export { ThemeProvider } from "./ThemeProvider";
+
+// Theming
+export { ThemeToggle } from "./ThemeToggle";

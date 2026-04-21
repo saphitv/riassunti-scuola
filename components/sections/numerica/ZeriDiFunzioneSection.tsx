@@ -10,7 +10,7 @@ import {
   Theorem,
   CodeBlock,
   RootFindingVisualizer,
-} from "@/components";
+} from "@/components/index";
 
 export function ZeriDiFunzioneSection() {
   return (

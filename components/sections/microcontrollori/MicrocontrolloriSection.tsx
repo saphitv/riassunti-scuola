@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box } from "@/components";
+import { Section, Row, Column, Box } from "@/components/index";
 import { Download, Eye } from "lucide-react";
 
 export function MicrocontrolloriSection() {

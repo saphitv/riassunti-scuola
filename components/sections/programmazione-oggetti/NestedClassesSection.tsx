@@ -5,7 +5,7 @@ import {
   Box,
   Definition,
   CodeBlock,
-} from "@/components";
+} from "@/components/index";
 
 export function NestedClassesSection() {
   return (

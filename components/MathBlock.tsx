@@ -1,6 +1,7 @@
 "use client";
 
 import { MathJax } from "better-react-mathjax";
+import { useHasMounted } from "@/components/useHasMounted";
 
 interface MathBlockProps {
   children: string;
@@ -13,9 +14,12 @@ export function MathBlock({
   gap = "md",
   size = "default",
 }: MathBlockProps) {
+  const hasMounted = useHasMounted();
+  const tex = `\\[${children}\\]`;
+
   return (
     <div className={`math-block math-block-gap-${gap} math-block-size-${size}`}>
-      <MathJax>{`\\[${children}\\]`}</MathJax>
+      {hasMounted ? <MathJax>{tex}</MathJax> : <span>{tex}</span>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { CourseHeader } from "@/components";
+import { CourseHeader } from "@/components/index";
 import { ZeriDiFunzioneSection, SistemiLineariSection } from "@/components/sections";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 

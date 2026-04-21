@@ -1,4 +1,4 @@
-import { CourseHeader } from "@/components";
+import { CourseHeader } from "@/components/index";
 import {
   IncludesSection,
   MacroSection,

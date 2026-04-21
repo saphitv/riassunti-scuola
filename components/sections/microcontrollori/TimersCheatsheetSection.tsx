@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, MathBlock } from "@/components";
+import { Section, Row, Column, Box, MathBlock } from "@/components/index";
 
 export function TimersCheatsheetSection() {
   return (

@@ -9,7 +9,7 @@ import {
   Definition,
   Theorem,
   Example,
-} from "@/components";
+} from "@/components/index";
 
 export function IntegraliSection() {
   return (

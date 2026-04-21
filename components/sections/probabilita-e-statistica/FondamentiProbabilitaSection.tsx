@@ -8,7 +8,7 @@ import {
   Note,
   Definition,
   Example,
-} from "@/components";
+} from "@/components/index";
 
 export function FondamentiProbabilitaSection() {
   return (

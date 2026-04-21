@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/index";
 
 export function UARTCheatsheetSection() {
   return (

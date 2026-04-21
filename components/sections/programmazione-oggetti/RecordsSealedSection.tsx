@@ -6,7 +6,7 @@ import {
   Note,
   Definition,
   CodeBlock,
-} from "@/components";
+} from "@/components/index";
 
 export function RecordsSealedSection() {
   return (

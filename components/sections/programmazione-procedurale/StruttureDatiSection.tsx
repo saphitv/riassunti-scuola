@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, CodeBlock, Note } from "@/components";
+import { Section, Row, Column, Box, CodeBlock, Note } from "@/components/index";
 
 export function StruttureDatiSection() {
   return (

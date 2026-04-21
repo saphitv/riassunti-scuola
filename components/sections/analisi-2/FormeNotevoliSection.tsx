@@ -1,4 +1,4 @@
-import { Section, Math } from "@/components";
+import { Section, Math } from "@/components/index";
 import { CurveVisualizer } from "@/components/CurveVisualizer";
 import { VolumeVisualizer } from "@/components/VolumeVisualizer";
 

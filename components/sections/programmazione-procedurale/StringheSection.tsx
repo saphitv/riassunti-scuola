@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, Note, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, Note, CodeBlock } from "@/components/index";
 
 export function StringheSection() {
   return (

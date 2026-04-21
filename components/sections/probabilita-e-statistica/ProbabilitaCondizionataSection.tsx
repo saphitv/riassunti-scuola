@@ -8,7 +8,7 @@ import {
   Note,
   Definition,
   Theorem,
-} from "@/components";
+} from "@/components/index";
 
 export function ProbabilitaCondizionataSection() {
   return (

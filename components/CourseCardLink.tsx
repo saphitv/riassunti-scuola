@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ViewTransition, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { ViewTransition } from "@/components/ViewTransition";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 
 interface CourseCardLinkProps {

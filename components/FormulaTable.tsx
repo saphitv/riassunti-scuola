@@ -1,6 +1,7 @@
 "use client";
 
 import { MathJax } from "better-react-mathjax";
+import { useHasMounted } from "@/components/useHasMounted";
 
 interface FormulaRow {
   label: string;
@@ -13,6 +14,8 @@ interface FormulaTableProps {
 }
 
 export function FormulaTable({ headers, rows }: FormulaTableProps) {
+  const hasMounted = useHasMounted();
+
   return (
     <div className="formula-table-wrapper">
       <table className="formula-table">
@@ -32,7 +35,11 @@ export function FormulaTable({ headers, rows }: FormulaTableProps) {
               <td className="formula-table-label">{row.label}</td>
               {row.cells.map((cell, cellIndex) => (
                 <td key={cellIndex} className="formula-table-cell">
-                  <MathJax>{`\\[${cell}\\]`}</MathJax>
+                  {hasMounted ? (
+                    <MathJax>{`\\[${cell}\\]`}</MathJax>
+                  ) : (
+                    <span>{`\\[${cell}\\]`}</span>
+                  )}
                 </td>
               ))}
             </tr>

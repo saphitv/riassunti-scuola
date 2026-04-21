@@ -8,7 +8,7 @@ import {
   Theorem,
   FormulaTable,
   Note,
-} from "@/components";
+} from "@/components/index";
 
 export function SolidiRotazioneSection() {
   return (

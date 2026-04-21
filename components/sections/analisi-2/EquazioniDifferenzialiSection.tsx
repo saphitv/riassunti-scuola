@@ -7,7 +7,7 @@ import {
   MathBlock,
   Theorem,
   Example,
-} from "@/components";
+} from "@/components/index";
 
 export function EquazioniDifferenzialiSection() {
   return (

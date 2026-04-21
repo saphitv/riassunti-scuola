@@ -1,4 +1,6 @@
-import { ViewTransition } from "react";
+"use client";
+
+import { ViewTransition } from "@/components/ViewTransition";
 
 interface CourseHeaderProps {
   title: string;

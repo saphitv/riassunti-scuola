@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, CodeBlock } from "@/components";
+import { Section, Row, Column, Box, CodeBlock } from "@/components/index";
 
 export function MacroSection() {
   return (
