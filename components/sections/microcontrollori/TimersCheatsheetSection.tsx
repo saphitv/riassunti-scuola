@@ -5,7 +5,7 @@ export function TimersCheatsheetSection() {
     <Section title="Timers">
       <Row>
         <Column width="third">
-          <Box color="blue" border="left" title="Cos'e un Timer">
+          <Box color="blue" border="left" title="Cos'e un Timer + Prescaler">
             <div style={{ fontSize: "var(--font-size-small)" }}>
               <p>
                 Un <strong>timer</strong> e un <strong>contatore</strong> che
@@ -14,6 +14,11 @@ export function TimersCheatsheetSection() {
               <p style={{ marginTop: "0.35rem" }}>
                 Usato per <strong>misurare tempi</strong>, generare{" "}
                 <strong>ritardi</strong> e temporizzare eventi.
+              </p>
+              <p style={{ marginTop: "0.35rem" }}>
+                Il <strong>prescaler</strong> divide il clock e quindi{" "}
+                <strong>rallenta</strong> il timer; si imposta tramite i bit{" "}
+                <code>TCKPS</code> in <code>TxCON</code>.
               </p>
             </div>
           </Box>
@@ -104,28 +109,26 @@ export function TimersCheatsheetSection() {
 
       <Row>
         <Column width="half">
-          <Box color="yellow" border="left" title="Prescaler (Timer1)">
-            <p style={{ fontSize: "var(--font-size-small)" }}>
-              Il <strong>prescaler</strong> divide il clock -&gt;{" "}
-              <strong>rallenta</strong> il timer.
-            </p>
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li><code>1 : 1</code></li>
-              <li><code>1 : 8</code></li>
-              <li><code>1 : 64</code></li>
-              <li><code>1 : 256</code></li>
-            </ul>
-            <p
-              style={{
-                fontSize: "var(--font-size-small)",
-                marginTop: "0.35rem",
-              }}
-            >
-              Si imposta tramite i bit <code>TCKPS</code> in <code>TxCON</code>.
-            </p>
+          <Box color="gray" border="left" title="Esempio C - Timer2 ogni 1 ms">
+            <CodeBlock language="c">{`void timer2_init(void){
+    T2CONbits.ON = 0;      // ferma Timer2
+    T2CONbits.TCKPS = 0b111; // prescaler 1:256
+    T2CONbits.TCS = 0;     // clock interno
+    PR2 = 312;             // ~1 ms con PBCLK = 80 MHz
+    TMR2 = 0;
+    T2CONbits.ON = 1;      // avvia Timer2
+}
+void wait_1ms(void) {
+    while (TMR2 < PR2);
+    TMR2 = 0;
+}
+int main(void) {
+    timer2_init();
+    while (1) {
+        wait_1ms();
+        LATDbits.LATD0 = ~LATDbits.LATD0;
+    }
+}`}</CodeBlock>
           </Box>
         </Column>
 
@@ -162,39 +165,7 @@ export function TimersCheatsheetSection() {
               </li>
             </ul>
           </Box>
-        </Column>
-      </Row>
 
-      <Row>
-        <Column width="half">
-          <Box color="red" border="left" title="Configurazione in 6 passi">
-            <ol
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                disabilita il timer (<code>ON = 0</code>)
-              </li>
-              <li>
-                imposta il prescaler (<code>TCKPS</code>)
-              </li>
-              <li>
-                scegli la sorgente di clock (<code>TCS</code>)
-              </li>
-              <li>
-                carica <code>PRx</code>
-              </li>
-              <li>
-                azzera <code>TMRx</code>
-              </li>
-              <li>
-                abilita il timer (<code>ON = 1</code>)
-              </li>
-            </ol>
-          </Box>
-        </Column>
-
-        <Column width="half">
           <Box color="blue" border="left" title="Modalita 32-bit">
             <ul
               className="ref-list"
@@ -218,65 +189,35 @@ export function TimersCheatsheetSection() {
         </Column>
       </Row>
 
-      <Row>
-        <Column width="half">
-          <Box color="green" border="left" title="Uso pratico del timer">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                configura <code>TxCON</code>, <code>PRx</code> e <code>TMRx</code>
-              </li>
-              <li>
-                avvia il timer con <code>ON = 1</code>
-              </li>
-              <li>
-                aspetta il flag di interrupt <code>IFS0bits.T2IF</code>
-              </li>
-              <li>
-                azzera il flag e ripeti l&apos;azione periodica
-              </li>
-            </ul>
-            <p style={{ fontSize: "var(--font-size-small)" }}>
-              In questo esempio <code>Timer2</code> genera un evento ogni{" "}
-              <strong>1 ms</strong> con polling del flag.
-            </p>
-          </Box>
-        </Column>
-
-        <Column width="half">
-          <Box color="gray" border="left" title="Esempio C - Timer2 ogni 1 ms">
-            <CodeBlock language="c">{`void timer2_init(void)
-{
-    T2CONbits.ON = 0;      // ferma Timer2
-    T2CONbits.TCKPS = 0b111; // prescaler 1:256
-    T2CONbits.TCS = 0;     // clock interno
-    PR2 = 312;             // ~1 ms con PBCLK = 80 MHz
-    TMR2 = 0;
-    IFS0bits.T2IF = 0;     // azzera il flag
-    T2CONbits.ON = 1;      // avvia Timer2
-}
-
-void wait_1ms(void)
-{
-    while (IFS0bits.T2IF == 0);
-    IFS0bits.T2IF = 0;
-}
-
-int main(void)
-{
-    timer2_init();
-
-    while (1)
-    {
-        wait_1ms();
-        LATDbits.LATD0 = ~LATDbits.LATD0;
-    }
-}`}</CodeBlock>
-          </Box>
-        </Column>
-      </Row>
+      <div className="no-print">
+        <Row>
+          <Column width="auto">
+            <Box color="green" border="left" title="Uso pratico del timer">
+              <ul
+                className="ref-list"
+                style={{ fontSize: "var(--font-size-small)" }}
+              >
+                <li>
+                  configura <code>TxCON</code>, <code>PRx</code> e <code>TMRx</code>
+                </li>
+                <li>
+                  avvia il timer con <code>ON = 1</code>
+                </li>
+                <li>
+                  aspetta il flag di interrupt <code>IFS0bits.T2IF</code>
+                </li>
+                <li>
+                  azzera il flag e ripeti l&apos;azione periodica
+                </li>
+              </ul>
+              <p style={{ fontSize: "var(--font-size-small)" }}>
+                In questo esempio <code>Timer2</code> genera un evento ogni{" "}
+                <strong>1 ms</strong> con polling del flag.
+              </p>
+            </Box>
+          </Column>
+        </Row>
+      </div>
     </Section>
   );
 }

@@ -42,9 +42,17 @@ export function MicrocontrolloriSection() {
 
         <Column width="third">
           <Box color="gray" border="left" title="Nota">
-            <p style={{ fontSize: "var(--font-size-small)" }}>
-              System bus e peripheral bus possono lavorare con clock diversi.
-            </p>
+            <div style={{ fontSize: "var(--font-size-small)" }}>
+              <p>
+                System bus e peripheral bus possono lavorare con clock diversi.
+              </p>
+              <p style={{ marginTop: "0.1rem" }}>
+                header: <code>#include &lt;p32xxxx.h&gt;</code>
+              </p>
+              <p style={{ marginTop: "0.1rem" }}>
+                <code>Z</code> = high impedance / tri-state (pin scollegato)
+              </p>
+            </div>
           </Box>
         </Column>
       </Row>

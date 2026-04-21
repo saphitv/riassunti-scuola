@@ -59,8 +59,8 @@ export function UARTCheatsheetSection() {
         </Row>
       </div>
 
-      <Row>
-        <Column width="third">
+      <Row gap="sm">
+        <Column width="auto">
           <Box color="gray" border="left" title="Struttura del frame">
             <div style={{ fontSize: "var(--font-size-small)" }}>
               <ul className="ref-list">
@@ -77,6 +77,7 @@ export function UARTCheatsheetSection() {
                 <li>
                   <strong>1 o 2 stop bit</strong> = <code>high</code> (fine frame)
                 </li>
+                <li>1 frame = start + dati + parity + stop</li>
               </ul>
               <p style={{ marginTop: "0.35rem" }}>
                 Start, parity e stop sono <strong>bit di controllo</strong>, non dati.
@@ -85,8 +86,8 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="third">
-          <Box color="purple" border="left" title="UxBRG + esempio @ 9600 baud">
+        <Column width="auto">
+          <Box color="purple" border="left" title="UxBRG">
             <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
             <ul
               className="ref-list"
@@ -96,14 +97,11 @@ export function UARTCheatsheetSection() {
               <li><code>B</code> = baud rate desiderato</li>
               <li><code>M = 4</code> se <code>BRGH = 1</code></li>
               <li><code>M = 16</code> se <code>BRGH = 0</code></li>
-              <li>1 bit ~ <strong>104 µs</strong></li>
-              <li>1 frame (8 dati + start + stop) ~ <strong>1 ms</strong></li>
-              <li>esempio classico: <code>9600</code> baud</li>
             </ul>
           </Box>
         </Column>
 
-        <Column width="third">
+        <Column width="auto">
           <Box color="gray" border="left" title="Registri usati qui">
             <ul
               className="ref-list"
@@ -117,10 +115,8 @@ export function UARTCheatsheetSection() {
             </ul>
           </Box>
         </Column>
-      </Row>
 
-      <Row>
-        <Column width="half">
+        <Column width="auto">
           <Box color="green" border="left" title="Bit di UxMODE">
             <ul
               className="ref-list"
@@ -135,7 +131,7 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="half">
+        <Column width="auto">
           <Box color="yellow" border="left" title="Bit di UxSTA">
             <ul
               className="ref-list"
@@ -145,12 +141,12 @@ export function UARTCheatsheetSection() {
               <li><code>UTXBF</code> - TX buffer pieno</li>
               <li><code>TRMT</code> - transmitter vuoto</li>
               <li><code>URXDA</code> - dato RX disponibile</li>
-              <li>
+              {/* <li>
                 <code>PERR</code> / <code>FERR</code> / <code>OERR</code> - errori parity / framing / overrun
               </li>
               <li>
                 <code>UTXISEL</code> / <code>URXISEL</code> - condizioni di interrupt
-              </li>
+              </li> */}
             </ul>
           </Box>
         </Column>
