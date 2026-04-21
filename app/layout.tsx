@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Crimson_Pro, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { MathJaxProvider } from "@/components/MathJaxProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
@@ -56,6 +57,16 @@ export default function RootLayout({
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={`${crimsonPro.variable} ${jetbrainsMono.variable}`}>
+        <Script id="theme-init" strategy="beforeInteractive">{`
+          try {
+            var storedTheme = localStorage.getItem("theme");
+            var systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            var resolvedTheme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : systemTheme;
+            var root = document.documentElement;
+            root.classList.toggle("dark", resolvedTheme === "dark");
+            root.style.colorScheme = resolvedTheme;
+          } catch {}
+        `}</Script>
         <ThemeProvider>
           <MathJaxProvider>{children}</MathJaxProvider>
         </ThemeProvider>

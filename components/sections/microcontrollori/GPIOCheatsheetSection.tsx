@@ -2,7 +2,7 @@ import { Section, Row, Column, Box, CodeBlock } from "@/components/index";
 
 export function GPIOCheatsheetSection() {
   return (
-    <Section title="GPIO - Cheat Sheet">
+    <Section title="GPIO">
       <Row>
         <Column width="two-thirds">
           <Box color="gray" border="left" title="Registri principali - SFR (Special Function Registers)">

@@ -2,7 +2,7 @@ import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/in
 
 export function TimersCheatsheetSection() {
   return (
-    <Section title="Timers - Cheat Sheet">
+    <Section title="Timers">
       <Row>
         <Column width="third">
           <Box color="blue" border="left" title="Cos'e un Timer">

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Enable class-based dark mode (next-themes applies .dark to <html>) */
+/* Enable class-based dark mode (.dark is applied to <html>). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Map landing-page tokens to Tailwind utilities (bg-surface, text-ink, …)
@@ -967,6 +967,39 @@ li {
    SCREEN STYLES
    ============================================ */
 @media screen {
+  .no-print {
+    position: relative;
+    outline: 1px dashed rgba(245, 158, 11, 0.9);
+    outline-offset: 0.2rem;
+  }
+
+  .no-print::before {
+    content: "[not printed]";
+    display: inline-block;
+    margin: 0 0 0.3rem;
+    padding: 0.15rem 0.4rem;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+    border-radius: 9999px;
+    background: rgba(245, 158, 11, 0.14);
+    color: #92400e;
+    font-family: var(--font-mono-jetbrains), ui-monospace, monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  html.dark .no-print {
+    outline-color: rgba(251, 191, 36, 0.9);
+  }
+
+  html.dark .no-print::before {
+    border-color: rgba(251, 191, 36, 0.35);
+    background: rgba(251, 191, 36, 0.16);
+    color: #fcd34d;
+  }
+
   body {
     /* Uses the themed surface token: cream paper on light, warm charcoal on dark. */
     background: var(--surface);
@@ -1109,6 +1142,18 @@ li {
 @media print {
   .page-compact {
     padding: 0;
+  }
+
+  .page-compact .section {
+    margin-bottom: 0;
+  }
+
+  .page-compact .section:last-child {
+    margin-bottom: 0;
+  }
+
+  .page-compact .section-title {
+    margin-bottom: 0;
   }
 
   .page-compact .code-block {

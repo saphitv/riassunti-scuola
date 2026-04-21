@@ -2,7 +2,7 @@ import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/in
 
 export function UARTCheatsheetSection() {
   return (
-    <Section title="UART - Cheat Sheet">
+    <Section title="UART">
       <div className="no-print">
         <Row>
           <Column width="third">
@@ -60,7 +60,7 @@ export function UARTCheatsheetSection() {
       </div>
 
       <Row>
-        <Column width="half">
+        <Column width="third">
           <Box color="gray" border="left" title="Struttura del frame">
             <div style={{ fontSize: "var(--font-size-small)" }}>
               <ul className="ref-list">
@@ -85,7 +85,7 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="half">
+        <Column width="third">
           <Box color="purple" border="left" title="UxBRG + esempio @ 9600 baud">
             <MathBlock gap="sm" size="small">{`U_xBRG = \\frac{F_{PB}}{M \\cdot B} - 1`}</MathBlock>
             <ul
@@ -102,9 +102,7 @@ export function UARTCheatsheetSection() {
             </ul>
           </Box>
         </Column>
-      </Row>
 
-      <Row>
         <Column width="third">
           <Box color="gray" border="left" title="Registri usati qui">
             <ul
@@ -119,8 +117,10 @@ export function UARTCheatsheetSection() {
             </ul>
           </Box>
         </Column>
+      </Row>
 
-        <Column width="third">
+      <Row>
+        <Column width="half">
           <Box color="green" border="left" title="Bit di UxMODE">
             <ul
               className="ref-list"
@@ -135,7 +135,7 @@ export function UARTCheatsheetSection() {
           </Box>
         </Column>
 
-        <Column width="third">
+        <Column width="half">
           <Box color="yellow" border="left" title="Bit di UxSTA">
             <ul
               className="ref-list"
