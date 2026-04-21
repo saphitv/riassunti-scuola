@@ -1,4 +1,4 @@
-import { Section, Row, Column, Box, MathBlock } from "@/components/index";
+import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/index";
 
 export function TimersCheatsheetSection() {
   return (
@@ -214,6 +214,66 @@ export function TimersCheatsheetSection() {
                 <code>TxCON</code>
               </li>
             </ul>
+          </Box>
+        </Column>
+      </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="green" border="left" title="Uso pratico del timer">
+            <ul
+              className="ref-list"
+              style={{ fontSize: "var(--font-size-small)" }}
+            >
+              <li>
+                configura <code>TxCON</code>, <code>PRx</code> e <code>TMRx</code>
+              </li>
+              <li>
+                avvia il timer con <code>ON = 1</code>
+              </li>
+              <li>
+                aspetta il flag di interrupt <code>IFS0bits.T2IF</code>
+              </li>
+              <li>
+                azzera il flag e ripeti l&apos;azione periodica
+              </li>
+            </ul>
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              In questo esempio <code>Timer2</code> genera un evento ogni{" "}
+              <strong>1 ms</strong> con polling del flag.
+            </p>
+          </Box>
+        </Column>
+
+        <Column width="half">
+          <Box color="gray" border="left" title="Esempio C - Timer2 ogni 1 ms">
+            <CodeBlock language="c">{`void timer2_init(void)
+{
+    T2CONbits.ON = 0;      // ferma Timer2
+    T2CONbits.TCKPS = 0b111; // prescaler 1:256
+    T2CONbits.TCS = 0;     // clock interno
+    PR2 = 312;             // ~1 ms con PBCLK = 80 MHz
+    TMR2 = 0;
+    IFS0bits.T2IF = 0;     // azzera il flag
+    T2CONbits.ON = 1;      // avvia Timer2
+}
+
+void wait_1ms(void)
+{
+    while (IFS0bits.T2IF == 0);
+    IFS0bits.T2IF = 0;
+}
+
+int main(void)
+{
+    timer2_init();
+
+    while (1)
+    {
+        wait_1ms();
+        LATDbits.LATD0 = ~LATDbits.LATD0;
+    }
+}`}</CodeBlock>
           </Box>
         </Column>
       </Row>

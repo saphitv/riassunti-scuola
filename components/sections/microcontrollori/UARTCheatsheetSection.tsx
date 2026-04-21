@@ -3,59 +3,61 @@ import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/in
 export function UARTCheatsheetSection() {
   return (
     <Section title="UART - Cheat Sheet">
-      <Row>
-        <Column width="third">
-          <Box color="blue" border="left" title="Cos'e UART">
-            <div style={{ fontSize: "var(--font-size-small)" }}>
-              <p>
-                <strong>UART</strong> = Universal Asynchronous Receiver
-                Transmitter
-              </p>
-              <ul className="ref-list">
-                <li>comunicazione <strong>seriale</strong></li>
+      <div className="no-print">
+        <Row>
+          <Column width="third">
+            <Box color="blue" border="left" title="Cos'e UART">
+              <div style={{ fontSize: "var(--font-size-small)" }}>
+                <p>
+                  <strong>UART</strong> = Universal Asynchronous Receiver
+                  Transmitter
+                </p>
+                <ul className="ref-list">
+                  <li>comunicazione <strong>seriale</strong></li>
+                  <li>
+                    <strong>asincrona</strong> - niente linea di clock
+                  </li>
+                  <li>
+                    <strong>full-duplex</strong> - TX e RX insieme
+                  </li>
+                  <li>i due dispositivi devono concordare il <strong>baud rate</strong></li>
+                </ul>
+              </div>
+            </Box>
+          </Column>
+
+          <Column width="third">
+            <Box color="green" border="left" title="Segnali">
+              <ul
+                className="ref-list"
+                style={{ fontSize: "var(--font-size-small)" }}
+              >
+                <li><code>TX</code> - trasmissione</li>
+                <li><code>RX</code> - ricezione</li>
+                <li><code>GND</code> - massa condivisa</li>
                 <li>
-                  <strong>asincrona</strong> - niente linea di clock
+                  <code>RTS</code> / <code>CTS</code> - flow control hw (opzionali)
                 </li>
-                <li>
-                  <strong>full-duplex</strong> - TX e RX insieme
-                </li>
-                <li>i due dispositivi devono concordare il <strong>baud rate</strong></li>
               </ul>
-            </div>
-          </Box>
-        </Column>
+            </Box>
+          </Column>
 
-        <Column width="third">
-          <Box color="green" border="left" title="Segnali">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li><code>TX</code> - trasmissione</li>
-              <li><code>RX</code> - ricezione</li>
-              <li><code>GND</code> - massa condivisa</li>
-              <li>
-                <code>RTS</code> / <code>CTS</code> - flow control hw (opzionali)
-              </li>
-            </ul>
-          </Box>
-        </Column>
-
-        <Column width="third">
-          <Box color="yellow" border="left" title="Collegamento">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                <code>TX</code> di uno -&gt; <code>RX</code> dell&apos;altro
-              </li>
-              <li><code>GND</code> in comune</li>
-              <li>stesso <strong>baud rate</strong> concordato</li>
-            </ul>
-          </Box>
-        </Column>
-      </Row>
+          <Column width="third">
+            <Box color="yellow" border="left" title="Collegamento">
+              <ul
+                className="ref-list"
+                style={{ fontSize: "var(--font-size-small)" }}
+              >
+                <li>
+                  <code>TX</code> di uno -&gt; <code>RX</code> dell&apos;altro
+                </li>
+                <li><code>GND</code> in comune</li>
+                <li>stesso <strong>baud rate</strong> concordato</li>
+              </ul>
+            </Box>
+          </Column>
+        </Row>
+      </div>
 
       <Row>
         <Column width="half">
