@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   DEFAULT_SEMESTER,
@@ -156,7 +157,7 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
         </span>
         <span className="catalog-meta-rule" aria-hidden />
         <span className="catalog-meta-info">
-          attivo&nbsp;&nbsp;·&nbsp;&nbsp;sem.&nbsp;{romanByValue[semester]}
+          sem.&nbsp;{romanByValue[semester]}
           {activeCats.size > 0 && (
             <>
               &nbsp;&nbsp;·&nbsp;&nbsp;{activeCats.size}&nbsp;cat.
@@ -204,7 +205,14 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
 
       {/* ══════════ FOOTER ══════════ */}
       <footer className="appunti-footer">
-        <span>— fine dell&apos;indice —</span>
+        <span className="appunti-footer-kicker">— fine dell&apos;indice —</span>
+        <p className="appunti-footer-note">
+          Contenuti di Simon Maggini. Uso personale di studio. Nessuna
+          garanzia.
+        </p>
+        <Link href="/terms" className="appunti-footer-link">
+          titolarita&apos; e termini d&apos;uso
+        </Link>
       </footer>
     </div>
   );

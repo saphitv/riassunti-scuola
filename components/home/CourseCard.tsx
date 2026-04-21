@@ -36,11 +36,10 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
       transitionTypes={["course-navigation"]}
       className={cn(
         "course-card group relative flex flex-col gap-4",
-        "border border-[var(--rule)] bg-[var(--surface)] p-6",
+        "border border-rule bg-surface p-6",
         "transition-[transform,border-color,background-color] duration-300 ease-out",
-        "hover:border-[var(--ink)] hover:-translate-y-[2px]",
-        "focus-visible:outline-none focus-visible:border-[var(--accent)]",
-        "focus-visible:ring-1 focus-visible:ring-[var(--accent)]",
+        "hover:border-ink hover:-translate-y-[2px]",
+        "outline-none focus:outline-none focus-visible:outline-none",
       )}
       style={{
         animation: "cardIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both",
@@ -56,15 +55,15 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
       {/* Meta row: semester */}
       <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
         <span className="inline-flex items-center gap-2">
-          <span className="text-[var(--ink)]">
+          <span className="text-ink">
             SEM {SEMESTER_ROMAN[course.semester]}
           </span>
-          <span aria-hidden className="h-px w-4 bg-[var(--rule)]" />
+          <span aria-hidden className="h-px w-4 bg-rule" />
           <span>{course.slug}</span>
         </span>
         <ArrowUpRight
           aria-hidden
-          className="h-4 w-4 -translate-x-0.5 translate-y-0.5 text-[var(--ink-muted)] transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-[var(--accent)]"
+          className="h-4 w-4 -translate-x-0.5 translate-y-0.5 text-ink-muted transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-[var(--accent)]"
         />
       </div>
 
@@ -75,18 +74,18 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
         </h2>
       </ViewTransition>
 
-      <p className="font-serif italic text-[1rem] leading-snug text-[var(--ink-muted)]">
+      <p className="font-serif italic text-[1rem] leading-snug text-ink-muted">
         {course.description}
       </p>
 
-      <span aria-hidden className="h-px w-8 bg-[var(--rule)]" />
+      <span aria-hidden className="h-px w-8 bg-rule" />
 
       {/* Category chips */}
       <div className="flex flex-wrap items-center gap-1.5">
         {course.categories.map((cat) => (
           <span
             key={cat}
-            className="inline-flex items-center border border-[var(--rule)] px-2 py-[3px] font-mono text-[9px] uppercase tracking-[0.14em] leading-none text-[var(--ink-muted)]"
+            className="inline-flex items-center border border-rule px-2 py-4 font-mono text-[10px] uppercase tracking-[0.14em] leading-none text-ink-muted"
           >
             {CATEGORY_LABELS[cat]}
           </span>

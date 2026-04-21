@@ -30,9 +30,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: [{ url: "/icon", type: "image/png" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/icon", type: "image/png", sizes: "512x512" },
+    ],
     apple: [{ url: "/apple-icon", type: "image/png" }],
-    shortcut: [{ url: "/icon", type: "image/png" }],
+    shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   other: {
     "mobile-web-app-capable": "yes",

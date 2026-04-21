@@ -33,6 +33,14 @@ The study content and summaries are mine.
 
 Most of the code for the repository was built with AI assistance. AI was used mainly to speed up the development of the website, UI structure, components, and general implementation details. The project direction, content organization, and the actual school material are still managed by me.
 
+## Ownership And Use
+
+The study notes and educational content in this repository are copyrighted by Simon Maggini.
+
+They are published publicly for personal study and reference use only. They are not official course material, may contain errors, and are provided as-is without warranties. Anyone using them is responsible for checking correctness and whether their use is allowed by the professor, the course, or the institution.
+
+For the full ownership, usage, and disclaimer notice, see [TERMS.md](./TERMS.md).
+
 ## Tech Stack
 
 - Next.js
