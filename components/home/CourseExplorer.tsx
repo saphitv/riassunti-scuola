@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
   DEFAULT_SEMESTER,
@@ -90,28 +91,34 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
       {/* ══════════ MASTHEAD ══════════ */}
       <header className="masthead">
         <div className="masthead-bar">
-          <span className="masthead-brand">
-            <span className="masthead-mark" aria-hidden>
-              ¶
+          <div className="masthead-brand-wrap">
+            <Image
+              src="/mascot/red-panda-mascot-notebook.png"
+              alt="Mascotte Appunti con libro"
+              width={56}
+              height={56}
+              className="brand-mascot"
+              priority
+            />
+            <span className="masthead-brand">
+              <span>APPUNTI</span>
+              <span className="masthead-sep" aria-hidden />
+              <span>VOL. {currentYear}</span>
+              <span className="masthead-sep hide-sm" aria-hidden />
+              <span className="hide-sm">ING. INFORMATICA</span>
             </span>
-            <span>APPUNTI</span>
-            <span className="masthead-sep" aria-hidden />
-            <span>VOL. {currentYear}</span>
-            <span className="masthead-sep hide-sm" aria-hidden />
-            <span className="hide-sm">ING. INFORMATICA</span>
-          </span>
+          </div>
           <ThemeToggle />
         </div>
 
         <div className="masthead-hero">
-          <p className="masthead-eyebrow">Riassunti universitari &mdash; ed. corrente</p>
           <h1 className="masthead-title">
-            <span>Appunti</span>
-            <span className="masthead-title-em">per gli esami.</span>
+            <span>L&rsquo;esame,</span>
+            <span className="masthead-title-em">riassunto.</span>
           </h1>
           <p className="masthead-tagline">
-            Un indice sobrio di riassunti, definizioni e teoremi, impaginati per
-            essere letti, stampati e ricordati.
+            Una raccolta di riassunti per gli esami universitari,
+            impaginati con cura per essere letti e stampati.
           </p>
         </div>
       </header>

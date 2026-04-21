@@ -1168,7 +1168,6 @@ html.dark .appunti-root::before {
 .masthead {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
   padding-bottom: 3rem;
 }
 
@@ -1177,8 +1176,14 @@ html.dark .appunti-root::before {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--rule);
+}
+
+.masthead-brand-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
 }
 
 .masthead-brand {
@@ -1193,12 +1198,13 @@ html.dark .appunti-root::before {
   line-height: 1;
 }
 
-.masthead-mark {
-  font-family: var(--font-crimson), serif;
-  font-size: 1.25rem;
-  line-height: 1;
-  color: var(--accent);
-  transform: translateY(-1px);
+.brand-mascot {
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 16px rgba(26, 26, 26, 0.12));
 }
 
 .masthead-sep {
@@ -1502,7 +1508,6 @@ html.dark .theme-icon-moon {
     display: none;
   }
   .masthead {
-    gap: 2rem;
     padding-bottom: 2rem;
   }
   .masthead-hero {
@@ -1510,6 +1515,13 @@ html.dark .theme-icon-moon {
   }
   .masthead-title {
     font-size: clamp(2.75rem, 13vw, 4rem);
+  }
+  .masthead-brand-wrap {
+    gap: 0.5rem;
+  }
+  .brand-mascot {
+    width: 44px;
+    height: 44px;
   }
   .controls-row {
     flex-direction: column;
