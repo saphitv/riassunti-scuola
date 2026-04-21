@@ -189,31 +189,31 @@ export function UARTCheatsheetSection() {
             <CodeBlock language="c">{`void UART_ConfigureUart(int baud)
 {
     // U4MODE: formato frame, pin UART, baud mode
-    U4MODEbits.ON     = 0;
-    U4MODEbits.SIDL   = 0;
-    U4MODEbits.IREN   = 0;
+    U4MODEbits.ON     = 0; // spegne la UART durante la configurazione
+    U4MODEbits.SIDL   = 0; // continua a funzionare anche in Idle mode
+    U4MODEbits.IREN   = 0; // disabilita la modalita IrDA
     U4MODEbits.RTSMD  = 0;
-    U4MODEbits.UEN0   = 0;
-    U4MODEbits.UEN1   = 0;
-    U4MODEbits.WAKE   = 0;
-    U4MODEbits.LPBACK = 0;
-    U4MODEbits.ABAUD  = 0;
-    U4MODEbits.RXINV  = 0;
-    U4MODEbits.PDSEL1 = 0;
-    U4MODEbits.PDSEL0 = 0;
-    U4MODEbits.STSEL  = 0;
-    U4MODEbits.BRGH   = 0;
+    U4MODEbits.UEN0   = 0; // usa solo i pin UxTX e UxRX
+    U4MODEbits.UEN1   = 0; // usa solo i pin UxTX e UxRX
+    U4MODEbits.WAKE   = 0; // disabilita il wake-up su start bit
+    U4MODEbits.LPBACK = 0; // disabilita il loopback interno
+    U4MODEbits.ABAUD  = 0; // disabilita l'autobaud
+    U4MODEbits.RXINV  = 0; // RX non invertito, idle = 1
+    U4MODEbits.PDSEL1 = 0; // insieme a PDSEL0 = 0 -> 8 bit, no parity
+    U4MODEbits.PDSEL0 = 0; // insieme a PDSEL1 = 0 -> 8 bit, no parity
+    U4MODEbits.STSEL  = 0; // 1 stop bit
+    U4MODEbits.BRGH   = 0; // modalita standard baud-rate (clock / 16)
 
     // U4BRG: divisore del baud-rate
     UartBrg = (int)(
         ((float)PbusClock / (16 * baud) - 1) + 0.5
     );
-    U4BRG = UartBrg;
+    U4BRG = UartBrg; // carica il divisore del baud-rate
 
     // U4STA: abilita trasmissione e ricezione
-    U4STAbits.UTXEN = 1;
-    U4STAbits.URXEN = 1;
-    U4MODEbits.ON   = 1;
+    U4STAbits.UTXEN = 1; // abilita il trasmettitore
+    U4STAbits.URXEN = 1; // abilita il ricevitore
+    U4MODEbits.ON   = 1; // accende la UART
 }`}</CodeBlock>
           </Column>
 
