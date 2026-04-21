@@ -49,7 +49,7 @@ export function GPIOCheatsheetSection() {
 
       <Row>
         <Column width="two-thirds">
-          <Box color="gray" border="left" title="Registri principali">
+          <Box color="gray" border="left" title="Registri principali - SFR (Special Function Registers)">
             <table className="comparison-table">
               <thead>
                 <tr>
@@ -172,15 +172,23 @@ export function GPIOCheatsheetSection() {
       <Row>
         <Column width="half">
           <Box color="blue" border="left" title="Setup base">
-            <CodeBlock language="c">{`TRISD = 0x0000;       // Port D tutto output
-LATDbits.LATD0 = 1;   // RD0 a livello alto`}</CodeBlock>
+            <CodeBlock language="c">{`ANSELD = 0x0000;      // Port D tutta digitale
+TRISD = 0x0001;       // RD0 input, gli altri pin output
+TRISDbits.TRISD1 = 0; // RD1 configurato come output
+LATDbits.LATD1 = 1;   // RD1 a livello alto`}</CodeBlock>
           </Box>
         </Column>
 
         <Column width="half">
           <Box color="purple" border="left" title="Toggle RD0">
-            <CodeBlock language="c">{`LATDbits.LATD0 = ~LATDbits.LATD0;
-// flip tra 0 e 1`}</CodeBlock>
+            <CodeBlock language="c">{`LATDbits.LATD1 = ~LATDbits.LATD1;
+// flip tra 0 e 1
+
+if (PORTDbits.RD0 == 1)
+{
+    LATDbits.LATD1 = 1;
+}
+// PORT si usa per leggere il livello presente sul pin`}</CodeBlock>
           </Box>
         </Column>
       </Row>
