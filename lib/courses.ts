@@ -8,6 +8,22 @@
 export type CourseCategory = "programming" | "math" | "hardware";
 export type Semester = 3 | 4;
 
+/**
+ * A clickable sub-route of a course. When a course is split into multiple
+ * parts (e.g. a long subject covered in two halves), each part has its own
+ * page and shows up in the home-page card hover overlay.
+ *
+ * - `slug` is the path fragment appended to the course slug. Use `""` for
+ *   the part that lives at the course root, e.g. `/microcontrollori`.
+ * - `numeral` is a short Roman label rendered in the overlay (I, II, ...).
+ */
+export interface CoursePart {
+  slug: string;
+  numeral: string;
+  title: string;
+  description: string;
+}
+
 export interface Course {
   slug: string;
   title: string;
@@ -16,6 +32,8 @@ export interface Course {
   semester: Semester;
   /** Extra tokens that boost search hits (e.g. "bayes", "pic32"). */
   keywords: string[];
+  /** Optional split into multiple parts — surfaced on hover from the home card. */
+  parts?: CoursePart[];
 }
 
 export const CATEGORY_LABELS: Record<CourseCategory, string> = {
@@ -95,7 +113,33 @@ export const courses: Course[] = [
     description: "PIC32, GPIO, UART, Timer, sistemi embedded",
     categories: ["programming", "hardware"],
     semester: 4,
-    keywords: ["pic32", "gpio", "uart", "timer", "embedded", "microcontroller"],
+    keywords: [
+      "pic32",
+      "gpio",
+      "uart",
+      "timer",
+      "embedded",
+      "microcontroller",
+      "interrupt",
+      "adc",
+      "spi",
+      "pwm",
+      "output compare",
+    ],
+    parts: [
+      {
+        slug: "",
+        numeral: "I",
+        title: "Parte I",
+        description: "GPIO, UART, Timer",
+      },
+      {
+        slug: "part-2",
+        numeral: "II",
+        title: "Parte II",
+        description: "Interrupt, ADC, Output Compare, SPI",
+      },
+    ],
   },
   {
     slug: "probabilita-e-statistica",

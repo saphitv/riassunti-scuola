@@ -11,7 +11,7 @@ export default function MicrocontrolloriPage() {
   return (
     <div className="page page-compact">
       <div className="no-print">
-        <CourseHeader title="Microcontrollori" />
+        <CourseHeader title="Microcontrollori — Parte I" />
       </div>
       <MicrocontrolloriSection />
       <GPIOCheatsheetSection />

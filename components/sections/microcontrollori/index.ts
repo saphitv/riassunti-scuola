@@ -3,3 +3,7 @@ export { GPIOCheatsheetSection } from "./GPIOCheatsheetSection";
 export { UARTCheatsheetSection } from "./UARTCheatsheetSection";
 export { TimersCheatsheetSection } from "./TimersCheatsheetSection";
 export { DocumentationIndexSection } from "./DocumentationIndexSection";
+export { InterruptsCheatsheetSection } from "./InterruptsCheatsheetSection";
+export { ADCCheatsheetSection } from "./ADCCheatsheetSection";
+export { OutputCompareCheatsheetSection } from "./OutputCompareCheatsheetSection";
+export { SPICheatsheetSection } from "./SPICheatsheetSection";

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ViewTransition } from "@/components/ViewTransition";
-import type { Course } from "@/lib/courses";
+import type { Course, CoursePart } from "@/lib/courses";
 import { CATEGORY_LABELS, SEMESTER_ROMAN } from "@/lib/courses";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 import { cn } from "@/lib/utils";
@@ -16,36 +16,52 @@ interface CourseCardProps {
   indexDelay?: number;
 }
 
+/** Build the destination URL for a course part. */
+function getPartHref(courseSlug: string, part: CoursePart): string {
+  return part.slug ? `/${courseSlug}/${part.slug}` : `/${courseSlug}`;
+}
+
 export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
   const router = useRouter();
   const prefetchedRef = useRef(false);
-  const href = `/${course.slug}`;
+
+  // For multi-part courses we navigate to the first part as the "default";
+  // for single-page courses the entire card is one big link to /<slug>.
+  const hasParts = Boolean(course.parts && course.parts.length > 0);
+  const defaultHref = hasParts && course.parts
+    ? getPartHref(course.slug, course.parts[0])
+    : `/${course.slug}`;
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       if (prefetchedRef.current) return;
       prefetchedRef.current = true;
-      router.prefetch(href);
+      if (hasParts && course.parts) {
+        for (const part of course.parts) {
+          router.prefetch(getPartHref(course.slug, part));
+        }
+      } else {
+        router.prefetch(defaultHref);
+      }
     }, 150);
     return () => window.clearTimeout(timeoutId);
-  }, [href, router]);
+  }, [course.parts, course.slug, defaultHref, hasParts, router]);
 
-  return (
-    <Link
-      href={href}
-      transitionTypes={["course-navigation"]}
-      className={cn(
-        "course-card group relative flex flex-col gap-4",
-        "border border-rule bg-surface p-6",
-        "transition-[transform,border-color,background-color] duration-300 ease-out",
-        "hover:border-ink hover:-translate-y-[2px]",
-        "outline-none focus:outline-none focus-visible:outline-none",
-      )}
-      style={{
-        animation: "cardIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both",
-        animationDelay: `${indexDelay}ms`,
-      }}
-    >
+  const cardClasses = cn(
+    "course-card group relative flex flex-col gap-4",
+    "border border-rule bg-surface p-6",
+    "transition-[transform,border-color,background-color] duration-300 ease-out",
+    "hover:border-ink hover:-translate-y-[2px]",
+    "outline-none focus:outline-none focus-visible:outline-none",
+  );
+
+  const cardStyle = {
+    animation: "cardIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both",
+    animationDelay: `${indexDelay}ms`,
+  } as const;
+
+  const cardBody = (
+    <>
       {/* left accent bar reveals on hover */}
       <span
         aria-hidden
@@ -60,6 +76,12 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
           </span>
           <span aria-hidden className="h-px w-4 bg-rule" />
           <span>{course.slug}</span>
+          {hasParts && course.parts && (
+            <>
+              <span aria-hidden className="h-px w-4 bg-rule" />
+              <span>{course.parts.length} parti</span>
+            </>
+          )}
         </span>
         <ArrowUpRight
           aria-hidden
@@ -91,6 +113,62 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
           </span>
         ))}
       </div>
-    </Link>
+    </>
+  );
+
+  // ── Single-part course: keep the original behaviour (whole card is a link).
+  if (!hasParts || !course.parts) {
+    return (
+      <Link
+        href={defaultHref}
+        transitionTypes={["course-navigation"]}
+        className={cardClasses}
+        style={cardStyle}
+      >
+        {cardBody}
+      </Link>
+    );
+  }
+
+  // ── Multi-part course: card is a non-link surface; each part is its own
+  // link, revealed in an overlay on hover/focus. We can't nest <a> tags, so
+  // the outer wrapper is a <div>.
+  return (
+    <div className={cn(cardClasses, "course-card-multi")} style={cardStyle}>
+      {cardBody}
+
+      {/* Parts overlay */}
+      <div
+        className="course-card-parts"
+        aria-label={`Parti di ${course.title}`}
+      >
+        <span className="course-card-parts-kicker">Scegli una parte</span>
+        <ul className="course-card-parts-list">
+          {course.parts.map((part) => (
+            <li key={part.slug || "root"}>
+              <Link
+                href={getPartHref(course.slug, part)}
+                transitionTypes={["course-navigation"]}
+                className="course-card-part"
+              >
+                <span className="course-card-part-numeral" aria-hidden>
+                  {part.numeral}
+                </span>
+                <span className="course-card-part-text">
+                  <span className="course-card-part-title">{part.title}</span>
+                  <span className="course-card-part-desc">
+                    {part.description}
+                  </span>
+                </span>
+                <ArrowUpRight
+                  aria-hidden
+                  className="course-card-part-arrow"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
