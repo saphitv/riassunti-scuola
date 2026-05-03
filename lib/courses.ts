@@ -137,7 +137,7 @@ export const courses: Course[] = [
         slug: "part-2",
         numeral: "II",
         title: "Parte II",
-        description: "Interrupt, ADC, Output Compare, SPI",
+        description: "Interrupt",
       },
     ],
   },

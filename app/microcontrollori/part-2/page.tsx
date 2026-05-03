@@ -1,9 +1,8 @@
 import { CourseHeader } from "@/components/index";
 import {
+  ClockCheatsheetSection,
+  DocumentationLinksSection,
   InterruptsCheatsheetSection,
-  ADCCheatsheetSection,
-  OutputCompareCheatsheetSection,
-  SPICheatsheetSection,
 } from "@/components/sections";
 
 export default function MicrocontrolloriPart2Page() {
@@ -12,10 +11,9 @@ export default function MicrocontrolloriPart2Page() {
       <div className="no-print">
         <CourseHeader title="Microcontrollori — Parte II" />
       </div>
+      <DocumentationLinksSection />
+      <ClockCheatsheetSection />
       <InterruptsCheatsheetSection />
-      <ADCCheatsheetSection />
-      <OutputCompareCheatsheetSection />
-      <SPICheatsheetSection />
     </div>
   );
 }

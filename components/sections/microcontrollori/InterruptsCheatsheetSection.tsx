@@ -4,68 +4,50 @@ export function InterruptsCheatsheetSection() {
   return (
     <Section title="Interrupt" forceFirstPage>
       <Row>
-        <Column width="third">
+        <Column width="two-thirds">
           <Box color="blue" border="left" title="Cos'e un interrupt">
             <div style={{ fontSize: "var(--font-size-small)" }}>
               <p>
-                Un <strong>interrupt</strong> e un segnale hardware che sospende
-                il flusso normale del programma per servire un evento urgente
-                tramite una <strong>ISR</strong> (Interrupt Service Routine).
+                Un <strong>interrupt</strong> e un evento interno o esterno che
+                richiede attenzione immediata della CPU.
               </p>
               <p style={{ marginTop: "0.35rem" }}>
-                Permette di reagire ad eventi esterni (pin, timer, periferiche)
-                senza fare <strong>polling</strong> continuo.
+                La CPU sospende il codice corrente, esegue la{" "}
+                <strong>ISR</strong> (Interrupt Service Routine), poi riprende
+                dal punto in cui era stata interrotta.
+              </p>
+              <p style={{ marginTop: "0.35rem" }}>
+                <strong>IRQ</strong> (Interrupt Request) e la richiesta inviata
+                alla CPU; <strong>ISR</strong> e la funzione che gestisce quella
+                richiesta.
+              </p>
+              <p style={{ marginTop: "0.35rem" }}>
+                Dentro una ISR fai solo operazioni brevi: evita chiamate a
+                funzioni lente, <code>printf</code>, delay e busy-wait.
+              </p>
+              <p style={{ marginTop: "0.35rem" }}>
+                Il controller interrupt raccoglie IRQ, decide priorita e li
+                invia alla CPU in ordine.
+              </p>
+              <p style={{ marginTop: "0.35rem" }}>
+                Su PIC32 gestisce fino a 96 sorgenti, 64 vettori, 7 priorita e
+                4 sub-priorita.
               </p>
             </div>
           </Box>
         </Column>
 
         <Column width="third">
-          <Box color="green" border="left" title="Sorgenti tipiche">
+          <Box color="yellow" border="left" title="Cosa succede su IRQ">
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
             >
-              <li>
-                <strong>External</strong> - pin <code>INTx</code>
-              </li>
-              <li>
-                <strong>Change Notification</strong> - cambio livello GPIO
-              </li>
-              <li>
-                <strong>Timer</strong> - <code>TxIF</code> ad ogni periodo
-              </li>
-              <li>
-                <strong>UART / SPI / I2C</strong> - dato pronto / TX vuoto
-              </li>
-              <li>
-                <strong>ADC</strong> - conversione completata
-              </li>
-              <li>
-                <strong>Output / Input Compare</strong>
-              </li>
-            </ul>
-          </Box>
-        </Column>
-
-        <Column width="third">
-          <Box color="yellow" border="left" title="Vantaggi vs polling">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                CPU <strong>libera</strong> tra un evento e l&apos;altro
-              </li>
-              <li>
-                <strong>latenza</strong> minima nel rispondere
-              </li>
-              <li>
-                priorita - eventi importanti possono <strong>preempt</strong>
-              </li>
-              <li>
-                meno consumo - si puo entrare in <strong>sleep</strong>
-              </li>
+              <li>salva il contesto corrente</li>
+              <li>legge la Interrupt Vector Table</li>
+              <li>salta alla ISR corretta</li>
+              <li>esegue la ISR e ripristina il contesto</li>
+              <li>continua il programma interrotto</li>
             </ul>
           </Box>
         </Column>
@@ -95,6 +77,20 @@ export function InterruptsCheatsheetSection() {
                 </tr>
                 <tr>
                   <td>
+                    <code>INTSTAT</code>
+                  </td>
+                  <td>stato IRQ verso CPU</td>
+                  <td>vettore e livello interrupt corrente</td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>IPTMR</code>
+                  </td>
+                  <td>proximity timer</td>
+                  <td>contatore usato dal controller interrupt</td>
+                </tr>
+                <tr>
+                  <td>
                     <code>IECx</code>
                   </td>
                   <td>Interrupt Enable</td>
@@ -105,7 +101,7 @@ export function InterruptsCheatsheetSection() {
                     <code>IFSx</code>
                   </td>
                   <td>Interrupt Flag Status</td>
-                  <td>flag che si setta quando l&apos;evento accade</td>
+                  <td>si setta anche se la sorgente non e abilitata</td>
                 </tr>
                 <tr>
                   <td>
@@ -113,8 +109,8 @@ export function InterruptsCheatsheetSection() {
                   </td>
                   <td>Interrupt Priority Control</td>
                   <td>
-                    <code>IP</code> 0-7 (priorita), <code>IS</code> 0-3
-                    (sub-priorita)
+                    <code>IP</code> 1-7, <code>IP=0</code> disabilita;{" "}
+                    <code>IS</code> 0-3
                   </td>
                 </tr>
                 <tr>
@@ -132,40 +128,41 @@ export function InterruptsCheatsheetSection() {
 
       <Row>
         <Column width="half">
-          <Box color="purple" border="left" title="Setup tipico">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                <code>INTCONbits.MVEC = 1</code> - abilita multi-vector
-              </li>
-              <li>
-                <code>IPCxbits.XXIP = priorita</code> (1 - 7)
-              </li>
-              <li>
-                <code>IPCxbits.XXIS = sub</code> (0 - 3)
-              </li>
-              <li>
-                <code>IFSxbits.XXIF = 0</code> - azzera flag
-              </li>
-              <li>
-                <code>IECxbits.XXIE = 1</code> - abilita sorgente
-              </li>
-              <li>
-                <code>__builtin_enable_interrupts()</code>
-              </li>
-            </ul>
-            <p
-              style={{
-                fontSize: "var(--font-size-small)",
-                marginTop: "0.35rem",
-              }}
-            >
-              <strong>Importante</strong>: dentro la ISR azzera sempre il flag{" "}
-              <code>IFSxbits.XXIF = 0</code>, altrimenti l&apos;interrupt scatta
-              di nuovo.
-            </p>
+          <Box color="purple" border="left" title="Esempio C">
+            <CodeBlock language="c">{`#include <sys/attribs.h>
+
+// Single-vector: una sola ISR per tutte le sorgenti.
+// Dentro controlli i flag per capire quale interrupt e arrivato.
+void __attribute__((interrupt(single), vector(0))) SingleVectorHandler(void)
+{
+    if (IFS0bits.T2IF) {
+        // ...
+        IFS0bits.T2IF = 0;
+    }
+}
+
+// Multi-vector, alternativa 1: macro __ISR.
+// 8 = Timer2 interrupt vector.
+void __ISR(8, ipl1) Timer2IntHandler(void)
+{
+    // ...
+    IFS0bits.T2IF = 0;
+}
+
+// Multi-vector, alternativa 2: attributi interrupt/vector.
+void __attribute__((interrupt(ipl1), vector(8))) Timer2IntHandler(void)
+{
+    // ...
+    IFS0bits.T2IF = 0;
+}
+
+// Multi-vector, alternativa 3: pragma interrupt.
+#pragma interrupt Timer2IntHandler ipl1 vector 8
+void Timer2IntHandler(void)
+{
+    // ...
+    IFS0bits.T2IF = 0;
+}`}</CodeBlock>
           </Box>
         </Column>
 
@@ -173,64 +170,54 @@ export function InterruptsCheatsheetSection() {
           <Box
             color="gray"
             border="left"
-            title="Esempio C - ISR Timer2 (priorita 2)"
+            title="Esempio C - Timer2 toggla RA1 ogni 500 ms"
           >
-            <CodeBlock language="c">{`void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2ISR(void)
+            <p
+              style={{
+                fontSize: "var(--font-size-small)",
+                marginBottom: "0.35rem",
+              }}
+            >
+              ISR in XC32: <code>__ISR(...)</code> oppure attributi{" "}
+              <code>interrupt/vector</code> o <code>#pragma interrupt</code>.
+            </p>
+            <CodeBlock language="c">{`// vector(8) = Timer2 interrupt vector
+void __attribute__((interrupt(ipl1), vector(8))) Timer2IntHandler(void)
 {
-    // azione periodica
-    LATDbits.LATD0 = ~LATDbits.LATD0;
-
-    // azzera SEMPRE il flag, altrimenti
-    // l'interrupt si ripresenta subito
-    IFS0bits.T2IF = 0;
+    LATAINV = 2;       // toggle RA1
+    IFS0bits.T2IF = 0; // azzera interrupt flag
 }
 
 void timer2_init_irq(void)
 {
     T2CONbits.ON    = 0;
+    T2CONbits.T32   = 0;     // 16-bit
     T2CONbits.TCKPS = 0b111; // prescaler 1:256
-    PR2  = 312;
+    T2CONbits.TCS   = 0;     // PBCLK interno
     TMR2 = 0;
+    PR2  = 39062;            // 500 ms con PBCLK = 20 MHz
 
     INTCONbits.MVEC = 1;     // multi-vector
-    IPC2bits.T2IP   = 2;     // priorita 2
+    IPC2bits.T2IP   = 1;     // priorita 1
     IPC2bits.T2IS   = 0;     // sub-priorita 0
     IFS0bits.T2IF   = 0;     // azzera flag
     IEC0bits.T2IE   = 1;     // abilita sorgente
 
     __builtin_enable_interrupts();
     T2CONbits.ON = 1;
+}
+
+int main(void)
+{
+    timer2_init_irq();
+    while (1) {
+        // interrupt mode: lavoro fatto dalla ISR
+    }
 }`}</CodeBlock>
           </Box>
         </Column>
       </Row>
 
-      <div className="no-print">
-        <Row>
-          <Column width="auto">
-            <Box color="green" border="left" title="Cosa fare in una ISR">
-              <ul
-                className="ref-list"
-                style={{ fontSize: "var(--font-size-small)" }}
-              >
-                <li>
-                  <strong>breve</strong> - solo l&apos;essenziale, zero ritardi
-                </li>
-                <li>
-                  azzerare il <strong>flag</strong> della sorgente
-                </li>
-                <li>
-                  aggiornare flag / contatori da leggere nel{" "}
-                  <code>main</code> (variabili <code>volatile</code>)
-                </li>
-                <li>
-                  evitare <code>printf</code>, allocazioni dinamiche, busy-wait
-                </li>
-              </ul>
-            </Box>
-          </Column>
-        </Row>
-      </div>
     </Section>
   );
 }
