@@ -172,15 +172,6 @@ void Timer2IntHandler(void)
             border="left"
             title="Esempio C - Timer2 toggla RA1 ogni 500 ms"
           >
-            <p
-              style={{
-                fontSize: "var(--font-size-small)",
-                marginBottom: "0.35rem",
-              }}
-            >
-              ISR in XC32: <code>__ISR(...)</code> oppure attributi{" "}
-              <code>interrupt/vector</code> o <code>#pragma interrupt</code>.
-            </p>
             <CodeBlock language="c">{`// vector(8) = Timer2 interrupt vector
 void __attribute__((interrupt(ipl1), vector(8))) Timer2IntHandler(void)
 {

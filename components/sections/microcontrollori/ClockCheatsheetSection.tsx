@@ -26,7 +26,7 @@ export function ClockCheatsheetSection() {
               <tbody>
                 <tr>
                   <td><code>FRC</code></td>
-                  <td>Fast RC interno, <strong>8 MHz</strong>, medio/low power, circa +/-2%</td>
+                  <td>Fast RC interno, <strong>8 MHz</strong>, medio/low power, circa +/-12%</td>
                 </tr>
                 <tr>
                   <td><code>LPRC</code></td>
@@ -195,32 +195,16 @@ export function ClockCheatsheetSection() {
 
         <Column width="half">
           <Box color="red" border="left" title="Registri protetti">
-            <CodeBlock language="c">{`SYSKEY = 0xAA996655;
-SYSKEY = 0x556699AA;
+            <CodeBlock language="c">{`asm volatile("di");     // disabilita gli interrupt durante la sequenza critica
 
-// modifica registri protetti: OSCCON, clock switch, ecc.
+SYSKEY = 0x0;            // forza lo stato locked prima dell'unlock
+SYSKEY = 0xAA996655;     // prima chiave della sequenza di unlock
+SYSKEY = 0x556699AA;     // seconda chiave: abilita la scrittura dei registri protetti
 
-SYSKEY = 0x00000000;`}</CodeBlock>
-            <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.35rem" }}>
-              I bit esatti dipendono dal PIC32 specifico: controlla datasheet e
-              reference manual prima di scrivere la configurazione.
-            </p>
-          </Box>
-        </Column>
-      </Row>
+OSCCONSET = 2;           // modifica il registro protetto OSCCON, es. clock switch
 
-      <Row>
-        <Column width="auto">
-          <Box color="green" border="left" title="Documentazione e strumenti">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>datasheet: riferimento per oscillator configuration e special features</li>
-              <li>Microchip Oscillator Configuration reference manual, es. <code>DS60001112</code></li>
-              <li>tabella Excel Microchip per scegliere divisori/moltiplicatori</li>
-              <li><code>MPLAB X MCC</code>: genera codice di inizializzazione XC32</li>
-            </ul>
+SYSKEY = 0x0;            // richiude i registri protetti dopo la modifica
+asm volatile("ei");     // riabilita gli interrupt`}</CodeBlock>
           </Box>
         </Column>
       </Row>
