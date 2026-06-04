@@ -1,0 +1,36 @@
+@startuml
+!pragma layout smetana
+left to right direction
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+skinparam packageStyle rectangle
+
+skinparam usecase {
+  BorderColor #202020
+  BackgroundColor #F9FAFB
+}
+skinparam rectangle {
+  BorderColor #202020
+  BackgroundColor #FFFFFF
+}
+
+actor Giocatore as Player
+
+rectangle "Blackjack Deluxe" {
+  usecase "Gameplay" as Gameplay
+  usecase "Carte / azioni\nscore / saldo" as GameplayDetails
+  usecase "Salvataggi" as Saves
+  usecase "Conferma" as Confirm
+  usecase "Pause" as Pause
+  usecase "Tornare menu" as Menu
+}
+
+Player -- Gameplay
+Player -- Saves
+Gameplay ..> GameplayDetails : <<include>>
+Pause ..> Saves : <<include>>
+Menu ..> Pause : <<extend>>
+Saves ..> Confirm : <<include>>
+@enduml

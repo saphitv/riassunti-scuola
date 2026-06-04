@@ -1,0 +1,39 @@
+@startuml
+hide footbox
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+skinparam sequenceMessageAlign center
+skinparam ParticipantPadding 12
+skinparam BoxPadding 4
+
+participant Controller
+participant BlackjackFacade as Facade
+participant BlackjackCore as Core
+participant GameSession as Session
+participant Round
+participant GameEventBus as Bus
+
+Controller -> Facade : performCurrentPlayerAction(HIT)
+activate Facade
+Facade -> Core : action(HIT)
+activate Core
+
+alt azione valida
+  Core -> Session : applyAction()
+  activate Session
+  Session -> Round : applyAction()
+  activate Round
+  Round -> Bus : emit(CardDealtEvent)
+  deactivate Round
+  deactivate Session
+  Facade -> Bus : drain()
+  Facade --> Controller : state + events
+else azione non valida
+  Core --> Facade : reject / no update
+end
+
+deactivate Core
+deactivate Facade
+@enduml

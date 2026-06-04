@@ -1,0 +1,21 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 10
+skinparam activity {
+  BorderColor #202020
+  BackgroundColor #F9FAFB
+}
+start
+:perform action;
+
+if (azione valida?) then (si)
+  :applyAction + emit events;
+  :drain bus + notify UI;
+else (no)
+  :reject;
+endif
+
+:animate + update UI;
+stop
+@enduml

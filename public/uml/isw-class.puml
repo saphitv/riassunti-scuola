@@ -1,0 +1,76 @@
+@startuml
+!pragma layout smetana
+left to right direction
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 9
+skinparam classFontSize 10
+skinparam classAttributeFontSize 8
+skinparam classAttributeIconSize 0
+
+class GameSession {
+  - saveId
+  + startRound()
+}
+
+class Round {
+  - phase
+  + dealInitialCards()
+  + applyAction()
+}
+
+class PlayerRound {
+  + hands
+}
+
+class Hand {
+  - cards
+  + score()
+}
+
+class Bet {
+  mainStake
+  insuranceStake
+}
+
+class Shoe {
+  + draw()
+  + needsRefill()
+}
+
+class GameRules
+class Card
+
+class Participant {
+  - balance
+}
+
+class License {
+  tier
+  expiresAt
+}
+
+interface PlayerLike
+interface SaveGameRepository
+class FileSystemSaveGameRepository
+
+class BlackjackFacade
+class BlackjackCore
+interface GameFacade
+class Controller
+
+GameSession "1" *-- "*" Round
+GameSession "1" *-- "1" Shoe
+GameSession "1" *-- "1" GameRules
+Round "1" *-- "1" Hand : dealer
+Round "1" *-- "*" PlayerRound
+PlayerRound "1" *-- "1..*" Hand
+Hand *-- Bet
+Hand *-- "*" Card
+Participant *-- License
+Participant ..|> PlayerLike
+FileSystemSaveGameRepository ..|> SaveGameRepository
+BlackjackFacade --> BlackjackCore
+Controller ..> GameFacade
+@enduml

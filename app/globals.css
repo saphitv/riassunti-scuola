@@ -1174,6 +1174,215 @@ li {
 }
 
 /* ============================================
+   INGEGNERIA SOFTWARE 1 - ONE PAGE SHEET
+   ============================================ */
+.isw-one-page {
+  --font-size-base: 4.8pt;
+  --font-size-small: 4.15pt;
+  --font-size-h1: 11pt;
+  --line-height: 1.05;
+  width: 210mm;
+  max-width: 210mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  padding: 5mm 6mm;
+  overflow: hidden;
+  color: #151515;
+}
+
+.isw-one-page .header {
+  margin-bottom: 1.4mm;
+  padding-bottom: 0.9mm;
+  border-bottom-width: 1px;
+}
+
+.isw-one-page .header h1 {
+  line-height: 1;
+}
+
+.isw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35mm;
+  align-items: start;
+}
+
+.isw-col {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.05mm;
+}
+
+.isw-card {
+  min-width: 0;
+  overflow: hidden;
+  border-top: 1.2px solid #888;
+  background: #fbfbfb;
+  padding: 0.65mm 0.8mm 0.8mm;
+  break-inside: avoid;
+}
+
+.isw-card h2 {
+  margin: 0 0 0.45mm;
+  font-size: 5.65pt;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.isw-card h3 {
+  margin: 0.45mm 0 0.25mm;
+  font-size: 4.7pt;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.isw-card-blue { border-top-color: #2563eb; background: #f4f8ff; }
+.isw-card-green { border-top-color: #16a34a; background: #f5fbf5; }
+.isw-card-yellow { border-top-color: #d97706; background: #fffaf0; }
+.isw-card-red { border-top-color: #dc2626; background: #fff5f5; }
+.isw-card-purple { border-top-color: #7c3aed; background: #faf5ff; }
+.isw-card-gray { border-top-color: #737373; background: #fafafa; }
+
+.isw-table {
+  width: 100%;
+  margin: 0.35mm 0;
+  border-collapse: collapse;
+  font-size: var(--font-size-small);
+  line-height: 1.04;
+}
+
+.isw-table th,
+.isw-table td {
+  overflow-wrap: anywhere;
+  border: 0.25pt solid #d7d7d7;
+  padding: 0.28mm 0.42mm;
+  text-align: left;
+  vertical-align: top;
+}
+
+.isw-table th {
+  background: rgba(0, 0, 0, 0.055);
+  font-weight: 800;
+}
+
+.isw-kv th {
+  width: 24%;
+  white-space: nowrap;
+}
+
+.isw-facts {
+  margin: 0.25mm 0;
+  padding-left: 2.4mm;
+  list-style: square;
+  font-size: var(--font-size-small);
+  line-height: 1.05;
+}
+
+.isw-facts li {
+  margin-bottom: 0.22mm;
+  padding-left: 0.1mm;
+}
+
+.isw-flow {
+  margin: 0.35mm 0;
+  border-left: 0.5mm solid rgba(0, 0, 0, 0.28);
+  background: rgba(255, 255, 255, 0.66);
+  padding: 0.45mm 0.55mm;
+  font-family: var(--font-mono-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 3.82pt;
+  line-height: 1.03;
+  white-space: pre-wrap;
+}
+
+.isw-chipline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35mm;
+  margin: 0.35mm 0;
+}
+
+.isw-one-page code,
+.isw-chipline code {
+  overflow-wrap: anywhere;
+  border: 0.25pt solid rgba(0, 0, 0, 0.11);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 0.05mm 0.35mm;
+  font-family: var(--font-mono-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  line-height: 1.05;
+}
+
+.isw-chipline code {
+  font-size: 3.55pt;
+}
+
+.isw-uml-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.35mm 0;
+  border: 0.25pt solid rgba(0, 0, 0, 0.18);
+  background: #fff;
+  object-fit: contain;
+}
+
+.isw-uml-img-narrow {
+  width: 52%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.isw-uml-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28mm;
+  margin: 0.25mm 0 0.55mm;
+}
+
+.isw-uml-legend code {
+  border: 0.25pt solid rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.08mm 0.3mm;
+  font-size: 3.25pt;
+  line-height: 1.05;
+}
+
+@media print {
+  .isw-one-page {
+    width: auto;
+    max-width: none;
+    height: 277mm;
+    min-height: 277mm;
+    max-height: 277mm;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .isw-one-page .header {
+    margin-bottom: 1mm;
+    padding-bottom: 0.7mm;
+  }
+
+  .isw-grid {
+    height: calc(277mm - 7.5mm);
+    gap: 1mm;
+  }
+
+  .isw-col {
+    gap: 0.9mm;
+  }
+
+  .isw-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
    LANDING PAGE — "SCHOLARLY INDEX"
    Editorial masthead + catalog + card deck.
    Scoped under .appunti-root so nothing leaks
