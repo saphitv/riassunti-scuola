@@ -140,6 +140,27 @@ export default function IngegneriaSoftwarePage() {
             />
           </Card>
 
+          <Card title="Requisiti funzionali/non funzionali" tone="yellow">
+            <KeyValue
+              rows={[
+                ["Funzionale", "cosa fa il sistema: servizi, azioni, regole di business"],
+                ["Non funzionale", "qualita, vincolo o proprieta: usabilita, affidabilita, portabilita, prestazioni"],
+                ["Ambiguo", "Salvare/caricare e funzionale; salvataggi affidabili e recuperabili e non funzionale"],
+              ]}
+            />
+            <Matrix
+              headings={["Tipo", "Esempi Blackjack Deluxe"]}
+              rows={[
+                ["Funzionale", "Il sistema deve gestire automaticamente il turno del banco secondo le regole del Blackjack."],
+                ["Funzionale", "Il giocatore deve poter cambiare lingua dalle impostazioni."],
+                ["Funzionale", "Il sistema deve validare la licenza di un partecipante prima di permetterne l'uso nel gioco."],
+                ["Non funzionale", "I dati di gioco devono essere persistenti e recuperabili tramite salvataggi, riducendo il rischio di perdita dello stato."],
+                ["Non funzionale", "Il cambio lingua deve essere immediato o percepito come fluido, migliorando l'usabilita."],
+                ["Non funzionale", "L'applicazione deve essere portabile/installabile su macOS, Windows e Linux tramite packaging."],
+              ]}
+            />
+          </Card>
+
           <Card title="Frontend JavaFX" tone="green">
             <Facts
               items={[
@@ -390,8 +411,8 @@ Round.settle() -> ROUND_SETTLED`}</Flow>
             <Matrix
               headings={["Rel.", "Da ricordare"]}
               rows={[
-                ["include", "obbligatorio/riusato: il caso base esegue sempre il sotto-caso. Freccia base ..> incluso."],
-                ["extend", "opzionale/condizionale: il caso extra aggiunge comportamento al caso base. Freccia extra ..> base."],
+                ["include", "Sempre richiesto: Registrare partecipante <<include>> Validare licenza; Giocare round <<include>> Visualizzare carte/saldo + Eseguire azione."],
+                ["extend", "Opzionale/condizionale, non exclude: Menu pausa <<extend>> Giocare partita; Eliminare salvataggio <<extend>> Gestire salvataggi."],
               ]}
             />
 
