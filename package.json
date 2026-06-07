@@ -9,7 +9,8 @@
     "release:minor": "node scripts/create-github-release.mjs minor",
     "release:patch": "node scripts/create-github-release.mjs patch",
     "ts:check": "tsc --noEmit",
-    "lint": "eslint"
+    "lint": "eslint",
+    "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
     "better-react-mathjax": "2.4.0-beta-1",
@@ -29,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
+    "react-doctor": "^0.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
