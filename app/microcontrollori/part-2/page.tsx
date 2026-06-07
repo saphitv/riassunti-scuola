@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { CourseHeader } from "@/components/index";
 import {
+  ADCCheatsheetSection,
   ClockCheatsheetSection,
   DocumentationLinksSection,
   InterruptsCheatsheetSection,
+  OutputCompareCheatsheetSection,
+  SPICheatsheetSection,
 } from "@/components/sections";
 
 export const metadata: Metadata = {
@@ -21,6 +24,9 @@ export default function MicrocontrolloriPart2Page() {
       <DocumentationLinksSection />
       <ClockCheatsheetSection />
       <InterruptsCheatsheetSection />
+      <SPICheatsheetSection />
+      <ADCCheatsheetSection />
+      <OutputCompareCheatsheetSection />
     </div>
   );
 }

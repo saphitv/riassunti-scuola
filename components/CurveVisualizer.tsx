@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Math as MathComponent } from "./Math";
 
 type CurveType =
@@ -85,6 +85,175 @@ interface CurveVisualizerProps {
   showFormula?: boolean;
 }
 
+interface CurveDrawingOptions {
+  canvas: HTMLCanvasElement;
+  curve: CurveConfig;
+  progress: number;
+  width: number;
+  height: number;
+  color: string;
+}
+
+interface CurveAnimationOptions extends Omit<CurveDrawingOptions, "progress"> {
+  animationRef: { current: number };
+  progressRef: { current: number };
+}
+
+function drawCurve({
+  canvas,
+  curve,
+  progress,
+  width,
+  height,
+  color,
+}: CurveDrawingOptions) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  // Clear canvas
+  ctx.clearRect(0, 0, width, height);
+
+  // Calculate points
+  const points: { x: number; y: number }[] = [];
+  const [tMin, tMax] = curve.tRange;
+  const tRange = tMax - tMin;
+  const steps = 500;
+  const currentTMax = tMin + tRange * progress;
+
+  for (let i = 0; i <= steps * progress; i++) {
+    const t = tMin + (i / steps) * tRange;
+    if (t > currentTMax) break;
+    points.push({
+      x: curve.parametric.x(t, curve.defaultParams),
+      y: curve.parametric.y(t, curve.defaultParams),
+    });
+  }
+
+  if (points.length < 2) return;
+
+  // Find bounds
+  // Calculate full curve bounds for consistent scaling
+  const allPoints: { x: number; y: number }[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = tMin + (i / steps) * tRange;
+    allPoints.push({
+      x: curve.parametric.x(t, curve.defaultParams),
+      y: curve.parametric.y(t, curve.defaultParams),
+    });
+  }
+  const allXs = allPoints.map((p) => p.x);
+  const allYs = allPoints.map((p) => p.y);
+  
+  const minX = Math.min(...allXs);
+  const maxX = Math.max(...allXs);
+  const minY = Math.min(...allYs);
+  const maxY = Math.max(...allYs);
+
+  // Calculate scale and offset
+  const padding = 20;
+  const scaleX = (width - 2 * padding) / (maxX - minX || 1);
+  const scaleY = (height - 2 * padding) / (maxY - minY || 1);
+  const scale = Math.min(scaleX, scaleY);
+
+  const offsetX = padding + ((width - 2 * padding) - (maxX - minX) * scale) / 2 - minX * scale;
+  const offsetY = padding + ((height - 2 * padding) - (maxY - minY) * scale) / 2 - minY * scale;
+
+  // Draw grid
+  ctx.strokeStyle = "#e5e7eb";
+  ctx.lineWidth = 0.5;
+  
+  // Draw axes if visible
+  const originX = offsetX;
+  const originY = height - offsetY;
+  
+  ctx.beginPath();
+  ctx.strokeStyle = "#9ca3af";
+  ctx.lineWidth = 1;
+  // X axis
+  if (originY >= 0 && originY <= height) {
+    ctx.moveTo(0, originY);
+    ctx.lineTo(width, originY);
+  }
+  // Y axis
+  if (originX >= 0 && originX <= width) {
+    ctx.moveTo(originX, 0);
+    ctx.lineTo(originX, height);
+  }
+  ctx.stroke();
+
+  // Draw curve
+  ctx.beginPath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  points.forEach((point, i) => {
+    const canvasX = offsetX + point.x * scale;
+    const canvasY = height - (offsetY + point.y * scale);
+    if (i === 0) {
+      ctx.moveTo(canvasX, canvasY);
+    } else {
+      ctx.lineTo(canvasX, canvasY);
+    }
+  });
+  ctx.stroke();
+
+  // Draw current point (animated dot)
+  if (progress < 1 && points.length > 0) {
+    const lastPoint = points[points.length - 1];
+    const dotX = offsetX + lastPoint.x * scale;
+    const dotY = height - (offsetY + lastPoint.y * scale);
+    
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.arc(dotX, dotY, 4, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
+
+function startCurveAnimation({
+  canvas,
+  curve,
+  width,
+  height,
+  color,
+  animationRef,
+  progressRef,
+}: CurveAnimationOptions) {
+  if (animationRef.current) {
+    cancelAnimationFrame(animationRef.current);
+  }
+
+  progressRef.current = 0;
+  drawCurve({ canvas, curve, progress: progressRef.current, width, height, color });
+
+  let start: number | null = null;
+  const duration = 2000; // 2 seconds
+  let activeFrame = 0;
+
+  const animateProgress = (timestamp: number) => {
+    if (!start) start = timestamp;
+    const elapsed = timestamp - start;
+    progressRef.current = Math.min(elapsed / duration, 1);
+    drawCurve({ canvas, curve, progress: progressRef.current, width, height, color });
+
+    if (progressRef.current < 1) {
+      activeFrame = requestAnimationFrame(animateProgress);
+      animationRef.current = activeFrame;
+    }
+  };
+
+  activeFrame = requestAnimationFrame(animateProgress);
+  animationRef.current = activeFrame;
+
+  return () => {
+    if (activeFrame) {
+      cancelAnimationFrame(activeFrame);
+    }
+  };
+}
+
 export function CurveVisualizer({
   type,
   width = 130,
@@ -94,154 +263,38 @@ export function CurveVisualizer({
   showFormula = true,
 }: CurveVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [progress, setProgress] = useState(animate ? 0 : 1);
-  const [animationKey, setAnimationKey] = useState(0);
   const animationRef = useRef<number>(0);
+  const progressRef = useRef(animate ? 0 : 1);
   const curve = CURVES[type];
-
-  useEffect(() => {
-    if (!animate) {
-      animationRef.current = requestAnimationFrame(() => {
-        setProgress(1);
-      });
-      return () => {
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
-        }
-      };
-    }
-
-    let start: number | null = null;
-    const duration = 2000; // 2 seconds
-
-    const animateProgress = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const newProgress = Math.min(elapsed / duration, 1);
-      setProgress(newProgress);
-
-      if (newProgress < 1) {
-        animationRef.current = requestAnimationFrame(animateProgress);
-      }
-    };
-
-    animationRef.current = requestAnimationFrame(animateProgress);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [animate, type, animationKey]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    let cancelAnimation = () => {};
 
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-
-    // Calculate points
-    const points: { x: number; y: number }[] = [];
-    const [tMin, tMax] = curve.tRange;
-    const tRange = tMax - tMin;
-    const steps = 500;
-    const currentTMax = tMin + tRange * progress;
-
-    for (let i = 0; i <= steps * progress; i++) {
-      const t = tMin + (i / steps) * tRange;
-      if (t > currentTMax) break;
-      points.push({
-        x: curve.parametric.x(t, curve.defaultParams),
-        y: curve.parametric.y(t, curve.defaultParams),
+    if (animate) {
+      cancelAnimation = startCurveAnimation({
+        canvas,
+        curve,
+        width,
+        height,
+        color,
+        animationRef,
+        progressRef,
       });
-    }
-
-    if (points.length < 2) return;
-
-    // Find bounds
-    // Calculate full curve bounds for consistent scaling
-    const allPoints: { x: number; y: number }[] = [];
-    for (let i = 0; i <= steps; i++) {
-      const t = tMin + (i / steps) * tRange;
-      allPoints.push({
-        x: curve.parametric.x(t, curve.defaultParams),
-        y: curve.parametric.y(t, curve.defaultParams),
-      });
-    }
-    const allXs = allPoints.map((p) => p.x);
-    const allYs = allPoints.map((p) => p.y);
-    
-    const minX = Math.min(...allXs);
-    const maxX = Math.max(...allXs);
-    const minY = Math.min(...allYs);
-    const maxY = Math.max(...allYs);
-
-    // Calculate scale and offset
-    const padding = 20;
-    const scaleX = (width - 2 * padding) / (maxX - minX || 1);
-    const scaleY = (height - 2 * padding) / (maxY - minY || 1);
-    const scale = Math.min(scaleX, scaleY);
-
-    const offsetX = padding + ((width - 2 * padding) - (maxX - minX) * scale) / 2 - minX * scale;
-    const offsetY = padding + ((height - 2 * padding) - (maxY - minY) * scale) / 2 - minY * scale;
-
-    // Draw grid
-    ctx.strokeStyle = "#e5e7eb";
-    ctx.lineWidth = 0.5;
-    
-    // Draw axes if visible
-    const originX = offsetX;
-    const originY = height - offsetY;
-    
-    ctx.beginPath();
-    ctx.strokeStyle = "#9ca3af";
-    ctx.lineWidth = 1;
-    // X axis
-    if (originY >= 0 && originY <= height) {
-      ctx.moveTo(0, originY);
-      ctx.lineTo(width, originY);
-    }
-    // Y axis
-    if (originX >= 0 && originX <= width) {
-      ctx.moveTo(originX, 0);
-      ctx.lineTo(originX, height);
-    }
-    ctx.stroke();
-
-    // Draw curve
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-
-    points.forEach((point, i) => {
-      const canvasX = offsetX + point.x * scale;
-      const canvasY = height - (offsetY + point.y * scale);
-      if (i === 0) {
-        ctx.moveTo(canvasX, canvasY);
-      } else {
-        ctx.lineTo(canvasX, canvasY);
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
-    });
-    ctx.stroke();
-
-    // Draw current point (animated dot)
-    if (progress < 1 && points.length > 0) {
-      const lastPoint = points[points.length - 1];
-      const dotX = offsetX + lastPoint.x * scale;
-      const dotY = height - (offsetY + lastPoint.y * scale);
-      
-      ctx.beginPath();
-      ctx.fillStyle = color;
-      ctx.arc(dotX, dotY, 4, 0, 2 * Math.PI);
-      ctx.fill();
+      progressRef.current = 1;
+      drawCurve({ canvas, curve, progress: progressRef.current, width, height, color });
     }
-  }, [curve, progress, width, height, color]);
+
+    return () => {
+      cancelAnimation();
+    };
+  }, [animate, curve, width, height, color]);
 
   const styles = {
     visualizer: {
@@ -292,9 +345,17 @@ export function CurveVisualizer({
         height={height}
         style={styles.canvas}
         onClick={() => {
-          if (animate) {
-            setProgress(0);
-            setAnimationKey((key) => key + 1);
+          const canvas = canvasRef.current;
+          if (animate && canvas) {
+            startCurveAnimation({
+              canvas,
+              curve,
+              width,
+              height,
+              color,
+              animationRef,
+              progressRef,
+            });
           }
         }}
       />

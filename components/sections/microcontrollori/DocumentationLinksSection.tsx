@@ -1,5 +1,6 @@
 import { Box } from "@/components/index";
 import { Download, Eye } from "lucide-react";
+import Link from "next/link";
 
 export function DocumentationLinksSection() {
   return (
@@ -10,8 +11,9 @@ export function DocumentationLinksSection() {
             <strong>Datasheet</strong>: pinout, memoria, limiti elettrici e
             funzioni del chip. <strong>Usalo</strong> per capire cosa offre il
             PIC32 e quali pin/valori puoi usare.{" "}
-            <a
+            <Link
               href="/downloads/microcontrollori/pic32mx370f512l-datasheet.pdf"
+              prefetch={false}
               target="_blank"
               rel="noreferrer"
               title="Apri anteprima datasheet"
@@ -25,9 +27,10 @@ export function DocumentationLinksSection() {
               }}
             >
               <Eye size={7} strokeWidth={1.7} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="/downloads/microcontrollori/pic32mx370f512l-datasheet.pdf"
+              prefetch={false}
               download
               title="Scarica datasheet"
               aria-label="Scarica datasheet"
@@ -40,15 +43,16 @@ export function DocumentationLinksSection() {
               }}
             >
               <Download size={7} strokeWidth={1.7} />
-            </a>
+            </Link>
           </p>
 
           <p style={{ marginTop: "0.35rem" }}>
             <strong>Reference Manual</strong>: descrive in dettaglio registri,
             bit e funzionamento delle periferiche. <strong>Usalo</strong> quando
             programmi timer, UART, SPI, ADC, interrupt o PPS.{" "}
-            <a
+            <Link
               href="/downloads/microcontrollori/pic32-reference-manual.pdf"
+              prefetch={false}
               target="_blank"
               rel="noreferrer"
               title="Apri anteprima reference manual"
@@ -62,9 +66,10 @@ export function DocumentationLinksSection() {
               }}
             >
               <Eye size={7} strokeWidth={1.7} />
-            </a>
-            <a
+            </Link>
+            <Link
               href="/downloads/microcontrollori/pic32-reference-manual.pdf"
+              prefetch={false}
               download
               title="Scarica reference manual"
               aria-label="Scarica reference manual"
@@ -77,7 +82,7 @@ export function DocumentationLinksSection() {
               }}
             >
               <Download size={7} strokeWidth={1.7} />
-            </a>
+            </Link>
           </p>
         </div>
       </Box>

@@ -3,6 +3,16 @@ import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/in
 export function SPICheatsheetSection() {
   return (
     <Section title="SPI">
+      {spiOverviewCards}
+      {spiRegistersTable}
+      {spiTransactionExample}
+      {spiComparisonAndErrors}
+    </Section>
+  );
+}
+
+const spiOverviewCards = (
+  <>
       <div className="no-print">
         <Row>
           <Column width="third">
@@ -87,7 +97,11 @@ export function SPICheatsheetSection() {
           </Column>
         </Row>
       </div>
+  </>
+);
 
+const spiRegistersTable = (
+  <>
       <Row>
         <Column width="auto">
           <Box color="gray" border="left" title="Registri principali (PIC32)">
@@ -147,7 +161,11 @@ export function SPICheatsheetSection() {
           </Box>
         </Column>
       </Row>
+  </>
+);
 
+const spiTransactionExample = (
+  <>
       <Row>
         <Column width="half">
           <Box color="purple" border="left" title="Frequenza SCK">
@@ -246,7 +264,11 @@ void spi1_send(unsigned char b)
           </Box>
         </Column>
       </Row>
+  </>
+);
 
+const spiComparisonAndErrors = (
+  <>
       <div className="no-print">
         <Row>
           <Column width="half">
@@ -312,6 +334,5 @@ void spi1_send(unsigned char b)
           </Column>
         </Row>
       </div>
-    </Section>
-  );
-}
+  </>
+);

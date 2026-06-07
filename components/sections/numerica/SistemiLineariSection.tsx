@@ -14,6 +14,17 @@ import {
 export function SistemiLineariSection() {
   return (
     <Section title="Sistemi Lineari">
+      <SistemiLineariBasics />
+      <GaussJordanAndComparison />
+      <LUFactorizationBasics />
+      <LUSolvingAndPivoting />
+    </Section>
+  );
+}
+
+function SistemiLineariBasics() {
+  return (
+    <>
       <Row>
         <Column width="half">
           <Definition term="Sistema lineare">
@@ -217,7 +228,13 @@ x_1 &= \\frac{c_1 - u_{12}\\,x_2 - u_{13}\\,x_3}{u_{11}}
           </Column>
         </Row>
       </Box>
+    </>
+  );
+}
 
+function GaussJordanAndComparison() {
+  return (
+    <>
       <Box
         color="gray"
         border="left"
@@ -337,7 +354,13 @@ x_1 &= \\frac{c_1 - u_{12}\\,x_2 - u_{13}\\,x_3}{u_{11}}
           </Theorem>
         </Column>
       </Row>
+    </>
+  );
+}
 
+function LUFactorizationBasics() {
+  return (
+    <>
       <Box color="yellow" border="left" title="Fattorizzazione LU — O(n³/3)">
         <Row>
           <Column width="half">
@@ -494,7 +517,13 @@ a_{33} &= (4,3,1) \\cdot (1,1,2) = 4{\\cdot}1 + 3{\\cdot}1 + 1{\\cdot}2 = \\math
           </Column>
         </Row>
       </Box>
+    </>
+  );
+}
 
+function LUSolvingAndPivoting() {
+  return (
+    <>
       <Box color="green" border="left" title="Risoluzione con LU — Due sostituzioni">
         <Row>
           <Column width="half">
@@ -745,6 +774,6 @@ def solve_lu_pivot(A, b):
           </Box>
         </Column>
       </Row>
-    </Section>
+    </>
   );
 }

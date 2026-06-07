@@ -6,6 +6,6 @@ export { DocumentationLinksSection } from "./DocumentationLinksSection";
 export { DocumentationIndexSection } from "./DocumentationIndexSection";
 export { ClockCheatsheetSection } from "./ClockCheatsheetSection";
 export { InterruptsCheatsheetSection } from "./InterruptsCheatsheetSection";
+export { SPICheatsheetSection } from "./SPICheatsheetSection";
 export { ADCCheatsheetSection } from "./ADCCheatsheetSection";
 export { OutputCompareCheatsheetSection } from "./OutputCompareCheatsheetSection";
-export { SPICheatsheetSection } from "./SPICheatsheetSection";

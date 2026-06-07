@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { Math as MathComponent } from "./Math";
 
 type VolumeType =
@@ -754,7 +754,7 @@ export function VolumeVisualizer({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const volume = VOLUMES[type];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 

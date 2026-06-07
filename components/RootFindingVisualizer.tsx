@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 type MethodType = "bisezione" | "secanti" | "newton" | "punto-fisso";
 
@@ -41,7 +41,7 @@ function useRootFindingCanvas({
 }: Required<RootFindingVisualizerProps>) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -59,7 +59,8 @@ function useRootFindingCanvas({
     };
     const color = colors[method];
 
-    if (method === "punto-fisso") {
+    switch (method) {
+      case "punto-fisso": {
       // Fixed-point iteration to find zero of f(x) = e^(-x) - x
       // The zero is where e^(-x) = x, i.e., fixed point of g(x) = e^(-x)
       // Fixed point at ξ ≈ 0.5671
@@ -276,7 +277,10 @@ function useRootFindingCanvas({
       ctx.fillText("Iterazione: xₙ₊₁ = g(xₙ) = e⁻ˣⁿ", legendX, legendY + 12);
       ctx.fillText("g(xₙ) proiettato su asse x → xₙ₊₁", legendX, legendY + 27);
 
-    } else if (method === "secanti") {
+        break;
+      }
+
+      case "secanti": {
       // Secant method with 2cos(x) - x
       // Using wider bounds to show x₀=-1 and x₁=4
       const xMin = -1.5, xMax = 4.5;
@@ -515,7 +519,11 @@ function useRootFindingCanvas({
       ctx.fillStyle = "#374151";
       ctx.fillText("Passo 3: x₂,x₃ → x₄", legendX + 16, legendY + 40);
 
-    } else {
+        break;
+      }
+
+      case "bisezione":
+      case "newton": {
       // Bisezione and Newton use f(x) = x² - 2
       const xMin = 0.5, xMax = 2.5;
       const yMin = -1.5, yMax = 2.5;
@@ -593,90 +601,93 @@ function useRootFindingCanvas({
       ctx.textAlign = "left";
       ctx.fillText("f(x) = x² − 2", toCanvasX(2.0), toCanvasY(2.0));
 
-      if (method === "bisezione") {
-        // Show iterations below the chart
-        const iterations = [
-          { a: 1, b: 2, c: 1.5, label: "1" },
-          { a: 1, b: 1.5, c: 1.25, label: "2" },
-          { a: 1.25, b: 1.5, c: 1.375, label: "3" },
-          { a: 1.375, b: 1.5, c: 1.4375, label: "4" },
-        ];
+      switch (method) {
+        case "bisezione": {
+          // Show iterations below the chart
+          const iterations = [
+            { a: 1, b: 2, c: 1.5, label: "1" },
+            { a: 1, b: 1.5, c: 1.25, label: "2" },
+            { a: 1.25, b: 1.5, c: 1.375, label: "3" },
+            { a: 1.375, b: 1.5, c: 1.4375, label: "4" },
+          ];
 
-        // Draw iterations below x-axis
-        iterations.forEach((iter, i) => {
-          const yOffset = y0 + 12 + i * 14;
+          // Draw iterations below x-axis
+          iterations.forEach((iter, i) => {
+            const yOffset = y0 + 12 + i * 14;
 
+            ctx.strokeStyle = color.main;
+            ctx.fillStyle = color.main;
+            ctx.globalAlpha = 0.5 + (i / iterations.length) * 0.5;
+            ctx.lineWidth = 3;
+
+            // Interval line
+            ctx.beginPath();
+            ctx.moveTo(toCanvasX(iter.a), yOffset);
+            ctx.lineTo(toCanvasX(iter.b), yOffset);
+            ctx.stroke();
+
+            // Bracket ends
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(toCanvasX(iter.a), yOffset - 4);
+            ctx.lineTo(toCanvasX(iter.a), yOffset + 4);
+            ctx.moveTo(toCanvasX(iter.b), yOffset - 4);
+            ctx.lineTo(toCanvasX(iter.b), yOffset + 4);
+            ctx.stroke();
+
+            // Midpoint
+            ctx.beginPath();
+            ctx.arc(toCanvasX(iter.c), yOffset, 3, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Label
+            ctx.globalAlpha = 1;
+            ctx.font = "8pt sans-serif";
+            ctx.textAlign = "left";
+            ctx.fillText(`n=${iter.label}: [${iter.a}, ${iter.b}]`, toCanvasX(iter.b) + 12, yOffset + 3);
+          });
+
+          ctx.globalAlpha = 1;
+
+          // Vertical line from final c to curve
+          const lastIter = iterations[iterations.length - 1];
+          ctx.beginPath();
+          ctx.setLineDash([4, 4]);
           ctx.strokeStyle = color.main;
-          ctx.fillStyle = color.main;
-          ctx.globalAlpha = 0.5 + (i / iterations.length) * 0.5;
-          ctx.lineWidth = 3;
-
-          // Interval line
-          ctx.beginPath();
-          ctx.moveTo(toCanvasX(iter.a), yOffset);
-          ctx.lineTo(toCanvasX(iter.b), yOffset);
+          ctx.lineWidth = 1.5;
+          ctx.moveTo(toCanvasX(lastIter.c), y0 + 12 + (iterations.length - 1) * 14);
+          ctx.lineTo(toCanvasX(lastIter.c), toCanvasY(f(lastIter.c)));
           ctx.stroke();
+          ctx.setLineDash([]);
 
-          // Bracket ends
-          ctx.lineWidth = 2;
+          // Point on curve
           ctx.beginPath();
-          ctx.moveTo(toCanvasX(iter.a), yOffset - 4);
-          ctx.lineTo(toCanvasX(iter.a), yOffset + 4);
-          ctx.moveTo(toCanvasX(iter.b), yOffset - 4);
-          ctx.lineTo(toCanvasX(iter.b), yOffset + 4);
-          ctx.stroke();
-
-          // Midpoint
-          ctx.beginPath();
-          ctx.arc(toCanvasX(iter.c), yOffset, 3, 0, 2 * Math.PI);
+          ctx.fillStyle = color.dark;
+          ctx.arc(toCanvasX(lastIter.c), toCanvasY(f(lastIter.c)), 5, 0, 2 * Math.PI);
           ctx.fill();
 
-          // Label
-          ctx.globalAlpha = 1;
-          ctx.font = "8pt sans-serif";
-          ctx.textAlign = "left";
-          ctx.fillText(`n=${iter.label}: [${iter.a}, ${iter.b}]`, toCanvasX(iter.b) + 12, yOffset + 3);
-        });
+          // Labels for a and b
+          ctx.font = "bold 10pt sans-serif";
+          ctx.fillStyle = color.main;
+          ctx.textAlign = "center";
+          ctx.fillText("a", toCanvasX(1), y0 - 8);
+          ctx.fillText("b", toCanvasX(2), y0 - 8);
+          break;
+        }
 
-        ctx.globalAlpha = 1;
+        case "newton": {
+          // Newton with f(x) = x³ - 2x - 5 (root ≈ 2.0946)
+          // A classic example - this is the function Newton himself used!
+          const fNewton = (x: number) => x * x * x - 2 * x - 5;
+          const dfNewton = (x: number) => 3 * x * x - 2;
+          const ROOT_NEWTON = 2.0945514815;
 
-        // Vertical line from final c to curve
-        const lastIter = iterations[iterations.length - 1];
-        ctx.beginPath();
-        ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = color.main;
-        ctx.lineWidth = 1.5;
-        ctx.moveTo(toCanvasX(lastIter.c), y0 + 12 + (iterations.length - 1) * 14);
-        ctx.lineTo(toCanvasX(lastIter.c), toCanvasY(f(lastIter.c)));
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // Point on curve
-        ctx.beginPath();
-        ctx.fillStyle = color.dark;
-        ctx.arc(toCanvasX(lastIter.c), toCanvasY(f(lastIter.c)), 5, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // Labels for a and b
-        ctx.font = "bold 10pt sans-serif";
-        ctx.fillStyle = color.main;
-        ctx.textAlign = "center";
-        ctx.fillText("a", toCanvasX(1), y0 - 8);
-        ctx.fillText("b", toCanvasX(2), y0 - 8);
-
-      } else if (method === "newton") {
-        // Newton with f(x) = x³ - 2x - 5 (root ≈ 2.0946)
-        // A classic example - this is the function Newton himself used!
-        const fNewton = (x: number) => x * x * x - 2 * x - 5;
-        const dfNewton = (x: number) => 3 * x * x - 2;
-        const ROOT_NEWTON = 2.0945514815;
-
-        // Different colors for each iteration step
-        const stepColors = [
-          { line: "#3b82f6", point: "#2563eb" },  // Blue for step 1
-          { line: "#f97316", point: "#ea580c" },  // Orange for step 2
-          { line: "#a855f7", point: "#9333ea" },  // Purple for step 3
-        ];
+          // Different colors for each iteration step
+          const stepColors = [
+            { line: "#3b82f6", point: "#2563eb" },  // Blue for step 1
+            { line: "#f97316", point: "#ea580c" },  // Orange for step 2
+            { line: "#a855f7", point: "#9333ea" },  // Purple for step 3
+          ];
 
         // Recalculate bounds for this function
         const xMinN = 1.0, xMaxN = 3.0;
@@ -871,6 +882,8 @@ function useRootFindingCanvas({
         ctx.fillRect(legendX, legendY + 34, 12, 3);
         ctx.fillStyle = "#374151";
         ctx.fillText("Passo 3: x₂ → x₃", legendX + 16, legendY + 40);
+          break;
+        }
       }
 
       // Mark the actual root
@@ -886,6 +899,8 @@ function useRootFindingCanvas({
       ctx.fillStyle = "#000";
       ctx.textAlign = "center";
       ctx.fillText("ξ = √2", toCanvasX(ROOT), y0 - 10);
+        break;
+      }
     }
 
   }, [method, width, height]);
