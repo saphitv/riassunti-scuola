@@ -45,12 +45,12 @@ export const CATEGORY_LABELS: Record<CourseCategory, string> = {
   hardware: "Hardware",
 };
 
-export const SEMESTER_ROMAN: Record<Semester, string> = {
+const SEMESTER_ROMAN: Record<Semester, string> = {
   3: "III",
   4: "IV",
 };
 
-export function getCourseSemesters(course: Course): Semester[] {
+function getCourseSemesters(course: Course): Semester[] {
   return course.semesters ?? [course.semester];
 }
 

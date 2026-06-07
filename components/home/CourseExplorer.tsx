@@ -197,7 +197,7 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
           ))}
         </ul>
       ) : (
-        <div className="course-empty" role="status">
+        <output className="course-empty">
           <p className="course-empty-title">Nessun riassunto trovato.</p>
           <p className="course-empty-hint">
             Prova a rimuovere un filtro o a cercare un termine diverso.
@@ -209,7 +209,7 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
           >
             ← torna all&apos;indice
           </button>
-        </div>
+        </output>
       )}
 
       {/* ══════════ FOOTER ══════════ */}

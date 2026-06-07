@@ -21,20 +21,20 @@ export function FormulaTable({ headers, rows }: FormulaTableProps) {
       <table className="formula-table">
         <thead>
           <tr>
-            <th className="formula-table-label-header"></th>
-            {headers.map((header, index) => (
-              <th key={index} className="formula-table-header">
+            <th className="formula-table-label-header" aria-label="Formula" scope="col" />
+            {headers.map((header) => (
+              <th key={header} className="formula-table-header" scope="col">
                 {header}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+          {rows.map((row) => (
+            <tr key={row.label}>
               <td className="formula-table-label">{row.label}</td>
               {row.cells.map((cell, cellIndex) => (
-                <td key={cellIndex} className="formula-table-cell">
+                <td key={headers[cellIndex] ?? cell} className="formula-table-cell">
                   {hasMounted ? (
                     <MathJax>{`\\[${cell}\\]`}</MathJax>
                   ) : (

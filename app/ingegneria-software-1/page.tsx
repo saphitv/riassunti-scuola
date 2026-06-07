@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { isValidElement } from "react";
 import type { ReactNode } from "react";
 import { CourseHeader } from "@/components/index";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
@@ -11,6 +12,26 @@ export const metadata: Metadata = {
 };
 
 type Row = [string, ReactNode];
+
+function reactNodeKey(node: ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") {
+    return "";
+  }
+
+  if (typeof node === "string" || typeof node === "number" || typeof node === "bigint") {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(reactNodeKey).join("|");
+  }
+
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    return reactNodeKey(node.props.children);
+  }
+
+  return "";
+}
 
 function Card({
   title,
@@ -32,8 +53,8 @@ function Card({
 function Facts({ items }: { items: ReactNode[] }) {
   return (
     <ul className="isw-facts">
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
+      {items.map((item) => (
+        <li key={reactNodeKey(item)}>{item}</li>
       ))}
     </ul>
   );
@@ -71,10 +92,10 @@ function Matrix({
         </tr>
       </thead>
       <tbody>
-        {rows.map((row, rowIndex) => (
-          <tr key={rowIndex}>
+        {rows.map((row) => (
+          <tr key={row.map(reactNodeKey).join("::")}>
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
+              <td key={headings[cellIndex]}>{cell}</td>
             ))}
           </tr>
         ))}
@@ -127,8 +148,18 @@ export default function IngegneriaSoftwarePage() {
       />
 
       <div className="isw-grid">
-        <div className="isw-col">
-          <Card title="Progetto" tone="blue">
+        <ProjectColumn />
+        <GameplayColumn />
+        <ImplementationColumn />
+      </div>
+    </div>
+  );
+}
+
+function ProjectColumn() {
+  return (
+    <div className="isw-col">
+      <Card title="Progetto" tone="blue">
             <KeyValue
               rows={[
                 ["App", "desktop JavaFX: Blackjack Deluxe"],
@@ -232,11 +263,15 @@ Bet = mainStake + insuranceStake`}</Flow>
                 ["Participant", "implementa PlayerLike"],
               ]}
             />
-          </Card>
-        </div>
+      </Card>
+    </div>
+  );
+}
 
-        <div className="isw-col">
-          <Card title="Fasi e azioni" tone="yellow">
+function GameplayColumn() {
+  return (
+    <div className="isw-col">
+      <Card title="Fasi e azioni" tone="yellow">
             <Flow>SETUP -&gt; PLAYER_TURN -&gt; DEALER_TURN -&gt; ROUND_SETTLED -&gt; SETUP</Flow>
             <Matrix
               headings={["Azione", "Regola"]}
@@ -345,11 +380,15 @@ Round.settle() -> ROUND_SETTLED`}</Flow>
                 "|swimlane|",
               ]}
             />
-          </Card>
-        </div>
+      </Card>
+    </div>
+  );
+}
 
-        <div className="isw-col">
-          <Card title="Persistenza" tone="gray">
+function ImplementationColumn() {
+  return (
+    <div className="isw-col">
+      <Card title="Persistenza" tone="gray">
             <KeyValue
               rows={[
                 ["Save repo", "list(), find(saveId), upsert(snapshot), delete(saveId)"],
@@ -450,9 +489,7 @@ Round.settle() -> ROUND_SETTLED`}</Flow>
                 <>Usabilita/HIG: feedback, animazioni, audio, carte/saldo/punteggio, overlay settings, <code>availableActions()</code> previene mosse illegali.</>,
               ]}
             />
-          </Card>
-        </div>
-      </div>
+      </Card>
     </div>
   );
 }

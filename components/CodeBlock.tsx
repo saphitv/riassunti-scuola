@@ -28,6 +28,8 @@ function highlightJava(code: string): React.ReactElement[] {
     "Set", "HashSet", "Collection", "Optional", "Stream", "Number", "Override",
     "Deprecated", "SuppressWarnings", "FunctionalInterface", "Retention", "Target",
   ];
+  const keywordSet = new Set(keywords);
+  const builtinSet = new Set(builtins);
 
   const lines = code.split("\n");
   const elements: React.ReactElement[] = [];
@@ -135,13 +137,13 @@ function highlightJava(code: string): React.ReactElement[] {
         while (j < line.length && /\w/.test(line[j])) j++;
         const word = line.slice(i, j);
 
-        if (keywords.includes(word)) {
+        if (keywordSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
-        } else if (builtins.includes(word)) {
+        } else if (builtinSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}
@@ -222,6 +224,9 @@ function highlightC(code: string): React.ReactElement[] {
   ];
 
   const preprocessor = ["include", "define", "ifdef", "ifndef", "endif", "pragma", "undef"];
+  const keywordSet = new Set(keywords);
+  const builtinSet = new Set(builtins);
+  const preprocessorSet = new Set(preprocessor);
 
   const lines = code.split("\n");
   const elements: React.ReactElement[] = [];
@@ -238,7 +243,7 @@ function highlightC(code: string): React.ReactElement[] {
         let k = j;
         while (k < line.length && /\w/.test(line[k])) k++;
         const directive = line.slice(j, k);
-        if (preprocessor.includes(directive)) {
+        if (preprocessorSet.has(directive)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, line.length, "preprocessor")} className="code-preprocessor">
               {line.slice(i)}
@@ -330,13 +335,13 @@ function highlightC(code: string): React.ReactElement[] {
         while (j < line.length && /\w/.test(line[j])) j++;
         const word = line.slice(i, j);
 
-        if (keywords.includes(word)) {
+        if (keywordSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
-        } else if (builtins.includes(word)) {
+        } else if (builtinSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}
@@ -425,6 +430,8 @@ function highlightPython(code: string): React.ReactElement[] {
   ];
 
   const builtins = ["abs", "print", "len", "range", "int", "float", "str", "list"];
+  const keywordSet = new Set(keywords);
+  const builtinSet = new Set(builtins);
 
   const lines = code.split("\n");
   const elements: React.ReactElement[] = [];
@@ -480,13 +487,13 @@ function highlightPython(code: string): React.ReactElement[] {
         while (j < line.length && /\w/.test(line[j])) j++;
         const word = line.slice(i, j);
 
-        if (keywords.includes(word)) {
+        if (keywordSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
-        } else if (builtins.includes(word)) {
+        } else if (builtinSet.has(word)) {
           tokens.push(
             <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}

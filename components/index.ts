@@ -1,12 +1,9 @@
 // Layout components
 export { CourseHeader } from "./CourseHeader";
-export { CourseCardLink } from "./CourseCardLink";
 export { Section } from "./Section";
 export { Row } from "./Row";
 export { Column } from "./Column";
 export { Box } from "./Box";
-export { Divider } from "./Divider";
-export { Spacer } from "./Spacer";
 
 // Math components
 export { Math } from "./Math";

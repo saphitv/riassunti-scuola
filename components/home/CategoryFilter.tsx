@@ -16,10 +16,9 @@ export function CategoryFilter({
   available,
 }: CategoryFilterProps) {
   return (
-    <div
-      role="group"
+    <fieldset
       aria-label="Categoria"
-      className="flex flex-wrap items-center gap-2"
+      className="m-0 flex flex-wrap items-center gap-2 border-0 p-0"
     >
       {available.map((cat) => {
         const isActive = active.has(cat);
@@ -48,6 +47,6 @@ export function CategoryFilter({
           </button>
         );
       })}
-    </div>
+    </fieldset>
   );
 }

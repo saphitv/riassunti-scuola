@@ -25,6 +25,20 @@ export function RootFindingVisualizer({
 }: RootFindingVisualizerProps) {
   // Secanti and Newton need more height to show clearly
   const height = propHeight ?? (method === "secanti" ? 320 : method === "newton" ? 220 : 170);
+  const canvasRef = useRootFindingCanvas({ method, width, height });
+
+  return (
+    <div className="root-finding-visualizer">
+      <canvas ref={canvasRef} width={width} height={height} />
+    </div>
+  );
+}
+
+function useRootFindingCanvas({
+  method,
+  width,
+  height,
+}: Required<RootFindingVisualizerProps>) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -876,9 +890,5 @@ export function RootFindingVisualizer({
 
   }, [method, width, height]);
 
-  return (
-    <div className="root-finding-visualizer">
-      <canvas ref={canvasRef} width={width} height={height} />
-    </div>
-  );
+  return canvasRef;
 }

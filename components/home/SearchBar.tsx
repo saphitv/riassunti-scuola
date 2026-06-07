@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -9,14 +10,17 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ value, onChange }: SearchBarProps) {
+  const searchId = useId();
+
   return (
-    <label className="group relative block">
+    <label htmlFor={searchId} className="group relative block">
       <span className="sr-only">Cerca un riassunto</span>
       <Search
         aria-hidden
         className="pointer-events-none absolute left-0 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--ink-muted)] transition-colors group-focus-within:text-[var(--accent)]"
       />
       <Input
+        id={searchId}
         type="search"
         autoComplete="off"
         spellCheck={false}
