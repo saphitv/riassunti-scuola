@@ -6,7 +6,7 @@ export default function NumericaPage() {
   return (
     <div className="page">
       <CourseHeader
-        title="Numerica"
+        title="Numerica — Semestre III"
         viewTransitionName={getCourseTitleTransitionName("numerica")}
       />
       <ZeriDiFunzioneSection />

@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ViewTransition } from "@/components/ViewTransition";
 import type { Course, CoursePart } from "@/lib/courses";
-import { CATEGORY_LABELS, SEMESTER_ROMAN } from "@/lib/courses";
+import { CATEGORY_LABELS, getCourseSemesterLabel } from "@/lib/courses";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +72,7 @@ export function CourseCard({ course, indexDelay = 0 }: CourseCardProps) {
       <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
         <span className="inline-flex items-center gap-2">
           <span className="text-ink">
-            SEM {SEMESTER_ROMAN[course.semester]}
+            SEM {getCourseSemesterLabel(course)}
           </span>
           <span aria-hidden className="h-px w-4 bg-rule" />
           <span>{course.slug}</span>

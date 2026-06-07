@@ -1,8 +1,8 @@
 /**
  * Single source of truth for the course catalog shown on the home page.
  *
- * Each course carries one or more categories (multi-valued) and a semester.
- * The landing page filters against these fields.
+ * Each course carries one or more categories (multi-valued) and one or more
+ * semesters. The landing page filters against these fields.
  */
 
 export type CourseCategory = "programming" | "math" | "hardware";
@@ -29,7 +29,10 @@ export interface Course {
   title: string;
   description: string;
   categories: CourseCategory[];
+  /** Primary semester used for single-semester courses and legacy sorting. */
   semester: Semester;
+  /** All semesters covered by the course when it spans multiple test scopes. */
+  semesters?: Semester[];
   /** Extra tokens that boost search hits (e.g. "bayes", "pic32"). */
   keywords: string[];
   /** Optional split into multiple parts — surfaced on hover from the home card. */
@@ -46,6 +49,24 @@ export const SEMESTER_ROMAN: Record<Semester, string> = {
   3: "III",
   4: "IV",
 };
+
+export function getCourseSemesters(course: Course): Semester[] {
+  return course.semesters ?? [course.semester];
+}
+
+export function getCourseLatestSemester(course: Course): Semester {
+  return Math.max(...getCourseSemesters(course)) as Semester;
+}
+
+export function getCourseSemesterLabel(course: Course): string {
+  return getCourseSemesters(course)
+    .map((semester) => SEMESTER_ROMAN[semester])
+    .join("-");
+}
+
+export function isCourseInSemester(course: Course, semester: Semester): boolean {
+  return getCourseSemesters(course).includes(semester);
+}
 
 export const courses: Course[] = [
   {
@@ -65,10 +86,32 @@ export const courses: Course[] = [
   {
     slug: "numerica",
     title: "Numerica",
-    description: "Zeri di funzioni, sistemi lineari",
+    description: "Zeri di funzioni, sistemi lineari, metodi numerici",
     categories: ["math"],
     semester: 3,
-    keywords: ["bisezione", "newton", "gauss", "zeri", "sistemi lineari"],
+    semesters: [3, 4],
+    keywords: [
+      "bisezione",
+      "newton",
+      "gauss",
+      "zeri",
+      "sistemi lineari",
+      "quarto semestre",
+    ],
+    parts: [
+      {
+        slug: "",
+        numeral: "I",
+        title: "Semestre III",
+        description: "Zeri di funzioni, sistemi lineari",
+      },
+      {
+        slug: "part-2",
+        numeral: "II",
+        title: "Semestre IV",
+        description: "Riassunto vuoto",
+      },
+    ],
   },
   {
     slug: "programmazione-oggetti",
@@ -180,5 +223,5 @@ export const courses: Course[] = [
 
 /** Most recent semester — selected by default in the home filter. */
 export const DEFAULT_SEMESTER: Semester = Math.max(
-  ...courses.map((course) => course.semester),
+  ...courses.map((course) => getCourseLatestSemester(course)),
 ) as Semester;

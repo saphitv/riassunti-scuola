@@ -67,3 +67,23 @@ pnpm lint
 pnpm ts:check
 pnpm build
 ```
+
+## Release
+
+These commands create a GitHub release from the latest default branch state.
+They require the GitHub CLI to be installed and authenticated with `gh auth login`.
+
+```bash
+pnpm release:minor
+pnpm release:patch
+```
+
+- `pnpm release:minor` bumps the release tag from `v0.X.Y` to `v0.(X+1).0`.
+- `pnpm release:patch` bumps the release tag from `v0.X.Y` to `v0.X.(Y+1)`.
+
+To preview the next tag without creating a release:
+
+```bash
+pnpm release:minor -- --dry-run
+pnpm release:patch -- --dry-run
+```

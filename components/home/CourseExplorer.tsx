@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   DEFAULT_SEMESTER,
+  getCourseLatestSemester,
+  isCourseInSemester,
   type Course,
   type CourseCategory,
+  type Semester,
 } from "@/lib/courses";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SearchBar } from "@/components/home/SearchBar";
@@ -47,7 +50,11 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     const matches = courses.filter((c) => {
-      if (semester !== "all" && c.semester !== Number(semester)) return false;
+      if (
+        semester !== "all" &&
+        !isCourseInSemester(c, Number(semester) as Semester)
+      )
+        return false;
       if (
         activeCats.size > 0 &&
         !c.categories.some((cat) => activeCats.has(cat))
@@ -61,7 +68,9 @@ export function CourseExplorer({ courses }: CourseExplorerProps) {
     });
     // Most recent semester first; alphabetical within a semester.
     return matches.sort(
-      (a, b) => b.semester - a.semester || a.title.localeCompare(b.title, "it"),
+      (a, b) =>
+        getCourseLatestSemester(b) - getCourseLatestSemester(a) ||
+        a.title.localeCompare(b.title, "it"),
     );
   }, [courses, query, semester, activeCats]);
 

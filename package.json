@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "release:minor": "node scripts/create-github-release.mjs minor",
+    "release:patch": "node scripts/create-github-release.mjs patch",
     "ts:check": "tsc --noEmit",
     "lint": "eslint"
   },
