@@ -97,6 +97,10 @@ export const courses: Course[] = [
       "zeri",
       "sistemi lineari",
       "quarto semestre",
+      "regressione",
+      "interpolazione",
+      "spline",
+      "trapezi",
     ],
     parts: [
       {
@@ -109,7 +113,7 @@ export const courses: Course[] = [
         slug: "part-2",
         numeral: "II",
         title: "Semestre IV",
-        description: "Riassunto vuoto",
+        description: "Regressione, interpolazione, spline, integrazione numerica",
       },
     ],
   },
