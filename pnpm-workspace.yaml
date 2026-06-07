@@ -2,8 +2,8 @@ packages:
   - .
 minimumReleaseAge: 10080
 trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 525600
 allowBuilds:
-  msgpackr-extract: set this to true or false
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+  msgpackr-extract: false
+  sharp: false
+  unrs-resolver: false
