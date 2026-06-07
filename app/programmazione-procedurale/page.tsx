@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CourseHeader } from "@/components/index";
 import {
   IncludesSection,
@@ -16,6 +17,12 @@ import {
   ModularizzazioneSection,
 } from "@/components/sections/programmazione-procedurale";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
+
+export const metadata: Metadata = {
+  title: "Programmazione Procedurale | Appunti",
+  description:
+    "Appunti stampabili di Programmazione Procedurale in C con include, macro, I/O, puntatori, strutture dati e modularizzazione.",
+};
 
 export default function ProgrammazioneProceduralePage() {
   return (

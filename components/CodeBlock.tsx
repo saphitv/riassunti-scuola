@@ -6,6 +6,10 @@ interface CodeBlockProps {
   title?: string;
 }
 
+function tokenKey(lineIndex: number, start: number, end: number, kind: string) {
+  return `${lineIndex}:${start}:${end}:${kind}`;
+}
+
 function highlightJava(code: string): React.ReactElement[] {
   const keywords = [
     "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",
@@ -31,13 +35,12 @@ function highlightJava(code: string): React.ReactElement[] {
   lines.forEach((line, lineIndex) => {
     const tokens: React.ReactElement[] = [];
     let i = 0;
-    let tokenKey = 0;
 
     while (i < line.length) {
       // Single-line comments
       if (line[i] === "/" && line[i + 1] === "/") {
         tokens.push(
-          <span key={tokenKey++} className="code-comment">
+          <span key={tokenKey(lineIndex, i, line.length, "comment")} className="code-comment">
             {line.slice(i)}
           </span>
         );
@@ -49,7 +52,7 @@ function highlightJava(code: string): React.ReactElement[] {
         let j = i + 1;
         while (j < line.length && /\w/.test(line[j])) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-annotation">
+          <span key={tokenKey(lineIndex, i, j, "annotation")} className="code-annotation">
             {line.slice(i, j)}
           </span>
         );
@@ -65,7 +68,7 @@ function highlightJava(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-string">
+          <span key={tokenKey(lineIndex, i, j + 1, "string")} className="code-string">
             {line.slice(i, j + 1)}
           </span>
         );
@@ -81,7 +84,7 @@ function highlightJava(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-string">
+          <span key={tokenKey(lineIndex, i, j + 1, "char")} className="code-string">
             {line.slice(i, j + 1)}
           </span>
         );
@@ -94,7 +97,7 @@ function highlightJava(code: string): React.ReactElement[] {
         let j = i;
         while (j < line.length && /[\d.fFdDlL]/.test(line[j])) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-number">
+          <span key={tokenKey(lineIndex, i, j, "number")} className="code-number">
             {line.slice(i, j)}
           </span>
         );
@@ -118,7 +121,7 @@ function highlightJava(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-generic">
+          <span key={tokenKey(lineIndex, i, j, "generic")} className="code-generic">
             {line.slice(i, j)}
           </span>
         );
@@ -134,31 +137,31 @@ function highlightJava(code: string): React.ReactElement[] {
 
         if (keywords.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-keyword">
+            <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
         } else if (builtins.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-builtin">
+            <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}
             </span>
           );
         } else if (j < line.length && line[j] === "(") {
           tokens.push(
-            <span key={tokenKey++} className="code-function">
+            <span key={tokenKey(lineIndex, i, j, "function")} className="code-function">
               {word}
             </span>
           );
         } else if (/^[A-Z]/.test(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-type">
+            <span key={tokenKey(lineIndex, i, j, "type")} className="code-type">
               {word}
             </span>
           );
         } else {
           tokens.push(
-            <span key={tokenKey++} className="code-variable">
+            <span key={tokenKey(lineIndex, i, j, "variable")} className="code-variable">
               {word}
             </span>
           );
@@ -173,7 +176,7 @@ function highlightJava(code: string): React.ReactElement[] {
         while (j < line.length && /[+\-*/%=<>!&|^~]/.test(line[j])) j++;
         if (j === i) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-operator">
+          <span key={tokenKey(lineIndex, i, j, "operator")} className="code-operator">
             {line.slice(i, j)}
           </span>
         );
@@ -182,7 +185,7 @@ function highlightJava(code: string): React.ReactElement[] {
       }
 
       // Whitespace and other characters
-      tokens.push(<span key={tokenKey++}>{line[i]}</span>);
+      tokens.push(<span key={tokenKey(lineIndex, i, i + 1, "text")}>{line[i]}</span>);
       i++;
     }
 
@@ -226,7 +229,6 @@ function highlightC(code: string): React.ReactElement[] {
   lines.forEach((line, lineIndex) => {
     const tokens: React.ReactElement[] = [];
     let i = 0;
-    let tokenKey = 0;
 
     while (i < line.length) {
       // Preprocessor directives
@@ -238,7 +240,7 @@ function highlightC(code: string): React.ReactElement[] {
         const directive = line.slice(j, k);
         if (preprocessor.includes(directive)) {
           tokens.push(
-            <span key={tokenKey++} className="code-preprocessor">
+            <span key={tokenKey(lineIndex, i, line.length, "preprocessor")} className="code-preprocessor">
               {line.slice(i)}
             </span>
           );
@@ -249,7 +251,7 @@ function highlightC(code: string): React.ReactElement[] {
       // Single-line comments
       if (line[i] === "/" && line[i + 1] === "/") {
         tokens.push(
-          <span key={tokenKey++} className="code-comment">
+          <span key={tokenKey(lineIndex, i, line.length, "comment")} className="code-comment">
             {line.slice(i)}
           </span>
         );
@@ -261,7 +263,7 @@ function highlightC(code: string): React.ReactElement[] {
         const endIndex = line.indexOf("*/", i + 2);
         if (endIndex !== -1) {
           tokens.push(
-            <span key={tokenKey++} className="code-comment">
+            <span key={tokenKey(lineIndex, i, endIndex + 2, "comment")} className="code-comment">
               {line.slice(i, endIndex + 2)}
             </span>
           );
@@ -269,7 +271,7 @@ function highlightC(code: string): React.ReactElement[] {
           continue;
         } else {
           tokens.push(
-            <span key={tokenKey++} className="code-comment">
+            <span key={tokenKey(lineIndex, i, line.length, "comment")} className="code-comment">
               {line.slice(i)}
             </span>
           );
@@ -285,7 +287,7 @@ function highlightC(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-string">
+          <span key={tokenKey(lineIndex, i, j + 1, "string")} className="code-string">
             {line.slice(i, j + 1)}
           </span>
         );
@@ -301,7 +303,7 @@ function highlightC(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-string">
+          <span key={tokenKey(lineIndex, i, j + 1, "char")} className="code-string">
             {line.slice(i, j + 1)}
           </span>
         );
@@ -314,7 +316,7 @@ function highlightC(code: string): React.ReactElement[] {
         let j = i;
         while (j < line.length && /[\d.xXaAbBcCdDeEfFlLuU]/.test(line[j])) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-number">
+          <span key={tokenKey(lineIndex, i, j, "number")} className="code-number">
             {line.slice(i, j)}
           </span>
         );
@@ -330,31 +332,31 @@ function highlightC(code: string): React.ReactElement[] {
 
         if (keywords.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-keyword">
+            <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
         } else if (builtins.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-builtin">
+            <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}
             </span>
           );
         } else if (j < line.length && line[j] === "(") {
           tokens.push(
-            <span key={tokenKey++} className="code-function">
+            <span key={tokenKey(lineIndex, i, j, "function")} className="code-function">
               {word}
             </span>
           );
         } else if (/^[A-Z_][A-Z_0-9]*$/.test(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-constant">
+            <span key={tokenKey(lineIndex, i, j, "constant")} className="code-constant">
               {word}
             </span>
           );
         } else {
           tokens.push(
-            <span key={tokenKey++} className="code-variable">
+            <span key={tokenKey(lineIndex, i, j, "variable")} className="code-variable">
               {word}
             </span>
           );
@@ -369,7 +371,7 @@ function highlightC(code: string): React.ReactElement[] {
         while (j < line.length && /[+\-*/%=<>!&|^~]/.test(line[j])) j++;
         if (j === i) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-operator">
+          <span key={tokenKey(lineIndex, i, j, "operator")} className="code-operator">
             {line.slice(i, j)}
           </span>
         );
@@ -378,7 +380,7 @@ function highlightC(code: string): React.ReactElement[] {
       }
 
       // Whitespace and other characters
-      tokens.push(<span key={tokenKey++}>{line[i]}</span>);
+      tokens.push(<span key={tokenKey(lineIndex, i, i + 1, "text")}>{line[i]}</span>);
       i++;
     }
 
@@ -430,13 +432,12 @@ function highlightPython(code: string): React.ReactElement[] {
   lines.forEach((line, lineIndex) => {
     const tokens: React.ReactElement[] = [];
     let i = 0;
-    let tokenKey = 0;
 
     while (i < line.length) {
       // Comments
       if (line[i] === "#") {
         tokens.push(
-          <span key={tokenKey++} className="code-comment">
+          <span key={tokenKey(lineIndex, i, line.length, "comment")} className="code-comment">
             {line.slice(i)}
           </span>
         );
@@ -452,7 +453,7 @@ function highlightPython(code: string): React.ReactElement[] {
           j++;
         }
         tokens.push(
-          <span key={tokenKey++} className="code-string">
+          <span key={tokenKey(lineIndex, i, j + 1, "string")} className="code-string">
             {line.slice(i, j + 1)}
           </span>
         );
@@ -465,7 +466,7 @@ function highlightPython(code: string): React.ReactElement[] {
         let j = i;
         while (j < line.length && /[\d.e\-]/.test(line[j])) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-number">
+          <span key={tokenKey(lineIndex, i, j, "number")} className="code-number">
             {line.slice(i, j)}
           </span>
         );
@@ -481,25 +482,25 @@ function highlightPython(code: string): React.ReactElement[] {
 
         if (keywords.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-keyword">
+            <span key={tokenKey(lineIndex, i, j, "keyword")} className="code-keyword">
               {word}
             </span>
           );
         } else if (builtins.includes(word)) {
           tokens.push(
-            <span key={tokenKey++} className="code-builtin">
+            <span key={tokenKey(lineIndex, i, j, "builtin")} className="code-builtin">
               {word}
             </span>
           );
         } else if (j < line.length && line[j] === "(") {
           tokens.push(
-            <span key={tokenKey++} className="code-function">
+            <span key={tokenKey(lineIndex, i, j, "function")} className="code-function">
               {word}
             </span>
           );
         } else {
           tokens.push(
-            <span key={tokenKey++} className="code-variable">
+            <span key={tokenKey(lineIndex, i, j, "variable")} className="code-variable">
               {word}
             </span>
           );
@@ -514,7 +515,7 @@ function highlightPython(code: string): React.ReactElement[] {
         while (j < line.length && /[+\-*/%=<>!&|^~]/.test(line[j])) j++;
         if (j === i) j++;
         tokens.push(
-          <span key={tokenKey++} className="code-operator">
+          <span key={tokenKey(lineIndex, i, j, "operator")} className="code-operator">
             {line.slice(i, j)}
           </span>
         );
@@ -523,7 +524,7 @@ function highlightPython(code: string): React.ReactElement[] {
       }
 
       // Whitespace and other characters
-      tokens.push(<span key={tokenKey++}>{line[i]}</span>);
+      tokens.push(<span key={tokenKey(lineIndex, i, i + 1, "text")}>{line[i]}</span>);
       i++;
     }
 

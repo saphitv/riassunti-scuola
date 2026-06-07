@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { CourseHeader, Section, Row, Column, Box, Math, MathBlock } from "@/components/index";
+
+export const metadata: Metadata = {
+  title: "Template corso | Appunti",
+  description:
+    "Pagina modello per comporre nuovi riassunti universitari stampabili con sezioni, box e formule.",
+};
 
 export default function TemplatePage() {
   return (

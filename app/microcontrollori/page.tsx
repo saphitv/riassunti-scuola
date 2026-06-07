@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CourseHeader } from "@/components/index";
 import {
   MicrocontrolloriSection,
@@ -6,6 +7,12 @@ import {
   TimersCheatsheetSection,
   DocumentationIndexSection,
 } from "@/components/sections";
+
+export const metadata: Metadata = {
+  title: "Microcontrollori Parte I | Appunti",
+  description:
+    "Appunti stampabili di Microcontrollori Parte I con GPIO, UART, timer e riferimenti alla documentazione.",
+};
 
 export default function MicrocontrolloriPage() {
   return (

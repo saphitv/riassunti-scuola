@@ -1,7 +1,14 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { CourseHeader } from "@/components/index";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
+
+export const metadata: Metadata = {
+  title: "Ingegneria Software 1 | Appunti",
+  description:
+    "Appunti visuali e stampabili di Ingegneria Software 1 con modelli, processi e concetti chiave.",
+};
 
 type Row = [string, ReactNode];
 

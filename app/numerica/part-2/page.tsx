@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CourseHeader } from "@/components/index";
 import {
   AdattamentoCurveSection,
@@ -6,6 +7,12 @@ import {
   IntegrazioneTrapeziSection,
 } from "@/components/sections";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
+
+export const metadata: Metadata = {
+  title: "Numerica Semestre IV | Appunti",
+  description:
+    "Riassunto stampabile di Calcolo Numerico con adattamento di curve, interpolazione, spline e integrazione.",
+};
 
 export default function NumericaPart2Page() {
   return (
