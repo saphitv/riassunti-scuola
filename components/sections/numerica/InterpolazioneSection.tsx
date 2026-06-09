@@ -45,6 +45,24 @@ export function InterpolazioneSection() {
           </Column>
           <Column width="half">
             <p>
+              Con <strong>3 punti</strong> si cercano 3 coefficienti:{" "}
+              <Math>{"a_0,a_1,a_2"}</Math>. Quindi <Math>{"V"}</Math> ha 3
+              righe e 3 colonne, mentre <Math>{"y"}</Math> e un vettore
+              colonna separato.
+            </p>
+            <MathBlock size="small">
+              {"\\begin{bmatrix} 1 & x_0 & x_0^2 \\\\ 1 & x_1 & x_1^2 \\\\ 1 & x_2 & x_2^2 \\end{bmatrix}\\begin{bmatrix} a_0 \\\\ a_1 \\\\ a_2 \\end{bmatrix}=\\begin{bmatrix} y_0 \\\\ y_1 \\\\ y_2 \\end{bmatrix}"}
+            </MathBlock>
+            <Note>
+              Esempio: per <Math>{"(0,1),(1,3),(2,7)"}</Math>:
+              <MathBlock size="small">
+                {"\\begin{bmatrix} 1 & 0 & 0 \\\\ 1 & 1 & 1 \\\\ 1 & 2 & 4 \\end{bmatrix}\\begin{bmatrix} a_0 \\\\ a_1 \\\\ a_2 \\end{bmatrix}=\\begin{bmatrix} 1 \\\\ 3 \\\\ 7 \\end{bmatrix}"}
+              </MathBlock>
+              La matrice di Vandermonde e <Math>{"3\\times3"}</Math>; se si
+              scrive la matrice aumentata <Math>{"[V\\mid y]"}</Math>, allora
+              compare una colonna in piu per i valori <Math>{"y"}</Math>.
+            </Note>
+            <p>
               Se il polinomio e scritto in ordine decrescente,{" "}
               <Math>{"p(x)=a_nx^n+\\cdots+a_1x+a_0"}</Math>, la riga diventa:
             </p>
