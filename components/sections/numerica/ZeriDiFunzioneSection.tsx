@@ -177,14 +177,18 @@ export function ZeriDiFunzioneSection() {
           <Column width="half">
             <MathBlock>{"x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}"}</MathBlock>
             <p>
-              Dato <Math>{"x_0"}</Math>, traccia la tangente in <Math>{"(x_0, f(x_0))"}</Math>.
-              Il nuovo <Math>{"x_1"}</Math> è l&apos;intersezione con l&apos;asse x.
+              Newton parte da un tentativo <Math>{"x_n"}</Math> e lo corregge usando
+              il valore della funzione e la sua pendenza.
             </p>
+            <ol style={{ fontSize: "var(--font-size-small)", margin: "0.4rem 0 0.5rem 1.1rem" }}>
+              <li>Calcola <Math>{"f(x_n)"}</Math>: quanto sei lontano dallo zero.</li>
+              <li>Calcola <Math>{"f'(x_n)"}</Math>: in che direzione sta andando la curva.</li>
+              <li>Sposta <Math>{"x_n"}</Math> dove la tangente taglia l&apos;asse x.</li>
+            </ol>
             <Note>
-              <strong>Errore:</strong> <Math>{"|f(x_n)|"}</Math> (residuo, valore della funzione nel punto).{" "}
-              <strong>Requisito:</strong> <Math>{"f'(x) \\neq 0"}</Math>.{" "}
-              <strong>Pro:</strong> Molto veloce.{" "}
-              <strong>Contro:</strong> Richiede derivata, può divergere.
+              <strong>Idea:</strong> ripeti la correzione finché <Math>{"f(x_n)"}</Math> è quasi zero.{" "}
+              <strong>Pro:</strong> molto veloce se parti vicino alla radice.{" "}
+              <strong>Contro:</strong> serve <Math>{"f'(x)"}</Math> e non deve essere <Math>{"0"}</Math>.
             </Note>
           </Column>
           <Column width="half">

@@ -118,7 +118,18 @@ export function InterpolazioneSection() {
             <p>
               Con <Math>{"(-2,4),\\ (-1,5),\\ (1,1),\\ (2,8)"}</Math>:
             </p>
-            <MathBlock>{"c_0=4,\\qquad c_1=1,\\qquad c_2=-1,\\qquad c_3=1"}</MathBlock>
+            <MathBlock size="small">
+              {`\\begin{aligned}
+c_0 &= f[x_0]=4 \\\\
+c_1 &= f[x_1,x_0]=\\frac{5-4}{-1-(-2)}=1 \\\\
+c_2 &= f[x_2,x_1,x_0]
+=\\frac{\\frac{1-5}{1-(-1)}-1}{1-(-2)}
+=\\frac{-2-1}{3}=-1 \\\\
+c_3 &= f[x_3,x_2,x_1,x_0]
+=\\frac{\\frac{\\frac{8-1}{2-1}-\\frac{1-5}{1-(-1)}}{2-(-1)}-(-1)}{2-(-2)}
+=\\frac{3-(-1)}{4}=1
+\\end{aligned}`}
+            </MathBlock>
             <MathBlock size="small">
               {"p_3(x)=4+(x+2)-(x+2)(x+1)+(x+2)(x+1)(x-1)"}
             </MathBlock>
@@ -128,7 +139,15 @@ export function InterpolazioneSection() {
             <p>
               Aggiungendo <Math>{"(3,5)"}</Math>:
             </p>
-            <MathBlock>{"c_4=-\\frac{3}{5}"}</MathBlock>
+            <MathBlock size="small">
+              {`\\begin{aligned}
+f[x_4,x_3] &= \\frac{5-8}{3-2}=-3 \\\\
+f[x_4,x_3,x_2] &= \\frac{-3-7}{3-1}=-5 \\\\
+f[x_4,x_3,x_2,x_1] &= \\frac{-5-3}{3-(-1)}=-2 \\\\
+c_4 &= f[x_4,x_3,x_2,x_1,x_0]
+=\\frac{-2-1}{3-(-2)}=-\\frac{3}{5}
+\\end{aligned}`}
+            </MathBlock>
             <MathBlock size="small">
               {"p_4(x)=p_3(x)-\\frac{3}{5}(x+2)(x+1)(x-1)(x-2)"}
             </MathBlock>
