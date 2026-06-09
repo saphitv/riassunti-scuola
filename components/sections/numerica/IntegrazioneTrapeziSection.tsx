@@ -41,6 +41,40 @@ export function IntegrazioneTrapeziSection() {
         </Row>
       </Box>
 
+      <Box color="green" border="left" title="Metodo di Simpson">
+        <Row>
+          <Column width="half">
+            <p>
+              Approssima la funzione con una parabola interpolante su tre
+              punti: estremi <Math>{"a"}</Math>, <Math>{"b"}</Math> e punto
+              medio <Math>{"\\frac{a+b}{2}"}</Math>.
+            </p>
+            <MathBlock size="small">
+              {"\\int_a^b f(x)\\,dx \\approx \\frac{b-a}{6}\\left[f(a)+4f\\left(\\frac{a+b}{2}\\right)+f(b)\\right]"}
+            </MathBlock>
+            <Note>
+              Richiede tre valutazioni della funzione ed e piu accurato dei
+              trapezi quando la funzione e liscia.
+            </Note>
+          </Column>
+          <Column width="half">
+            <p>
+              Nella forma composta si divide <Math>{"[a,b]"}</Math> in{" "}
+              <Math>{"n"}</Math> sottointervalli equidistanti con{" "}
+              <strong><Math>{"n"}</Math> pari</strong> e{" "}
+              <Math>{"h=\\frac{b-a}{n}"}</Math>.
+            </p>
+            <MathBlock size="small">
+              {"\\int_a^b f(x)\\,dx \\approx \\frac{h}{3}\\left[f(x_0)+4\\sum_{i\\,\\text{dispari}} f(x_i)+2\\sum_{i\\,\\text{pari},\\,0<i<n} f(x_i)+f(x_n)\\right]"}
+            </MathBlock>
+            <p className="text-sm">
+              Schema coefficienti: <Math>{"1,4,2,4,2,\\dots,4,1"}</Math>.
+              Errore globale di ordine <Math>{"O(h^4)"}</Math>.
+            </p>
+          </Column>
+        </Row>
+      </Box>
+
       <Box color="yellow" border="left" title="Mini-tabella decisionale per l'esame">
         <table className="comparison-table">
           <thead>
@@ -88,6 +122,10 @@ export function IntegrazioneTrapeziSection() {
             <tr>
               <td>Approssimare un integrale da punti discreti</td>
               <td>Metodo dei trapezi</td>
+            </tr>
+            <tr>
+              <td>Integrale di funzione liscia, con numero pari di intervalli</td>
+              <td>Metodo di Simpson</td>
             </tr>
           </tbody>
         </table>

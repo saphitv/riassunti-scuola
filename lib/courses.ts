@@ -101,6 +101,7 @@ export const courses: Course[] = [
       "interpolazione",
       "spline",
       "trapezi",
+      "simpson",
     ],
     parts: [
       {
