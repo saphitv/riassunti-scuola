@@ -52,6 +52,20 @@ g & h & i
 \\end{pmatrix}
 = aei + bfg + cdh - ceg - bdi - afh`}
             </MathBlock>
+            <MathBlock>
+              {`= a\\det\\begin{pmatrix}
+e & f \\\\
+h & i
+\\end{pmatrix}
+- b\\det\\begin{pmatrix}
+d & f \\\\
+g & i
+\\end{pmatrix}
++ c\\det\\begin{pmatrix}
+d & e \\\\
+g & h
+\\end{pmatrix}`}
+            </MathBlock>
             <Example title="Esempio" color="blue">
               <MathBlock>
                 {`\\det\\begin{pmatrix}
