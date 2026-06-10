@@ -4,6 +4,9 @@ export * from "./analisi-2";
 // Numerica sections
 export * from "./numerica";
 
+// Matematica Avanzata sections
+export * from "./matematica-avanzata";
+
 // Programmazione a Oggetti sections
 export * from "./programmazione-oggetti";
 
