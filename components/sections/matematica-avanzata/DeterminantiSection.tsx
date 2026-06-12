@@ -103,6 +103,58 @@ g & h
         </MathBlock>
       </Theorem>
 
+      <Box color="green" border="left" title="Come invertire una matrice">
+        <Row>
+          <Column width="half">
+            <p>
+              <strong>Metodo generale (Gauss-Jordan):</strong>
+            </p>
+            <ol>
+              <li>
+                Scrivi la matrice aumentata{" "}
+                <Math>{"[A\\mid I_n]"}</Math>.
+              </li>
+              <li>
+                Usa operazioni elementari di riga per trasformare la parte
+                sinistra in <Math>{"I_n"}</Math>.
+              </li>
+              <li>
+                Applica le stesse operazioni anche alla parte destra.
+              </li>
+              <li>
+                Quando ottieni <Math>{"[I_n\\mid B]"}</Math>, allora{" "}
+                <Math>{"B=A^{-1}"}</Math>.
+              </li>
+            </ol>
+            <Note>
+              Se non riesci a ottenere un pivot non nullo, allora{" "}
+              <Math>{"\\det(A)=0"}</Math> e la matrice non e invertibile.
+            </Note>
+          </Column>
+          <Column width="half">
+            <p>
+              <strong>Formula per matrici 2 x 2:</strong>
+            </p>
+            <MathBlock>
+              {`A=\\begin{pmatrix}
+a & b \\\\
+c & d
+\\end{pmatrix}
+\\qquad
+\\det(A)=ad-bc`}
+            </MathBlock>
+            <MathBlock>
+              {`A^{-1}=\\frac{1}{ad-bc}
+\\begin{pmatrix}
+d & -b \\\\
+-c & a
+\\end{pmatrix}
+\\qquad (ad-bc\\neq0)`}
+            </MathBlock>
+          </Column>
+        </Row>
+      </Box>
+
       <Box color="yellow" border="left" title="Regole del determinante">
         <Row>
           <Column width="half">

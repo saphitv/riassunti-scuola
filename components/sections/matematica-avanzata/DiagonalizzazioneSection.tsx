@@ -5,6 +5,7 @@ import {
   Example,
   Math,
   MathBlock,
+  Note,
   Row,
   Section,
   Theorem,
@@ -25,6 +26,15 @@ export function DiagonalizzazioneSection() {
         <Math>{"D"}</Math> sono gli autovalori corrispondenti, nello stesso
         ordine delle colonne di <Math>{"P"}</Math>.
       </p>
+      <Note>
+        Invertibile e diagonalizzabile sono proprieta diverse:{" "}
+        <Math>{"A"}</Math> e invertibile se <Math>{"\\det(A)\\neq0"}</Math>,
+        cioe se <Math>{"0"}</Math> non e un autovalore.{" "}
+        <Math>{"A"}</Math> e diagonalizzabile quando ha <Math>{"n"}</Math>{" "}
+        autovettori indipendenti. Se <Math>{"A=PDP^{-1}"}</Math>, allora{" "}
+        <Math>{"A"}</Math> e invertibile se e solo se nessun autovalore sulla
+        diagonale di <Math>{"D"}</Math> e <Math>{"0"}</Math>.
+      </Note>
 
       <Row>
         <Column width="half">
