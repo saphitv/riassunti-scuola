@@ -49,6 +49,47 @@ export function AutovaloriAutospaziSection() {
         </MathBlock>
       </Box>
 
+      <Box color="purple" border="left" title="Cayley-Hamilton e trucco 3 x 3">
+        <Row>
+          <Column width="half">
+            <p>
+              Il teorema di Cayley-Hamilton dice che ogni matrice quadrata
+              annulla il proprio polinomio caratteristico.
+            </p>
+            <MathBlock>
+              {`q(\\lambda)=\\det(\\lambda I-A)
+\\quad\\Longrightarrow\\quad
+q(A)=0`}
+            </MathBlock>
+            <p>Per una matrice 3 x 3:</p>
+            <MathBlock>
+              {`q(A)=A^3-\\operatorname{tr}(A)A^2+S_2A-\\det(A)I=0`}
+            </MathBlock>
+          </Column>
+          <Column width="half">
+            <p>
+              Trucco rapido per scrivere il polinomio caratteristico monico:
+            </p>
+            <MathBlock>
+              {`q(\\lambda)
+=\\lambda^3-\\operatorname{tr}(A)\\lambda^2
++S_2\\lambda-\\det(A)`}
+            </MathBlock>
+            <MathBlock>
+              {`S_2=
+\\text{somma dei minori principali }2\\times2
+=\\frac{(\\operatorname{tr}A)^2-\\operatorname{tr}(A^2)}{2}`}
+            </MathBlock>
+            <Note>
+              Qui <Math>{"q(\\lambda)=\\det(\\lambda I-A)"}</Math>. Se usi{" "}
+              <Math>{"p_A(\\lambda)=\\det(A-\\lambda I)"}</Math>, per una{" "}
+              matrice 3 x 3 vale <Math>{"p_A(\\lambda)=-q(\\lambda)"}</Math>,
+              ma gli zeri sono gli stessi.
+            </Note>
+          </Column>
+        </Row>
+      </Box>
+
       <Row>
         <Column width="half">
           <Box color="green" border="left" title="Autospazio">
