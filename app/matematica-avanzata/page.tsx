@@ -5,13 +5,14 @@ import {
   DiagonalizzazioneSection,
   DeterminantiSection,
   MatriciVettoriSection,
+  SistemiEquazioniDifferenzialiSection,
 } from "@/components/sections/matematica-avanzata";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 
 export const metadata: Metadata = {
   title: "Matematica Avanzata | Appunti",
   description:
-    "Riassunto stampabile di matematica avanzata con matrici, vettori, determinanti, traccia, autovalori, autovettori, autospazi e diagonalizzazione.",
+    "Riassunto stampabile di matematica avanzata con matrici, vettori, determinanti, traccia, autovalori, autovettori, autospazi, diagonalizzazione e sistemi di equazioni differenziali.",
 };
 
 export default function MatematicaAvanzataPage() {
@@ -26,6 +27,7 @@ export default function MatematicaAvanzataPage() {
       <DeterminantiSection />
       <AutovaloriAutospaziSection />
       <DiagonalizzazioneSection />
+      <SistemiEquazioniDifferenzialiSection />
     </div>
   );
 }
