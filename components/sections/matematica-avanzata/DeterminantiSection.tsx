@@ -103,15 +103,30 @@ g & h
         </MathBlock>
       </Theorem>
 
-      <Box color="yellow" border="left" title="Proprieta utili">
+      <Box color="yellow" border="left" title="Regole del determinante">
         <Row>
           <Column width="half">
             <ul>
+              <li>
+                <Math>{"\\det(I_n)=1"}</Math>
+              </li>
               <li>
                 <Math>{"\\det(AB)=\\det(A)\\det(B)"}</Math>
               </li>
               <li>
                 <Math>{"\\det(A^T)=\\det(A)"}</Math>
+              </li>
+              <li>
+                Se <Math>{"A"}</Math> e invertibile,{" "}
+                <Math>{"\\det(A^{-1})=\\frac{1}{\\det(A)}"}</Math>.
+              </li>
+              <li>
+                <Math>{"\\det(A^k)=\\det(A)^k"}</Math> per{" "}
+                <Math>{"k \\in \\mathbb{N}"}</Math>.
+              </li>
+              <li>
+                Per <Math>{"A \\in \\mathbb{R}^{n \\times n}"}</Math>,{" "}
+                <Math>{"\\det(cA)=c^n\\det(A)"}</Math>.
               </li>
               <li>
                 Se <Math>{"A"}</Math> e triangolare,{" "}
@@ -127,7 +142,16 @@ g & h
                 determinante per <Math>{"k"}</Math>.
               </li>
               <li>
+                Sostituire <Math>{"R_i"}</Math> con{" "}
+                <Math>{"R_i+kR_j"}</Math>, con <Math>{"i \\neq j"}</Math>, non
+                cambia il determinante.
+              </li>
+              <li>
                 Due righe proporzionali implicano <Math>{"\\det(A)=0"}</Math>.
+              </li>
+              <li>
+                Una riga nulla, una colonna nulla o righe/colonne linearmente
+                dipendenti implicano <Math>{"\\det(A)=0"}</Math>.
               </li>
             </ul>
           </Column>
@@ -138,6 +162,14 @@ g & h
           non invertibile.
         </Note>
       </Box>
+
+      <Note>
+        Se <Math>{"\\lambda_1,\\dots,\\lambda_n"}</Math> sono gli autovalori di{" "}
+        <Math>{"A"}</Math> contati con molteplicita, allora la loro somma e la
+        traccia <Math>{"\\operatorname{tr}(A)=\\lambda_1+\\cdots+\\lambda_n"}</Math>{" "}
+        e il loro prodotto e il determinante{" "}
+        <Math>{"\\det(A)=\\lambda_1\\cdots\\lambda_n"}</Math>.
+      </Note>
     </Section>
   );
 }
