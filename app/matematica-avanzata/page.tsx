@@ -16,8 +16,9 @@ export const metadata: Metadata = {
 };
 
 export default function MatematicaAvanzataPage() {
+  const compact = true
   return (
-    <div className="page page-compact">
+    <div className={`page ${compact ? "page-compact" : ""}`}> 
       <CourseHeader
         title="Matematica Avanzata"
         viewTransitionName={getCourseTitleTransitionName("matematica-avanzata")}
