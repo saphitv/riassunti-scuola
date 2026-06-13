@@ -14,33 +14,47 @@ import {
 export function DiagonalizzazioneSection() {
   return (
     <Section title="Diagonalizzazione" allowPageBreak>
-      <Definition term="Matrice diagonalizzabile">
-        Una matrice <Math>{"A \\in \\mathbb{R}^{n \\times n}"}</Math> e
-        diagonalizzabile se esistono una matrice invertibile <Math>{"P"}</Math>{" "}
-        e una matrice diagonale <Math>{"D"}</Math> tali che:
-      </Definition>
-      <MathBlock>{`A=PDP^{-1}`}</MathBlock>
-      <p>
-        Le colonne di <Math>{"P"}</Math> sono autovettori linearmente
-        indipendenti di <Math>{"A"}</Math>. Gli elementi diagonali di{" "}
-        <Math>{"D"}</Math> sono gli autovalori corrispondenti, nello stesso
-        ordine delle colonne di <Math>{"P"}</Math>.
-      </p>
-      <Note>
-        Invertibile e diagonalizzabile sono proprieta diverse:{" "}
-        <Math>{"A"}</Math> e invertibile se <Math>{"\\det(A)\\neq0"}</Math>,
-        cioe se <Math>{"0"}</Math> non e un autovalore.{" "}
-        <Math>{"A"}</Math> e diagonalizzabile quando ha <Math>{"n"}</Math>{" "}
-        autovettori indipendenti. Se <Math>{"A=PDP^{-1}"}</Math>, allora{" "}
-        <Math>{"A"}</Math> e invertibile se e solo se nessun autovalore sulla
-        diagonale di <Math>{"D"}</Math> e <Math>{"0"}</Math>.
-      </Note>
+      <Row gap="sm">
+        <Column width="half">
+          <Box color="blue" border="left" title="Idea chiave">
+            <Definition term="Matrice diagonalizzabile">
+              Una matrice <Math>{"A \\in \\mathbb{R}^{n \\times n}"}</Math> e
+              diagonalizzabile se esistono una matrice invertibile{" "}
+              <Math>{"P"}</Math> e una matrice diagonale <Math>{"D"}</Math>{" "}
+              tali che:
+            </Definition>
+            <MathBlock gap="sm">{`A=PDP^{-1}`}</MathBlock>
+            <p>
+              Le colonne di <Math>{"P"}</Math> sono autovettori linearmente
+              indipendenti di <Math>{"A"}</Math>. Gli elementi diagonali di{" "}
+              <Math>{"D"}</Math> sono gli autovalori corrispondenti, nello
+              stesso ordine delle colonne di <Math>{"P"}</Math>.
+            </p>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="gray" border="left" title="Invertibile vs diagonalizzabile">
+            <Note>
+              Invertibile e diagonalizzabile sono proprieta diverse:{" "}
+              <Math>{"A"}</Math> e invertibile se{" "}
+              <Math>{"\\det(A)\\neq0"}</Math>, cioe se <Math>{"0"}</Math> non e
+              un autovalore. <Math>{"A"}</Math> e diagonalizzabile quando ha{" "}
+              <Math>{"n"}</Math> autovettori indipendenti.
+            </Note>
+            <Note>
+              Se <Math>{"A=PDP^{-1}"}</Math>, allora <Math>{"A"}</Math> e
+              invertibile se e solo se nessun autovalore sulla diagonale di{" "}
+              <Math>{"D"}</Math> e <Math>{"0"}</Math>.
+            </Note>
+          </Box>
+        </Column>
+      </Row>
 
-      <Row>
+      <Row gap="sm">
         <Column width="half">
           <Box color="blue" border="left" title="Criterio pratico">
             <Theorem title="Quando si puo diagonalizzare">
-              <MathBlock>
+              <MathBlock gap="sm">
                 {`A\\ \\text{diagonalizzabile}
 \\Longleftrightarrow
 \\mathbb{R}^n\\ \\text{ha una base di autovettori di}\\ A`}
@@ -64,9 +78,9 @@ export function DiagonalizzazioneSection() {
                 <Math>{"m_g(\\lambda)=\\dim(E_\\lambda)"}</Math>.
               </li>
               <li>
-                Usa il rango:
+                Usa il rango:{" "}
                 <Math>
-                  {"\\ m_g(\\lambda)=n-\\operatorname{rank}(A-\\lambda I)"}
+                  {"m_g(\\lambda)=n-\\operatorname{rank}(A-\\lambda I)"}
                 </Math>
                 .
               </li>
@@ -108,7 +122,7 @@ export function DiagonalizzazioneSection() {
         </Column>
       </Row>
 
-      <Row>
+      <Row gap="sm">
         <Column width="half">
           <Box color="green" border="left" title="Molteplicita">
             <ul>
@@ -119,7 +133,10 @@ export function DiagonalizzazioneSection() {
               </li>
               <li>
                 Molteplicita geometrica:{" "}
-                <Math>{"\\dim(E_\\lambda)=n-\\operatorname{rank}(A-\\lambda I)"}</Math>.
+                <Math>
+                  {"\\dim(E_\\lambda)=n-\\operatorname{rank}(A-\\lambda I)"}
+                </Math>
+                .
               </li>
               <li>
                 Sempre{" "}
@@ -139,7 +156,7 @@ export function DiagonalizzazioneSection() {
               La diagonalizzazione semplifica potenze e calcoli ripetuti: se{" "}
               <Math>{"A=PDP^{-1}"}</Math>, allora
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`A^k=PD^kP^{-1}
 \\qquad
 D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
@@ -148,7 +165,7 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
               Determinante e traccia si leggono dalla diagonale di{" "}
               <Math>{"D"}</Math>:
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\det(A)=\\lambda_1\\cdots\\lambda_n
 \\qquad
 \\operatorname{tr}(A)=\\lambda_1+\\cdots+\\lambda_n`}
@@ -157,10 +174,50 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
         </Column>
       </Row>
 
+      <Row gap="sm">
+        <Column width="half">
+          <Box color="red" border="left" title="Errori comuni">
+            <ul>
+              <li>
+                L&apos;ordine degli autovalori in <Math>{"D"}</Math> deve
+                seguire l&apos;ordine degli autovettori nelle colonne di{" "}
+                <Math>{"P"}</Math>.
+              </li>
+              <li>
+                Un autovalore ripetuto non basta: servono abbastanza
+                autovettori indipendenti.
+              </li>
+              <li>
+                Il vettore nullo appartiene agli autospazi, ma non e mai un
+                autovettore.
+              </li>
+            </ul>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="gray" border="left" title="Checklist veloce">
+            <ol>
+              <li>
+                Autovalori distinti: diagonalizzabile direttamente.
+              </li>
+              <li>
+                Autovalore ripetuto: confronta{" "}
+                <Math>{"m_g(\\lambda)"}</Math> e{" "}
+                <Math>{"m_a(\\lambda)"}</Math>.
+              </li>
+              <li>
+                Costruisci <Math>{"P"}</Math> solo dopo avere{" "}
+                <Math>{"n"}</Math> autovettori indipendenti.
+              </li>
+            </ol>
+          </Box>
+        </Column>
+      </Row>
+
       <Example title="Esempio 2 x 2" color="blue">
         <Row>
           <Column width="half">
-            <MathBlock>
+            <MathBlock gap="sm">
               {`A=
 \\begin{pmatrix}
 2 & 1 \\\\
@@ -169,7 +226,7 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
 \\qquad
 \\lambda_1=2,\\ \\lambda_2=3`}
             </MathBlock>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`E_2=\\operatorname{span}\\left\\{
 \\begin{pmatrix}
 1 \\\\
@@ -186,7 +243,7 @@ E_3=\\operatorname{span}\\left\\{
             </MathBlock>
           </Column>
           <Column width="half">
-            <MathBlock>
+            <MathBlock gap="sm">
               {`P=
 \\begin{pmatrix}
 1 & 1 \\\\
@@ -199,7 +256,7 @@ D=
 0 & 3
 \\end{pmatrix}`}
             </MathBlock>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`P^{-1}=
 \\begin{pmatrix}
 1 & -1 \\\\
@@ -211,23 +268,6 @@ A=PDP^{-1}`}
           </Column>
         </Row>
       </Example>
-
-      <Box color="red" border="left" title="Errori comuni">
-        <ul>
-          <li>
-            L&apos;ordine degli autovalori in <Math>{"D"}</Math> deve seguire
-            l&apos;ordine degli autovettori nelle colonne di <Math>{"P"}</Math>.
-          </li>
-          <li>
-            Un autovalore ripetuto non basta: servono abbastanza autovettori
-            indipendenti.
-          </li>
-          <li>
-            Il vettore nullo appartiene agli autospazi, ma non e mai un
-            autovettore.
-          </li>
-        </ul>
-      </Box>
     </Section>
   );
 }

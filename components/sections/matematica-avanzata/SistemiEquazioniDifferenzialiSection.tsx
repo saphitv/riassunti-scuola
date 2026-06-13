@@ -14,12 +14,15 @@ import {
 export function SistemiEquazioniDifferenzialiSection() {
   return (
     <Section title="Sistemi di equazioni differenziali" allowPageBreak>
-      <Definition term="Sistema lineare del primo ordine">
-        Un sistema di equazioni differenziali lineari si scrive in forma
-        vettoriale usando una matrice dei coefficienti:
-      </Definition>
-      <MathBlock>
-        {`\\mathbf{x}'(t)=A\\mathbf{x}(t)+\\mathbf{b}(t)
+      <Row gap="sm">
+        <Column width="half">
+          <Box color="blue" border="left" title="Forma vettoriale">
+            <Definition term="Sistema lineare del primo ordine">
+              Un sistema di equazioni differenziali lineari si scrive in forma
+              vettoriale usando una matrice dei coefficienti:
+            </Definition>
+            <MathBlock gap="sm">
+              {`\\mathbf{x}'(t)=A\\mathbf{x}(t)+\\mathbf{b}(t)
 \\qquad
 \\mathbf{x}(t)=
 \\begin{pmatrix}
@@ -27,43 +30,13 @@ x_1(t) \\\\
 \\vdots \\\\
 x_n(t)
 \\end{pmatrix}`}
-      </MathBlock>
-      <p>
-        Se <Math>{"\\mathbf{b}(t)=0"}</Math>, il sistema e omogeneo. Se{" "}
-        <Math>{"A"}</Math> ha coefficienti costanti, autovalori e autovettori
-        descrivono direttamente l&apos;andamento delle soluzioni.
-      </p>
-
-      <Row>
-        <Column width="half">
-          <Box color="blue" border="left" title="Problema di Cauchy">
-            <p>
-              Data una condizione iniziale{" "}
-              <Math>{"\\mathbf{x}(t_0)=\\mathbf{x}_0"}</Math>, si cerca la
-              traiettoria che parte dal vettore assegnato:
-            </p>
-            <MathBlock>
-              {`\\begin{cases}
-\\mathbf{x}'(t)=A\\mathbf{x}(t) \\\\
-\\mathbf{x}(t_0)=\\mathbf{x}_0
-\\end{cases}`}
             </MathBlock>
-            <Theorem title="Soluzione generale">
-              <MathBlock>
-                {`\\mathbf{x}(t)=e^{A(t-t_0)}\\mathbf{x}_0`}
-              </MathBlock>
-              <p>
-                Per una matrice quadrata <Math>{"B"}</Math>,
-                l&apos;esponenziale di matrice si definisce con la stessa serie
-                dell&apos;esponenziale scalare:
-              </p>
-              <MathBlock>
-                {`e^B=I+B+\\frac{B^2}{2!}+\\frac{B^3}{3!}+\\cdots
-=\\sum_{k=0}^{\\infty}\\frac{B^k}{k!}`}
-              </MathBlock>
-              La matrice <Math>{"e^{At}"}</Math> si calcola facilmente quando{" "}
-              <Math>{"A"}</Math> e diagonalizzabile.
-            </Theorem>
+            <p>
+              Se <Math>{"\\mathbf{b}(t)=0"}</Math>, il sistema e omogeneo. Se{" "}
+              <Math>{"A"}</Math> ha coefficienti costanti, autovalori e
+              autovettori descrivono direttamente l&apos;andamento delle
+              soluzioni.
+            </p>
           </Box>
         </Column>
         <Column width="half">
@@ -93,7 +66,38 @@ x_n(t)
         </Column>
       </Row>
 
-      <Row>
+      <Row gap="sm">
+        <Column width="half">
+          <Box color="blue" border="left" title="Problema di Cauchy">
+            <p>
+              Data una condizione iniziale{" "}
+              <Math>{"\\mathbf{x}(t_0)=\\mathbf{x}_0"}</Math>, si cerca la
+              traiettoria che parte dal vettore assegnato:
+            </p>
+            <MathBlock gap="sm">
+              {`\\begin{cases}
+\\mathbf{x}'(t)=A\\mathbf{x}(t) \\\\
+\\mathbf{x}(t_0)=\\mathbf{x}_0
+\\end{cases}`}
+            </MathBlock>
+            <Theorem title="Soluzione generale">
+              <MathBlock gap="sm">
+                {`\\mathbf{x}(t)=e^{A(t-t_0)}\\mathbf{x}_0`}
+              </MathBlock>
+              <p>
+                Per una matrice quadrata <Math>{"B"}</Math>,
+                l&apos;esponenziale di matrice si definisce con la stessa serie
+                dell&apos;esponenziale scalare:
+              </p>
+              <MathBlock gap="sm" size="small">
+                {`e^B=I+B+\\frac{B^2}{2!}+\\frac{B^3}{3!}+\\cdots
+=\\sum_{k=0}^{\\infty}\\frac{B^k}{k!}`}
+              </MathBlock>
+              La matrice <Math>{"e^{At}"}</Math> si calcola facilmente quando{" "}
+              <Math>{"A"}</Math> e diagonalizzabile.
+            </Theorem>
+          </Box>
+        </Column>
         <Column width="half">
           <Box color="green" border="left" title="Caso diagonalizzabile">
             <p>
@@ -101,7 +105,7 @@ x_n(t)
               <Math>{"D=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)"}</Math>,
               allora:
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`e^{At}=Pe^{Dt}P^{-1}
 \\qquad
 e^{Dt}=\\operatorname{diag}(e^{\\lambda_1 t},\\dots,e^{\\lambda_n t})`}
@@ -110,12 +114,15 @@ e^{Dt}=\\operatorname{diag}(e^{\\lambda_1 t},\\dots,e^{\\lambda_n t})`}
               Equivalentemente, se <Math>{"v_1,\\dots,v_n"}</Math> sono
               autovettori indipendenti:
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\mathbf{x}(t)
 =c_1e^{\\lambda_1t}v_1+\\cdots+c_ne^{\\lambda_nt}v_n`}
             </MathBlock>
           </Box>
         </Column>
+      </Row>
+
+      <Row gap="sm">
         <Column width="half">
           <Box color="purple" border="left" title="Autovalori complessi">
             <p>
@@ -123,7 +130,7 @@ e^{Dt}=\\operatorname{diag}(e^{\\lambda_1 t},\\dots,e^{\\lambda_n t})`}
               <Math>{"v=p+iq"}</Math>, dal termine complesso{" "}
               <Math>{"e^{\\lambda t}v"}</Math> si ottengono due soluzioni reali:
             </p>
-            <MathBlock>
+            <MathBlock gap="sm" size="small">
               {`e^{\\alpha t}\\bigl(p\\cos(\\beta t)-q\\sin(\\beta t)\\bigr)
 \\qquad
 e^{\\alpha t}\\bigl(p\\sin(\\beta t)+q\\cos(\\beta t)\\bigr)`}
@@ -134,26 +141,26 @@ e^{\\alpha t}\\bigl(p\\sin(\\beta t)+q\\cos(\\beta t)\\bigr)`}
             </Note>
           </Box>
         </Column>
-      </Row>
-
-      <Row>
         <Column width="half">
           <Box color="gray" border="left" title="Sistema non omogeneo">
             <p>
               Per <Math>{"\\mathbf{x}'=A\\mathbf{x}+\\mathbf{b}(t)"}</Math>, la
               soluzione e la somma di omogenea e particolare:
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\mathbf{x}(t)=\\mathbf{x}_h(t)+\\mathbf{x}_p(t)`}
             </MathBlock>
             <p>Una formula generale usa la variazione delle costanti:</p>
-            <MathBlock>
+            <MathBlock gap="sm" size="small">
               {`\\mathbf{x}(t)
 =e^{A(t-t_0)}\\mathbf{x}_0
 +\\int_{t_0}^{t} e^{A(t-s)}\\mathbf{b}(s)\\,ds`}
             </MathBlock>
           </Box>
         </Column>
+      </Row>
+
+      <Row gap="sm">
         <Column width="half">
           <Box color="red" border="left" title="Da ordine superiore a sistema">
             <p>
@@ -161,7 +168,7 @@ e^{\\alpha t}\\bigl(p\\sin(\\beta t)+q\\cos(\\beta t)\\bigr)`}
               sistema del primo ordine, metti nel vettore la funzione e le sue
               derivate successive.
             </p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\mathbf{x}=
 \\begin{pmatrix}
 y \\\\
@@ -179,7 +186,7 @@ y^{(n)}
 \\end{pmatrix}`}
             </MathBlock>
             <p>Nel caso del secondo ordine:</p>
-            <MathBlock>
+            <MathBlock gap="sm" size="small">
               {`y''=\\alpha y' + \\beta y
 \\qquad
 \\begin{pmatrix}
@@ -196,7 +203,7 @@ y \\\\
 y'
 \\end{pmatrix}`}
             </MathBlock>
-            <MathBlock>
+            <MathBlock gap="sm" size="small">
               {`\\text{Esempio: } y''=-y'+2y
 \\qquad
 \\begin{pmatrix}
@@ -220,13 +227,32 @@ y'
             </Note>
           </Box>
         </Column>
+        <Column width="half">
+          <Box color="red" border="left" title="Errori comuni">
+            <ul>
+              <li>
+                Non confondere gli autovalori della matrice{" "}
+                <Math>{"A"}</Math> con le componenti della soluzione.
+              </li>
+              <li>
+                Gli autovettori devono essere nello stesso ordine degli
+                autovalori usati nelle esponenziali.
+              </li>
+              <li>
+                Se <Math>{"A"}</Math> non ha abbastanza autovettori
+                indipendenti, la formula diagonalizzata non basta: serve la
+                forma di Jordan o un metodo equivalente.
+              </li>
+            </ul>
+          </Box>
+        </Column>
       </Row>
 
       <Example title="Esempio con due autovalori reali distinti" color="blue">
         <Row>
           <Column width="half">
             <p>Risolvi il sistema omogeneo:</p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\mathbf{x}'=
 \\begin{pmatrix}
 2 & 1 \\\\
@@ -234,7 +260,7 @@ y'
 \\end{pmatrix}
 \\mathbf{x}`}
             </MathBlock>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\lambda_1=2,\\quad v_1=
 \\begin{pmatrix}
 1 \\\\
@@ -250,7 +276,7 @@ y'
           </Column>
           <Column width="half">
             <p>La soluzione generale e:</p>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`\\mathbf{x}(t)
 =c_1e^{2t}
 \\begin{pmatrix}
@@ -263,7 +289,7 @@ y'
 1
 \\end{pmatrix}`}
             </MathBlock>
-            <MathBlock>
+            <MathBlock gap="sm">
               {`x_1(t)=c_1e^{2t}+c_2e^{3t}
 \\qquad
 x_2(t)=c_2e^{3t}`}
@@ -271,24 +297,6 @@ x_2(t)=c_2e^{3t}`}
           </Column>
         </Row>
       </Example>
-
-      <Box color="red" border="left" title="Errori comuni">
-        <ul>
-          <li>
-            Non confondere gli autovalori della matrice{" "}
-            <Math>{"A"}</Math> con le componenti della soluzione.
-          </li>
-          <li>
-            Gli autovettori devono essere nello stesso ordine degli autovalori
-            usati nelle esponenziali.
-          </li>
-          <li>
-            Se <Math>{"A"}</Math> non ha abbastanza autovettori indipendenti,
-            la formula diagonalizzata non basta: serve la forma di Jordan o un
-            metodo equivalente.
-          </li>
-        </ul>
-      </Box>
     </Section>
   );
 }
