@@ -80,6 +80,30 @@ q(A)=0`}
 \\text{somma dei minori principali }2\\times2
 =\\frac{(\\operatorname{tr}A)^2-\\operatorname{tr}(A^2)}{2}`}
             </MathBlock>
+            <p>Se</p>
+            <MathBlock>
+              {`A=\\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\\\
+a_{21} & a_{22} & a_{23} \\\\
+a_{31} & a_{32} & a_{33}
+\\end{pmatrix}`}
+            </MathBlock>
+            <p>
+              allora i minori principali <Math>{"2\\times2"}</Math> sono quelli
+              ottenuti usando gli stessi indici di riga e colonna:
+            </p>
+            <MathBlock>
+              {`S_2=
+\\begin{vmatrix}a_{11}&a_{12}\\\\a_{21}&a_{22}\\end{vmatrix}
++\\begin{vmatrix}a_{11}&a_{13}\\\\a_{31}&a_{33}\\end{vmatrix}
++\\begin{vmatrix}a_{22}&a_{23}\\\\a_{32}&a_{33}\\end{vmatrix}`}
+            </MathBlock>
+            <MathBlock>
+              {`S_2=
+(a_{11}a_{22}-a_{12}a_{21})
++(a_{11}a_{33}-a_{13}a_{31})
++(a_{22}a_{33}-a_{23}a_{32})`}
+            </MathBlock>
             <Note>
               Qui <Math>{"q(\\lambda)=\\det(\\lambda I-A)"}</Math>. Se usi{" "}
               <Math>{"p_A(\\lambda)=\\det(A-\\lambda I)"}</Math>, per una{" "}

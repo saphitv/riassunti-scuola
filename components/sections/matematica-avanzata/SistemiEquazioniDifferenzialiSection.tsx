@@ -52,6 +52,15 @@ x_n(t)
               <MathBlock>
                 {`\\mathbf{x}(t)=e^{A(t-t_0)}\\mathbf{x}_0`}
               </MathBlock>
+              <p>
+                Per una matrice quadrata <Math>{"B"}</Math>,
+                l&apos;esponenziale di matrice si definisce con la stessa serie
+                dell&apos;esponenziale scalare:
+              </p>
+              <MathBlock>
+                {`e^B=I+B+\\frac{B^2}{2!}+\\frac{B^3}{3!}+\\cdots
+=\\sum_{k=0}^{\\infty}\\frac{B^k}{k!}`}
+              </MathBlock>
               La matrice <Math>{"e^{At}"}</Math> si calcola facilmente quando{" "}
               <Math>{"A"}</Math> e diagonalizzabile.
             </Theorem>
