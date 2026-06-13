@@ -1077,6 +1077,7 @@ li {
 }
 
 .page-compact li {
+  font-size: var(--font-size-small);
   margin-bottom: 0.08rem;
 }
 

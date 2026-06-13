@@ -3,9 +3,7 @@ import { CourseHeader } from "@/components/index";
 import {
   AutovaloriAutospaziSection,
   DiagonalizzazioneSection,
-  DeterminantiSection,
   MatriciVettoriSection,
-  RangoMatriciSection,
   SistemiEquazioniDifferenzialiSection,
   TrasformataLaplaceSection,
 } from "@/components/sections/matematica-avanzata";
@@ -19,15 +17,13 @@ export const metadata: Metadata = {
 
 export default function MatematicaAvanzataPage() {
   return (
-    <div className="page">
+    <div className="page page-compact">
       <CourseHeader
         title="Matematica Avanzata"
         viewTransitionName={getCourseTitleTransitionName("matematica-avanzata")}
       />
 
       <MatriciVettoriSection />
-      <RangoMatriciSection />
-      <DeterminantiSection />
       <AutovaloriAutospaziSection />
       <DiagonalizzazioneSection />
       <SistemiEquazioniDifferenzialiSection />
