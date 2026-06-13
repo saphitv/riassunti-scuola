@@ -46,20 +46,41 @@ export function DiagonalizzazioneSection() {
 \\mathbb{R}^n\\ \\text{ha una base di autovettori di}\\ A`}
               </MathBlock>
             </Theorem>
-            <ul>
+            <p>
+              In pratica devi verificare se riesci a trovare{" "}
+              <Math>{"n"}</Math> autovettori linearmente indipendenti.
+            </p>
+            <ol>
               <li>
-                Se <Math>{"A"}</Math> ha <Math>{"n"}</Math> autovalori distinti,
-                allora e diagonalizzabile.
+                Calcola gli autovalori e la loro molteplicita algebrica{" "}
+                <Math>{"m_a(\\lambda)"}</Math>.
               </li>
               <li>
-                Se un autovalore e ripetuto, bisogna controllare la dimensione
-                del suo autospazio.
+                Se gli autovalori sono <Math>{"n"}</Math> e tutti distinti,
+                puoi fermarti: <Math>{"A"}</Math> e diagonalizzabile.
               </li>
               <li>
-                Se <Math>{"A=A^T"}</Math>, allora <Math>{"A"}</Math> e
-                diagonalizzabile con autovettori ortogonali.
+                Se un autovalore e ripetuto, calcola{" "}
+                <Math>{"m_g(\\lambda)=\\dim(E_\\lambda)"}</Math>.
               </li>
-            </ul>
+              <li>
+                Usa il rango:
+                <Math>
+                  {"\\ m_g(\\lambda)=n-\\operatorname{rank}(A-\\lambda I)"}
+                </Math>
+                .
+              </li>
+              <li>
+                Confronta: se per ogni autovalore{" "}
+                <Math>{"m_g(\\lambda)=m_a(\\lambda)"}</Math>, allora{" "}
+                <Math>{"A"}</Math> e diagonalizzabile; se anche solo uno ha{" "}
+                <Math>{"m_g(\\lambda)<m_a(\\lambda)"}</Math>, non lo e.
+              </li>
+            </ol>
+            <Note>
+              Scorciatoia: se <Math>{"A=A^T"}</Math>, allora{" "}
+              <Math>{"A"}</Math> e diagonalizzabile con autovettori ortogonali.
+            </Note>
           </Box>
         </Column>
         <Column width="half">

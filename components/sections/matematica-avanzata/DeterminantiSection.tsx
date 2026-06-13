@@ -153,6 +153,31 @@ d & -b \\\\
             </MathBlock>
           </Column>
         </Row>
+        <p>
+          <strong>Formula per matrici 3 x 3:</strong>
+        </p>
+        <MathBlock>
+          {`A=\\begin{pmatrix}
+a & b & c \\\\
+d & e & f \\\\
+g & h & i
+\\end{pmatrix}
+\\qquad
+\\det(A)=a(ei-fh)-b(di-fg)+c(dh-eg)`}
+        </MathBlock>
+        <MathBlock>
+          {`A^{-1}=\\frac{1}{\\det(A)}
+\\begin{pmatrix}
+ei-fh & ch-bi & bf-ce \\\\
+fg-di & ai-cg & cd-af \\\\
+dh-eg & bg-ah & ae-bd
+\\end{pmatrix}
+\\qquad (\\det(A)\\neq0)`}
+        </MathBlock>
+        <Note>
+          La matrice nella formula e la trasposta della matrice dei cofattori:
+          per matrici piu grandi conviene usare Gauss-Jordan.
+        </Note>
       </Box>
 
       <Box color="yellow" border="left" title="Regole del determinante">

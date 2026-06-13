@@ -226,6 +226,16 @@ E_3 = \\operatorname{span}\\left\\{
 \\qquad
 \\operatorname{tr}(A)=\\lambda_1+\\cdots+\\lambda_n`}
             </MathBlock>
+            <MathBlock>
+              {`Av=\\lambda v,\\ A\\ \\text{invertibile},\\ \\lambda\\neq0
+\\qquad\\Longrightarrow\\qquad
+A^{-1}v=\\frac{1}{\\lambda}v`}
+            </MathBlock>
+            <p>
+              Quindi se <Math>{"\\lambda"}</Math> e autovalore di{" "}
+              <Math>{"A"}</Math>, allora <Math>{"\\frac{1}{\\lambda}"}</Math> e
+              autovalore di <Math>{"A^{-1}"}</Math>.
+            </p>
             <Note>
               <Math>{"\\det(A)=0"}</Math> equivale a dire che{" "}
               <Math>{"0"}</Math> e autovalore: esiste un{" "}

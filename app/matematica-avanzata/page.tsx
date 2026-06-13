@@ -5,6 +5,7 @@ import {
   DiagonalizzazioneSection,
   DeterminantiSection,
   MatriciVettoriSection,
+  RangoMatriciSection,
   SistemiEquazioniDifferenzialiSection,
 } from "@/components/sections/matematica-avanzata";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
@@ -24,6 +25,7 @@ export default function MatematicaAvanzataPage() {
       />
 
       <MatriciVettoriSection />
+      <RangoMatriciSection />
       <DeterminantiSection />
       <AutovaloriAutospaziSection />
       <DiagonalizzazioneSection />

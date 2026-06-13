@@ -148,27 +148,67 @@ e^{\\alpha t}\\bigl(p\\sin(\\beta t)+q\\cos(\\beta t)\\bigr)`}
         <Column width="half">
           <Box color="red" border="left" title="Da ordine superiore a sistema">
             <p>
-              Un&apos;equazione scalare di ordine <Math>{"n"}</Math> diventa un
-              sistema ponendo come variabili la funzione e le sue derivate.
+              Per trasformare un&apos;equazione di ordine superiore in un
+              sistema del primo ordine, metti nel vettore la funzione e le sue
+              derivate successive.
             </p>
             <MathBlock>
-              {`y''+ay'+by=0
-\\qquad
-x_1=y,\\quad x_2=y'`}
-            </MathBlock>
-            <MathBlock>
-              {`\\begin{cases}
-x_1'=x_2 \\\\
-x_2'=-bx_1-ax_2
-\\end{cases}
+              {`\\mathbf{x}=
+\\begin{pmatrix}
+y \\\\
+y' \\\\
+\\vdots \\\\
+y^{(n-1)}
+\\end{pmatrix}
 \\qquad
 \\mathbf{x}'=
 \\begin{pmatrix}
-0 & 1 \\\\
--b & -a
-\\end{pmatrix}
-\\mathbf{x}`}
+y' \\\\
+y'' \\\\
+\\vdots \\\\
+y^{(n)}
+\\end{pmatrix}`}
             </MathBlock>
+            <p>Nel caso del secondo ordine:</p>
+            <MathBlock>
+              {`y''=\\alpha y' + \\beta y
+\\qquad
+\\begin{pmatrix}
+y' \\\\
+y''
+\\end{pmatrix}
+=
+\\begin{pmatrix}
+0 & 1 \\\\
+\\beta & \\alpha
+\\end{pmatrix}
+\\begin{pmatrix}
+y \\\\
+y'
+\\end{pmatrix}`}
+            </MathBlock>
+            <MathBlock>
+              {`\\text{Esempio: } y''=-y'+2y
+\\qquad
+\\begin{pmatrix}
+y' \\\\
+y''
+\\end{pmatrix}
+=
+\\begin{pmatrix}
+0 & 1 \\\\
+2 & -1
+\\end{pmatrix}
+\\begin{pmatrix}
+y \\\\
+y'
+\\end{pmatrix}`}
+            </MathBlock>
+            <Note>
+              La prima riga copia sempre <Math>{"y'=y'"}</Math>; la seconda
+              riga contiene i coefficienti dell&apos;equazione che esprime{" "}
+              <Math>{"y''"}</Math>.
+            </Note>
           </Box>
         </Column>
       </Row>
