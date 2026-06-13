@@ -240,6 +240,57 @@ dh-eg & bg-ah & ae-bd
         </Note>
       </Box>
 
+      <Box color="purple" border="left" title="Regole della traccia">
+        <Row>
+          <Column width="half">
+            <ul>
+              <li>
+                <Math>{"\\operatorname{tr}(A)"}</Math> e la somma degli
+                elementi sulla diagonale principale.
+              </li>
+              <li>
+                <Math>{"\\operatorname{tr}(I_n)=n"}</Math>
+              </li>
+              <li>
+                <Math>{"\\operatorname{tr}(A+B)=\\operatorname{tr}(A)+\\operatorname{tr}(B)"}</Math>
+              </li>
+              <li>
+                <Math>{"\\operatorname{tr}(cA)=c\\operatorname{tr}(A)"}</Math>
+              </li>
+              <li>
+                <Math>{"\\operatorname{tr}(A^T)=\\operatorname{tr}(A)"}</Math>
+              </li>
+            </ul>
+          </Column>
+          <Column width="half">
+            <ul>
+              <li>
+                <Math>{"\\operatorname{tr}(AB)=\\operatorname{tr}(BA)"}</Math>{" "}
+                quando i prodotti sono definiti.
+              </li>
+              <li>
+                <Math>{"\\operatorname{tr}(ABC)=\\operatorname{tr}(BCA)=\\operatorname{tr}(CAB)"}</Math>
+              </li>
+              <li>
+                Se <Math>{"B=P^{-1}AP"}</Math>, allora{" "}
+                <Math>{"\\operatorname{tr}(B)=\\operatorname{tr}(A)"}</Math>.
+              </li>
+              <li>
+                Se <Math>{"A"}</Math> e triangolare,{" "}
+                <Math>{"\\operatorname{tr}(A)"}</Math> e la somma degli
+                elementi diagonali.
+              </li>
+            </ul>
+          </Column>
+        </Row>
+        <Note>
+          Attenzione: in generale{" "}
+          <Math>{"\\operatorname{tr}(AB)\\neq\\operatorname{tr}(A)\\operatorname{tr}(B)"}</Math>.
+          La traccia si comporta bene con somme, scalari e cicli del prodotto,
+          non come prodotto separato.
+        </Note>
+      </Box>
+
       <Note>
         Se <Math>{"\\lambda_1,\\dots,\\lambda_n"}</Math> sono gli autovalori di{" "}
         <Math>{"A"}</Math> contati con molteplicita, allora la loro somma e la
