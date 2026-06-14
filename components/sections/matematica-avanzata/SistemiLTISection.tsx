@@ -1,7 +1,6 @@
 import {
   Box,
   Column,
-  Definition,
   Example,
   Math,
   MathBlock,
@@ -15,140 +14,46 @@ export function SistemiLTISection() {
     <Section title="Sistemi lineari tempo-invarianti (LTI)" allowPageBreak>
       <Row gap="sm">
         <Column width="half">
-          <Box color="blue" border="left" title="Idea e modello">
-            <Definition term="Sistema LTI">
-              Un sistema e lineare se vale la sovrapposizione degli effetti, ed
-              e tempo-invariante se le matrici che lo descrivono non dipendono
-              dal tempo.
-            </Definition>
-            <MathBlock gap="sm">
-              {`\\dot{\\mathbf{x}}(t)=A\\mathbf{x}(t)+B\\mathbf{u}(t)
-\\qquad
-\\mathbf{y}(t)=C\\mathbf{x}(t)+D\\mathbf{u}(t)`}
-            </MathBlock>
-            <ul>
-              <li>
-                <Math>{"\\mathbf{x}"}</Math>: stato interno del sistema.
-              </li>
-              <li>
-                <Math>{"\\mathbf{u}"}</Math>: ingresso applicato.
-              </li>
-              <li>
-                <Math>{"\\mathbf{y}"}</Math>: uscita osservata.
-              </li>
-            </ul>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="gray" border="left" title="Dimensioni">
+          <Box color="purple" border="left" title="Perche si usa Laplace">
             <p>
-              Se lo stato ha dimensione <Math>{"n"}</Math>, gli ingressi sono{" "}
-              <Math>{"m"}</Math> e le uscite sono <Math>{"p"}</Math>, allora:
+              Un sistema e LTI quando l&apos;equazione e lineare e i
+              coefficienti non dipendono da <Math>{"t"}</Math>. Laplace
+              trasforma le derivate in polinomi in <Math>{"s"}</Math>, quindi
+              l&apos;equazione differenziale diventa algebrica.
             </p>
             <MathBlock gap="sm">
-              {`A\\in\\mathbb{R}^{n\\times n}
+              {`\\mathcal{L}\\{y'\\}=sY(s)-y(0)
 \\qquad
-B\\in\\mathbb{R}^{n\\times m}
-\\qquad
-C\\in\\mathbb{R}^{p\\times n}
-\\qquad
-D\\in\\mathbb{R}^{p\\times m}`}
+\\mathcal{L}\\{y''\\}=s^2Y(s)-sy(0)-y'(0)`}
             </MathBlock>
             <Note>
-              Controllare le dimensioni evita molti errori:{" "}
-              <Math>{"A\\mathbf{x}"}</Math> e <Math>{"B\\mathbf{u}"}</Math>{" "}
-              devono produrre entrambi un vettore in{" "}
-              <Math>{"\\mathbb{R}^n"}</Math>.
+              Se ci sono condizioni iniziali non nulle, non usare direttamente{" "}
+              <Math>{"G(s)=Y(s)/U(s)"}</Math>: trasforma tutta l&apos;equazione
+              e porta dentro i dati iniziali.
             </Note>
           </Box>
         </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
-          <Box color="green" border="left" title="Risposta nel tempo">
-            <p>
-              Con condizione iniziale{" "}
-              <Math>{"\\mathbf{x}(t_0)=\\mathbf{x}_0"}</Math>, la soluzione si
-              ottiene con l&apos;esponenziale di matrice:
-            </p>
-            <MathBlock gap="sm" size="small">
-              {`\\mathbf{x}(t)
-=e^{A(t-t_0)}\\mathbf{x}_0
-+\\int_{t_0}^{t}e^{A(t-\\tau)}B\\mathbf{u}(\\tau)\\,d\\tau`}
-            </MathBlock>
-            <ul>
-              <li>
-                Risposta libera:{" "}
-                <Math>{"e^{A(t-t_0)}\\mathbf{x}_0"}</Math>.
-              </li>
-              <li>
-                Risposta forzata: integrale dovuto a{" "}
-                <Math>{"\\mathbf{u}(t)"}</Math>.
-              </li>
-            </ul>
-          </Box>
-        </Column>
-        <Column width="half">
-          <Box color="purple" border="left" title="Collegamento con Laplace">
-            <p>
-              Con <Math>{"t_0=0"}</Math> e condizioni iniziali nulle, applicare
-              Laplace al modello di stato trasforma le derivate in prodotti per{" "}
-              <Math>{"s"}</Math>:
-            </p>
-            <MathBlock gap="sm" size="small">
-              {`sX(s)=AX(s)+BU(s)
-\\qquad
-Y(s)=CX(s)+DU(s)`}
-            </MathBlock>
-            <MathBlock gap="sm">
-              {`X(s)=(sI-A)^{-1}BU(s)`}
-            </MathBlock>
-            <p>
-              Per questo la trasformata di Laplace e il linguaggio naturale per
-              passare da stato a ingresso-uscita.
-            </p>
-          </Box>
-        </Column>
-      </Row>
-
-      <Row gap="sm">
-        <Column width="half">
-          <Box color="blue" border="left" title="Funzione di trasferimento">
-            <Definition term="Funzione di trasferimento">
-              Con condizioni iniziali nulle, descrive il rapporto tra uscita e
-              ingresso nel dominio di Laplace.
-            </Definition>
-            <MathBlock gap="sm">
-              {`G(s)=\\frac{Y(s)}{U(s)}
-=C(sI-A)^{-1}B+D`}
-            </MathBlock>
-            <Note>
-              La formula sopra e scalare nei sistemi SISO. Nei sistemi MIMO{" "}
-              <Math>{"G(s)"}</Math> e una matrice di trasferimento{" "}
-              <Math>{"p\\times m"}</Math>.
-            </Note>
-          </Box>
-        </Column>
         <Column width="half">
           <Box color="yellow" border="left" title="Procedura pratica">
             <ol>
               <li>
-                Scrivi il sistema nella forma{" "}
-                <Math>{"\\dot{x}=Ax+Bu,\\ y=Cx+Du"}</Math>.
+                Scrivi l&apos;equazione con <Math>{"y"}</Math> a sinistra e{" "}
+                <Math>{"u"}</Math> a destra.
               </li>
               <li>
-                Calcola <Math>{"sI-A"}</Math>.
+                Applica <Math>{"\\mathcal{L}"}</Math> a ogni termine.
               </li>
               <li>
-                Trova <Math>{"(sI-A)^{-1}"}</Math>.
+                Sostituisci le formule delle derivate includendo i dati
+                iniziali.
               </li>
               <li>
-                Moltiplica nell&apos;ordine{" "}
-                <Math>{"C(sI-A)^{-1}B"}</Math>.
+                Raggruppa tutti i termini con <Math>{"Y(s)"}</Math>.
               </li>
               <li>
-                Somma il termine diretto <Math>{"D"}</Math>, se presente.
+                Isola <Math>{"Y(s)"}</Math>, scomponi in fratti semplici e fai{" "}
+                <Math>{"\\mathcal{L}^{-1}"}</Math>.
               </li>
             </ol>
           </Box>
@@ -157,75 +62,165 @@ Y(s)=CX(s)+DU(s)`}
 
       <Row gap="sm">
         <Column width="half">
-          <Box color="green" border="left" title="Poli e stabilita">
+          <Box color="green" border="left" title="Funzione di trasferimento">
             <p>
-              I poli del sistema sono legati agli zeri del denominatore di{" "}
-              <Math>{"G(s)"}</Math>. Dal modello di stato si leggono da:
+              Con condizioni iniziali nulle puoi passare al rapporto
+              ingresso-uscita:
             </p>
             <MathBlock gap="sm">
-              {`\\det(sI-A)=0`}
+              {`G(s)=\\frac{Y(s)}{U(s)}`}
             </MathBlock>
             <p>
-              Questi valori coincidono con gli autovalori di{" "}
-              <Math>{"A"}</Math>, salvo cancellazioni nella funzione di
-              trasferimento.
+              Nei problemi di segnali spesso l&apos;ingresso si chiama{" "}
+              <Math>{"x(t)"}</Math> e si scrive:
             </p>
+            <MathBlock gap="sm">
+              {`H(s)=\\frac{Y(s)}{X(s)}
+\\qquad
+Y(s)=H(s)X(s)`}
+            </MathBlock>
+            <p>Per esempio, se</p>
+            <MathBlock gap="sm" size="small">
+              {`y''+3y'+2y=u(t)`}
+            </MathBlock>
+            <p>allora, con dati iniziali nulli,</p>
+            <MathBlock gap="sm" size="small">
+              {`(s^2+3s+2)Y(s)=U(s)
+\\qquad
+G(s)=\\frac{1}{s^2+3s+2}`}
+            </MathBlock>
             <Note>
-              In tempo continuo, il sistema libero e asintoticamente stabile se
-              tutti gli autovalori di <Math>{"A"}</Math> hanno parte reale
-              negativa.
+              I poli sono gli zeri del denominatore di <Math>{"G(s)"}</Math>.
             </Note>
           </Box>
         </Column>
+
         <Column width="half">
-          <Box color="red" border="left" title="Errori comuni">
-            <ul>
-              <li>
-                Usare <Math>{"G(s)"}</Math> senza condizioni iniziali nulle.
-              </li>
-              <li>
-                Confondere i poli con gli zeri: i poli vengono dal
-                denominatore, gli zeri dal numeratore.
-              </li>
-              <li>
-                Dimenticare il termine diretto <Math>{"D"}</Math>.
-              </li>
-              <li>
-                Moltiplicare le matrici nell&apos;ordine sbagliato.
-              </li>
-            </ul>
+          <Box color="gray" border="left" title="Se lo danno in forma di stato">
+            <p>
+              A volte il sistema e scritto con matrici. Con{" "}
+              <Math>{"z(0)=0"}</Math>:
+            </p>
+            <MathBlock gap="sm" size="small">
+              {`\\dot{z}=Az+Bu
+\\qquad
+y=Cz+Du`}
+            </MathBlock>
+            <MathBlock gap="sm" size="small">
+              {`sZ(s)=AZ(s)+BU(s)
+\\Rightarrow
+Z(s)=(sI-A)^{-1}BU(s)`}
+            </MathBlock>
+            <MathBlock gap="sm" size="small">
+              {`G(s)=C(sI-A)^{-1}B+D`}
+            </MathBlock>
           </Box>
         </Column>
       </Row>
 
-      <Example title="Esempio SISO" color="blue">
-        <Row>
-          <Column width="half">
-            <p>Considera il sistema:</p>
-            <MathBlock gap="sm">
-              {`\\dot{x}=-2x+u
+      <Example title="Esempio completo con Laplace" color="blue">
+        <p>Risolvi il sistema LTI con ingresso gradino:</p>
+        <MathBlock gap="sm">
+          {`y''+3y'+2y=u(t)
 \\qquad
-y=3x`}
-            </MathBlock>
-            <p>
-              Qui <Math>{"A=-2"}</Math>, <Math>{"B=1"}</Math>,{" "}
-              <Math>{"C=3"}</Math>, <Math>{"D=0"}</Math>.
-            </p>
-          </Column>
+u(t)=1
+\\qquad
+y(0)=1
+\\qquad
+y'(0)=0`}
+        </MathBlock>
+        <p>
+          Siccome <Math>{"u(t)=1"}</Math>, allora{" "}
+          <Math>{"U(s)=1/s"}</Math>. Trasforma l&apos;equazione:
+        </p>
+        <MathBlock gap="sm">
+          {`\\bigl(s^2Y(s)-sy(0)-y'(0)\\bigr)
++3\\bigl(sY(s)-y(0)\\bigr)+2Y(s)=\\frac{1}{s}`}
+        </MathBlock>
+        <p>
+          Sostituisci i dati iniziali e raggruppa i termini con{" "}
+          <Math>{"Y(s)"}</Math>:
+        </p>
+        <MathBlock gap="sm">
+          {`(s^2Y-s)+3(sY-1)+2Y=\\frac{1}{s}
+\\Rightarrow
+(s^2+3s+2)Y(s)-s-3=\\frac{1}{s}`}
+        </MathBlock>
+        <p>Isola <Math>{"Y(s)"}</Math>, fattorizza e scomponi:</p>
+        <MathBlock gap="sm">
+          {`Y(s)=\\frac{\\frac{1}{s}+s+3}{s^2+3s+2}
+=\\frac{s^2+3s+1}{s(s+1)(s+2)}
+=\\frac{1}{2}\\frac{1}{s}
++\\frac{1}{s+1}
+-\\frac{1}{2}\\frac{1}{s+2}`}
+        </MathBlock>
+        <p>Antitrasforma termine per termine:</p>
+        <MathBlock gap="sm">
+          {`\\boxed{y(t)=\\frac12+e^{-t}-\\frac12e^{-2t}}`}
+        </MathBlock>
+        <Note>
+          Controllo veloce: <Math>{"y(0)=\\frac12+1-\\frac12=1"}</Math> e{" "}
+          <Math>{"y'(0)=-1+1=0"}</Math>, quindi i dati iniziali tornano.
+        </Note>
+      </Example>
+
+      <Example title="Esempio con H(s) e x(t)" color="green">
+        <Row gap="sm">
           <Column width="half">
-            <p>La funzione di trasferimento e:</p>
+            <p>
+              Il sistema e dato dalla funzione di trasferimento e
+              dall&apos;ingresso:
+            </p>
             <MathBlock gap="sm">
-              {`G(s)=C(sI-A)^{-1}B+D
-=3\\frac{1}{s+2}\\cdot1
-=\\frac{3}{s+2}`}
+              {`H(s)=\\frac{2}{s+3}
+\\qquad
+x(t)=e^{-t}`}
             </MathBlock>
             <p>
-              Il polo e <Math>{"s=-2"}</Math>, quindi la risposta libera decade
-              esponenzialmente.
+              Con condizioni iniziali nulle, prima trasformi l&apos;ingresso:
             </p>
+            <MathBlock gap="sm">
+              {`X(s)=\\mathcal{L}\\{e^{-t}\\}=\\frac{1}{s+1}`}
+            </MathBlock>
+          </Column>
+
+          <Column width="half">
+            <p>Moltiplica nel dominio di Laplace:</p>
+            <MathBlock gap="sm">
+              {`Y(s)=H(s)X(s)
+=\\frac{2}{(s+3)(s+1)}`}
+            </MathBlock>
+            <p>Scomponi e antitrasforma:</p>
+            <MathBlock gap="sm">
+              {`\\frac{2}{(s+1)(s+3)}
+=\\frac{1}{s+1}-\\frac{1}{s+3}
+\\Rightarrow
+\\boxed{y(t)=e^{-t}-e^{-3t}}`}
+            </MathBlock>
           </Column>
         </Row>
       </Example>
+
+      <Box color="red" border="left" title="Errori da evitare">
+        <ul>
+          <li>
+            Dimenticare <Math>{"-y(0)"}</Math>,{" "}
+            <Math>{"-sy(0)-y'(0)"}</Math> nelle derivate.
+          </li>
+          <li>
+            Usare <Math>{"G(s)"}</Math> anche quando i dati iniziali non sono
+            nulli.
+          </li>
+          <li>
+            Non trasformare l&apos;ingresso: per il gradino{" "}
+            <Math>{"u(t)=1"}</Math> vale <Math>{"U(s)=1/s"}</Math>.
+          </li>
+          <li>
+            Saltare il controllo finale su <Math>{"y(0)"}</Math> e{" "}
+            <Math>{"y'(0)"}</Math>.
+          </li>
+        </ul>
+      </Box>
     </Section>
   );
 }
