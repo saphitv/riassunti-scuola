@@ -219,13 +219,19 @@ export const courses: Course[] = [
       {
         slug: "",
         numeral: "I",
-        title: "Parte I",
+        title: "Test 1 P1",
         description: "GPIO, UART, Timer",
       },
       {
         slug: "part-2",
         numeral: "II",
-        title: "Parte II",
+        title: "Test 1 P2",
+        description: "Clock, Interrupt, SPI, ADC, PWM",
+      },
+      {
+        slug: "part-3",
+        numeral: "III",
+        title: "Test 2",
         description: "PMP, ADC, PWM, I2C",
       },
     ],
