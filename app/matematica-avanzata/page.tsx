@@ -5,6 +5,7 @@ import {
   DiagonalizzazioneSection,
   MatriciVettoriSection,
   SistemiEquazioniDifferenzialiSection,
+  SistemiLTISection,
   TrasformataLaplaceSection,
 } from "@/components/sections/matematica-avanzata";
 import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
@@ -12,7 +13,7 @@ import { getCourseTitleTransitionName } from "@/lib/courseViewTransition";
 export const metadata: Metadata = {
   title: "Matematica Avanzata | Appunti",
   description:
-    "Riassunto stampabile di matematica avanzata con matrici, vettori, determinanti, traccia, autovalori, autovettori, autospazi, diagonalizzazione, sistemi di equazioni differenziali e trasformata di Laplace.",
+    "Riassunto stampabile di matematica avanzata con matrici, vettori, determinanti, traccia, autovalori, autovettori, autospazi, diagonalizzazione, sistemi di equazioni differenziali, sistemi LTI e trasformata di Laplace.",
 };
 
 export default function MatematicaAvanzataPage() {
@@ -28,6 +29,7 @@ export default function MatematicaAvanzataPage() {
       <AutovaloriAutospaziSection />
       <DiagonalizzazioneSection />
       <SistemiEquazioniDifferenzialiSection />
+      <SistemiLTISection />
       <TrasformataLaplaceSection />
     </div>
   );

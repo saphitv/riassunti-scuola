@@ -117,6 +117,20 @@ export function AutovaloriAutospaziSection() {
 \\qquad
 \\operatorname{tr}(A)=\\lambda_1+\\cdots+\\lambda_n`}
             </MathBlock>
+            <p>
+              Per le potenze, eleva ogni autovalore alla stessa potenza
+              contando le molteplicita:
+            </p>
+            <MathBlock gap="sm" size="small">
+              {`\\det(A^k)=\\lambda_1^k\\cdots\\lambda_n^k=(\\det A)^k
+\\qquad
+\\operatorname{tr}(A^k)=\\lambda_1^k+\\cdots+\\lambda_n^k`}
+            </MathBlock>
+            <MathBlock gap="sm" size="small">
+              {`\\det(A^{959})=\\lambda_1^{959}\\cdots\\lambda_n^{959}
+\\qquad
+\\operatorname{tr}(A^{959})=\\lambda_1^{959}+\\cdots+\\lambda_n^{959}`}
+            </MathBlock>
           </Box>
         </Column>
       </Row>
