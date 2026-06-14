@@ -210,6 +210,9 @@ export const courses: Course[] = [
       "adc",
       "spi",
       "pwm",
+      "pmp",
+      "lcd",
+      "i2c",
       "output compare",
     ],
     parts: [
@@ -223,7 +226,7 @@ export const courses: Course[] = [
         slug: "part-2",
         numeral: "II",
         title: "Parte II",
-        description: "Interrupt",
+        description: "PMP, ADC, PWM, I2C",
       },
     ],
   },

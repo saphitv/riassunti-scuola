@@ -158,8 +158,10 @@ export function OutputCompareCheatsheetSection() {
           </Box>
 
           <Box color="blue" border="left" title="Formula PWM">
+            <MathBlock gap="sm" size="small">{`T = \\frac{(PR_y + 1) \\cdot \\text{Prescaler}}{PBCLK}`}</MathBlock>
             <MathBlock gap="sm" size="small">{`f_{PWM} = \\frac{F_{PB}}{(PR_y + 1) \\cdot \\text{Prescaler}}`}</MathBlock>
             <MathBlock gap="sm" size="small">{`\\text{duty} = \\frac{OCxRS}{PR_y + 1}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`V_{medio} \\approx D \\cdot V_H`}</MathBlock>
             <ul
               className="ref-list"
               style={{ fontSize: "var(--font-size-small)" }}
@@ -170,6 +172,9 @@ export function OutputCompareCheatsheetSection() {
               <li>
                 <code>OCxRS = PRy + 1</code> -&gt; pin sempre{" "}
                 <strong>alto</strong>
+              </li>
+              <li>
+                risoluzione PWM: circa <code>log2(PRy + 1)</code> bit
               </li>
             </ul>
           </Box>
@@ -209,6 +214,48 @@ void pwm_oc1_set_duty(unsigned int d)
     if (d > PR2 + 1) d = PR2 + 1;
     OC1RS = d;                 // aggiornamento atomico
 }`}</CodeBlock>
+          </Box>
+        </Column>
+      </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="yellow" border="left" title="Esempio numerico">
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              Con <code>PBCLK = 10 MHz</code>, prescaler <code>1</code> e
+              frequenza PWM <code>52.08 kHz</code>:
+            </p>
+            <MathBlock gap="sm" size="small">{`PR_2 = \\frac{PBCLK}{f_{PWM} \\cdot PRESC} - 1 \\approx 191`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`\\log_2(192) \\approx 7.6\\ \\text{bit}`}</MathBlock>
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              Frequenza piu alta significa periodo piu corto e quindi meno
+              valori distinti di duty.
+            </p>
+          </Box>
+        </Column>
+
+        <Column width="half">
+          <Box color="green" border="left" title="Servo e motori">
+            <ul
+              className="ref-list"
+              style={{ fontSize: "var(--font-size-small)" }}
+            >
+              <li>
+                <strong>Servo RC</strong>: impulso alto ogni <code>20 ms</code>.
+              </li>
+              <li>
+                <code>Ton ~= 0.5 ms</code> a <code>2.5 ms</code> imposta la
+                posizione.
+              </li>
+              <li>
+                alimentare il servo con <strong>5 V esterni</strong>, non dalla
+                sola USB.
+              </li>
+              <li>
+                <strong>Motore DC</strong>: PWM su H-bridge per velocita e
+                direzione.
+              </li>
+            </ul>
           </Box>
         </Column>
       </Row>
