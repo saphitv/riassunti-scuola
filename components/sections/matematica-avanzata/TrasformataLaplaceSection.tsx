@@ -121,26 +121,56 @@ s=b \\Rightarrow B=\\frac{P(b)}{b-a}`}
         </Column>
       </Row>
 
-      <Example title="Esempio di scomposizione" color="green">
-        <p>Scomponi la funzione razionale:</p>
-        <MathBlock gap="sm">
-          {`Y(s)=\\frac{3s+5}{(s+1)(s+2)}
-=\\frac{A}{s+1}+\\frac{B}{s+2}`}
-        </MathBlock>
-        <p>Moltiplico per il denominatore comune:</p>
-        <MathBlock gap="sm">{`3s+5=A(s+2)+B(s+1)`}</MathBlock>
-        <p>
-          Sostituendo <Math>{"s=-1"}</Math> e <Math>{"s=-2"}</Math>:
-        </p>
-        <MathBlock gap="sm">
-          {`s=-1:\\quad 2=A
+      <Example title="Esercizio completo con Laplace" color="green">
+        <Row gap="sm">
+          <Column width="half">
+            <p>Risolvi il problema di Cauchy:</p>
+            <MathBlock gap="sm">
+              {`y''-4y'+4y=0
 \\qquad
-s=-2:\\quad -1=-B \\Rightarrow B=1`}
-        </MathBlock>
-        <MathBlock gap="sm">
-          {`\\frac{3s+5}{(s+1)(s+2)}
-=\\frac{2}{s+1}+\\frac{1}{s+2}`}
-        </MathBlock>
+y(0)=1
+\\qquad
+y'(0)=1`}
+            </MathBlock>
+            <p>
+              Poni <Math>{"\\mathcal{L}\\{y(t)\\}=Y(s)"}</Math> e trasforma
+              ogni termine:
+            </p>
+            <MathBlock gap="sm" size="small">
+              {`\\mathcal{L}\\{y''\\}=s^2Y(s)-sy(0)-y'(0)=s^2Y(s)-s-1
+\\qquad
+\\mathcal{L}\\{y'\\}=sY(s)-y(0)=sY(s)-1`}
+            </MathBlock>
+            <p>Sostituisci nell&apos;equazione:</p>
+            <MathBlock gap="sm" size="small">
+              {`(s^2Y-s-1)-4(sY-1)+4Y=0`}
+            </MathBlock>
+          </Column>
+
+          <Column width="half">
+            <p>Raggruppa i termini con <Math>{"Y(s)"}</Math>:</p>
+            <MathBlock gap="sm" size="small">
+              {`(s^2-4s+4)Y(s)-s-1+4=0
+\\Rightarrow
+(s-2)^2Y(s)-s+3=0`}
+            </MathBlock>
+            <p>Isola <Math>{"Y(s)"}</Math> e prepara l&apos;antitrasformata:</p>
+            <MathBlock gap="sm" size="small">
+              {`Y(s)=\\frac{s-3}{(s-2)^2}
+=\\frac{(s-2)-1}{(s-2)^2}
+=\\frac{1}{s-2}-\\frac{1}{(s-2)^2}`}
+            </MathBlock>
+            <p>Usa la tabella inversa:</p>
+            <MathBlock gap="sm" size="small">
+              {`\\mathcal{L}^{-1}\\left\\{\\frac{1}{s-a}\\right\\}=e^{at}
+\\qquad
+\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s-a)^2}\\right\\}=te^{at}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`\\boxed{y(t)=e^{2t}-te^{2t}=(1-t)e^{2t}}`}
+            </MathBlock>
+          </Column>
+        </Row>
       </Example>
 
       <Box color="red" border="left" title="Errori comuni">
