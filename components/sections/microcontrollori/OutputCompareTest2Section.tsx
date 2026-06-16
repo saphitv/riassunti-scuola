@@ -125,42 +125,29 @@ export function OutputCompareTest2Section() {
 
       <Row>
         <Column width="half">
-          <Box color="purple" border="left" title="Modalita di OCxCON.OCM">
-            <ul
-              className="ref-list"
-              style={{ fontSize: "var(--font-size-small)" }}
-            >
-              <li>
-                <code>0b000</code> - modulo disabilitato
-              </li>
-              <li>
-                <code>0b001</code> - active-low one-shot
-              </li>
-              <li>
-                <code>0b010</code> - active-high one-shot
-              </li>
-              <li>
-                <code>0b011</code> - toggle ad ogni match
-              </li>
-              <li>
-                <code>0b100</code> - single pulse
-              </li>
-              <li>
-                <code>0b101</code> - continuous pulse
-              </li>
-              <li>
-                <code>0b110</code> - <strong>PWM senza fault pin</strong>
-              </li>
-              <li>
-                <code>0b111</code> - PWM con fault pin
-              </li>
-            </ul>
+          <Box color="purple" border="left" title="Da duty a Ton e OCxR">
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              Se il duty e dato in percentuale, prima trasformalo in numero
+              decimale: <code>24% = 0.24</code>. Poi scala periodo e registro
+              sul numero di conteggi della PWM.
+            </p>
+            <MathBlock gap="sm" size="small">{`D=\\frac{\\text{duty}\\%}{100}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`T_{tick}=\\frac{\\text{Prescaler}}{PBCLK}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`T_{on}=D\\cdot T_{PWM}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`T_{on}=D\\cdot (PR_y+1)\\cdot T_{tick}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`OCxR \\approx OCxRS \\approx D\\cdot (PR_y+1)`}</MathBlock>
+            <p style={{ fontSize: "var(--font-size-small)" }}>
+              Se non sono dati clock e prescaler, <code>Ton</code> resta in
+              conteggi: con <code>PR2 = 4999</code> e <code>D = 0.24</code>,{" "}
+              <code>Ton = 1200</code> tick e <code>OC1R = 1200</code>.
+            </p>
           </Box>
 
           <Box color="blue" border="left" title="Formula PWM">
             <MathBlock gap="sm" size="small">{`T = \\frac{(PR_y + 1) \\cdot \\text{Prescaler}}{PBCLK}`}</MathBlock>
             <MathBlock gap="sm" size="small">{`f_{PWM} = \\frac{F_{PB}}{(PR_y + 1) \\cdot \\text{Prescaler}}`}</MathBlock>
             <MathBlock gap="sm" size="small">{`\\text{duty} = \\frac{OCxRS}{PR_y + 1}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`OCxRS \\approx \\text{duty}\\cdot(PR_y+1)`}</MathBlock>
             <MathBlock gap="sm" size="small">{`V_{medio} \\approx D \\cdot V_H`}</MathBlock>
             <ul
               className="ref-list"
