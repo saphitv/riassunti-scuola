@@ -38,67 +38,6 @@ x_n(t)
               soluzioni.
             </p>
           </Box>
-        </Column>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Procedura pratica">
-            <ol>
-              <li>
-                Scrivi il sistema nella forma{" "}
-                <Math>{"\\mathbf{x}'=A\\mathbf{x}"}</Math>.
-              </li>
-              <li>
-                Calcola gli autovalori con{" "}
-                <Math>{"\\det(A-\\lambda I)=0"}</Math>.
-              </li>
-              <li>
-                Trova una base di autovettori risolvendo{" "}
-                <Math>{"(A-\\lambda I)v=0"}</Math>.
-              </li>
-              <li>
-                Costruisci le soluzioni elementari{" "}
-                <Math>{"e^{\\lambda t}v"}</Math>.
-              </li>
-              <li>
-                Combinale e usa le condizioni iniziali per trovare le costanti.
-              </li>
-            </ol>
-          </Box>
-        </Column>
-      </Row>
-
-      <Row gap="sm">
-        <Column width="half">
-          <Box color="blue" border="left" title="Problema di Cauchy">
-            <p>
-              Data una condizione iniziale{" "}
-              <Math>{"\\mathbf{x}(t_0)=\\mathbf{x}_0"}</Math>, si cerca la
-              traiettoria che parte dal vettore assegnato:
-            </p>
-            <MathBlock gap="sm">
-              {`\\begin{cases}
-\\mathbf{x}'(t)=A\\mathbf{x}(t) \\\\
-\\mathbf{x}(t_0)=\\mathbf{x}_0
-\\end{cases}`}
-            </MathBlock>
-            <Theorem title="Soluzione generale">
-              <MathBlock gap="sm">
-                {`\\mathbf{x}(t)=e^{A(t-t_0)}\\mathbf{x}_0`}
-              </MathBlock>
-              <p>
-                Per una matrice quadrata <Math>{"B"}</Math>,
-                l&apos;esponenziale di matrice si definisce con la stessa serie
-                dell&apos;esponenziale scalare:
-              </p>
-              <MathBlock gap="sm" size="small">
-                {`e^B=I+B+\\frac{B^2}{2!}+\\frac{B^3}{3!}+\\cdots
-=\\sum_{k=0}^{\\infty}\\frac{B^k}{k!}`}
-              </MathBlock>
-              La matrice <Math>{"e^{At}"}</Math> si calcola facilmente quando{" "}
-              <Math>{"A"}</Math> e diagonalizzabile.
-            </Theorem>
-          </Box>
-        </Column>
-        <Column width="half">
           <Box color="green" border="left" title="Caso diagonalizzabile">
             <p>
               Se <Math>{"A=PDP^{-1}"}</Math>, con{" "}
@@ -119,11 +58,7 @@ e^{Dt}=\\operatorname{diag}(e^{\\lambda_1 t},\\dots,e^{\\lambda_n t})`}
 =c_1e^{\\lambda_1t}v_1+\\cdots+c_ne^{\\lambda_nt}v_n`}
             </MathBlock>
           </Box>
-        </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
           <Box color="purple" border="left" title="Autovalori complessi">
             <p>
               Se <Math>{"\\lambda=\\alpha+i\\beta"}</Math> ha autovettore{" "}
@@ -140,28 +75,7 @@ e^{\\alpha t}\\bigl(p\\sin(\\beta t)+q\\cos(\\beta t)\\bigr)`}
               <Math>{"\\beta"}</Math> controlla la rotazione.
             </Note>
           </Box>
-        </Column>
-        <Column width="half">
-          <Box color="gray" border="left" title="Sistema non omogeneo">
-            <p>
-              Per <Math>{"\\mathbf{x}'=A\\mathbf{x}+\\mathbf{b}(t)"}</Math>, la
-              soluzione e la somma di omogenea e particolare:
-            </p>
-            <MathBlock gap="sm">
-              {`\\mathbf{x}(t)=\\mathbf{x}_h(t)+\\mathbf{x}_p(t)`}
-            </MathBlock>
-            <p>Una formula generale usa la variazione delle costanti:</p>
-            <MathBlock gap="sm" size="small">
-              {`\\mathbf{x}(t)
-=e^{A(t-t_0)}\\mathbf{x}_0
-+\\int_{t_0}^{t} e^{A(t-s)}\\mathbf{b}(s)\\,ds`}
-            </MathBlock>
-          </Box>
-        </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
           <Box color="red" border="left" title="Da ordine superiore a sistema">
             <p>
               Per trasformare un&apos;equazione di ordine superiore in un
@@ -227,7 +141,78 @@ y'
             </Note>
           </Box>
         </Column>
+
         <Column width="half">
+          <Box color="yellow" border="left" title="Procedura pratica">
+            <ol>
+              <li>
+                Scrivi il sistema nella forma{" "}
+                <Math>{"\\mathbf{x}'=A\\mathbf{x}"}</Math>.
+              </li>
+              <li>
+                Calcola gli autovalori con{" "}
+                <Math>{"\\det(A-\\lambda I)=0"}</Math>.
+              </li>
+              <li>
+                Trova una base di autovettori risolvendo{" "}
+                <Math>{"(A-\\lambda I)v=0"}</Math>.
+              </li>
+              <li>
+                Costruisci le soluzioni elementari{" "}
+                <Math>{"e^{\\lambda t}v"}</Math>.
+              </li>
+              <li>
+                Combinale e usa le condizioni iniziali per trovare le costanti.
+              </li>
+            </ol>
+          </Box>
+
+          <Box color="blue" border="left" title="Problema di Cauchy">
+            <p>
+              Data una condizione iniziale{" "}
+              <Math>{"\\mathbf{x}(t_0)=\\mathbf{x}_0"}</Math>, si cerca la
+              traiettoria che parte dal vettore assegnato:
+            </p>
+            <MathBlock gap="sm">
+              {`\\begin{cases}
+\\mathbf{x}'(t)=A\\mathbf{x}(t) \\\\
+\\mathbf{x}(t_0)=\\mathbf{x}_0
+\\end{cases}`}
+            </MathBlock>
+            <Theorem title="Soluzione generale">
+              <MathBlock gap="sm">
+                {`\\mathbf{x}(t)=e^{A(t-t_0)}\\mathbf{x}_0`}
+              </MathBlock>
+              <p>
+                Per una matrice quadrata <Math>{"B"}</Math>,
+                l&apos;esponenziale di matrice si definisce con la stessa serie
+                dell&apos;esponenziale scalare:
+              </p>
+              <MathBlock gap="sm" size="small">
+                {`e^B=I+B+\\frac{B^2}{2!}+\\frac{B^3}{3!}+\\cdots
+=\\sum_{k=0}^{\\infty}\\frac{B^k}{k!}`}
+              </MathBlock>
+              La matrice <Math>{"e^{At}"}</Math> si calcola facilmente quando{" "}
+              <Math>{"A"}</Math> e diagonalizzabile.
+            </Theorem>
+          </Box>
+
+          <Box color="gray" border="left" title="Sistema non omogeneo">
+            <p>
+              Per <Math>{"\\mathbf{x}'=A\\mathbf{x}+\\mathbf{b}(t)"}</Math>, la
+              soluzione e la somma di omogenea e particolare:
+            </p>
+            <MathBlock gap="sm">
+              {`\\mathbf{x}(t)=\\mathbf{x}_h(t)+\\mathbf{x}_p(t)`}
+            </MathBlock>
+            <p>Una formula generale usa la variazione delle costanti:</p>
+            <MathBlock gap="sm" size="small">
+              {`\\mathbf{x}(t)
+=e^{A(t-t_0)}\\mathbf{x}_0
++\\int_{t_0}^{t} e^{A(t-s)}\\mathbf{b}(s)\\,ds`}
+            </MathBlock>
+          </Box>
+
           <Box color="red" border="left" title="Errori comuni">
             <ul>
               <li>

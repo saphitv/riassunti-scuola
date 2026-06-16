@@ -201,22 +201,6 @@ y'(0)=1`}
           </Column>
         </Row>
       </Example>
-
-      <Box color="red" border="left" title="Errori comuni">
-        <ul>
-          <li>
-            Non dimenticare i dati iniziali nelle trasformate delle derivate.
-          </li>
-          <li>
-            Prima di scomporre, controlla che la frazione sia propria:{" "}
-            <Math>{"\\deg P < \\deg Q"}</Math>.
-          </li>
-          <li>
-            Per fattori ripetuti servono tutti i termini fino alla potenza
-            massima, non solo <Math>{"A/(s-a)"}</Math>.
-          </li>
-        </ul>
-      </Box>
     </Section>
   );
 }

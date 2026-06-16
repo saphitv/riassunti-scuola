@@ -31,27 +31,7 @@ export function DiagonalizzazioneSection() {
               stesso ordine delle colonne di <Math>{"P"}</Math>.
             </p>
           </Box>
-        </Column>
-        <Column width="half">
-          <Box color="gray" border="left" title="Invertibile vs diagonalizzabile">
-            <Note>
-              Invertibile e diagonalizzabile sono proprieta diverse:{" "}
-              <Math>{"A"}</Math> e invertibile se{" "}
-              <Math>{"\\det(A)\\neq0"}</Math>, cioe se <Math>{"0"}</Math> non e
-              un autovalore. <Math>{"A"}</Math> e diagonalizzabile quando ha{" "}
-              <Math>{"n"}</Math> autovettori indipendenti.
-            </Note>
-            <Note>
-              Se <Math>{"A=PDP^{-1}"}</Math>, allora <Math>{"A"}</Math> e
-              invertibile se e solo se nessun autovalore sulla diagonale di{" "}
-              <Math>{"D"}</Math> e <Math>{"0"}</Math>.
-            </Note>
-          </Box>
-        </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
           <Box color="blue" border="left" title="Criterio pratico">
             <Theorem title="Quando si puo diagonalizzare">
               <MathBlock gap="sm">
@@ -96,34 +76,7 @@ export function DiagonalizzazioneSection() {
               <Math>{"A"}</Math> e diagonalizzabile con autovettori ortogonali.
             </Note>
           </Box>
-        </Column>
-        <Column width="half">
-          <Box color="yellow" border="left" title="Procedura">
-            <ol>
-              <li>
-                Calcola il polinomio caratteristico{" "}
-                <Math>{"p_A(\\lambda)=\\det(A-\\lambda I)"}</Math>.
-              </li>
-              <li>Trova gli autovalori risolvendo il polinomio.</li>
-              <li>
-                Per ogni autovalore, calcola{" "}
-                <Math>{"E_\\lambda=\\ker(A-\\lambda I)"}</Math>.
-              </li>
-              <li>
-                Se ottieni in totale <Math>{"n"}</Math> autovettori
-                indipendenti, costruisci <Math>{"P"}</Math>.
-              </li>
-              <li>
-                Metti in <Math>{"D"}</Math> gli autovalori nello stesso ordine
-                degli autovettori scelti in <Math>{"P"}</Math>.
-              </li>
-            </ol>
-          </Box>
-        </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
           <Box color="green" border="left" title="Molteplicita">
             <ul>
               <li>
@@ -149,8 +102,64 @@ export function DiagonalizzazioneSection() {
               </li>
             </ul>
           </Box>
+
+          <Box color="red" border="left" title="Errori comuni">
+            <ul>
+              <li>
+                L&apos;ordine degli autovalori in <Math>{"D"}</Math> deve
+                seguire l&apos;ordine degli autovettori nelle colonne di{" "}
+                <Math>{"P"}</Math>.
+              </li>
+              <li>
+                Un autovalore ripetuto non basta: servono abbastanza
+                autovettori indipendenti.
+              </li>
+              <li>
+                Il vettore nullo appartiene agli autospazi, ma non e mai un
+                autovettore.
+              </li>
+            </ul>
+          </Box>
         </Column>
+
         <Column width="half">
+          <Box color="gray" border="left" title="Invertibile vs diagonalizzabile">
+            <Note>
+              Invertibile e diagonalizzabile sono proprieta diverse:{" "}
+              <Math>{"A"}</Math> e invertibile se{" "}
+              <Math>{"\\det(A)\\neq0"}</Math>, cioe se <Math>{"0"}</Math> non e
+              un autovalore. <Math>{"A"}</Math> e diagonalizzabile quando ha{" "}
+              <Math>{"n"}</Math> autovettori indipendenti.
+            </Note>
+            <Note>
+              Se <Math>{"A=PDP^{-1}"}</Math>, allora <Math>{"A"}</Math> e
+              invertibile se e solo se nessun autovalore sulla diagonale di{" "}
+              <Math>{"D"}</Math> e <Math>{"0"}</Math>.
+            </Note>
+          </Box>
+
+          <Box color="yellow" border="left" title="Procedura">
+            <ol>
+              <li>
+                Calcola il polinomio caratteristico{" "}
+                <Math>{"p_A(\\lambda)=\\det(A-\\lambda I)"}</Math>.
+              </li>
+              <li>Trova gli autovalori risolvendo il polinomio.</li>
+              <li>
+                Per ogni autovalore, calcola{" "}
+                <Math>{"E_\\lambda=\\ker(A-\\lambda I)"}</Math>.
+              </li>
+              <li>
+                Se ottieni in totale <Math>{"n"}</Math> autovettori
+                indipendenti, costruisci <Math>{"P"}</Math>.
+              </li>
+              <li>
+                Metti in <Math>{"D"}</Math> gli autovalori nello stesso ordine
+                degli autovettori scelti in <Math>{"P"}</Math>.
+              </li>
+            </ol>
+          </Box>
+
           <Box color="purple" border="left" title="A cosa serve">
             <p>
               La diagonalizzazione semplifica potenze e calcoli ripetuti: se{" "}
@@ -171,30 +180,7 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
 \\operatorname{tr}(A)=\\lambda_1+\\cdots+\\lambda_n`}
             </MathBlock>
           </Box>
-        </Column>
-      </Row>
 
-      <Row gap="sm">
-        <Column width="half">
-          <Box color="red" border="left" title="Errori comuni">
-            <ul>
-              <li>
-                L&apos;ordine degli autovalori in <Math>{"D"}</Math> deve
-                seguire l&apos;ordine degli autovettori nelle colonne di{" "}
-                <Math>{"P"}</Math>.
-              </li>
-              <li>
-                Un autovalore ripetuto non basta: servono abbastanza
-                autovettori indipendenti.
-              </li>
-              <li>
-                Il vettore nullo appartiene agli autospazi, ma non e mai un
-                autovettore.
-              </li>
-            </ul>
-          </Box>
-        </Column>
-        <Column width="half">
           <Box color="gray" border="left" title="Checklist veloce">
             <ol>
               <li>
