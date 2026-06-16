@@ -9,3 +9,7 @@ export { InterruptsCheatsheetSection } from "./InterruptsCheatsheetSection";
 export { SPICheatsheetSection } from "./SPICheatsheetSection";
 export { ADCCheatsheetSection } from "./ADCCheatsheetSection";
 export { OutputCompareCheatsheetSection } from "./OutputCompareCheatsheetSection";
+export { PMPCheatsheetSection } from "./PMPCheatsheetSection";
+export { I2CCheatsheetSection } from "./I2CCheatsheetSection";
+export { ADCTest2Section } from "./ADCTest2Section";
+export { OutputCompareTest2Section } from "./OutputCompareTest2Section";

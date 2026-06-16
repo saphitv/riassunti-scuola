@@ -1,11 +1,10 @@
 import { Section, Row, Column, Box, MathBlock, CodeBlock } from "@/components/index";
 
-export function ADCCheatsheetSection() {
+export function ADCTest2Section() {
   return (
     <Section title="ADC">
       {adcOverviewCards}
       {adcRegistersTable}
-      {adcConceptsAndErrors}
       {adcConversionAndCode}
       {adcVoltageExample}
     </Section>
@@ -14,8 +13,8 @@ export function ADCCheatsheetSection() {
 
 const adcOverviewCards = (
   <Row>
-    <Column width="third">
-      <Box color="blue" border="left" title="Cos'e un ADC">
+    <Column width="fourth">
+      <Box color="blue" border="left" title="Informazioni generali">
         <div style={{ fontSize: "var(--font-size-small)" }}>
           <p>
             <strong>ADC</strong> = Analog to Digital Converter. Converte una{" "}
@@ -32,45 +31,81 @@ const adcOverviewCards = (
       </Box>
     </Column>
 
-    <Column width="third">
-      <Box color="green" border="left" title="Risoluzione & range">
-        <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
-          <li>
-            <strong>10 bit</strong> -&gt; valori da <code>0</code> a{" "}
-            <code>1023</code>
-          </li>
-          <li>
-            riferimento di default: <code>V<sub>REF+</sub> = AVDD</code>,{" "}
-            <code>V<sub>REF-</sub> = AVSS</code>
-          </li>
-          <li>
-            <code>0 V</code> -&gt; <code>0</code>, <code>3.3 V</code> -&gt;{" "}
-            <code>1023</code>
-          </li>
-        </ul>
-        <MathBlock gap="sm" size="small">{`N = \\frac{V_{in}}{V_{ref}} \\cdot 2^n`}</MathBlock>
-        <MathBlock gap="sm" size="small">{`R = \\frac{V_{FS}}{2^n}`}</MathBlock>
-        <MathBlock gap="sm" size="small">{`V_{in} = \\frac{ADC \\cdot V_{REF}}{1023}`}</MathBlock>
+    <Column width="fourth">
+      <Box color="purple" border="left" title="Campionamento">
+        <p style={{ fontSize: "var(--font-size-small)" }}>
+          Il <strong>campionamento</strong> misura il segnale in istanti
+          discreti: l&apos;ADC prende un valore ogni periodo{" "}
+          <code>T<sub>s</sub></code>, quindi con frequenza{" "}
+          <code>f<sub>s</sub></code>.
+        </p>
+        <p style={{ fontSize: "var(--font-size-small)", marginTop: "0.35rem" }}>
+          Nel PIC il <strong>sample-and-hold</strong> carica una capacita alla
+          tensione del pin selezionato, poi la isola durante la conversione. Il
+          tempo di acquisizione deve bastare per caricarla correttamente.
+        </p>
+        <MathBlock gap="sm" size="small">{`f_s=\\frac{1}{T_s}`}</MathBlock>
       </Box>
     </Column>
 
-    <Column width="third">
-      <Box color="yellow" border="left" title="Pin & setup base">
-        <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
-          <li>
-            <code>ANSELxbits.ANSELx = 1</code> - pin{" "}
-            <strong>analogico</strong>
-          </li>
-          <li>
-            <code>TRISxbits.TRISx = 1</code> - pin in <strong>input</strong>
-          </li>
-          <li>
-            seleziona il canale tramite <code>AD1CHSbits.CH0SA</code>
-          </li>
-          <li>
-            <code>AD1CON1bits.ON = 1</code> per accendere il modulo
-          </li>
-        </ul>
+    <Column width="half">
+      <Box color="green" border="left" title="Fondo scala & risoluzione">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "0.35rem 0.6rem",
+            fontSize: "var(--font-size-small)",
+          }}
+        >
+          <p>
+            <strong>Fondo scala:</strong> intervallo di tensioni codificabile,
+            da <code>V<sub>REF-</sub></code> a{" "}
+            <code>V<sub>REF+</sub></code>.
+          </p>
+          <p>
+            <strong>Saturazione:</strong> sotto <code>V<sub>REF-</sub></code>{" "}
+            si legge circa <code>0</code>; sopra{" "}
+            <code>V<sub>REF+</sub></code> il codice massimo.
+          </p>
+          <p>
+            <strong>Risoluzione:</strong> con <code>n</code> bit ci sono{" "}
+            <code>2^n</code> codici, numerati da <code>0</code> a{" "}
+            <code>2^n - 1</code>.
+          </p>
+          <p>
+            <strong>LSB:</strong> salto di tensione tra due codici consecutivi;
+            piu bit significa passo piu piccolo.
+          </p>
+          <p style={{ gridColumn: "1 / -1" }}>
+            <strong>PIC32 10 bit:</strong> codici <code>0..1023</code>; con{" "}
+            <code>V<sub>FS</sub> = 3.3 V</code>,{" "}
+            <code>1 LSB ~= 3.22 mV</code>. Per stimare la tensione si scala il
+            codice letto sul codice massimo.
+          </p>
+          <p style={{ gridColumn: "1 / -1" }}>
+            <strong>Da tensione a codice:</strong> normalizza la tensione sul
+            fondo scala e moltiplica per il codice massimo. Esempio:{" "}
+            <code>2.50/5 * 4095 ~= 2048</code>.
+          </p>
+        </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: "center",
+            columnGap: "0.6rem",
+          }}
+        >
+          <div>
+            <MathBlock gap="sm" size="small">{`V_{FS}=V_{REF+}-V_{REF-}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`1\\,LSB \\approx \\frac{V_{FS}}{2^n}`}</MathBlock>
+          </div>
+          <div>
+            <MathBlock gap="sm" size="small">{`ADC \\approx \\frac{V_{in}-V_{REF-}}{V_{FS}}(2^n-1)`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`V_{in} \\approx V_{REF-}+\\frac{ADC}{2^n-1}V_{FS}`}</MathBlock>
+          </div>
+        </div>
       </Box>
     </Column>
   </Row>
@@ -138,6 +173,16 @@ const adcRegistersTable = (
             </tr>
             <tr>
               <td>
+                <code>ANSEL/TRIS</code>
+              </td>
+              <td>config pin</td>
+              <td>
+                pin analogico e in input prima di leggere il canale{" "}
+                <code>ANx</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 <code>ADC1BUF0..F</code>
               </td>
               <td>16 buffer di lettura</td>
@@ -153,30 +198,8 @@ const adcRegistersTable = (
   </Row>
 );
 
-const adcConceptsAndErrors = (
+const adcConversionAndCode = (
   <Row>
-    <Column width="half">
-      <Box color="purple" border="left" title="Digitalizzazione">
-        <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
-          <li>
-            <strong>Sampling</strong>: si misura il segnale a istanti discreti.
-          </li>
-          <li>
-            <strong>Quantizzazione</strong>: ogni campione viene arrotondato al
-            codice digitale piu vicino.
-          </li>
-          <li>
-            <strong>Sample-and-hold</strong>: un condensatore conserva la
-            tensione durante la conversione.
-          </li>
-          <li>
-            Il tempo di acquisizione deve essere sufficiente: il condensatore
-            non si carica istantaneamente.
-          </li>
-        </ul>
-      </Box>
-    </Column>
-
     <Column width="half">
       <Box color="red" border="left" title="Errori non ideali">
         <table className="comparison-table">
@@ -185,19 +208,19 @@ const adcConceptsAndErrors = (
               <td>
                 <strong>Offset</strong>
               </td>
-              <td>tutta la curva e traslata rispetto allo zero ideale</td>
+              <td>curva traslata rispetto allo zero ideale</td>
             </tr>
             <tr>
               <td>
                 <strong>Gain</strong>
               </td>
-              <td>pendenza errata: fondo scala prima/dopo il valore ideale</td>
+              <td>pendenza errata: fondo scala prima/dopo l&apos;ideale</td>
             </tr>
             <tr>
               <td>
                 <strong>DNL</strong>
               </td>
-              <td>ampiezza dei singoli codici non uniforme</td>
+              <td>ampiezza dei codici non uniforme</td>
             </tr>
             <tr>
               <td>
@@ -208,29 +231,20 @@ const adcConceptsAndErrors = (
           </tbody>
         </table>
       </Box>
-    </Column>
-  </Row>
-);
 
-const adcConversionAndCode = (
-  <Row>
-    <Column width="half">
       <Box color="purple" border="left" title="Sequenza di conversione">
         <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
           <li>
             <strong>Sampling</strong>: la capacita interna si carica al valore
-            della tensione di ingresso (dura <code>SAMC</code> cicli)
+            di ingresso per <code>SAMC</code> cicli
           </li>
           <li>
             <strong>Hold</strong>: il sample &amp; hold si stacca
             dall&apos;ingresso
           </li>
           <li>
-            <strong>Conversione</strong>: SAR a 10 bit, un bit per ciclo
-          </li>
-          <li>
-            il SAR prova i bit da MSB a LSB tramite DAC + comparatore: e una
-            ricerca binaria sul valore analogico
+            <strong>Conversione</strong>: il SAR prova i bit da MSB a LSB con
+            DAC + comparatore, come una ricerca binaria
           </li>
           <li>
             a fine: <code>DONE = 1</code>, risultato in <code>ADC1BUF0</code>,
@@ -295,7 +309,7 @@ const adcVoltageExample = (
           <MathBlock gap="sm" size="small">{`V_{in} = \\frac{512 \\cdot 3.3}{1023} \\approx 1.65\\,V`}</MathBlock>
           <p style={{ fontSize: "var(--font-size-small)" }}>
             <strong>LSB</strong> (un quanto) ={" "}
-            <code>3.3 / 1023 ~= 3.22 mV</code>: e la risoluzione minima.
+            <code>3.3 / 1024 ~= 3.22 mV</code>: e la risoluzione minima.
           </p>
         </Box>
       </Column>

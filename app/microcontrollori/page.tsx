@@ -9,16 +9,16 @@ import {
 } from "@/components/sections";
 
 export const metadata: Metadata = {
-  title: "Microcontrollori Parte I | Appunti",
+  title: "Microcontrollori Test 1 P1 | Appunti",
   description:
-    "Appunti stampabili di Microcontrollori Parte I con GPIO, UART, timer e riferimenti alla documentazione.",
+    "Appunti stampabili di Microcontrollori Test 1 P1 con GPIO, UART, timer e riferimenti alla documentazione.",
 };
 
 export default function MicrocontrolloriPage() {
   return (
     <div className="page page-compact">
       <div className="no-print">
-        <CourseHeader title="Microcontrollori — Parte I" />
+        <CourseHeader title="Microcontrollori — Test 1 P1" />
       </div>
       <MicrocontrolloriSection />
       <GPIOCheatsheetSection />

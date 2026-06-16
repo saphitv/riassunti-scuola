@@ -10,16 +10,16 @@ import {
 } from "@/components/sections";
 
 export const metadata: Metadata = {
-  title: "Microcontrollori Parte II | Appunti",
+  title: "Microcontrollori Test 1 P2 | Appunti",
   description:
-    "Appunti stampabili di Microcontrollori Parte II con clock, interrupt e collegamenti alla documentazione.",
+    "Appunti stampabili di Microcontrollori Test 1 P2 con clock, interrupt, SPI, ADC e Output Compare/PWM.",
 };
 
 export default function MicrocontrolloriPart2Page() {
   return (
     <div className="page page-compact">
       <div className="no-print">
-        <CourseHeader title="Microcontrollori — Parte II" />
+        <CourseHeader title="Microcontrollori — Test 1 P2" />
       </div>
       <DocumentationLinksSection />
       <ClockCheatsheetSection />
