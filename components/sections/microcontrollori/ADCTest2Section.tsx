@@ -5,7 +5,6 @@ export function ADCTest2Section() {
     <Section title="ADC">
       {adcOverviewCards}
       {adcRegistersTable}
-      {adcErrors}
       {adcConversionAndCode}
       {adcVoltageExample}
     </Section>
@@ -163,9 +162,9 @@ const adcRegistersTable = (
   </Row>
 );
 
-const adcErrors = (
+const adcConversionAndCode = (
   <Row>
-    <Column width="auto">
+    <Column width="half">
       <Box color="red" border="left" title="Errori non ideali">
         <table className="comparison-table">
           <tbody>
@@ -173,19 +172,19 @@ const adcErrors = (
               <td>
                 <strong>Offset</strong>
               </td>
-              <td>tutta la curva e traslata rispetto allo zero ideale</td>
+              <td>curva traslata rispetto allo zero ideale</td>
             </tr>
             <tr>
               <td>
                 <strong>Gain</strong>
               </td>
-              <td>pendenza errata: fondo scala prima/dopo il valore ideale</td>
+              <td>pendenza errata: fondo scala prima/dopo l&apos;ideale</td>
             </tr>
             <tr>
               <td>
                 <strong>DNL</strong>
               </td>
-              <td>ampiezza dei singoli codici non uniforme</td>
+              <td>ampiezza dei codici non uniforme</td>
             </tr>
             <tr>
               <td>
@@ -196,13 +195,7 @@ const adcErrors = (
           </tbody>
         </table>
       </Box>
-    </Column>
-  </Row>
-);
 
-const adcConversionAndCode = (
-  <Row>
-    <Column width="half">
       <Box color="purple" border="left" title="Sequenza di conversione">
         <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
           <li>
