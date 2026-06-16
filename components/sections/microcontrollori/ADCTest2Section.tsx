@@ -83,6 +83,11 @@ const adcOverviewCards = (
             <code>1 LSB ~= 3.22 mV</code>. Per stimare la tensione si scala il
             codice letto sul codice massimo.
           </p>
+          <p style={{ gridColumn: "1 / -1" }}>
+            <strong>Da tensione a codice:</strong> normalizza la tensione sul
+            fondo scala e moltiplica per il codice massimo. Esempio:{" "}
+            <code>2.50/5 * 4095 ~= 2048</code>.
+          </p>
         </div>
         <div
           style={{
@@ -96,7 +101,10 @@ const adcOverviewCards = (
             <MathBlock gap="sm" size="small">{`V_{FS}=V_{REF+}-V_{REF-}`}</MathBlock>
             <MathBlock gap="sm" size="small">{`1\\,LSB \\approx \\frac{V_{FS}}{2^n}`}</MathBlock>
           </div>
-          <MathBlock gap="sm" size="small">{`V_{in} \\approx V_{REF-}+\\frac{ADC}{2^n-1}V_{FS}`}</MathBlock>
+          <div>
+            <MathBlock gap="sm" size="small">{`ADC \\approx \\frac{V_{in}-V_{REF-}}{V_{FS}}(2^n-1)`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`V_{in} \\approx V_{REF-}+\\frac{ADC}{2^n-1}V_{FS}`}</MathBlock>
+          </div>
         </div>
       </Box>
     </Column>
