@@ -121,7 +121,8 @@ export const courses: Course[] = [
   {
     slug: "matematica-avanzata",
     title: "Matematica Avanzata",
-    description: "Matrici, vettori, determinanti, autovalori e autospazi",
+    description:
+      "Matrici, vettori, determinanti, traccia, autovalori, autospazi e diagonalizzazione",
     categories: ["math"],
     semester: 4,
     keywords: [
@@ -129,9 +130,11 @@ export const courses: Course[] = [
       "matrici",
       "vettori",
       "determinante",
+      "traccia",
       "autovalore",
       "autovettore",
       "autospazio",
+      "diagonalizzazione",
       "eigenvalue",
       "eigenvector",
     ],
