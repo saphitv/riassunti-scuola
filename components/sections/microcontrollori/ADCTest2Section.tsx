@@ -13,7 +13,7 @@ export function ADCTest2Section() {
 
 const adcOverviewCards = (
   <Row>
-    <Column width="third">
+    <Column width="fourth">
       <Box color="blue" border="left" title="Informazioni generali">
         <div style={{ fontSize: "var(--font-size-small)" }}>
           <p>
@@ -31,7 +31,7 @@ const adcOverviewCards = (
       </Box>
     </Column>
 
-    <Column width="third">
+    <Column width="fourth">
       <Box color="purple" border="left" title="Campionamento">
         <p style={{ fontSize: "var(--font-size-small)" }}>
           Il <strong>campionamento</strong> misura il segnale in istanti
@@ -48,28 +48,56 @@ const adcOverviewCards = (
       </Box>
     </Column>
 
-    <Column width="third">
+    <Column width="half">
       <Box color="green" border="left" title="Fondo scala & risoluzione">
-        <ul className="ref-list" style={{ fontSize: "var(--font-size-small)" }}>
-          <li>
-            <strong>Fondo scala</strong>: intervallo rappresentabile
-            dall&apos;ADC, fissato da <code>V<sub>REF+</sub></code> e{" "}
-            <code>V<sub>REF-</sub></code>.
-          </li>
-          <li>
-            <strong>Risoluzione</strong>: con <code>n</code> bit ci sono{" "}
-            <code>2^n</code> livelli; il passo minimo e un{" "}
-            <strong>LSB</strong>.
-          </li>
-          <li>
-            PIC32 10 bit: codici <code>0..1023</code>; con{" "}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "0.35rem 0.6rem",
+            fontSize: "var(--font-size-small)",
+          }}
+        >
+          <p>
+            <strong>Fondo scala:</strong> intervallo di tensioni codificabile,
+            da <code>V<sub>REF-</sub></code> a{" "}
+            <code>V<sub>REF+</sub></code>.
+          </p>
+          <p>
+            <strong>Saturazione:</strong> sotto <code>V<sub>REF-</sub></code>{" "}
+            si legge circa <code>0</code>; sopra{" "}
+            <code>V<sub>REF+</sub></code> il codice massimo.
+          </p>
+          <p>
+            <strong>Risoluzione:</strong> con <code>n</code> bit ci sono{" "}
+            <code>2^n</code> codici, numerati da <code>0</code> a{" "}
+            <code>2^n - 1</code>.
+          </p>
+          <p>
+            <strong>LSB:</strong> salto di tensione tra due codici consecutivi;
+            piu bit significa passo piu piccolo.
+          </p>
+          <p style={{ gridColumn: "1 / -1" }}>
+            <strong>PIC32 10 bit:</strong> codici <code>0..1023</code>; con{" "}
             <code>V<sub>FS</sub> = 3.3 V</code>,{" "}
-            <code>LSB ~= 3.22 mV</code>.
-          </li>
-        </ul>
-        <MathBlock gap="sm" size="small">{`V_{FS}=V_{REF+}-V_{REF-}`}</MathBlock>
-        <MathBlock gap="sm" size="small">{`q \\approx \\frac{V_{FS}}{2^n}`}</MathBlock>
-        <MathBlock gap="sm" size="small">{`V_{in} \\approx V_{REF-}+\\frac{ADC}{2^n-1}V_{FS}`}</MathBlock>
+            <code>1 LSB ~= 3.22 mV</code>. Per stimare la tensione si scala il
+            codice letto sul codice massimo.
+          </p>
+        </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            alignItems: "center",
+            columnGap: "0.6rem",
+          }}
+        >
+          <div>
+            <MathBlock gap="sm" size="small">{`V_{FS}=V_{REF+}-V_{REF-}`}</MathBlock>
+            <MathBlock gap="sm" size="small">{`1\\,LSB \\approx \\frac{V_{FS}}{2^n}`}</MathBlock>
+          </div>
+          <MathBlock gap="sm" size="small">{`V_{in} \\approx V_{REF-}+\\frac{ADC}{2^n-1}V_{FS}`}</MathBlock>
+        </div>
       </Box>
     </Column>
   </Row>
