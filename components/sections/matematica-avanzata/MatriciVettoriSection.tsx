@@ -151,6 +151,19 @@ dh-eg & bg-ah & ae-bd
               
             </ol>
           </Box>
+          <Box color="blue" border="left" title="Matrici simili">
+            <MathBlock gap="sm">
+              {`B=P^{-1}AP
+\\qquad
+A=PBP^{-1}`}
+            </MathBlock>
+            <ul>
+              <li>Rappresentano la stessa applicazione lineare in basi diverse.</li>
+              <li>Hanno stesso polinomio caratteristico e stessi autovalori, con la stessa molteplicita algebrica.</li>
+              <li>Sono invarianti: <Math>{"\\det(A)=\\det(B)"}</Math>, <Math>{"\\operatorname{tr}(A)=\\operatorname{tr}(B)"}</Math>, <Math>{"\\operatorname{rank}(A)=\\operatorname{rank}(B)"}</Math>.</li>
+              <li><Math>{"A"}</Math> e invertibile/diagonalizzabile se e solo se lo e <Math>{"B"}</Math>.</li>
+            </ul>
+          </Box>
         </Column>
       </Row>
     </Section>

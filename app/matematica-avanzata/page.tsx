@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CourseHeader } from "@/components/index";
 import {
   AutovaloriAutospaziSection,
+  DerivateEssenzialiSection,
   DiagonalizzazioneSection,
   MatriciVettoriSection,
   SistemiEquazioniDifferenzialiSection,
@@ -27,6 +28,7 @@ export default function MatematicaAvanzataPage() {
       />
 
       <MatriciVettoriSection />
+      <DerivateEssenzialiSection />
       <AutovaloriAutospaziSection />
       <DiagonalizzazioneSection />
       <SistemiEquazioniDifferenzialiSection />
