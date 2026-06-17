@@ -15,19 +15,11 @@ export function AutovaloriAutospaziSection() {
     <Section title="Autovalori, Autovettori e Autospazi" allowPageBreak>
       <Row gap="sm">
         <Column width="half">
-          <Box color="blue" border="left" title="Significato">
-            <Definition term="Autovalore">
-              Uno scalare <Math>{"\\lambda"}</Math> e un autovalore di{" "}
-              <Math>{"A"}</Math> se esiste un vettore non nullo{" "}
-              <Math>{"v \\neq 0"}</Math> tale che{" "}
-              <Math>{"Av=\\lambda v"}</Math>.
-            </Definition>
-            <Definition term="Autovettore">
-              Il vettore non nullo <Math>{"v"}</Math> e un autovettore
-              associato a <Math>{"\\lambda"}</Math> quando la moltiplicazione
-              per <Math>{"A"}</Math> cambia solo la sua lunghezza o il suo
-              verso, non la sua direzione.
-            </Definition>
+          <Box color="blue" border="left">
+            <div style={{ fontSize: "8pt", lineHeight: 1.2 }}>
+              <div className="definition"><span className="definition-term">Autovalore:</span> Uno scalare <Math>{"\\lambda"}</Math> e un autovalore di <Math>{"A"}</Math> se esiste un vettore non nullo <Math>{"v \\neq 0"}</Math> tale che <Math>{"Av=\\lambda v"}</Math>.</div>
+              <div className="definition"><span className="definition-term">Autovettore:</span> Il vettore non nullo <Math>{"v"}</Math> e un autovettore associato a <Math>{"\\lambda"}</Math> quando la moltiplicazione per <Math>{"A"}</Math> cambia solo la sua lunghezza o il suo verso, non la sua direzione.</div>
+            </div>
           </Box>
         </Column>
         <Column width="half">

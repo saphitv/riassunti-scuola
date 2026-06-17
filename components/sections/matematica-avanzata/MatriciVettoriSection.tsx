@@ -51,30 +51,7 @@ ce+dg & cf+dh
               <li>Il prodotto in generale non commuta: <Math>{"AB\\neq BA"}</Math>.</li>
             </ul>
           </Box>
-        </Column>
-        <Column width="half">
-          <Box color="green" border="left" title="Rango con Gauss">
-            <MathBlock gap="sm">
-              {`\\operatorname{rank}(A)
-=\\#\\{\\text{righe/colonne linearmente indipendenti}\\}
-=\\#\\{\\text{pivot dopo Gauss}\\}`}
-            </MathBlock>
-            <ol>
-              <li>Porta la matrice in forma a scala con operazioni di riga.</li>
-              <li>Conta i pivot, cioe le righe non nulle.</li>
-              <li>Se <Math>{"A\\in\\mathbb{R}^{m\\times n}"}</Math>, allora <Math>{"0\\le\\operatorname{rank}(A)\\le\\min(m,n)"}</Math>.</li>
-            </ol>
-            <MathBlock gap="sm">
-              {`A\\in\\mathbb{R}^{n\\times n},\\quad
-\\operatorname{rank}(A)=n
-\\Longleftrightarrow A\\ \\text{invertibile}`}
-            </MathBlock>
-          </Box>
-        </Column>
-      </Row>
 
-      <Row>
-        <Column width="half">
           <Box color="yellow" border="left" title="Determinante">
             <MathBlock gap="sm">
               {`\\det\\begin{pmatrix}
@@ -103,8 +80,38 @@ g & h & i
               <li>Riga nulla o righe dipendenti: <Math>{"\\det(A)=0"}</Math>.</li>
             </ul>
           </Box>
+          <Box color="gray" border="left" title="Traccia">
+            <MathBlock gap="sm">
+              {`\\operatorname{tr}(A^T)=\\operatorname{tr}(A),\\quad
+\\operatorname{tr}(AB)=\\operatorname{tr}(BA),\\quad
+\\operatorname{tr}(ABC)=\\operatorname{tr}(BCA)=\\operatorname{tr}(CAB)`}
+            </MathBlock>
+            <ol>
+              <li>Somma degli elementi diagonali.</li>
+              <li>
+                Non vale in generale: <Math>{"\\operatorname{tr}(AB)=\\operatorname{tr}(A)\\operatorname{tr}(B)"}</Math>.
+              </li>
+            </ol>
+          </Box>
         </Column>
         <Column width="half">
+          <Box color="green" border="left" title="Rango con Gauss">
+            <MathBlock gap="sm">
+              {`\\operatorname{rank}(A)
+=\\#\\{\\text{righe/colonne linearmente indipendenti}\\}
+=\\#\\{\\text{pivot dopo Gauss}\\}`}
+            </MathBlock>
+            <ol>
+              <li>Porta la matrice in forma a scala con operazioni di riga.</li>
+              <li>Conta i pivot, cioe le righe non nulle.</li>
+              <li>Se <Math>{"A\\in\\mathbb{R}^{m\\times n}"}</Math>, allora <Math>{"0\\le\\operatorname{rank}(A)\\le\\min(m,n)"}</Math>.</li>
+            </ol>
+            <MathBlock gap="sm">
+              {`A\\in\\mathbb{R}^{n\\times n},\\quad
+\\operatorname{rank}(A)=n
+\\Longleftrightarrow A\\ \\text{invertibile}`}
+            </MathBlock>
+          </Box>
           <Box color="purple" border="left" title="Inversa">
             <MathBlock gap="sm" size="small">
               {`A=\\begin{pmatrix}
@@ -135,20 +142,6 @@ dh-eg & bg-ah & ae-bd
             <ol>
               <li>Valida solo se il denominatore e non nullo.</li>
               <li>Gauss-Jordan: <Math>{"[A\\mid I_n]\\to[I_n\\mid A^{-1}]"}</Math>.</li>
-            </ol>
-          </Box>
-          <Box color="gray" border="left" title="Traccia">
-            <MathBlock gap="sm">
-              {`\\operatorname{tr}(A^T)=\\operatorname{tr}(A),\\quad
-\\operatorname{tr}(AB)=\\operatorname{tr}(BA),\\quad
-\\operatorname{tr}(ABC)=\\operatorname{tr}(BCA)=\\operatorname{tr}(CAB)`}
-            </MathBlock>
-            <ol>
-              <li>Somma degli elementi diagonali.</li>
-              <li>
-              Non vale in generale: <Math>{"\\operatorname{tr}(AB)=\\operatorname{tr}(A)\\operatorname{tr}(B)"}</Math>.
-              </li>
-              
             </ol>
           </Box>
           <Box color="blue" border="left" title="Matrici simili">

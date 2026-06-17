@@ -115,6 +115,27 @@ Z(s)=(sI-A)^{-1}BU(s)`}
               {`G(s)=C(sI-A)^{-1}B+D`}
             </MathBlock>
           </Box>
+
+          <Box color="red" border="left" title="Errori da evitare">
+            <ul>
+              <li>
+                Dimenticare <Math>{"-y(0)"}</Math>,{" "}
+                <Math>{"-sy(0)-y'(0)"}</Math> nelle derivate.
+              </li>
+              <li>
+                Usare <Math>{"G(s)"}</Math> anche quando i dati iniziali non
+                sono nulli.
+              </li>
+              <li>
+                Non trasformare l&apos;ingresso: per il gradino{" "}
+                <Math>{"u(t)=1"}</Math> vale <Math>{"U(s)=1/s"}</Math>.
+              </li>
+              <li>
+                Saltare il controllo finale su <Math>{"y(0)"}</Math> e{" "}
+                <Math>{"y'(0)"}</Math>.
+              </li>
+            </ul>
+          </Box>
         </Column>
       </Row>
 
@@ -201,26 +222,6 @@ x(t)=e^{-t}`}
         </Row>
       </Example>
 
-      <Box color="red" border="left" title="Errori da evitare">
-        <ul>
-          <li>
-            Dimenticare <Math>{"-y(0)"}</Math>,{" "}
-            <Math>{"-sy(0)-y'(0)"}</Math> nelle derivate.
-          </li>
-          <li>
-            Usare <Math>{"G(s)"}</Math> anche quando i dati iniziali non sono
-            nulli.
-          </li>
-          <li>
-            Non trasformare l&apos;ingresso: per il gradino{" "}
-            <Math>{"u(t)=1"}</Math> vale <Math>{"U(s)=1/s"}</Math>.
-          </li>
-          <li>
-            Saltare il controllo finale su <Math>{"y(0)"}</Math> e{" "}
-            <Math>{"y'(0)"}</Math>.
-          </li>
-        </ul>
-      </Box>
     </Section>
   );
 }

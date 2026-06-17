@@ -56,29 +56,35 @@ X(\\omega)e^{j\\omega t}\\,d\\omega`}
       </Row>
 
       <Box color="yellow" border="left" title="Frazione di energia in una banda">
-        <p>
-          La domanda tipica chiede quale percentuale dell&apos;energia totale cade
-          in una certa banda. Si usa direttamente lo spettro:
-        </p>
-        <MathBlock gap="sm">
-          {`\\boxed{
+        <Row gap="sm">
+          <Column width="half">
+            <p>
+              La domanda tipica chiede quale percentuale dell&apos;energia totale cade
+              in una certa banda. Si usa direttamente lo spettro:
+            </p>
+            <MathBlock gap="sm" size="small">
+              {`\\boxed{
 \\rho_B=\\frac{E_B}{E}
 =\\frac{\\int_B |X(\\omega)|^2\\,d\\omega}
 {\\int_{-\\infty}^{+\\infty}|X(\\omega)|^2\\,d\\omega}
 }`}
-        </MathBlock>
-        <p>
-          Per la banda simmetrica <Math>{"[-\\Omega,\\Omega]"}</Math>:
-        </p>
-        <MathBlock gap="sm">
-          {`\\rho(\\Omega)=
+            </MathBlock>
+          </Column>
+          <Column width="half">
+            <p>
+              Per la banda simmetrica <Math>{"[-\\Omega,\\Omega]"}</Math>:
+            </p>
+            <MathBlock gap="sm" size="small">
+              {`\\rho(\\Omega)=
 \\frac{\\int_{-\\Omega}^{\\Omega}|X(\\omega)|^2\\,d\\omega}
 {\\int_{-\\infty}^{+\\infty}|X(\\omega)|^2\\,d\\omega}`}
-        </MathBlock>
-        <Note>
-          Il fattore <Math>{"1/(2\\pi)"}</Math> non va messo nel rapporto:
-          compare sia sopra sia sotto.
-        </Note>
+            </MathBlock>
+            <Note>
+              Il fattore <Math>{"1/(2\\pi)"}</Math> non va messo nel rapporto:
+              compare sia sopra sia sotto.
+            </Note>
+          </Column>
+        </Row>
       </Box>
 
       <Row gap="sm">

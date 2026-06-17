@@ -197,13 +197,9 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
               </li>
             </ol>
           </Box>
-        </Column>
-      </Row>
 
-      <Example title="Esempio 2 x 2" color="blue">
-        <Row>
-          <Column width="half">
-            <MathBlock gap="sm">
+          <Example title="Esempio 2 x 2" color="blue">
+            <MathBlock gap="sm" size="small">
               {`A=
 \\begin{pmatrix}
 2 & 1 \\\\
@@ -212,7 +208,7 @@ D^k=\\operatorname{diag}(\\lambda_1^k,\\dots,\\lambda_n^k)`}
 \\qquad
 \\lambda_1=2,\\ \\lambda_2=3`}
             </MathBlock>
-            <MathBlock gap="sm">
+            <MathBlock gap="sm" size="small">
               {`E_2=\\operatorname{span}\\left\\{
 \\begin{pmatrix}
 1 \\\\
@@ -227,9 +223,7 @@ E_3=\\operatorname{span}\\left\\{
 \\end{pmatrix}
 \\right\\}`}
             </MathBlock>
-          </Column>
-          <Column width="half">
-            <MathBlock gap="sm">
+            <MathBlock gap="sm" size="small">
               {`P=
 \\begin{pmatrix}
 1 & 1 \\\\
@@ -242,7 +236,7 @@ D=
 0 & 3
 \\end{pmatrix}`}
             </MathBlock>
-            <MathBlock gap="sm">
+            <MathBlock gap="sm" size="small">
               {`P^{-1}=
 \\begin{pmatrix}
 1 & -1 \\\\
@@ -251,9 +245,9 @@ D=
 \\qquad
 A=PDP^{-1}`}
             </MathBlock>
-          </Column>
-        </Row>
-      </Example>
+          </Example>
+        </Column>
+      </Row>
     </Section>
   );
 }
