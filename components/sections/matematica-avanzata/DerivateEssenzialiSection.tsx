@@ -59,6 +59,10 @@ export function DerivateEssenzialiSection() {
 \\qquad
 (\\cos u)'=-\\sin(u)u'`}
             </MathBlock>
+            <MathBlock gap="sm" size="small">
+              {`\\int \\frac{1}{a^2+\\omega^2}\\,d\\omega
+=\\frac{1}{a}\\arctan\\left(\\frac{\\omega}{a}\\right)`}
+            </MathBlock>
           </Box>
         </Column>
       </Row>
