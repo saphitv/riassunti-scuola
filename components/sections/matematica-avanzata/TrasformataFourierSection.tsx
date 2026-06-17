@@ -98,6 +98,15 @@ X(\\omega)e^{j\\omega t}\\,d\\omega`}
                 Calcola <Math>{"|X(\\omega)|^2"}</Math>.
               </li>
               <li>
+                Per un complesso <Math>{"z=a+jb"}</Math>, il modulo e:
+                <MathBlock gap="sm" size="small">
+                  {`\\boxed{|z|=\\sqrt{a^2+b^2}}`}
+                </MathBlock>
+                Quindi se <Math>{"X(\\omega)=a(\\omega)+jb(\\omega)"}</Math>,
+                allora{" "}
+                <Math>{"|X(\\omega)|^2=a(\\omega)^2+b(\\omega)^2"}</Math>.
+              </li>
+              <li>
                 Integra <Math>{"|X(\\omega)|^2"}</Math> nella banda richiesta.
               </li>
               <li>
