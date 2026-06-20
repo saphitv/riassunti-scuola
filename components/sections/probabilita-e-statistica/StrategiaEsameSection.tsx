@@ -31,9 +31,15 @@ export function StrategiaEsameSection() {
         <ul>
           <li><strong>Disgiunti ≠ indipendenti.</strong></li>
           <li><Math>{"P(A\\mid B)"}</Math> <strong>≠</strong> <Math>{"P(B\\mid A)"}</Math>.</li>
-          <li>“Ogni giorno accade A”: <Math>{"P(A)^n"}</Math>; “in almeno k giorni”: conteggio binomiale.</li>
+          <li>
+            Con giorni indipendenti e probabilità costante, “ogni giorno accade A”:
+            <Math>{" P(A)^n"}</Math>; “in almeno k giorni”: conteggio binomiale.
+          </li>
           <li>“Somma complessiva sotto s”: convoluzione o enumerazione, non una potenza.</li>
-          <li>Senza reinserimento: ipergeometrica; la binomiale è solo un&apos;approssimazione.</li>
+          <li>
+            Campionamento casuale senza reinserimento da una popolazione finita con
+            due categorie: ipergeometrica; la binomiale è solo un&apos;approssimazione.
+          </li>
           <li>Per somme indipendenti si sommano le varianze, non le deviazioni standard.</li>
         </ul>
       </Box>

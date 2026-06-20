@@ -17,7 +17,7 @@ export function ModelliContinuiSection() {
             <p><Math>{"X\\sim U([a,b])"}</Math>: stessa densità in tutto l&apos;intervallo.</p>
             <MathBlock>{`f(x)=\\frac1{b-a},\\ a\\le x\\le b`}</MathBlock>
             <MathBlock>{`E[X]=\\frac{a+b}{2} \\qquad Var(X)=\\frac{(b-a)^2}{12}`}</MathBlock>
-            <MathBlock>{`P(c\\le X\\le d)=\\frac{d-c}{b-a}`}</MathBlock>
+            <MathBlock>{`P(c\\le X\\le d)=\\frac{d-c}{b-a},\\quad a\\le c\\le d\\le b`}</MathBlock>
           </Box>
         </Column>
         <Column width="half">

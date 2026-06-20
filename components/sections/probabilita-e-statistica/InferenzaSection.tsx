@@ -47,12 +47,23 @@ export function InferenzaSection() {
       </Box>
 
       <Box color="yellow" border="left" title="Intervallo per una media">
-        <p>Con deviazione standard della popolazione nota (o campione grande):</p>
+        <p>
+          Con deviazione standard della popolazione nota (esatto per popolazione
+          normale, approssimato per campioni grandi):
+        </p>
         <MathBlock>
           {`IC_{1-\\alpha}:\\quad \\bar X\\pm z_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}`}
         </MathBlock>
         <p>
-          Quantili: 1.64 (90%), 1.96 (95%), 2.58 (99%). Il margine
+          Se <Math>{"\\sigma"}</Math> è ignota, stimarla con
+          <Math>{" s"}</Math> e usare il quantile t con
+          <Math>{" n-1"}</Math> gradi di libertà:
+        </p>
+        <MathBlock>
+          {`\\bar X\\pm t_{1-\\alpha/2,n-1}\\frac{s}{\\sqrt n}`}
+        </MathBlock>
+        <p>
+          Nel caso z, i quantili sono 1.64 (90%), 1.96 (95%), 2.58 (99%). Il margine
           <Math>{" E=z\\sigma/\\sqrt n"}</Math> diminuisce come
           <Math>{" 1/\\sqrt n"}</Math>; per progettare il campione:
         </p>
@@ -80,7 +91,9 @@ export function InferenzaSection() {
               Per stimare <Math>{"E[X^2]"}</Math>, porre
               <Math>{" Y=X^2"}</Math>. Allora la stima è
               <Math>{" m_2"}</Math> e la varianza stimata di
-              <Math>{" Y"}</Math> è <Math>{"m_4-m_2^2"}</Math>:
+              <Math>{" Y"}</Math> è <Math>{"m_4-m_2^2"}</Math>. Per un campione
+              i.i.d. grande e con <Math>{"E[X^4]<\\infty"}</Math>, l&apos;intervallo
+              asintotico è:
             </p>
             <MathBlock>
               {`m_2\\pm z_{1-\\alpha/2}\\sqrt{\\frac{m_4-m_2^2}{n}}`}
@@ -92,8 +105,9 @@ export function InferenzaSection() {
       <Note>
         Interpretazione frequentista: il parametro è fisso; è il metodo che, su
         campioni ripetuti, produce una frazione <Math>{"1-\\alpha"}</Math> di
-        intervalli contenenti il parametro. Con <Math>{"\\sigma"}</Math> ignota e
-        campione piccolo serve la distribuzione t di Student, non trattata nelle slide.
+        intervalli contenenti il parametro. Con <Math>{"\\sigma"}</Math> ignota si
+        usa la distribuzione t di Student; per campioni piccoli l&apos;intervallo
+        richiede una popolazione normale.
       </Note>
     </Section>
   );

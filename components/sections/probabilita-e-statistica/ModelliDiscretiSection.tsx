@@ -29,7 +29,10 @@ export function ModelliDiscretiSection() {
         </Column>
         <Column width="third">
           <Box color="purple" border="left" title="Poisson">
-            <p><Math>{"X\\sim P(\\lambda)"}</Math>: conteggio di eventi indipendenti in un intervallo.</p>
+            <p>
+              <Math>{"X\\sim P(\\lambda)"}</Math>: conteggio di eventi di un
+              processo con tasso costante e incrementi indipendenti.
+            </p>
             <MathBlock>{`P(X=k)=e^{-\\lambda}\\frac{\\lambda^k}{k!}`}</MathBlock>
             <MathBlock>{`E[X]=Var(X)=\\lambda`}</MathBlock>
           </Box>
@@ -42,7 +45,7 @@ export function ModelliDiscretiSection() {
             <ul>
               <li>Una prova sì/no: Bernoulli.</li>
               <li>Numero di successi su un totale fisso: binomiale.</li>
-              <li>Numero di arrivi in tempo/spazio: Poisson.</li>
+              <li>Numero di arrivi in tempo/spazio con tasso costante: Poisson.</li>
             </ul>
             <p>
               Con <Math>{"n"}</Math> grande, <Math>{"p"}</Math> piccolo e
