@@ -12,99 +12,76 @@ import {
 
 export function FondamentiProbabilitaSection() {
   return (
-    <Section title="Fondamenti di Probabilita" forceFirstPage>
+    <Section title="1. Elementi di probabilità" forceFirstPage allowPageBreak>
       <Row>
         <Column width="half">
-          <Definition term="Spazio campionario">
-            Lo spazio campionario <Math>{"\\Omega"}</Math> e l&apos;insieme di
-            tutti gli esiti possibili di un esperimento aleatorio.
+          <Definition term="Spazio campionario ed evento">
+            Lo spazio campionario <Math>{"\\Omega"}</Math> contiene tutti gli
+            esiti possibili. Un evento <Math>{"E"}</Math> è un sottoinsieme di
+            <Math>{" \\Omega"}</Math>; si verifica quando l&apos;esito osservato
+            appartiene a <Math>{"E"}</Math>.
           </Definition>
         </Column>
         <Column width="half">
-          <Definition term="Evento">
-            Un evento e un sottoinsieme di <Math>{"\\Omega"}</Math>. Si verifica
-            quando l&apos;esito osservato appartiene a quel sottoinsieme.
-          </Definition>
+          <Box color="purple" border="left" title="Operazioni tra eventi">
+            <MathBlock>
+              {`E \\cup F \\quad E \\cap F \\quad \\bar E = \\Omega \\setminus E`}
+            </MathBlock>
+            <p>
+              Disgiunti: <Math>{"E \\cap F=\\varnothing"}</Math>. Inclusione:
+              <Math>{" E \\subseteq F"}</Math>. De Morgan:
+            </p>
+            <MathBlock>
+              {`\\overline{E\\cup F}=\\bar E\\cap\\bar F \\qquad \\overline{E\\cap F}=\\bar E\\cup\\bar F`}
+            </MathBlock>
+          </Box>
         </Column>
       </Row>
 
-      <Box color="blue" border="left" title="Assiomi di probabilita">
+      <Box color="blue" border="left" title="Assiomi e conseguenze">
         <MathBlock>
-          {`0 \\leq P(E) \\leq 1 \\qquad P(\\varnothing) = 0 \\qquad P(\\Omega) = 1`}
+          {`0\\le P(E)\\le1 \\qquad P(\\varnothing)=0 \\qquad P(\\Omega)=1`}
         </MathBlock>
         <MathBlock>
-          {`E_i \\cap E_j = \\varnothing \\; (i \\neq j) \\Rightarrow P(E_1 \\cup \\cdots \\cup E_n) = P(E_1) + \\cdots + P(E_n)`}
+          {`E_i\\cap E_j=\\varnothing \\Rightarrow P\\!\\left(\\bigcup_i E_i\\right)=\\sum_iP(E_i)`}
         </MathBlock>
-        <p style={{ marginTop: "0.5rem" }}>
-          Dagli assiomi si ricavano subito:
-        </p>
         <MathBlock>
-          {`P(\\overline{E}) = 1 - P(E) \\qquad P(E \\cup F) = P(E) + P(F) - P(E \\cap F)`}
+          {`P(\\bar E)=1-P(E) \\qquad P(E\\cup F)=P(E)+P(F)-P(E\\cap F)`}
         </MathBlock>
       </Box>
 
       <Row>
         <Column width="half">
-          <Example title="Esempio: lancio di un dado" color="yellow">
-            <MathBlock>{"\\Omega = \\{1,2,3,4,5,6\\}"}</MathBlock>
+          <Box color="green" border="left" title="Spazi equiprobabili">
+            <p>Se tutti gli esiti hanno la stessa probabilità:</p>
+            <MathBlock>{`P(E)=\\frac{|E|}{|\\Omega|}`}</MathBlock>
             <p>
-              Se <Math>{"E"}</Math> = &quot;numero dispari&quot;, allora
+              Con ordine: <Math>{"n^k"}</Math> sequenze di <Math>{"k"}</Math>
+              estrazioni con reinserimento. Senza ordine e senza reinserimento:
             </p>
-            <MathBlock>{"E = \\{1,3,5\\}"}</MathBlock>
-          </Example>
-        </Column>
-        <Column width="half">
-          <Example title="Esempio: lancio di due monete" color="green">
-            <MathBlock>
-              {"\\Omega = \\{(T,T),(T,C),(C,T),(C,C)\\}"}
-            </MathBlock>
-            <p>
-              Se <Math>{"E"}</Math> = &quot;almeno una testa&quot;, allora
-            </p>
-            <MathBlock>{"E = \\{(T,T),(T,C),(C,T)\\}"}</MathBlock>
-          </Example>
-        </Column>
-      </Row>
-
-      <Row>
-        <Column width="half">
-          <Box color="purple" border="left" title="Relazioni tra eventi">
-            <p>
-              <Math>{"E \\cup F"}</Math>: esiti che stanno in <Math>{"E"}</Math>{" "}
-              oppure in <Math>{"F"}</Math>.
-            </p>
-            <p>
-              <Math>{"E \\cap F"}</Math>: esiti che stanno sia in{" "}
-              <Math>{"E"}</Math> sia in <Math>{"F"}</Math>.
-            </p>
-            <p>
-              <Math>{"\\overline{E}"}</Math>: esiti che non appartengono a{" "}
-              <Math>{"E"}</Math>.
-            </p>
-            <MathBlock>
-              {`E \\cap \\overline{E} = \\varnothing \\qquad E \\cup \\overline{E} = \\Omega`}
-            </MathBlock>
+            <MathBlock>{`\\binom nk=\\frac{n!}{k!(n-k)!}`}</MathBlock>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="red" border="left" title="Eventi disgiunti">
+          <Example title="Strategia: almeno uno" color="yellow">
             <p>
-              Due eventi <Math>{"E"}</Math> e <Math>{"F"}</Math> sono disgiunti
-              se non possono verificarsi insieme:
+              È spesso più rapido calcolare il complementare. Se ogni prova
+              fallisce con probabilità <Math>{"q"}</Math> e le prove sono
+              indipendenti:
             </p>
-            <MathBlock>{"E \\cap F = \\varnothing"}</MathBlock>
+            <MathBlock>{`P(\\text{almeno un successo})=1-q^n`}</MathBlock>
             <p>
-              In questo caso la probabilita dell&apos;unione si ottiene sommando
-              le probabilita dei singoli eventi.
+              Prima di contare, chiarire sempre: ordine rilevante? reinserimento?
+              esiti equiprobabili?
             </p>
-          </Box>
+          </Example>
         </Column>
       </Row>
 
       <Note>
-        I diagrammi di Venn rappresentano graficamente lo spazio campionario
-        come un rettangolo e gli eventi come cerchi o ovali, rendendo immediati
-        unione, intersezione e complementare.
+        Nei sistemi affidabili indipendenti: componenti in serie funzionano tutti,
+        quindi si moltiplicano le affidabilità; un blocco in parallelo funziona se
+        almeno un componente funziona, quindi <Math>{"1-(1-r)^n"}</Math>.
       </Note>
     </Section>
   );

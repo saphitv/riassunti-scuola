@@ -242,7 +242,7 @@ export const courses: Course[] = [
   {
     slug: "probabilita-e-statistica",
     title: "Probabilità e Statistica",
-    description: "Eventi, probabilità condizionata, Bayes, indipendenza",
+    description: "Probabilità, variabili aleatorie, modelli, descrittiva e inferenza",
     categories: ["math"],
     semester: 4,
     keywords: [
@@ -252,6 +252,14 @@ export const courses: Course[] = [
       "condizionata",
       "indipendenza",
       "eventi",
+      "variabili aleatorie",
+      "binomiale",
+      "poisson",
+      "normale",
+      "esponenziale",
+      "statistica descrittiva",
+      "limite centrale",
+      "intervalli di confidenza",
     ],
   },
 ];

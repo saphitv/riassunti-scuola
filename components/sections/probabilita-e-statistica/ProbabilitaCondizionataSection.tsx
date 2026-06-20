@@ -7,96 +7,74 @@ import {
   MathBlock,
   Note,
   Definition,
-  Theorem,
+  Example,
 } from "@/components/index";
 
 export function ProbabilitaCondizionataSection() {
   return (
-    <Section title="Probabilita Condizionata, Bayes e Indipendenza">
+    <Section title="2. Probabilità condizionata, Bayes e indipendenza" allowPageBreak>
       <Row>
         <Column width="half">
-          <Definition term="Probabilita condizionata">
-            Se l&apos;evento <Math>{"F"}</Math> si e verificato e{" "}
-            <Math>{"P(F) > 0"}</Math>, allora la probabilita di{" "}
-            <Math>{"E"}</Math> dato <Math>{"F"}</Math> e
+          <Definition term="Probabilità condizionata">
+            Sapendo che <Math>{"F"}</Math> si è verificato, lo spazio campionario
+            si restringe a <Math>{"F"}</Math>:
           </Definition>
-          <MathBlock>{"P(E\\mid F) = \\frac{P(E \\cap F)}{P(F)}"}</MathBlock>
-          <p>
-            L&apos;evento <Math>{"F"}</Math> diventa il nuovo spazio
-            campionario &quot;ridotto&quot;.
-          </p>
+          <MathBlock>{`P(E\\mid F)=\\frac{P(E\\cap F)}{P(F)},\\quad P(F)>0`}</MathBlock>
         </Column>
         <Column width="half">
-          <Box color="blue" border="left" title="Prodotto">
-            <p>Dalla definizione segue subito:</p>
-            <MathBlock>{"P(E \\cap F) = P(E \\mid F) \\cdot P(F)"}</MathBlock>
-            <p>
-              Questa formula e utile quando conviene descrivere un evento come
-              intersezione tra un evento principale e una condizione gia nota.
-            </p>
+          <Box color="blue" border="left" title="Regola del prodotto">
+            <MathBlock>{`P(E\\cap F)=P(E\\mid F)P(F)`}</MathBlock>
+            <MathBlock>
+              {`P(E_1\\cap\\cdots\\cap E_n)=P(E_1)\\prod_{i=2}^nP(E_i\\mid E_1\\cap\\cdots\\cap E_{i-1})`}
+            </MathBlock>
           </Box>
         </Column>
       </Row>
 
-      <Theorem title="Fattorizzazione di un evento">
-        <MathBlock>{"E = (E \\cap F) \\cup (E \\cap \\overline{F})"}</MathBlock>
+      <Box color="green" border="left" title="Probabilità totale e formula di Bayes">
         <p>
-          Poiche i due eventi sono disgiunti, si ottiene la legge del caso
-          totale su due casi:
+          Se <Math>{"F_1,\\ldots,F_n"}</Math> è una partizione di
+          <Math>{" \\Omega"}</Math>, allora:
         </p>
         <MathBlock>
-          {`P(E) = P(E \\mid F)P(F) + P(E \\mid \\overline{F})P(\\overline{F})`}
+          {`P(E)=\\sum_{i=1}^nP(E\\mid F_i)P(F_i)`}
         </MathBlock>
-      </Theorem>
-
-      <Box color="green" border="left" title="Formula di Bayes">
-        <p>
-          Se <Math>{"F_1, \\ldots, F_n"}</Math> sono eventi disgiunti che
-          formano una partizione di <Math>{"\\Omega"}</Math>, allora
-        </p>
         <MathBlock>
-          {`P(E) = P(E \\mid F_1)P(F_1) + \\cdots + P(E \\mid F_n)P(F_n)`}
+          {`P(F_j\\mid E)=\\frac{P(E\\mid F_j)P(F_j)}{\\sum_iP(E\\mid F_i)P(F_i)}`}
         </MathBlock>
-        <p>e per ogni indice <Math>{"j"}</Math> vale:</p>
-        <MathBlock>
-          {`P(F_j \\mid E) = \\frac{P(E \\mid F_j)P(F_j)}{P(E)}`}
-        </MathBlock>
-        <Note>
-          Bayes serve a &quot;invertire&quot; il condizionamento: da{" "}
-          <Math>{"P(E \\mid F_j)"}</Math> si passa a{" "}
-          <Math>{"P(F_j \\mid E)"}</Math>.
-        </Note>
       </Box>
 
       <Row>
         <Column width="half">
-          <Box color="yellow" border="left" title="Indipendenza tra due eventi">
+          <Box color="yellow" border="left" title="Indipendenza">
+            <MathBlock>{`P(E\\cap F)=P(E)P(F)`}</MathBlock>
             <p>
-              Gli eventi <Math>{"E"}</Math> e <Math>{"F"}</Math> sono
-              indipendenti se
+              Equivalentemente, se le probabilità sono positive,
+              <Math>{" P(E\\mid F)=P(E)"}</Math>. L&apos;indipendenza non è la
+              disgiunzione: due eventi disgiunti non banali sono dipendenti.
             </p>
-            <MathBlock>{"P(E \\cap F) = P(E) \\cdot P(F)"}</MathBlock>
-            <p>In questo caso conoscere uno dei due eventi non cambia l&apos;altro:</p>
-            <MathBlock>
-              {"P(E \\mid F) = P(E) \\qquad P(F \\mid E) = P(F)"}
-            </MathBlock>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="gray" border="left" title="Indipendenza di piu eventi">
+          <Example title="Test diagnostico" color="red">
             <p>
-              Gli eventi <Math>{"F_1, \\ldots, F_n"}</Math> sono indipendenti se
+              Con prevalenza <Math>{"P(M)"}</Math>, sensibilità
+              <Math>{" P(T^+\\mid M)"}</Math> e specificità
+              <Math>{" P(T^-\\mid\\bar M)"}</Math>, prima trovare
+              <Math>{" P(T^+)"}</Math> col caso totale, poi applicare Bayes.
             </p>
             <MathBlock>
-              {`P(F_1 \\cap \\cdots \\cap F_n) = P(F_1) \\cdots P(F_n)`}
+              {`P(M\\mid T^+)=\\frac{P(T^+\\mid M)P(M)}{P(T^+)}`}
             </MathBlock>
-            <p>
-              La probabilita congiunta e quindi il prodotto delle probabilita
-              singole.
-            </p>
-          </Box>
+          </Example>
         </Column>
       </Row>
+
+      <Note>
+        Per gli esercizi costruire un albero: probabilità iniziali sui primi rami,
+        condizionate sui secondi; moltiplicare lungo un percorso, sommare percorsi
+        alternativi. Bayes inverte la direzione del condizionamento.
+      </Note>
     </Section>
   );
 }
