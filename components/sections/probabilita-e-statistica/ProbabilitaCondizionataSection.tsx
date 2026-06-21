@@ -33,8 +33,16 @@ export function ProbabilitaCondizionataSection() {
 
       <Box color="green" border="left" title="Probabilità totale e formula di Bayes">
         <p>
-          Se <Math>{"F_1,\\ldots,F_n"}</Math> è una partizione di
-          <Math>{" \\Omega"}</Math>, allora:
+          La forma diretta di Bayes, per <Math>{"P(M)>0"}</Math>, inverte il
+          condizionamento:
+        </p>
+        <MathBlock>
+          {`P(D\\mid M)=\\frac{P(M\\mid D)P(D)}{P(M)}`}
+        </MathBlock>
+        <p>
+          Se il denominatore non è noto e <Math>{"F_1,\\ldots,F_n"}</Math> è
+          una partizione di <Math>{"\\Omega"}</Math>, lo si calcola con la
+          probabilità totale:
         </p>
         <MathBlock>
           {`P(E)=\\sum_{i=1}^nP(E\\mid F_i)P(F_i)`}
