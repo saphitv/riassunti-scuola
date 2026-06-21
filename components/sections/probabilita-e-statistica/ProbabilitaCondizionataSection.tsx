@@ -205,20 +205,6 @@ export function ProbabilitaCondizionataSection() {
         </Column>
       </Row>
 
-      <Box color="blue" border="left" title="Mini esempio: Bayes">
-        <p>
-          Categorie: <Math>{"P(A)=0.30"}</Math>,{" "}
-          <Math>{"P(B)=0.70"}</Math>. Attributo:{" "}
-          <Math>{"P(E\\mid A)=0.20"}</Math>,{" "}
-          <Math>{"P(E\\mid B)=0.10"}</Math>.
-        </p>
-        <MathBlock gap="sm">
-          {`P(E)=0.20\\cdot0.30+0.10\\cdot0.70=0.13`}
-        </MathBlock>
-        <MathBlock gap="sm">
-          {`P(A\\mid E)=\\frac{0.20\\cdot0.30}{0.13}\\approx0.4615`}
-        </MathBlock>
-      </Box>
     </Section>
   );
 }
