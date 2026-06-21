@@ -87,7 +87,19 @@ export function FondamentiProbabilitaSection() {
               <strong>Binomiale</strong> <Math>{"B(n,p)"}</Math>:
             </p>
             <MathBlock gap="sm">
-              {`P(X=k)=\\binom nk p^k(1-p)^{n-k},\\quad E[X]=np,\\quad \\operatorname{Var}(X)=np(1-p)`}
+              {`P(X=r)=\\binom nr p^r(1-p)^{n-r}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`E[X]=np,\\quad \\operatorname{Var}(X)=np(1-p)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`A_i=\\text{successo prova }i,\\quad p=P(A_i)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`S_n=\\sum_{i=1}^n \\mathbf1_{A_i}\\sim B(n,p)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`P(S_n\\ge m)=\\sum_{r=m}^{n}\\binom nr p^r(1-p)^{n-r}`}
             </MathBlock>
             <p>
               <strong>Poisson</strong> <Math>{"P(\\lambda)"}</Math>:{" "}
@@ -124,7 +136,13 @@ export function FondamentiProbabilitaSection() {
               {`F(x)=P(X\\le x)=\\int_{-\\infty}^{x}f(t)\\,dt`}
             </MathBlock>
             <MathBlock gap="sm">
-              {`E[X]=\\int xf(x)\\,dx,\\quad \\operatorname{Var}(X)=E[X^2]-E[X]^2`}
+              {`E[X]=\\int xf(x)\\,dx,\\quad E[X^2]=\\int x^2f(x)\\,dx,\\quad \\operatorname{Var}(X)=E[X^2]-E[X]^2`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`\\text{parametri: }\\int f(x)\\,dx=1,\\quad \\int xf(x)\\,dx=E[X]\\text{ dato}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`c\\le d:\\quad P(X\\le c\\mid X\\le d)=\\frac{F(c)}{F(d)}`}
             </MathBlock>
           </Box>
         </Column>
@@ -138,9 +156,31 @@ export function FondamentiProbabilitaSection() {
             </p>
             <p>
               <strong>Normale</strong> <Math>{"N(\\mu,\\sigma^2)"}</Math>:{" "}
-              standardizza con{" "}
+              <Math>{"\\mu=E[X]"}</Math>,{" "}
+              <Math>{"\\sigma=\\sqrt{\\operatorname{Var}(X)}"}</Math>; standardizza con{" "}
               <Math>{"Z=\\frac{X-\\mu}{\\sigma}\\sim N(0,1)"}</Math>.
             </p>
+            <MathBlock gap="sm">
+              {`z_t=\\frac{t-\\mu}{\\sigma},\\quad P(X\\le t)=\\Phi(z_t)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`P(X>t)=1-\\Phi(z_t),\\quad P(a<X<b)=\\Phi(z_b)-\\Phi(z_a)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`D=X-Y,\\quad \\mu_D=\\mu_X-\\mu_Y`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`X,Y\\text{ indip.}:\\quad \\sigma_D=\\sqrt{\\sigma_X^2+\\sigma_Y^2}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`P(X\\le Y-c)=P(D\\le -c)`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`\\overline X_k:\\quad \\mu_{\\overline X}=\\mu,\\quad \\sigma_{\\overline X}=\\frac{\\sigma}{\\sqrt k}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`P(\\overline X_k\\le x)=\\Phi\\left(\\frac{x-\\mu}{\\sigma_{\\overline X}}\\right),\\quad \\text{soglia: }P<\\alpha`}
+            </MathBlock>
             <p>
               <strong>Esponenziale</strong> <Math>{"E(\\lambda)"}</Math>:{" "}
               <Math>{"P(X>x)=e^{-\\lambda x}"}</Math>,{" "}
