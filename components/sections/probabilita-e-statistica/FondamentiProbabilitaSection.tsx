@@ -203,7 +203,10 @@ export function FondamentiProbabilitaSection() {
               <Math>{"\\Phi(2.00)=0.9772"}</Math>.
             </p>
             <p>
-              Quantili: <Math>{"q_{0.95}=1.64"}</Math>,{" "}
+              Quantili: <Math>{"q_p"}</Math> indica il valore tale che{" "}
+              <Math>{"P(Z\\le q_p)=p"}</Math>, con{" "}
+              <Math>{"Z\\sim N(0,1)"}</Math>. Valori utili:{" "}
+              <Math>{"q_{0.95}=1.64"}</Math>,{" "}
               <Math>{"q_{0.975}=1.96"}</Math>,{" "}
               <Math>{"q_{0.995}=2.58"}</Math>.
             </p>
@@ -211,6 +214,12 @@ export function FondamentiProbabilitaSection() {
         </Column>
         <Column width="half">
           <Box color="blue" border="left" title="Stima, TLC, intervalli">
+            <p>
+              <Math>{"\\widehat\\mu_n"}</Math> e la media campionaria: somma i
+              dati del campione e dividi per <Math>{"n"}</Math>.{" "}
+              <Math>{"\\widehat\\mu_{k,n}"}</Math> e la media delle potenze
+              <Math>{"k"}</Math>-esime, utile per i momenti.
+            </p>
             <MathBlock gap="sm">
               {`\\widehat\\mu_n=\\frac1n\\sum_i X_i,\\quad \\widehat\\mu_{k,n}=\\frac1n\\sum_i X_i^k`}
             </MathBlock>
@@ -219,6 +228,15 @@ export function FondamentiProbabilitaSection() {
             </MathBlock>
             <MathBlock gap="sm">
               {`IC_{1-\\alpha}:\\quad \\widehat\\mu_n\\pm q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}`}
+            </MathBlock>
+            <p>
+              <Math>{"IC"}</Math> significa intervallo di confidenza: e
+              l&apos;intervallo che stima dove puo stare il vero{" "}
+              <Math>{"\\mu"}</Math>. Il livello <Math>{"1-\\alpha"}</Math> e la
+              confidenza, per esempio <Math>{"0.95"}</Math> al 95%.
+            </p>
+            <MathBlock gap="sm">
+              {`[a;b]:\\quad \\widehat\\mu_n=\\frac{a+b}{2},\\quad E_{max}=\\frac{b-a}{2}`}
             </MathBlock>
             <p>
               Per precisione <Math>{"\\varepsilon_0"}</Math>:{" "}

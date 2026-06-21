@@ -183,11 +183,22 @@ export function ProbabilitaCondizionataSection() {
           <Box color="gray" border="left" title="6. Intervalli di confidenza">
             <ol>
               <li>
-                Dal solo intervallo, la media campionaria e il centro.
+                <Math>{"IC"}</Math> significa intervallo di confidenza per{" "}
+                <Math>{"\\mu"}</Math>; <Math>{"IC_{0.95}"}</Math> vuol dire
+                intervallo al 95%.
               </li>
               <li>
-                La semiampiezza e{" "}
-                <Math>{"q_{1-\\alpha/2}\\sigma/\\sqrt n"}</Math>.
+                Scrivi l&apos;intervallo come <Math>{"[a;b]"}</Math>: la media
+                campionaria e il centro.
+              </li>
+              <li>
+                La semiampiezza e l&apos;errore massimo di stima:{" "}
+                <Math>{"E_{max}=q_{1-\\alpha/2}\\sigma/\\sqrt n"}</Math>.
+              </li>
+              <li>
+                <Math>{"q_p"}</Math> e il quantile della normale standard:
+                <Math>{"P(Z\\le q_p)=p"}</Math>. Al 95% si usa{" "}
+                <Math>{"q_{0.975}=1.96"}</Math>.
               </li>
               <li>
                 Per trovare <Math>{"n"}</Math>, uguaglia la semiampiezza nota o
@@ -199,7 +210,13 @@ export function ProbabilitaCondizionataSection() {
               </li>
             </ol>
             <MathBlock gap="sm">
+              {`\\widehat\\mu_n=\\frac{a+b}{2},\\qquad E_{max}=\\frac{b-a}{2}`}
+            </MathBlock>
+            <MathBlock gap="sm">
               {`\\left[\\widehat\\mu_n-q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n},\\ \\widehat\\mu_n+q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}\\right]`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`E_{max}=q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}\\quad\\Rightarrow\\quad n=\\left(\\frac{q_{1-\\alpha/2}\\sigma}{E_{max}}\\right)^2`}
             </MathBlock>
           </Box>
         </Column>

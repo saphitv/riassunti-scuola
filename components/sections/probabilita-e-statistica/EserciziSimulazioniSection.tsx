@@ -217,14 +217,22 @@ export function EserciziSimulazioniSection() {
               Intervallo 95%: <Math>{"[49.02;50.98]"}</Math>,{" "}
               <Math>{"\\sigma^2=16"}</Math>.
             </p>
+            <p>
+              Qui <Math>{"a=49.02"}</Math>, <Math>{"b=50.98"}</Math>,{" "}
+              <Math>{"\\sigma=\\sqrt{16}=4"}</Math> e al 95%{" "}
+              <Math>{"q_{0.975}=1.96"}</Math>.
+            </p>
             <MathBlock gap="sm">
-              {`\\widehat\\mu=\\frac{49.02+50.98}{2}=50`}
+              {`\\widehat\\mu_n=\\frac{a+b}{2}=\\frac{49.02+50.98}{2}=50`}
             </MathBlock>
             <MathBlock gap="sm">
-              {`1.96\\frac4{\\sqrt n}=0.98\\quad\\Rightarrow\\quad n=64`}
+              {`E_{max}=\\frac{b-a}{2}=\\frac{50.98-49.02}{2}=0.98`}
             </MathBlock>
             <MathBlock gap="sm">
-              {`1.96\\frac4{\\sqrt n}<0.5\\quad\\Rightarrow\\quad n\\ge246`}
+              {`0.98=1.96\\frac4{\\sqrt n}\\quad\\Rightarrow\\quad \\sqrt n=8\\quad\\Rightarrow\\quad n=64`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`1.96\\frac4{\\sqrt n}<0.5\\quad\\Rightarrow\\quad n>245.86\\quad\\Rightarrow\\quad n_{min}=246`}
             </MathBlock>
           </Box>
         </Column>
