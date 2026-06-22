@@ -5,98 +5,223 @@ import {
   Box,
   Math,
   MathBlock,
-  Note,
-  Definition,
-  Theorem,
+  Example,
 } from "@/components/index";
 
 export function ProbabilitaCondizionataSection() {
   return (
-    <Section title="Probabilita Condizionata, Bayes e Indipendenza">
-      <Row>
-        <Column width="half">
-          <Definition term="Probabilita condizionata">
-            Se l&apos;evento <Math>{"F"}</Math> si e verificato e{" "}
-            <Math>{"P(F) > 0"}</Math>, allora la probabilita di{" "}
-            <Math>{"E"}</Math> dato <Math>{"F"}</Math> e
-          </Definition>
-          <MathBlock>{"P(E\\mid F) = \\frac{P(E \\cap F)}{P(F)}"}</MathBlock>
-          <p>
-            L&apos;evento <Math>{"F"}</Math> diventa il nuovo spazio
-            campionario &quot;ridotto&quot;.
-          </p>
-        </Column>
-        <Column width="half">
-          <Box color="blue" border="left" title="Prodotto">
-            <p>Dalla definizione segue subito:</p>
-            <MathBlock>{"P(E \\cap F) = P(E \\mid F) \\cdot P(F)"}</MathBlock>
-            <p>
-              Questa formula e utile quando conviene descrivere un evento come
-              intersezione tra un evento principale e una condizione gia nota.
-            </p>
-          </Box>
-        </Column>
-      </Row>
-
-      <Theorem title="Fattorizzazione di un evento">
-        <MathBlock>{"E = (E \\cap F) \\cup (E \\cap \\overline{F})"}</MathBlock>
-        <p>
-          Poiche i due eventi sono disgiunti, si ottiene la legge del caso
-          totale su due casi:
-        </p>
-        <MathBlock>
-          {`P(E) = P(E \\mid F)P(F) + P(E \\mid \\overline{F})P(\\overline{F})`}
+    <Section title="Parte II - Strategie per esercizi" allowPageBreak>
+      <Box color="blue" border="left" title="1. Probabilita totale e Bayes">
+        <ol>
+          <li>
+            Identifica la partizione <Math>{"F_1,\\ldots,F_n"}</Math> e le
+            probabilita <Math>{"P(F_j)"}</Math>.
+          </li>
+          <li>
+            Identifica l&apos;attributo osservato <Math>{"E"}</Math> e le
+            condizionate <Math>{"P(E\\mid F_j)"}</Math>.
+          </li>
+          <li>
+            Calcola l&apos;attributo con la probabilita totale:
+            <Math>{"P(E)=\\sum_j P(E\\mid F_j)P(F_j)"}</Math>.
+          </li>
+          <li>
+            Se il testo chiede &quot;categoria sapendo attributo&quot;, usa Bayes.
+            Se chiede &quot;non ha l&apos;attributo&quot;, lavora con{" "}
+            <Math>{"\\overline E"}</Math>.
+          </li>
+        </ol>
+        <MathBlock gap="sm">
+          {`P(F_j\\mid E)=\\frac{P(E\\mid F_j)P(F_j)}{P(E)},\\qquad P(\\overline E\\mid F_j)=1-P(E\\mid F_j)`}
         </MathBlock>
-      </Theorem>
-
-      <Box color="green" border="left" title="Formula di Bayes">
-        <p>
-          Se <Math>{"F_1, \\ldots, F_n"}</Math> sono eventi disgiunti che
-          formano una partizione di <Math>{"\\Omega"}</Math>, allora
-        </p>
-        <MathBlock>
-          {`P(E) = P(E \\mid F_1)P(F_1) + \\cdots + P(E \\mid F_n)P(F_n)`}
-        </MathBlock>
-        <p>e per ogni indice <Math>{"j"}</Math> vale:</p>
-        <MathBlock>
-          {`P(F_j \\mid E) = \\frac{P(E \\mid F_j)P(F_j)}{P(E)}`}
-        </MathBlock>
-        <Note>
-          Bayes serve a &quot;invertire&quot; il condizionamento: da{" "}
-          <Math>{"P(E \\mid F_j)"}</Math> si passa a{" "}
-          <Math>{"P(F_j \\mid E)"}</Math>.
-        </Note>
       </Box>
 
       <Row>
         <Column width="half">
-          <Box color="yellow" border="left" title="Indipendenza tra due eventi">
-            <p>
-              Gli eventi <Math>{"E"}</Math> e <Math>{"F"}</Math> sono
-              indipendenti se
-            </p>
-            <MathBlock>{"P(E \\cap F) = P(E) \\cdot P(F)"}</MathBlock>
-            <p>In questo caso conoscere uno dei due eventi non cambia l&apos;altro:</p>
-            <MathBlock>
-              {"P(E \\mid F) = P(E) \\qquad P(F \\mid E) = P(F)"}
-            </MathBlock>
+          <Box color="green" border="left" title="2. Variabile discreta da tabella">
+            <ol>
+              <li>
+                Parole come &quot;meno di&quot;, &quot;almeno&quot;, &quot;tra&quot;:
+                somma solo le probabilita dei valori ammessi.
+              </li>
+              <li>
+                Per media e varianza calcola prima <Math>{"E[X]"}</Math>, poi{" "}
+                <Math>{"E[X^2]"}</Math>.
+              </li>
+              <li>
+                Eventi ripetuti e indipendenti: moltiplica le probabilita o usa
+                la binomiale.
+              </li>
+              <li>
+                Somma su piu giorni/prove: elenca le combinazioni che rispettano
+                la soglia e conta quante disposizioni hanno.
+              </li>
+            </ol>
           </Box>
         </Column>
         <Column width="half">
-          <Box color="gray" border="left" title="Indipendenza di piu eventi">
-            <p>
-              Gli eventi <Math>{"F_1, \\ldots, F_n"}</Math> sono indipendenti se
-            </p>
-            <MathBlock>
-              {`P(F_1 \\cap \\cdots \\cap F_n) = P(F_1) \\cdots P(F_n)`}
-            </MathBlock>
-            <p>
-              La probabilita congiunta e quindi il prodotto delle probabilita
-              singole.
-            </p>
+          <Example title="Schema tabella" color="green" border="left">
+            <table className="comparison-table">
+              <thead>
+                <tr>
+                  <th>Richiesta</th>
+                  <th>Cosa fare</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Math>{"P(X<2)"}</Math>
+                  </td>
+                  <td>
+                    Somma <Math>{"P(0)+P(1)"}</Math>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Math>{"E[X]"}</Math>
+                  </td>
+                  <td>
+                    Somma <Math>{"x_iP(X=x_i)"}</Math>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Tutti successi in <Math>{"k"}</Math> prove
+                  </td>
+                  <td>
+                    Usa <Math>{"p^k"}</Math>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Almeno <Math>{"m"}</Math> successi
+                  </td>
+                  <td>
+                    Usa <Math>{"\\sum_{r=m}^n \\binom nr p^r(1-p)^{n-r}"}</Math>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Example>
+        </Column>
+      </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="yellow" border="left" title="3. Densita continua">
+            <ol>
+              <li>
+                Parametri incogniti: imponi{" "}
+                <Math>{"\\int f(x)\\,dx=1"}</Math> e gli eventuali momenti dati.
+              </li>
+              <li>
+                Verifica densita: mostra <Math>{"f(x)\\ge0"}</Math> sul dominio e
+                integrale totale uguale a 1.
+              </li>
+              <li>
+                Probabilita: costruisci <Math>{"F(x)"}</Math> e usa differenze
+                come <Math>{"P(a<X<b)=F(b)-F(a)"}</Math>.
+              </li>
+              <li>
+                Condizionata con eventi inclusi: se <Math>{"c<d"}</Math>,{" "}
+                <Math>{"P(X\\le c\\mid X\\le d)=F(c)/F(d)"}</Math>.
+              </li>
+            </ol>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="purple" border="left" title="4. Normale">
+            <ol>
+              <li>
+                Standardizza sempre:{" "}
+                <Math>{"z=(x-\\mu)/\\sigma"}</Math>.
+              </li>
+              <li>
+                Per code destre: <Math>{"P(X>x)=1-\\Phi(z)"}</Math>.
+              </li>
+              <li>
+                Somme e differenze di normali indipendenti restano normali:
+                somma le medie con il segno, somma sempre le varianze.
+              </li>
+              <li>
+                &quot;Almeno <Math>{"m"}</Math> giorni su{" "}
+                <Math>{"n"}</Math>&quot;: prima trovi{" "}
+                <Math>{"p"}</Math> con la normale, poi usi{" "}
+                <Math>{"B(n,p)"}</Math>.
+              </li>
+            </ol>
           </Box>
         </Column>
       </Row>
+
+      <Row>
+        <Column width="half">
+          <Box color="red" border="left" title="5. Esponenziale">
+            <ol>
+              <li>
+                Se il testo parla di tempo/durata/attesa con parametro{" "}
+                <Math>{"\\lambda"}</Math>, parti dalla coda{" "}
+                <Math>{"P(X>x)=e^{-\\lambda x}"}</Math>.
+              </li>
+              <li>
+                Assenza di memoria:
+                <Math>{"P(X>s+t\\mid X>t)=P(X>s)"}</Math>.
+              </li>
+              <li>
+                Piu prove indipendenti: trasforma ogni prova in successo con
+                probabilita <Math>{"p"}</Math>, poi binomiale.
+              </li>
+              <li>
+                Soglie su <Math>{"\\lambda"}</Math>: scrivi la disequazione e
+                controlla il verso usando la monotonia.
+              </li>
+            </ol>
+          </Box>
+        </Column>
+        <Column width="half">
+          <Box color="gray" border="left" title="6. Intervalli di confidenza">
+            <ol>
+              <li>
+                <Math>{"IC"}</Math> significa intervallo di confidenza per{" "}
+                <Math>{"\\mu"}</Math>; <Math>{"IC_{0.95}"}</Math> vuol dire
+                intervallo al 95%.
+              </li>
+              <li>
+                Scrivi l&apos;intervallo come <Math>{"[a;b]"}</Math>: la media
+                campionaria e il centro.
+              </li>
+              <li>
+                La semiampiezza e l&apos;errore massimo di stima:{" "}
+                <Math>{"E_{max}=q_{1-\\alpha/2}\\sigma/\\sqrt n"}</Math>.
+              </li>
+              <li>
+                <Math>{"q_p"}</Math> e il quantile della normale standard:
+                <Math>{"P(Z\\le q_p)=p"}</Math>. Al 95% si usa{" "}
+                <Math>{"q_{0.975}=1.96"}</Math>.
+              </li>
+              <li>
+                Per trovare <Math>{"n"}</Math>, uguaglia la semiampiezza nota o
+                imponi la precisione richiesta.
+              </li>
+              <li>
+                Se <Math>{"\\sigma"}</Math> e ignota e hai i momenti:{" "}
+                <Math>{"\\widehat\\sigma^2=m_2-m_1^2"}</Math>.
+              </li>
+            </ol>
+            <MathBlock gap="sm">
+              {`\\widehat\\mu_n=\\frac{a+b}{2},\\qquad E_{max}=\\frac{b-a}{2}`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`\\left[\\widehat\\mu_n-q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n},\\ \\widehat\\mu_n+q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}\\right]`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`E_{max}=q_{1-\\alpha/2}\\frac{\\sigma}{\\sqrt n}\\quad\\Rightarrow\\quad n=\\left(\\frac{q_{1-\\alpha/2}\\sigma}{E_{max}}\\right)^2`}
+            </MathBlock>
+          </Box>
+        </Column>
+      </Row>
+
     </Section>
   );
 }
