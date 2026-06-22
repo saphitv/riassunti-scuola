@@ -136,7 +136,13 @@ export function FondamentiProbabilitaSection() {
               {`F(x)=P(X\\le x)=\\int_{-\\infty}^{x}f(t)\\,dt`}
             </MathBlock>
             <MathBlock gap="sm">
-              {`E[X]=\\int xf(x)\\,dx,\\quad E[X^2]=\\int x^2f(x)\\,dx,\\quad \\operatorname{Var}(X)=E[X^2]-E[X]^2`}
+              {`P(X>x)=1-F(x)=\\int_x^{+\\infty}f(t)\\,dt`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`E[X]=\\int xf(x)\\,dx,\\quad E[X^2]=\\int x^2f(x)\\,dx`}
+            </MathBlock>
+            <MathBlock gap="sm">
+              {`\\operatorname{Var}(X)=E[X^2]-E[X]^2`}
             </MathBlock>
             <MathBlock gap="sm">
               {`\\text{parametri: }\\int f(x)\\,dx=1,\\quad \\int xf(x)\\,dx=E[X]\\text{ dato}`}
